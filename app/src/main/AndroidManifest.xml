@@ -16,10 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YouDongKnowMe">
         <activity
-            android:name=".ui.detail.DetailActivity"
+            android:name=".ui.view.detail.DetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".ui.view.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
