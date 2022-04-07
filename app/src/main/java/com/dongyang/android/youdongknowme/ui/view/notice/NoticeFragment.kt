@@ -3,11 +3,18 @@ package com.dongyang.android.youdongknowme.ui.view.notice
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.remote.entity.Notice
 import com.dongyang.android.youdongknowme.databinding.FragmentNoticeBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
 import com.dongyang.android.youdongknowme.ui.adapter.NoticeAdapter
+import java.lang.String
+import kotlin.Int
+import kotlin.apply
+import kotlin.getValue
+import kotlin.lazy
 
 /* 공지 사항 화면 */
 class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>() {
@@ -35,6 +42,12 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>() {
 
     override fun initDataBinding() {
 
+        // TODO :: 데이터 업데이트하기!
+        binding.noticeSwipe.setOnRefreshListener {
+            binding.noticeSwipe.isRefreshing = false
+        }
+
+        // TODO :: Object Retrofit 생성하기
         // TODO :: 테스트 코드!!! 후에 변경 요망
         val testCode = listOf(Notice(0,"[학부] 2022학년도 1학기 학습공동체(전공튜터링) 프로그램 시행 안내", "2022-04-07", "김정호"))
         adapter.submitList(testCode)
