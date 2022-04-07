@@ -1,4 +1,4 @@
-package com.dongyang.android.youdongknowme.ui.detail
+package com.dongyang.android.youdongknowme.ui.view.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
