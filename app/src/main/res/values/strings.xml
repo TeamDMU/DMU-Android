@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">유동노미</string>
 
+    <!-- main -->
+    <string name="main_tab_university">대학</string>
+    <string name="main_tab_faculty">학부</string>
+
     <!-- main menu -->
     <string name="menu_main_bottom_home">공지사항</string>
     <string name="menu_main_bottom_calendar">학사일정</string>
