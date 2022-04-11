@@ -24,14 +24,16 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.tabs.TabItem
+                    android:id="@+id/notice_tab_university"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/main_tab_university" />
+                    android:text="@string/notice_tab_university" />
 
                 <com.google.android.material.tabs.TabItem
+                    android:id="@+id/notice_tab_faculty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/main_tab_faculty" />
+                    android:text="@string/notice_tab_faculty" />
 
             </com.google.android.material.tabs.TabLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -56,6 +58,7 @@
         <variable
             name="viewModel"
             type="com.dongyang.android.youdongknowme.ui.view.notice.NoticeViewModel" />
+
     </data>
 
 </layout>

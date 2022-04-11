@@ -3,8 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_notice_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{() -> itemClickListener.itemClick()}"
         android:paddingVertical="12dp">
 
         <TextView
@@ -28,7 +30,6 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="16dp"
             android:text="@{notice.date}"
-            android:hint="date"
             android:textSize="13sp"
             app:layout_constraintEnd_toStartOf="@id/item_notice_writer"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +42,6 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
             android:text="@{notice.writer}"
-            android:hint="writer"
             android:textSize="13sp"
             app:layout_constraintStart_toEndOf="@id/item_notice_date"
             app:layout_constraintTop_toBottomOf="@id/item_notice_title" />
@@ -52,6 +52,10 @@
         <variable
             name="notice"
             type="com.dongyang.android.youdongknowme.data.remote.entity.Notice" />
+
+        <variable
+            name="itemClickListener"
+            type="com.dongyang.android.youdongknowme.ui.view.notice.NoticeClickListener" />
 
     </data>
 
