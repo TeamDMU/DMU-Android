@@ -34,8 +34,8 @@ class MainActivity : AppCompatActivity() {
                 replaceFragment(
                     when (item.itemId) {
                         R.id.menu_main_home -> NoticeFragment.newInstance()
-                        R.id.menu_main_setting -> ScheduleFragment.newInstance()
-                        else -> SettingFragment.newInstance()
+                        R.id.menu_main_setting -> SettingFragment.newInstance()
+                        else -> ScheduleFragment.newInstance()
                     }
                 )
                 true

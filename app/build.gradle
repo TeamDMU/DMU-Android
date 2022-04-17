@@ -70,4 +70,8 @@ dependencies {
     // Koin
     implementation "io.insert-koin:koin-core:3.1.2"
     implementation "io.insert-koin:koin-android:3.1.2"
+
+    // Animation
+    implementation 'com.daimajia.easing:library:2.0@aar'
+    implementation 'com.daimajia.androidanimations:library:2.4@aar'
 }
