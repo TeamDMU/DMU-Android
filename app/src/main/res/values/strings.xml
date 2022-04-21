@@ -8,6 +8,9 @@
 
     <!-- notice -->
     <string name="notice_title">공지사항</string>
+    <string name="notice_tab_university">대학</string>
+    <string name="notice_tab_faculty">학부</string>
+
 
     <!-- schedule -->
     <string name="schedule_title">학사일정</string>
