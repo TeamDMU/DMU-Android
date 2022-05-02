@@ -1,6 +1,6 @@
 package com.dongyang.android.youdongknowme.ui.view.setting
 
-import androidx.lifecycle.ViewModelProvider
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentSettingBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
@@ -12,9 +12,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
     }
 
     override val layoutResourceId: Int = R.layout.fragment_setting
-    override val viewModel: SettingViewModel by lazy {
-        ViewModelProvider(this)[SettingViewModel::class.java]
-    }
+    override val viewModel: SettingViewModel by viewModel()
 
     override fun initStartView() {
 

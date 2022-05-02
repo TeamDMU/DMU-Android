@@ -1,7 +1,6 @@
 package com.dongyang.android.youdongknowme.ui.view.notice
 
 import android.content.Intent
-import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,14 +10,10 @@ import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.remote.entity.Notice
 import com.dongyang.android.youdongknowme.databinding.FragmentNoticeBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
-import com.dongyang.android.youdongknowme.standard.util.log
 import com.dongyang.android.youdongknowme.ui.adapter.NoticeAdapter
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.google.android.material.tabs.TabLayout
-import kotlin.Int
-import kotlin.apply
-import kotlin.getValue
-import kotlin.lazy
 
 /* 공지 사항 화면 */
 class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), NoticeClickListener {
@@ -28,9 +23,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     }
 
     override val layoutResourceId: Int = R.layout.fragment_notice
-    override val viewModel: NoticeViewModel by lazy {
-        ViewModelProvider(this)[NoticeViewModel::class.java]
-    }
+    override val viewModel: NoticeViewModel by viewModel()
 
     private lateinit var adapter : NoticeAdapter
 
