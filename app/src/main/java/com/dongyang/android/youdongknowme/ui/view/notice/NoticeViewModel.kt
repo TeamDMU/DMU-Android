@@ -15,5 +15,4 @@ class NoticeViewModel : ViewModel() {
     fun setSearchMode(value : Boolean) {
         _isSearchMode.postValue(value)
     }
-
 }
