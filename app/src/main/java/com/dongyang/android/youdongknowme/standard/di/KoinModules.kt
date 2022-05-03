@@ -9,7 +9,7 @@ import org.koin.dsl.module
 
 val viewModelModule = module {
     viewModel {
-        NoticeViewModel()
+        NoticeViewModel(get())
     }
     viewModel {
         ScheduleViewModel()

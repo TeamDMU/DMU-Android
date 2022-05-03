@@ -1,7 +1,6 @@
 package com.dongyang.android.youdongknowme.ui.view.notice
 
 import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.daimajia.androidanimations.library.Techniques
@@ -39,36 +38,24 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     }
 
     override fun initDataBinding() {
+        // 최초 데이터 불러오기
+        getNoticeList()
 
-        // 초기 데이터
-        val testCode = listOf(Notice(0,"[공지] 3월 31일(목)부터 적용될 수업 방침에 대한 안내 말씀 드립니다.", "2022-04-07", "김지원"))
-        adapter.submitList(testCode)
-
-        // TODO :: 테스트 코드!!! 후에 변경 요망
-        // TODO :: 데이터 업데이트하기!
-
-        binding.noticeTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                if(tab.text == "대학") {
-                    val test = listOf(Notice(0,"[공지] 3월 31일(목)부터 적용될 수업 방침에 대한 안내 말씀 드립니다.", "2022-04-07", "김지원"))
-                    adapter.submitList(test)
-                } else {
-                    val test = listOf(Notice(0,"[학부] 2022학년도 1학기 학습공동체(전공튜터링) 프로그램 시행 안내", "2022-04-07", "이계홍"))
-                    adapter.submitList(test)
-                }
-            }
-            override fun onTabUnselected(tab: TabLayout.Tab?) { } // 구현 X
-            override fun onTabReselected(tab: TabLayout.Tab?) { } // 구현 X
-        })
+        viewModel.noticeList.observe(this) {
+            adapter.submitList(it)
+        }
     }
 
     override fun initAfterBinding() {
+        // 새로고침 했을 때 동작
         binding.noticeSwipe.setOnRefreshListener {
-            // TODO :: 데이터 새로고침 활성화
+            getNoticeList()
             binding.noticeSwipe.isRefreshing = false
         }
 
+        // 툴바의 검색 버튼 눌렀을 때 동작
         binding.noticeToolbar.toolbarSearch.setOnClickListener {
+            // 최초 검색 버튼 클릭 시 EditText 보여지게 설정
             if(viewModel.isSearchMode.value == false) {
                 viewModel.setSearchMode(true)
                 YoYo.with(Techniques.FadeInUp)
@@ -76,26 +63,49 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
                     .playOn(binding.noticeToolbar.toolbarSearchView)
 
             } else {
+                // EditText 가 보여진 상황에서 아무 입력도 하지 않고 검색 버튼을 클릭하면 사라지게 설정
                 if (binding.noticeToolbar.toolbarSearchText.text.toString() == "") {
                     viewModel.setSearchMode(false)
                     YoYo.with(Techniques.FadeOutDown)
                         .duration(400)
                         .playOn(binding.noticeToolbar.toolbarSearchView)
                 } else {
-                    // TODO :: 실 데이터를 넣고 검색 활성화
+                    // TODO :: 검색 API 연동
                 }
             }
         }
 
+        // 툴바의 X버튼 눌렀을 때 동작
         binding.noticeToolbar.toolbarSearchTextClear.setOnClickListener {
             binding.noticeToolbar.toolbarSearchText.text.clear()
         }
+
+        // 각각 탭 버튼 눌렀을 때 동작
+        binding.noticeTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                if(tab.text == "대학") {
+                    // TODO :: 대학 공지사항 API 연동
+                    val test = listOf(Notice(0,"[공지] 3월 31일(목)부터 적용될 수업 방침에 대한 안내 말씀 드립니다.", "2022-04-07", "김지원"))
+                    adapter.submitList(test)
+                } else {
+                    getNoticeList()
+                }
+            }
+            override fun onTabUnselected(tab: TabLayout.Tab?) { } // 구현 X
+            override fun onTabReselected(tab: TabLayout.Tab?) { } // 구현 X
+        })
+
+
     }
 
-    override fun itemClick() {
+    private fun getNoticeList() {
+        viewModel.getNoticeList()
+    }
+
+    // 아이템 클릭시 자세히 보기 화면으로 이동
+    override fun itemClick(nid : Int) {
         val intent = Intent(requireActivity(), DetailActivity::class.java)
-        intent.putExtra("nid", 0) // TODO :: value 실 데이터에 맞게 변경
+        intent.putExtra("nid", nid)
         startActivity(intent)
     }
-
 }

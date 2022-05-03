@@ -11,7 +11,7 @@ object RetrofitObject {
 
     fun getNetwork() : Retrofit {
         // TODO :: Localhost -> Server
-        val baseUrl = "http://127.0.0.1:8000"
+        val baseUrl = "http://10.0.2.2:8000"
 
         val client = OkHttpClient.Builder()
             .connectTimeout(TIME_OUT_COUNT, TimeUnit.SECONDS)
@@ -20,6 +20,7 @@ object RetrofitObject {
 
         return Retrofit.Builder()
             .baseUrl(baseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
     }
