@@ -17,4 +17,8 @@
 
     <!-- setting -->
     <string name="setting_title">설정</string>
+
+    <!-- calendar -->
+    <string name="calendar_year">년</string>
+    <string name="calendar_month">월</string>
 </resources>
