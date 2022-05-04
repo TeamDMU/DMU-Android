@@ -9,6 +9,7 @@ import com.dongyang.android.youdongknowme.standard.base.BaseFragment
 import com.dongyang.android.youdongknowme.standard.util.log
 import com.dongyang.android.youdongknowme.ui.adapter.ScheduleAdapter
 import org.threeten.bp.LocalDate
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 /* 학사 일정 화면 */
@@ -18,9 +19,7 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
     }
 
     override val layoutResourceId: Int = R.layout.fragment_schedule
-    override val viewModel: ScheduleViewModel by lazy {
-        ViewModelProvider(this)[ScheduleViewModel::class.java]
-    }
+    override val viewModel: ScheduleViewModel by viewModel()
 
     private lateinit var adapter : ScheduleAdapter
 
@@ -33,6 +32,8 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
             this.setHasFixedSize(true)
             this.addItemDecoration(DividerItemDecoration(requireActivity(),1))
         }
+        
+    override fun initStartView() {
     }
 
     override fun initDataBinding() {
