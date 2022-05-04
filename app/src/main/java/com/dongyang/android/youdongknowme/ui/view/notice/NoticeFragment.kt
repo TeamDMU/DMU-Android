@@ -41,8 +41,12 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         // 최초 데이터 불러오기
         getNoticeList()
 
-        viewModel.noticeList.observe(this) {
+        viewModel.noticeList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
+        }
+
+        viewModel.errorState.observe(viewLifecycleOwner) { resId ->
+            showToast(getString(resId))
         }
     }
 

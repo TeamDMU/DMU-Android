@@ -1,8 +1,8 @@
 package com.dongyang.android.youdongknowme.ui.view.setting
 
-import androidx.lifecycle.ViewModel
+import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 
 /* 설정 뷰모델 */
-class SettingViewModel : ViewModel() {
+class SettingViewModel : BaseViewModel() {
     // TODO: Implement the ViewModel
 }

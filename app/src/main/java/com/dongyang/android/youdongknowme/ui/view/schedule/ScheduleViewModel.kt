@@ -1,8 +1,8 @@
 package com.dongyang.android.youdongknowme.ui.view.schedule
 
-import androidx.lifecycle.ViewModel
+import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 
 /* 학사 일정 뷰모델 */
-class ScheduleViewModel : ViewModel() {
+class ScheduleViewModel : BaseViewModel() {
     // TODO: Implement the ViewModel
 }
