@@ -30,10 +30,8 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
             this.adapter = this@ScheduleFragment.adapter
             this.layoutManager = LinearLayoutManager(requireActivity())
             this.setHasFixedSize(true)
-            this.addItemDecoration(DividerItemDecoration(requireActivity(),1))
+            this.addItemDecoration(DividerItemDecoration(requireActivity(), 1))
         }
-        
-    override fun initStartView() {
     }
 
     override fun initDataBinding() {
