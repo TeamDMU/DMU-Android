@@ -1,5 +1,6 @@
 package com.dongyang.android.youdongknowme.standard.network
 
+import com.dongyang.android.youdongknowme.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -11,7 +12,7 @@ object RetrofitObject {
 
     fun getNetwork() : Retrofit {
         // TODO :: Localhost -> Server
-        val baseUrl = "http://10.0.2.2:8000"
+        val baseUrl = BuildConfig.SERVER
 
         val client = OkHttpClient.Builder()
             .connectTimeout(TIME_OUT_COUNT, TimeUnit.SECONDS)
