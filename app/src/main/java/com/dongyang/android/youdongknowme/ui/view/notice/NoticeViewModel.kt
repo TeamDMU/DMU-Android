@@ -20,6 +20,9 @@ class NoticeViewModel(
     private val _noticeList : MutableLiveData<List<Notice>> = MutableLiveData()
     val noticeList : LiveData<List<Notice>> = _noticeList
 
+    private val _searchList : MutableLiveData<List<Notice>> = MutableLiveData()
+    val searchList : LiveData<List<Notice>> = _searchList
+
     private val _errorState: MutableLiveData<Int> = MutableLiveData()
     val errorState: LiveData<Int> = _errorState
 
@@ -36,6 +39,23 @@ class NoticeViewModel(
                 if(response.isSuccessful) {
                     val noticeList = response.body()
                     _noticeList.postValue(noticeList!!)
+                } else {
+                    _errorState.postValue(ERROR_NOTICE)
+                }
+            }
+        } catch (e: Exception){
+            _errorState.postValue(ERROR_NOTICE)
+        }
+    }
+
+    // 검색어가 포함된 공지사항 리스트 호출
+    fun getNoticeSearchList(keyword : String) {
+        try {
+            viewModelScope.launch(connectionHandler) {
+                val response = noticeRepository.getNoticeSearchList(keyword)
+                if(response.isSuccessful) {
+                    val searchList = response.body()
+                    _searchList.postValue(searchList!!)
                 } else {
                     _errorState.postValue(ERROR_NOTICE)
                 }

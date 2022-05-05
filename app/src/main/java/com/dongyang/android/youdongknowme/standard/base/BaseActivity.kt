@@ -5,10 +5,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 
-abstract class BaseActivity<T : ViewDataBinding, R : ViewModel> : AppCompatActivity() {
+abstract class BaseActivity<T : ViewDataBinding, R : BaseViewModel> : AppCompatActivity() {
 
     lateinit var binding: T
     abstract val layoutResourceId: Int
@@ -22,6 +20,7 @@ abstract class BaseActivity<T : ViewDataBinding, R : ViewModel> : AppCompatActiv
         setContentView(binding.root)
 
         initStartView()
+        connectionCheck()
         initDataBinding()
         initAfterBinding()
     }
@@ -39,6 +38,12 @@ abstract class BaseActivity<T : ViewDataBinding, R : ViewModel> : AppCompatActiv
 
     protected fun configureToolbar() {
         TODO()
+    }
+
+    private fun connectionCheck() {
+        viewModel.errorConnectionState.observe(this) { resId ->
+            showToast(getString(resId))
+        }
     }
 
     /**

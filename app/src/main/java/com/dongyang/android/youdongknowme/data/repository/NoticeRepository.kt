@@ -9,4 +9,8 @@ class NoticeRepository {
     suspend fun getNoticeList() : Response<List<Notice>> {
         return RetrofitObject.getNetwork().create(NoticeService::class.java).getList()
     }
+
+    suspend fun getNoticeSearchList(keyword : String) : Response<List<Notice>> {
+        return RetrofitObject.getNetwork().create(NoticeService::class.java).getSearchList(keyword)
+    }
 }

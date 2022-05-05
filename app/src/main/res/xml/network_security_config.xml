@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
-    <!-- TODO :: 서버 주소로 변경 필요, https 로 바뀌면 false로 설정 -->
+    <!-- TODO :: https 로 바뀌면 false로 설정 -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">ec2-13-125-202-140.ap-northeast-2.compute.amazonaws.com</domain>
+    </domain-config>
+
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">10.0.2.2</domain>
     </domain-config>

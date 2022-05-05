@@ -31,6 +31,12 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
 
     override fun initAfterBinding() {
         viewModel.getNoticeList(num)
+
+        // 뒤로가기 버튼 클릭 시
+        binding.detailExit.setOnClickListener {
+            finish()
+        }
+
         log(num.toString())
     }
 }

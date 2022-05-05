@@ -21,6 +21,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
+            android:id="@+id/detail_exit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -53,10 +54,9 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="16dp"
             android:gravity="end"
-            android:hint="date"
             android:text="@{detail.date}"
             android:textColor="@color/black"
-            android:textSize="13dp"
+            android:textSize="13sp"
             app:layout_constraintEnd_toStartOf="@id/detail_writer"
             app:layout_constraintTop_toBottomOf="@id/detail_title" />
 
@@ -68,10 +68,9 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="16dp"
             android:gravity="end"
-            android:hint="writer"
             android:text="@{detail.writer}"
             android:textColor="@color/black"
-            android:textSize="13dp"
+            android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/detail_title" />
 

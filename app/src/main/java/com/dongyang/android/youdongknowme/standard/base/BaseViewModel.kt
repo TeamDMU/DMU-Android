@@ -12,7 +12,8 @@ abstract class BaseViewModel : ViewModel() {
     private val _errorConnectionState: MutableLiveData<Int> = MutableLiveData()
     val errorConnectionState: LiveData<Int> = _errorConnectionState
 
-    val connectionHandler = CoroutineExceptionHandler { _, _ ->
+    val connectionHandler = CoroutineExceptionHandler { _, e ->
+        e.printStackTrace()
         _errorConnectionState.postValue(ERROR_NETWORK)
     }
 

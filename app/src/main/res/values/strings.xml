@@ -10,6 +10,7 @@
     <string name="notice_title">공지사항</string>
     <string name="notice_tab_university">대학</string>
     <string name="notice_tab_faculty">학부</string>
+    <string name="notice_search_message">검색어를 입력해주세요.</string>
 
 
     <!-- schedule -->
