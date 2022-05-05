@@ -38,9 +38,6 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     }
 
     override fun initDataBinding() {
-        // 최초 데이터 불러오기
-        getNoticeList()
-
         viewModel.noticeList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
@@ -51,6 +48,8 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     }
 
     override fun initAfterBinding() {
+        // 최초 데이터 불러오기
+        getNoticeList()
         // 새로고침 했을 때 동작
         binding.noticeSwipe.setOnRefreshListener {
             getNoticeList()
@@ -107,9 +106,9 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     }
 
     // 아이템 클릭시 자세히 보기 화면으로 이동
-    override fun itemClick(nid : Int) {
+    override fun itemClick(num : Int) {
         val intent = Intent(requireActivity(), DetailActivity::class.java)
-        intent.putExtra("nid", nid)
+        intent.putExtra("num", num)
         startActivity(intent)
     }
 }
