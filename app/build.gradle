@@ -7,12 +7,17 @@ plugins {
 android {
     compileSdk 32
 
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
     defaultConfig {
         applicationId "com.dongyang.android.youdongknowme"
         minSdk 21
         targetSdk 32
         versionCode 1
         versionName "1.0"
+
+        buildConfigField "String", "SERVER", properties['aws_server']
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

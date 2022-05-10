@@ -6,7 +6,7 @@
         android:id="@+id/item_notice_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{() -> itemClickListener.itemClick()}"
+        android:onClick="@{() -> itemClickListener.itemClick(notice.num)}"
         android:paddingVertical="12dp">
 
         <TextView

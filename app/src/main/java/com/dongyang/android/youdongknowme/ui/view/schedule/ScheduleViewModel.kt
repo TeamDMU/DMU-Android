@@ -1,11 +1,12 @@
 package com.dongyang.android.youdongknowme.ui.view.schedule
 
-import androidx.lifecycle.ViewModel
-import com.dongyang.android.youdongknowme.data.remote.entity.Notice
+
+import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.data.remote.entity.Schedule
 
+
 /* 학사 일정 뷰모델 */
-class ScheduleViewModel : ViewModel() {
+class ScheduleViewModel : BaseViewModel() {
     val testCode = listOf(Schedule(0,"22.03.31(목) ~ 22.04.06(수)", "1차 강의 평가"),
         Schedule(1,"22.04.05(화) ~ 22.04.06(수)", "등록금 분할납부(3회차)"),
         Schedule(2,"22.04.21(목) ~ 22.04.27(수)", "중간고사"),

@@ -13,7 +13,6 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -80,11 +79,13 @@
                     android:layout_height="40dp"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:hint="입력 없이 버튼을 누르면 사라집니다."
+                    android:hint="@string/notice_search_message"
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
                     android:background="@android:color/transparent"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:inputType="text"
+                    android:imeOptions="actionSearch"/>
 
                 <ImageButton
                     android:id="@+id/toolbar_search_text_clear"

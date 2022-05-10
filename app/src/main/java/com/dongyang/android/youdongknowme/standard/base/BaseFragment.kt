@@ -8,9 +8,8 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 
-abstract class BaseFragment<T : ViewDataBinding, R : ViewModel> : Fragment() {
+abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel> : Fragment() {
 
     private var _binding : T? = null
     val binding get() = _binding!!
@@ -32,6 +31,7 @@ abstract class BaseFragment<T : ViewDataBinding, R : ViewModel> : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         initStartView()
+        connectionCheck()
         initDataBinding()
         initAfterBinding()
     }
@@ -39,6 +39,12 @@ abstract class BaseFragment<T : ViewDataBinding, R : ViewModel> : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun connectionCheck() {
+        viewModel.errorConnectionState.observe(viewLifecycleOwner) { resId ->
+            showToast(getString(resId))
+        }
     }
 
     protected fun showToast(message: String) =
@@ -66,7 +72,7 @@ abstract class BaseFragment<T : ViewDataBinding, R : ViewModel> : Fragment() {
      * ex) rxjava observe, databinding observe..
      */
 
-    abstract fun initDataBinding()
+    abstract fun initDataBinding( )
 
     /**
      * 바인딩 이후에 할 일을 여기에 구현.

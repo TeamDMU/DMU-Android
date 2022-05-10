@@ -1,0 +1,29 @@
+
+object CODE {
+    const val SCHOOL_CODE = 1
+
+    const val MECHANICAL_ENGINE = 101
+    const val MECHANICAL_DESIGN = 102
+
+    const val ELECTRICAL_ENGINE = 201
+    const val INFO_ELECTRONIC_ENGINE = 202
+    const val SEMICONDUCTOR_ENGINE = 203
+    const val INFO_COMMUNICATION_ENGINE = 204
+
+    const val COMPUTER_SOFTWARE_ENGINE = 301
+    const val COMPUTER_INFO_ENGINE = 302
+    const val ARTIFICIAL_ENGINE = 303
+
+    const val BIOCHEMICAL_ENGINE = 401
+    const val BIO_CONVERGENCE_ENGINE = 402
+    const val ARCHITECTURE = 403
+    const val INTERIOR_DESIGN = 404
+    const val VISUAL_DESIGN = 405
+
+    const val BUSINESS_ADMINISTRATION = 501
+    const val TAX_ACCOUNTING = 502
+    const val DISTRIBUTION_MARKETING = 503
+    const val HOTEL_TOURISM = 504
+    const val MANAGEMENT_INFORMATION = 505
+    const val BIG_DATA_MANAGEMENT = 506
+}
