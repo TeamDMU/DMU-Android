@@ -32,10 +32,10 @@ class NoticeViewModel(
     }
 
     // 공지사항 리스트 호출
-    fun getNoticeList() {
+    fun getNoticeList(code : Int) {
         try {
             viewModelScope.launch(connectionHandler) {
-                val response = noticeRepository.getNoticeList()
+                val response = noticeRepository.getNoticeList(code)
                 if(response.isSuccessful) {
                     val noticeList = response.body()
                     _noticeList.postValue(noticeList!!)
@@ -49,10 +49,10 @@ class NoticeViewModel(
     }
 
     // 검색어가 포함된 공지사항 리스트 호출
-    fun getNoticeSearchList(keyword : String) {
+    fun getNoticeSearchList(code : Int, keyword : String) {
         try {
             viewModelScope.launch(connectionHandler) {
-                val response = noticeRepository.getNoticeSearchList(keyword)
+                val response = noticeRepository.getNoticeSearchList(code, keyword)
                 if(response.isSuccessful) {
                     val searchList = response.body()
                     _searchList.postValue(searchList!!)

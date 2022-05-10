@@ -1,7 +1,5 @@
 package com.dongyang.android.youdongknowme.standard.network
 
-import com.dongyang.android.youdongknowme.BuildConfig
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -11,8 +9,8 @@ object RetrofitObject {
     private const val TIME_OUT_COUNT : Long = 10
 
     fun getNetwork() : Retrofit {
-        // TODO :: Localhost -> Server
-        val baseUrl = BuildConfig.SERVER
+        // val baseUrl = BuildConfig.SERVER
+         val baseUrl = "http://10.0.2.2:8000"
 
         val client = OkHttpClient.Builder()
             .connectTimeout(TIME_OUT_COUNT, TimeUnit.SECONDS)

@@ -6,8 +6,9 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface DetailService {
-    @GET("/notice/{number}")
+    @GET("/notice/{code}/{number}")
     suspend fun getNoticeDetail(
+        @Path("code") code : Int,
         @Path("number") number : Int
     ) : Response<NoticeDetail>
 }

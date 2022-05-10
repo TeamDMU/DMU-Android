@@ -25,7 +25,7 @@ data class NoticeDetail(
     @SerializedName("content")
     var content: String,
     @SerializedName("img_url")
-    var imgUrl : String,
+    var imgUrl : List<String>,
     @SerializedName("file_url")
     var fileUrl : List<String>
     )

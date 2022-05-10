@@ -28,6 +28,9 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     override val layoutResourceId: Int = R.layout.fragment_notice
     override val viewModel: NoticeViewModel by viewModel()
 
+    // TODO :: 로컬 데이터에서 받아온 것을 DEFAULT 값으로 설정
+    // TODO :: TAB 에서 공지사항임이 확인 됐을 경우에는 공지사항 코드로 고정해야 함
+    val code = CODE.COMPUTER_SOFTWARE_ENGINE
     private lateinit var adapter: NoticeAdapter
 
     override fun initStartView() {
@@ -87,10 +90,9 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
 
         binding.noticeToolbar.toolbarSearchText.setOnEditorActionListener { textView, actionId, _ ->
             val searchData = textView.text.toString()
-
             if (actionId == EditorInfo.IME_ACTION_SEARCH && searchData.isNotEmpty()) {
                 textView.hideKeyboard()
-                viewModel.getNoticeSearchList(searchData)
+                viewModel.getNoticeSearchList(code, searchData)
             }
 
             false
@@ -128,7 +130,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     }
 
     private fun getNoticeList() {
-        viewModel.getNoticeList()
+        viewModel.getNoticeList(code)
     }
 
     // 아이템 클릭시 자세히 보기 화면으로 이동

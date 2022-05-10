@@ -16,6 +16,9 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
         intent.getIntExtra("num", 0)
     }
 
+    // TODO :: 로컬 데이터에서 받아온 것을 DEFAULT 값으로 설정
+    private val code = CODE.COMPUTER_SOFTWARE_ENGINE
+
     override fun initStartView() {
 
     }
@@ -30,7 +33,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
     }
 
     override fun initAfterBinding() {
-        viewModel.getNoticeList(num)
+        viewModel.getNoticeList(code, num)
 
         // 뒤로가기 버튼 클릭 시
         binding.detailExit.setOnClickListener {

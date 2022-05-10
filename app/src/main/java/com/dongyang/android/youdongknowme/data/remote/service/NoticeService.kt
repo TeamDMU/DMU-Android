@@ -8,13 +8,14 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface NoticeService {
-    @GET("/notice")
+    @GET("/notice/{code}")
     suspend fun getList(
-
+        @Path("code") code : Int
     ) : Response<List<Notice>>
 
-    @GET("/notice/search")
+    @GET("/notice/{code}/search")
     suspend fun getSearchList(
+        @Path("code") code : Int,
         @Query("keyword") keyword : String
     ) : Response<List<Notice>>
 }

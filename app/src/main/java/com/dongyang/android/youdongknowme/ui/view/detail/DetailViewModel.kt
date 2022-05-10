@@ -19,10 +19,10 @@ class DetailViewModel(private val detailRepository: DetailRepository) : BaseView
     val errorState: LiveData<Int> = _errorState
 
     // 공지사항 리스트 호출
-    fun getNoticeList(num : Int) {
+    fun getNoticeList(code : Int, num : Int) {
         try {
             viewModelScope.launch(connectionHandler) {
-                val response = detailRepository.getNoticeDetail(num)
+                val response = detailRepository.getNoticeDetail(code, num)
                 if(response.isSuccessful) {
                     val noticeDetail = response.body()
                     _noticeDetail.postValue(noticeDetail!!)
