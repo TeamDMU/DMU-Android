@@ -17,4 +17,11 @@
 
         <!-- Customize your theme here. -->
     </style>
+
+    <!-- 달력 연, 월 스타일 지정 -->
+    <style name="CalendarHeader">
+        <item name="android:textSize">16sp</item>s
+        <item name="android:textColor">@color/sub_black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

@@ -2,6 +2,7 @@ package com.dongyang.android.youdongknowme.standard
 
 import android.app.Application
 import android.content.Context
+import com.dongyang.android.youdongknowme.data.local.SharedPreference
 import com.dongyang.android.youdongknowme.standard.di.repositoryModule
 import com.dongyang.android.youdongknowme.standard.di.viewModelModule
 import com.dongyang.android.youdongknowme.standard.util.log
@@ -27,6 +28,9 @@ class MyApplication : Application() {
     override fun onCreate() {
         log("application create")
         super.onCreate()
+
+        // SharedPreference 초기화
+        SharedPreference.getInstance(this)
 
         startKoin {
             androidContext(this@MyApplication)

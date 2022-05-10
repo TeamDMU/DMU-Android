@@ -18,7 +18,6 @@ android {
         versionName "1.0"
 
         buildConfigField "String", "SERVER", properties['aws_server']
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -79,4 +78,8 @@ dependencies {
     // Animation
     implementation 'com.daimajia.easing:library:2.0@aar'
     implementation 'com.daimajia.androidanimations:library:2.4@aar'
+
+    // MaterialCalendarView
+    implementation 'com.github.prolificinteractive:material-calendarview:2.0.0'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.0'
 }

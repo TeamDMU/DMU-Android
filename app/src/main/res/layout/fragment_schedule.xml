@@ -5,17 +5,35 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.view.notice.CalendarFragment">
+        tools:context=".ui.view.main.MainActivity">
 
-        <TextView
+        <include
+            android:id="@+id/schedule_toolbar"
+            layout="@layout/standard_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            app:title="@{@string/schedule_title}">
+        </include>
+
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:id="@+id/schedule_calendar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="@string/schedule_title"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            app:mcv_tileHeight="50dp"
+            app:mcv_tileWidth="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/schedule_toolbar"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:mcv_headerTextAppearance="@style/CalendarHeader"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/schedule_rv_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@id/schedule_calendar"
+            tools:listitem="@layout/item_schedule"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -23,7 +41,7 @@
 
         <variable
             name="viewModel"
-            type="com.dongyang.android.youdongknowme.ui.view.notice.NoticeViewModel" />
+            type="com.dongyang.android.youdongknowme.ui.view.schedule.ScheduleViewModel" />
     </data>
 
 </layout>
