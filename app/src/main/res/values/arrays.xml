@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!-- 동양미래대학교_학과 배열 데이터 저장-->
+    <string-array name="dmu_department_list">
+        <item>기계공학과</item>
+        <item>기계설계공학과</item>
+        <item>로봇공학과</item>
+        <item>자동화공학과</item>
+        <item>전기공학과</item>
+        <item>정보전자공학과</item>
+        <item>반도체전자공학과</item>
+        <item>정보통신공학과</item>
+        <item>컴퓨터소프트웨어공학과</item>
+        <item>컴퓨터정보공학과</item>
+        <item>인공지능소프트웨어학과</item>
+        <item>생명화학공학과</item>
+        <item>바이오융합공학과</item>
+        <item>건축과</item>
+        <item>실내건축디자인과</item>
+        <item>시각디자인과</item>
+        <item>경영학과</item>
+        <item>세무회계학과</item>
+        <item>유통마케팅학과</item>
+        <item>호텔관광학과</item>
+        <item>경영정보학과</item>
+        <item>빅데이터경영과</item>
+    </string-array>
+</resources>

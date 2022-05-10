@@ -1,0 +1,50 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:iconSpaceReserved="false">
+<!-- iconSpaceReserved="false" : 들여쓰기 제거 -->
+        <PreferenceCategory
+            app:title="@string/setting_dmu"
+            app:iconSpaceReserved="false">
+                <SwitchPreferenceCompat
+                    app:key="dmu_new"
+                    app:title="알림 설정"
+                    app:iconSpaceReserved="false"/>
+        </PreferenceCategory>
+        <PreferenceCategory
+            app:title="@string/setting_sw"
+            app:iconSpaceReserved="false">
+                <SwitchPreferenceCompat
+                    app:key="sw_new"
+                    app:title="알림 설정"
+                    app:iconSpaceReserved="false"/>
+        </PreferenceCategory>
+
+        <!-- 사용자에게 목록을 띄우고 항목을 선택하는 태그 listpreference는 항목 하나 선택 -->
+        <ListPreference
+            android:key="department_list"
+            android:title="@string/setting_department"
+            android:summary="학과를 선택하세요"
+            android:entries="@array/dmu_department_list"
+            android:entryValues="@array/dmu_department_list"
+            app:iconSpaceReserved="false"/>
+f
+
+        <PreferenceCategory
+            app:title="앱 정보"
+            app:iconSpaceReserved="false">
+                <Preference
+                    app:key="help"
+                    app:title="@string/setting_app_help"
+                    app:iconSpaceReserved="false"/>
+
+                <Preference
+                    app:key="version"
+                    app:title="@string/setting_app_version"
+                    app:iconSpaceReserved="false" />
+
+                <Preference
+                    app:key="license"
+                    app:title="@string/setting_app_license"
+                    app:iconSpaceReserved="false"/>
+        </PreferenceCategory>
+</PreferenceScreen>
