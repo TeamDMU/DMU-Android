@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">유동노미</string>
+    <string name="shared_pref_key">YDKM_DB</string>
 
     <!-- main menu -->
     <string name="menu_main_bottom_home">공지사항</string>
