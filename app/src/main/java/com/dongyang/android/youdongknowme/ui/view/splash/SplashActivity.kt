@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.dongyang.android.youdongknowme.databinding.ActivitySplashBinding
 import com.dongyang.android.youdongknowme.standard.util.log
+import com.dongyang.android.youdongknowme.ui.view.depart.DepartActivity
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -34,7 +35,7 @@ class SplashActivity : AppCompatActivity() {
             viewModel.isDepart.observe(this@SplashActivity) {
                 if (!it) {
                     log("학과 정보 없음")
-                    val intent = Intent(this@SplashActivity, MainActivity::class.java)
+                    val intent = Intent(this@SplashActivity, DepartActivity::class.java)
                     startActivity(intent)
                     finish()
                 } else {
