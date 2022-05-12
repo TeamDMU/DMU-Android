@@ -274,3 +274,7 @@ lint/tmp/
 .idea/sqlDataSources.xml
 .idea/dynamic.xml
 .idea/uiDesigner.xml
+.idea/deploymentTargetDropDown.xml
+*.xml
+.idea/deploymentTargetDropDown.xml
+.idea/misc.xml
