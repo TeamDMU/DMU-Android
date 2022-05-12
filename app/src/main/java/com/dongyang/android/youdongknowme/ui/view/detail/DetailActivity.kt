@@ -17,7 +17,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
     }
 
     // TODO :: 로컬 데이터에서 받아온 것을 DEFAULT 값으로 설정
-    private val code = CODE.COMPUTER_SOFTWARE_ENGINE
+    private val code = CODE.COMPUTER_SOFTWARE_ENGINE_CODE
 
     override fun initStartView() {
 
