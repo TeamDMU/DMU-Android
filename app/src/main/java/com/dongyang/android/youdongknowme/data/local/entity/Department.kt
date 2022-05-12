@@ -52,6 +52,31 @@ sealed class Department(
                 else -> throw IllegalArgumentException("올바른 타입이 아닙니다.")
             }
         }
+
+        fun getDepartmentList(): ArrayList<Department> {
+            return arrayListOf(
+                Mechanical,
+                MechanicalDesign,
+                Electrical,
+                InfoElectrical,
+                Semiconductor,
+                InfoCommunication,
+                ComputerSoftware,
+                ComputerInfo,
+                Artificial,
+                Biochemical,
+                BioConvergence,
+                Architecture,
+                InteriorDesign,
+                VisualDesign,
+                Business,
+                TaxAccounting,
+                DistributionMarketing,
+                HotelTourism,
+                ManagementInformation,
+                BigDataManagement
+            )
+        }
     }
 
 }

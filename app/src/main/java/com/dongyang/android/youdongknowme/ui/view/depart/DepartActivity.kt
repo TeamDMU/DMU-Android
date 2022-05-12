@@ -1,15 +1,20 @@
 package com.dongyang.android.youdongknowme.ui.view.depart
 
-import android.content.res.Resources
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityDepartBinding
+import com.dongyang.android.youdongknowme.standard.util.log
 import com.dongyang.android.youdongknowme.ui.adapter.DepartAdapter
+import com.dongyang.android.youdongknowme.ui.view.detail.DetailActivity
+import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
+import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_INDEFINITE
+import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DepartActivity : AppCompatActivity() {
+class DepartActivity : AppCompatActivity(), DepartClickListener {
 
     private lateinit var adapter: DepartAdapter
     private lateinit var binding: ActivityDepartBinding
@@ -20,21 +25,42 @@ class DepartActivity : AppCompatActivity() {
         binding = ActivityDepartBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val item = resources.getStringArray(R.array.dmu_department_list).toCollection(ArrayList<String>())
-        item.sort()
+        // 학과 리스트
+        val items = resources.getStringArray(R.array.dmu_department_list).toCollection(ArrayList<String>())
 
-        adapter = DepartAdapter().apply { submitList(item) }
+        // 확인 버튼을 누르면 내부 DB에 학과를 담고 메인 액티비티로 이동
+        val snackBar = Snackbar.make(binding.root, "학과 선택을 마치셨나요?", LENGTH_INDEFINITE).setAction("확인") {
+            viewModel.setDepartment(items[viewModel.selectDepartPosition.value!!])
+
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        adapter = DepartAdapter().apply {
+            submitList(items)
+            setItemClickListener(this@DepartActivity)
+        }
+
         binding.departRcv.apply {
             this.adapter = this@DepartActivity.adapter
             this.layoutManager = LinearLayoutManager(this@DepartActivity)
             this.setHasFixedSize(true)
         }
 
-//        binding.departComputerSoftware.setOnClickListener {
-//            viewModel.setDepartment(binding.departComputerSoftwareTv.text.toString())
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//        }
+        // 선택 포지션을 실시간 옵저빙
+        viewModel.selectDepartPosition.observe(this) {
+            adapter.submitPosition(it)
+
+            // 포지션 선택 시 스낵바를 통해 알림 표시
+            if(it != -1) snackBar.show()
+        }
+
+
+    }
+
+    // 컨테이너 클릭 시 선택한 학과의 포지션 저장
+    override fun containerClick(position : Int) {
+        viewModel.setSelectPosition(position)
     }
 }
