@@ -39,7 +39,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="68dp"
             android:layout_marginEnd="16dp"
-            android:text="@{detail.title}"
+            android:text="@{viewModel.title}"
             android:textColor="@color/black"
             android:textSize="16dp"
             android:textStyle="bold"
@@ -51,10 +51,10 @@
             android:id="@+id/detail_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="6dp"
             android:layout_marginEnd="16dp"
             android:gravity="end"
-            android:text="@{detail.date}"
+            android:text="@{viewModel.date}"
             android:textColor="@color/black"
             android:textSize="13sp"
             app:layout_constraintEnd_toStartOf="@id/detail_writer"
@@ -65,10 +65,10 @@
             android:id="@+id/detail_writer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="6dp"
             android:layout_marginEnd="16dp"
             android:gravity="end"
-            android:text="@{detail.writer}"
+            android:text="@{viewModel.writer}"
             android:textColor="@color/black"
             android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -141,17 +141,33 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detail_bot_line">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{detail.content}"
-                android:textColor="#E81C1C1C" />
+                android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.content}"
+                    android:textColor="#E81C1C1C" />
+
+                <ImageView
+                    android:id="@+id/detail_image_01"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
         </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <data>
+
+        <variable
+            name="viewModel"
+            type="com.dongyang.android.youdongknowme.ui.view.detail.DetailViewModel" />
+
+
         <variable
             name="detail"
             type="com.dongyang.android.youdongknowme.data.remote.entity.NoticeDetail" />

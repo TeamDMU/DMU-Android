@@ -24,9 +24,8 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
     }
 
     override fun initDataBinding() {
-        viewModel.noticeDetail.observe(this) {
-            binding.detail = it
-        }
+        binding.viewModel = viewModel
+
         viewModel.errorState.observe(this) { resId ->
             showToast(getString(resId))
         }
