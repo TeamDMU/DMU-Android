@@ -18,6 +18,7 @@
     <!-- setting -->
     <string name="setting_title">설정</string>
     <string name="setting_dmu">동양미래대학교</string>
+    <string name="setting_notice">알림 설정</string>
     <string name="setting_sw">컴퓨터소프트웨어공학과</string>
     <string name="setting_department">학과 설정</string>
     <string name="setting_app_info">앱 정보</string>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -11,9 +11,122 @@
             android:id="@+id/setting_toolbar"
             layout="@layout/standard_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:title="@{@string/setting_title}">
         </include>
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/setting_toolbar"
+            app:layout_constraintVertical_bias="0.0">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:paddingLeft="30dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/setting_dmu"
+                    android:textSize="18sp"
+                    android:textColor="@color/teal_200"/>
+
+                <Switch
+                    android:id="@+id/setting_notice"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:paddingLeft="30dp"
+                    android:switchMinWidth="50dp"
+                    android:textSize="18sp"
+                    android:text="@string/setting_notice"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/line"/>
+
+                <TextView
+                    android:id="@+id/setting_department"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:paddingLeft="30dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/setting_sw"
+                    android:textSize="18sp"
+                    android:textColor="@color/teal_200"/>
+                <Switch
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:paddingLeft="30dp"
+                    android:switchMinWidth="50dp"
+                    android:textSize="18sp"
+                    android:text="@string/setting_notice"/>
+                <TextView
+                    android:id="@+id/department_choice"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:paddingLeft="30dp"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/setting_department"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/line"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="15dp"
+                    android:paddingLeft="30dp"
+                    android:text="@string/setting_app_info"
+                    android:textColor="@color/teal_200"
+                    android:textSize="18sp"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/line"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:paddingLeft="30dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/setting_app_help"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/setting_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:paddingLeft="30dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/setting_app_version"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:paddingLeft="30dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/setting_app_license"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
