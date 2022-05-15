@@ -1,16 +1,20 @@
 <resources>
     <string name="app_name">유동노미</string>
+    <string name="shared_pref_key">YDKM_DB</string>
 
     <!-- main menu -->
     <string name="menu_main_bottom_home">공지사항</string>
     <string name="menu_main_bottom_calendar">학사일정</string>
     <string name="menu_main_bottom_setting">설정</string>
 
+    <!-- department -->
+    <string name="department_title">학과선택</string>
+
     <!-- notice -->
     <string name="notice_title">공지사항</string>
     <string name="notice_tab_university">대학</string>
     <string name="notice_tab_faculty">학부</string>
-
+    <string name="notice_search_message">검색어를 입력해주세요.</string>
 
     <!-- schedule -->
     <string name="schedule_title">학사일정</string>
@@ -29,4 +33,8 @@
     <!-- calendar -->
     <string name="calendar_year">년</string>
     <string name="calendar_month">월</string>
+
+    <!-- error message -->
+    <string name="error_network">서버에 오류가 발생하였습니다.\n 잠시 후 다시 실행해주세요.</string>
+    <string name="error_notice">공지사항을 불러올 수 없습니다.</string>
 </resources>

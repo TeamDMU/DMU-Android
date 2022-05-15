@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!-- 동양미래대학교_학과 배열 데이터 저장-->
     <string-array name="dmu_department_list">
         <item>기계공학과</item>
         <item>기계설계공학과</item>
