@@ -15,7 +15,7 @@ android {
         minSdk 21
         targetSdk 32
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         buildConfigField "String", "SERVER", properties['aws_server']
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

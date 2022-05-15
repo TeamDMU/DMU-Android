@@ -12,22 +12,18 @@
             layout="@layout/standard_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:title="@{@string/setting_title}">
         </include>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:fillViewport="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/setting_toolbar"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintTop_toBottomOf="@id/setting_toolbar">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -37,19 +33,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:paddingLeft="30dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="20dp"
                     android:text="@string/setting_dmu"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="@color/teal_200"/>
 
-                <Switch
+                <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/setting_notice"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:paddingLeft="30dp"
-                    android:switchMinWidth="50dp"
-                    android:textSize="18sp"
+                    android:layout_marginStart="16dp"
+                    android:textSize="16sp"
                     android:text="@string/setting_notice"/>
                 <View
                     android:layout_width="match_parent"
@@ -61,26 +56,26 @@
                     android:id="@+id/setting_department"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:paddingLeft="30dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="10dp"
                     android:text="@string/setting_sw"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="@color/teal_200"/>
-                <Switch
+
+                <androidx.appcompat.widget.SwitchCompat
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:paddingLeft="30dp"
-                    android:switchMinWidth="50dp"
-                    android:textSize="18sp"
+                    android:layout_marginStart="16dp"
+                    android:textSize="16sp"
                     android:text="@string/setting_notice"/>
                 <TextView
                     android:id="@+id/department_choice"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:paddingLeft="30dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="12dp"
                     android:text="@string/setting_department"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="@color/black"/>
                 <View
                     android:layout_width="match_parent"
@@ -91,10 +86,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_marginTop="15dp"
-                    android:paddingLeft="30dp"
+                    android:layout_marginStart="16dp"
                     android:text="@string/setting_app_info"
                     android:textColor="@color/teal_200"
-                    android:textSize="18sp"/>
+                    android:textSize="16sp"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -103,29 +98,28 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:paddingLeft="30dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="20dp"
                     android:text="@string/setting_app_help"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="@color/black"/>
                 <TextView
                     android:id="@+id/setting_version"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:paddingLeft="30dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="20dp"
                     android:text="@string/setting_app_version"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="@color/black"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:paddingLeft="30dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="20dp"
                     android:text="@string/setting_app_license"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="@color/black"/>
-
             </LinearLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
