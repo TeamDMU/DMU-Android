@@ -1,13 +1,20 @@
 package com.dongyang.android.youdongknowme.ui.view.detail
 
-import CODE
+import android.app.DownloadManager
+import android.content.Context
+import android.net.Uri
+import android.os.Environment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityDetailBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.standard.util.log
 import com.dongyang.android.youdongknowme.ui.adapter.FileAdapter
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.dongyang.android.youdongknowme.ui.adapter.ImageAdapter
+import java.io.File
 
 /* 공지사항 글 상세 화면 */
 class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
@@ -16,6 +23,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
     override val viewModel: DetailViewModel by viewModel()
 
     private lateinit var fileAdapter: FileAdapter
+    private lateinit var imageAdapter: ImageAdapter
 
     private val num : Int by lazy {
         intent.getIntExtra("num", 0)
@@ -31,6 +39,13 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
             this.layoutManager = LinearLayoutManager(this@DetailActivity)
             this.setHasFixedSize(true)
         }
+
+        imageAdapter = ImageAdapter()
+        binding.detailImageRcv.apply {
+            this.adapter = imageAdapter
+            this.layoutManager = LinearLayoutManager(this@DetailActivity)
+            this.setHasFixedSize(true)
+        }
     }
 
     override fun initDataBinding() {
@@ -43,6 +58,11 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
         viewModel.fileUrl.observe(this) {
             if(it.isNotEmpty())
                 fileAdapter.submitList(it)
+        }
+
+        viewModel.imgUrl.observe(this) {
+            if(it.isNotEmpty())
+                imageAdapter.submitList(it)
         }
     }
 
