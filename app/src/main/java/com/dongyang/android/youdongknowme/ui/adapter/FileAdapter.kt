@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dongyang.android.youdongknowme.data.remote.entity.NoticeFileUrl
 import com.dongyang.android.youdongknowme.databinding.ItemFileBinding
-import com.dongyang.android.youdongknowme.ui.view.notice.NoticeClickListener
 
 class FileAdapter : RecyclerView.Adapter<FileAdapter.ViewHolder>() {
 
@@ -20,7 +19,6 @@ class FileAdapter : RecyclerView.Adapter<FileAdapter.ViewHolder>() {
             if(item.name.isBlank()) {
                 binding.itemFileBtn.visibility = View.GONE
                 binding.itemFileNotFound.apply {
-                    text = "첨부파일이(가) 존재하지 않습니다."
                     visibility = View.VISIBLE
                 }
             } else {

@@ -15,6 +15,7 @@
     <string name="notice_tab_university">대학</string>
     <string name="notice_tab_faculty">학부</string>
     <string name="notice_search_message">검색어를 입력해주세요.</string>
+    <string name="notice_file_not_found_message"> &#128517; 첨부 파일이 존재하지 않습니다. </string>
 
     <!-- schedule -->
     <string name="schedule_title">학사일정</string>

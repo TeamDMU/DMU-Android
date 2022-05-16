@@ -1,20 +1,14 @@
 package com.dongyang.android.youdongknowme.ui.view.detail
 
-import android.app.DownloadManager
-import android.content.Context
-import android.net.Uri
-import android.os.Environment
-import androidx.recyclerview.widget.DividerItemDecoration
+import CODE
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityDetailBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.standard.util.log
 import com.dongyang.android.youdongknowme.ui.adapter.FileAdapter
 import com.dongyang.android.youdongknowme.ui.adapter.ImageAdapter
-import java.io.File
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /* 공지사항 글 상세 화면 */
 class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
