@@ -2,37 +2,27 @@ package com.dongyang.android.youdongknowme.ui.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dongyang.android.youdongknowme.data.remote.entity.NoticeFileUrl
 import com.dongyang.android.youdongknowme.databinding.ItemFileBinding
+import com.dongyang.android.youdongknowme.ui.view.detail.DetailClickListener
 
 class FileAdapter : RecyclerView.Adapter<FileAdapter.ViewHolder>() {
 
     private var item = arrayListOf<NoticeFileUrl>()
-    // private var itemClickListener : NoticeClickListener? = null
+     private var itemClickListener : DetailClickListener? = null
 
-    inner class ViewHolder(private val binding: ItemFileBinding)
-        : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: ItemFileBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(item: NoticeFileUrl) {
-            if(item.name.isBlank()) {
-                binding.itemFileBtn.visibility = View.GONE
-                binding.itemFileNotFound.apply {
-                    visibility = View.VISIBLE
-                }
-            } else {
-                binding.itemFileBtn.text = item.name
-                binding.itemFileNotFound.apply {
-                    visibility = View.GONE
-                }
-            }
-            // binding.itemClickListener = itemClickListener
+            binding.itemClickListener = itemClickListener
+            binding.file = item
         }
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun submitList(item : List<NoticeFileUrl>) {
+    fun submitList(item: List<NoticeFileUrl>) {
         this.item.clear()
         this.item.addAll(item)
         notifyDataSetChanged()
@@ -52,7 +42,7 @@ class FileAdapter : RecyclerView.Adapter<FileAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = item.size
 
-//    fun setItemClickListener(listener : NoticeClickListener) {
-//        itemClickListener = listener
-//    }
+    fun setItemClickListener(listener : DetailClickListener) {
+        itemClickListener = listener
+    }
 }
