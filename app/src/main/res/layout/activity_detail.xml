@@ -14,7 +14,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/notice_title"
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +41,7 @@
             android:layout_marginEnd="16dp"
             android:text="@{viewModel.title}"
             android:textColor="@color/black"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -86,38 +86,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detail_writer" />
 
-        <LinearLayout
-            android:id="@+id/detail_file_list"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/detail_file_rcv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="16dp"
-            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail_top_line">
-
-            <TextView
-                android:id="@+id/detail_first_file"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="[붙임 1] 2022학년도 1학기 수강신청 안내서.hwp"
-                android:textColor="#005DFB"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/detail_second_file"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="[붙임 2] 2022학년도 1학기 한국열린사이버대학교(OCU) 학점교류 교과목 수업계획서.zip"
-                android:textColor="#005DFB"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@id/detail_top_line"
+            tools:listitem="@layout/item_file"/>
 
         <View
             android:id="@+id/detail_bot_line"
@@ -129,9 +108,10 @@
             android:background="#A1333232"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detail_file_list" />
+            app:layout_constraintTop_toBottomOf="@+id/detail_file_rcv" />
 
         <ScrollView
+            android:id="@+id/detail_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
@@ -142,7 +122,7 @@
             app:layout_constraintTop_toBottomOf="@+id/detail_bot_line">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
@@ -152,10 +132,12 @@
                     android:text="@{viewModel.content}"
                     android:textColor="#E81C1C1C" />
 
-                <ImageView
-                    android:id="@+id/detail_image_01"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/detail_image_rcv"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp"
+                    tools:listitem="@layout/item_image"/>
             </LinearLayout>
         </ScrollView>
 
@@ -166,7 +148,6 @@
         <variable
             name="viewModel"
             type="com.dongyang.android.youdongknowme.ui.view.detail.DetailViewModel" />
-
 
         <variable
             name="detail"
