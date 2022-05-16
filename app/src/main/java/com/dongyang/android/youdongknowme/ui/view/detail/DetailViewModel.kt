@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.remote.entity.NoticeDetail
+import com.dongyang.android.youdongknowme.data.remote.entity.NoticeFileUrl
 import com.dongyang.android.youdongknowme.data.repository.DetailRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.standard.util.log
@@ -14,6 +15,19 @@ class DetailViewModel(private val detailRepository: DetailRepository) : BaseView
 
     private val _noticeDetail : MutableLiveData<NoticeDetail> = MutableLiveData()
     val noticeDetail : LiveData<NoticeDetail> = _noticeDetail
+
+    private val _title: MutableLiveData<String> = MutableLiveData()
+    val title: LiveData<String> get() = _title
+    private val _writer: MutableLiveData<String> = MutableLiveData()
+    val writer: LiveData<String> get() = _writer
+    private val _date: MutableLiveData<String> = MutableLiveData()
+    val date: LiveData<String> get() = _date
+    private val _content: MutableLiveData<String> = MutableLiveData()
+    val content: LiveData<String> get() = _content
+    private val _imgUrl: MutableLiveData<List<String>> = MutableLiveData()
+    val imgUrl: LiveData<List<String>> get() = _imgUrl
+    private val _fileUrl: MutableLiveData<List<NoticeFileUrl>> = MutableLiveData()
+    val fileUrl: LiveData<List<NoticeFileUrl>> get() = _fileUrl
 
     private val _errorState: MutableLiveData<Int> = MutableLiveData()
     val errorState: LiveData<Int> = _errorState
@@ -25,7 +39,12 @@ class DetailViewModel(private val detailRepository: DetailRepository) : BaseView
                 val response = detailRepository.getNoticeDetail(code, num)
                 if(response.isSuccessful) {
                     val noticeDetail = response.body()
-                    _noticeDetail.postValue(noticeDetail!!)
+                    _title.postValue(noticeDetail?.title)
+                    _writer.postValue(noticeDetail?.writer)
+                    _date.postValue(noticeDetail?.date)
+                    _content.postValue(noticeDetail?.content)
+                    _imgUrl.postValue(noticeDetail?.imgUrl)
+                    _fileUrl.postValue(noticeDetail?.fileUrl)
                 } else {
                     _errorState.postValue(ERROR_NOTICE)
                 }

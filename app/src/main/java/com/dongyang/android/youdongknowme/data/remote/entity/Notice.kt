@@ -27,5 +27,12 @@ data class NoticeDetail(
     @SerializedName("img_url")
     var imgUrl : List<String>,
     @SerializedName("file_url")
-    var fileUrl : List<String>
+    var fileUrl : List<NoticeFileUrl>
     )
+
+data class NoticeFileUrl(
+    @SerializedName("url")
+    var url: String,
+    @SerializedName("name")
+    var name: String
+)

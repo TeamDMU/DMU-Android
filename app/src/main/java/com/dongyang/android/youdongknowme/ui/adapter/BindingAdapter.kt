@@ -7,3 +7,8 @@ import androidx.databinding.BindingAdapter
 fun bindSearchView(view : View, condition: Boolean) {
     view.visibility = if(condition) View.VISIBLE else View.GONE
 }
+
+@BindingAdapter("bind_visibility_existence")
+fun bindFileList(view : View, condition: Boolean) {
+    view.visibility = if(condition) View.VISIBLE else View.GONE
+}
