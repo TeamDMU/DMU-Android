@@ -82,4 +82,8 @@ dependencies {
     // MaterialCalendarView
     implementation 'com.github.prolificinteractive:material-calendarview:2.0.0'
     implementation 'com.jakewharton.threetenabp:threetenabp:1.2.0'
+
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.13.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
 }
