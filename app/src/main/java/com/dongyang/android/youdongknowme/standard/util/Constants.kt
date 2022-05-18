@@ -2,6 +2,7 @@
 object CODE {
     const val SCHOOL_CODE = 1
 
+    // TODO :: 코드 변경 필요
     const val MECHANICAL_ENGINE_CODE = 101
     const val MECHANICAL_DESIGN_CODE = 102
 
@@ -26,4 +27,7 @@ object CODE {
     const val HOTEL_TOURISM_CODE = 504
     const val MANAGEMENT_INFORMATION_CODE = 505
     const val BIG_DATA_MANAGEMENT_CODE = 506
+
+    const val ROBOT_ENGINE_CODE = 601
+    const val AUTOMATION_ENGINE_CODE = 602
 }
