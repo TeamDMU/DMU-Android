@@ -24,11 +24,14 @@ sealed class Department(
     object HotelTourism : Department("호텔관광학과", CODE.HOTEL_TOURISM_CODE)
     object ManagementInformation : Department("경영정보학과", CODE.MANAGEMENT_INFORMATION_CODE)
     object BigDataManagement : Department("빅데이터경영과", CODE.BIG_DATA_MANAGEMENT_CODE)
-
+    object Robot : Department("로봇공학과", CODE.ROBOT_ENGINE_CODE)
+    object Automation : Department("자동화공학부", CODE.AUTOMATION_ENGINE_CODE)
 
     companion object {
         fun getDepartment(department: String): Department {
             return when (department) {
+                "경영학과" -> Business
+                "경영정보학과" -> ManagementInformation
                 "기계공학과" -> Mechanical
                 "기계설계공학과" -> MechanicalDesign
                 "전기공학과" -> Electrical
@@ -43,12 +46,12 @@ sealed class Department(
                 "건축과" -> Architecture
                 "실내건축디자인학과" -> InteriorDesign
                 "시각디자인학과" -> VisualDesign
-                "경영학과" -> Business
-                "세무회계과" -> TaxAccounting
+                "세무회계학과" -> TaxAccounting
                 "유통마케팅학과" -> DistributionMarketing
-                "호텔관광과" -> HotelTourism
-                "경영정보학과" -> ManagementInformation
+                "호텔관광학과" -> HotelTourism
                 "빅데이터경영학과" -> BigDataManagement
+                "로봇공학부" -> Robot
+                "자동화공학부" -> Automation
                 else -> throw IllegalArgumentException("올바른 타입이 아닙니다.")
             }
         }
