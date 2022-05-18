@@ -7,16 +7,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
 import com.dongyang.android.youdongknowme.R
-import com.dongyang.android.youdongknowme.data.remote.entity.Notice
 import com.dongyang.android.youdongknowme.databinding.FragmentNoticeBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
 import com.dongyang.android.youdongknowme.standard.util.hideKeyboard
-import com.dongyang.android.youdongknowme.standard.util.log
 import com.dongyang.android.youdongknowme.standard.util.showKeyboard
 import com.dongyang.android.youdongknowme.ui.adapter.NoticeAdapter
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailActivity
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.google.android.material.tabs.TabLayout
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /* 공지 사항 화면 */
 class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), NoticeClickListener {
@@ -28,9 +26,6 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     override val layoutResourceId: Int = R.layout.fragment_notice
     override val viewModel: NoticeViewModel by viewModel()
 
-    // TODO :: 로컬 데이터에서 받아온 것을 DEFAULT 값으로 설정
-    // TODO :: TAB 에서 공지사항임이 확인 됐을 경우에는 공지사항 코드로 고정해야 함
-    val code = CODE.COMPUTER_SOFTWARE_ENGINE_CODE
     private lateinit var adapter: NoticeAdapter
 
     override fun initStartView() {
@@ -56,14 +51,20 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         viewModel.errorState.observe(viewLifecycleOwner) { resId ->
             showToast(getString(resId))
         }
+
+        viewModel.isUniversityTab.observe(viewLifecycleOwner) {
+            viewModel.setDepartmentCode()
+        }
+
+        viewModel.departmentCode.observe(viewLifecycleOwner) {
+            viewModel.getNoticeList()
+        }
     }
 
     override fun initAfterBinding() {
-        // 최초 데이터 불러오기
-        getNoticeList()
         // 새로고침 했을 때 동작
         binding.noticeSwipe.setOnRefreshListener {
-            getNoticeList()
+            viewModel.getNoticeList()
             binding.noticeSwipe.isRefreshing = false
         }
 
@@ -77,7 +78,6 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
                 YoYo.with(Techniques.FadeInUp)
                     .duration(400)
                     .playOn(binding.noticeToolbar.toolbarSearchView)
-
             } else {
                 binding.noticeToolbar.toolbarSearchText.hideKeyboard()
                 binding.noticeToolbar.toolbarSearchText.text.clear()
@@ -89,10 +89,10 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         }
 
         binding.noticeToolbar.toolbarSearchText.setOnEditorActionListener { textView, actionId, _ ->
-            val searchData = textView.text.toString()
-            if (actionId == EditorInfo.IME_ACTION_SEARCH && searchData.isNotEmpty()) {
+            val searchKeyword = textView.text.toString()
+            if (actionId == EditorInfo.IME_ACTION_SEARCH && searchKeyword.isNotEmpty()) {
                 textView.hideKeyboard()
-                viewModel.getNoticeSearchList(code, searchData)
+                viewModel.getNoticeSearchList(searchKeyword)
             }
 
             false
@@ -107,30 +107,15 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         binding.noticeTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 if (tab.text == "대학") {
-                    // TODO :: 대학 공지사항 API 연동
-                    val test = listOf(
-                        Notice(
-                            0,
-                            "[공지] 3월 31일(목)부터 적용될 수업 방침에 대한 안내 말씀 드립니다.",
-                            "2022-04-07",
-                            "김지원"
-                        )
-                    )
-                    adapter.submitList(test)
+                    viewModel.setTabMode(true)
                 } else {
-                    getNoticeList()
+                    viewModel.setTabMode(false)
                 }
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {} // 구현 X
             override fun onTabReselected(tab: TabLayout.Tab?) {} // 구현 X
         })
-
-
-    }
-
-    private fun getNoticeList() {
-        viewModel.getNoticeList(code)
     }
 
     // 아이템 클릭시 자세히 보기 화면으로 이동
