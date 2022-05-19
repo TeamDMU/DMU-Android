@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 abstract class BaseViewModel : ViewModel() {
 
     // 로딩 유무 확인
-    private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
+    protected val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
     val isLoading: LiveData<Boolean> get() = _isLoading
 
     // 서버 연결 확인
