@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.dongyang.android.youdongknowme.ui.view.LoadingDialog
 
 abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel> : Fragment() {
 
@@ -15,6 +16,10 @@ abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel> : Fragment()
     val binding get() = _binding!!
     abstract val layoutResourceId: Int
     abstract val viewModel: R
+
+    private val loadingDialog : LoadingDialog by lazy {
+        LoadingDialog(requireActivity())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,11 +56,11 @@ abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel> : Fragment()
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 
     protected fun showLoading() {
-        TODO()
+        loadingDialog.show()
     }
 
     protected fun dismissLoading() {
-        TODO()
+        loadingDialog.dismiss()
     }
 
     /**

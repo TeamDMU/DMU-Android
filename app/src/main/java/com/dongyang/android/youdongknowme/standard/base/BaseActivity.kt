@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.dongyang.android.youdongknowme.ui.view.LoadingDialog
 
 abstract class BaseActivity<T : ViewDataBinding, R : BaseViewModel> : AppCompatActivity() {
 
@@ -12,6 +13,9 @@ abstract class BaseActivity<T : ViewDataBinding, R : BaseViewModel> : AppCompatA
     abstract val layoutResourceId: Int
     abstract val viewModel: R
 
+    private val loadingDialog : LoadingDialog by lazy {
+        LoadingDialog(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,11 +33,11 @@ abstract class BaseActivity<T : ViewDataBinding, R : BaseViewModel> : AppCompatA
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
     protected fun showLoading() {
-        TODO()
+        loadingDialog.show()
     }
 
     protected fun dismissLoading() {
-        TODO()
+        loadingDialog.dismiss()
     }
 
     protected fun configureToolbar() {
