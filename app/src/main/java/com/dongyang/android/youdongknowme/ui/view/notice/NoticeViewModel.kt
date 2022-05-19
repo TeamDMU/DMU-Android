@@ -1,5 +1,6 @@
 package com.dongyang.android.youdongknowme.ui.view.notice
 
+import CODE
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -17,7 +18,7 @@ class NoticeViewModel(
     private val _isUniversityTab = MutableLiveData(true)
     val isUniversityTab : LiveData<Boolean> get() = _isUniversityTab
 
-    private val _departmentCode = MutableLiveData(1)
+    private val _departmentCode : MutableLiveData<Int> = MutableLiveData()
     val departmentCode : LiveData<Int> get() = _departmentCode
 
     private val _isSearchMode = MutableLiveData(false)
@@ -53,6 +54,7 @@ class NoticeViewModel(
 
     // 공지사항 리스트 호출
     fun getNoticeList() {
+        _isLoading.postValue(true)
         try {
             viewModelScope.launch(connectionHandler) {
                 val response = noticeRepository.getNoticeList(departmentCode.value!!)
@@ -62,14 +64,17 @@ class NoticeViewModel(
                 } else {
                     _errorState.postValue(ERROR_NOTICE)
                 }
+                _isLoading.postValue(false)
             }
         } catch (e: Exception){
             _errorState.postValue(ERROR_NOTICE)
+            _isLoading.postValue(false)
         }
     }
 
     // 검색어가 포함된 공지사항 리스트 호출
     fun getNoticeSearchList(keyword : String) {
+        _isLoading.postValue(true)
         try {
             viewModelScope.launch(connectionHandler) {
                 val response = noticeRepository.getNoticeSearchList(departmentCode.value!!, keyword)
@@ -79,9 +84,11 @@ class NoticeViewModel(
                 } else {
                     _errorState.postValue(ERROR_NOTICE)
                 }
+                _isLoading.postValue(false)
             }
         } catch (e: Exception){
             _errorState.postValue(ERROR_NOTICE)
+            _isLoading.postValue(false)
         }
     }
 

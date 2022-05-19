@@ -12,6 +12,7 @@ import com.dongyang.android.youdongknowme.standard.base.BaseFragment
 import com.dongyang.android.youdongknowme.standard.util.hideKeyboard
 import com.dongyang.android.youdongknowme.standard.util.showKeyboard
 import com.dongyang.android.youdongknowme.ui.adapter.NoticeAdapter
+import com.dongyang.android.youdongknowme.ui.view.LoadingDialog
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailActivity
 import com.google.android.material.tabs.TabLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,6 +26,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
 
     override val layoutResourceId: Int = R.layout.fragment_notice
     override val viewModel: NoticeViewModel by viewModel()
+
 
     private lateinit var adapter: NoticeAdapter
 
@@ -40,6 +42,12 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     }
 
     override fun initDataBinding() {
+
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            if(it) showLoading()
+            else dismissLoading()
+        }
+
         viewModel.noticeList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
@@ -106,6 +114,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         // 각각 탭 버튼 눌렀을 때 동작
         binding.noticeTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
+                binding.noticeToolbar.toolbarSearchText.text.clear()
                 if (tab.text == "대학") {
                     viewModel.setTabMode(true)
                 } else {
