@@ -62,6 +62,11 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
     override fun initDataBinding() {
         binding.viewModel = viewModel
 
+        viewModel.isLoading.observe(this) {
+            if(it) showLoading()
+            else dismissLoading()
+        }
+
         viewModel.errorState.observe(this) { resId ->
             showToast(getString(resId))
         }
@@ -78,7 +83,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
     }
 
     override fun initAfterBinding() {
-        viewModel.getNoticeList(code, num)
+        viewModel.getNoticeDetail(code, num)
 
         // 뒤로가기 버튼 클릭 시
         binding.detailExit.setOnClickListener {

@@ -33,7 +33,8 @@ class DetailViewModel(private val detailRepository: DetailRepository) : BaseView
     val errorState: LiveData<Int> = _errorState
 
     // 공지사항 리스트 호출
-    fun getNoticeList(code : Int, num : Int) {
+    fun getNoticeDetail(code : Int, num : Int) {
+        _isLoading.postValue(true)
         try {
             viewModelScope.launch(connectionHandler) {
                 val response = detailRepository.getNoticeDetail(code, num)
@@ -48,10 +49,12 @@ class DetailViewModel(private val detailRepository: DetailRepository) : BaseView
                 } else {
                     _errorState.postValue(ERROR_NOTICE)
                 }
+                _isLoading.postValue(false)
             }
         } catch (e: Exception){
             log("에러 발생")
             _errorState.postValue(ERROR_NOTICE)
+            _isLoading.postValue(false)
         }
     }
 
