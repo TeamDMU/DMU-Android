@@ -45,6 +45,7 @@
                     android:layout_marginStart="16dp"
                     android:textSize="16sp"
                     android:text="@string/setting_notice"/>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -67,7 +68,6 @@
                     android:layout_height="30dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-
                     android:textSize="16sp"
                     android:text="@string/setting_notice"/>
 
@@ -77,7 +77,7 @@
                     android:clickable="true">
 
                     <TextView
-                        android:id="@+id/departmentChoice"
+                        android:id="@+id/setting_department_choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -86,8 +86,7 @@
                         android:clickable="true"
                         android:text="@string/department_title"
                         android:textColor="@color/black"
-                        android:textSize="16sp">
-                    </TextView>
+                        android:textSize="16sp"/>
                 </LinearLayout>
 
                 <View
@@ -106,29 +105,12 @@
                     android:textColor="@color/main"
                     android:textSize="16sp"/>
 
-                <!--  이벤트 처리    -->
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content">-->
-<!--                    <Button-->
-<!--                        android:id="@+id/appHelp"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:background="#00ff0000"-->
-<!--                        android:clickable="true"-->
-<!--                        android:text="@string/setting_app_help"-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="16sp">-->
-<!--                    </Button>-->
-<!--                </LinearLayout>-->
-
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true">
                     <TextView
-                        android:id="@+id/appHelp"
+                        android:id="@+id/setting_ask"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -137,11 +119,8 @@
                         android:clickable="true"
                         android:text="@string/setting_app_help"
                         android:textColor="@color/black"
-                        android:textSize="16sp">
-                    </TextView>
+                        android:textSize="16sp"/>
                 </LinearLayout>
-
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -170,6 +149,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/setting_license"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"

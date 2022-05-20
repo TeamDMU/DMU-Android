@@ -19,17 +19,9 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
     override val layoutResourceId: Int = R.layout.fragment_setting
     override val viewModel: SettingViewModel by viewModel()
 
-    //현재 app version 불러오기 (1.0.0)
-    private fun getAppVersion(): String {
-        val packageManager =
-            requireContext().packageManager.getPackageInfo(requireContext().packageName,0)
-            return packageManager.versionName
-    }
-
-
 
     override fun initStartView() {
-        binding.settingVersion.text = " ${getAppVersion()}"
+        binding.settingVersion.text = getAppVersion()
     }
 
     override fun initDataBinding() {
@@ -38,7 +30,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
 
     override fun initAfterBinding() {
         //이메일 연동 코드
-        binding.appHelp.setOnClickListener {
+        binding.settingAsk.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = "plain/text"
             val address = arrayOf("jiwon0705@m365.dongyang.ac.kr") //이메일 주소는 배열로 묶어주기
@@ -47,9 +39,17 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
         }
 
         //학과 설정 눌렀을 때
-        binding.departmentChoice.setOnClickListener {
+        binding.settingDepartmentChoice.setOnClickListener {
             val intent = Intent(requireActivity(), DepartActivity::class.java)
             startActivity(intent)
         }
     }
+
+    //현재 app version 불러오기 (1.0.0)
+    private fun getAppVersion(): String {
+        val packageManager =
+            requireContext().packageManager.getPackageInfo(requireContext().packageName,0)
+        return packageManager.versionName
+    }
+
 }
