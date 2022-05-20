@@ -1,6 +1,7 @@
 package com.dongyang.android.youdongknowme.ui.view.notice
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,6 +11,7 @@ import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentNoticeBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
 import com.dongyang.android.youdongknowme.standard.util.hideKeyboard
+import com.dongyang.android.youdongknowme.standard.util.log
 import com.dongyang.android.youdongknowme.standard.util.showKeyboard
 import com.dongyang.android.youdongknowme.ui.adapter.NoticeAdapter
 import com.dongyang.android.youdongknowme.ui.view.LoadingDialog
@@ -129,8 +131,11 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
 
     // 아이템 클릭시 자세히 보기 화면으로 이동
     override fun itemClick(num: Int) {
+        val departCode = viewModel.departmentCode.value
+
         val intent = Intent(requireActivity(), DetailActivity::class.java)
-        intent.putExtra("num", num)
+        intent.putExtra("departCode", departCode)
+        intent.putExtra("boardNum", num)
         startActivity(intent)
     }
 }

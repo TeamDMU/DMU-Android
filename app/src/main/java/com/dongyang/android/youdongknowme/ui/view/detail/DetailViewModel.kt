@@ -13,8 +13,11 @@ import kotlinx.coroutines.launch
 
 class DetailViewModel(private val detailRepository: DetailRepository) : BaseViewModel() {
 
-    private val _noticeDetail : MutableLiveData<NoticeDetail> = MutableLiveData()
-    val noticeDetail : LiveData<NoticeDetail> = _noticeDetail
+    private val _noticeDetail: MutableLiveData<NoticeDetail> = MutableLiveData()
+    val noticeDetail: LiveData<NoticeDetail> = _noticeDetail
+
+    private val _num: MutableLiveData<Int> = MutableLiveData()
+    private val _code: MutableLiveData<Int> = MutableLiveData()
 
     private val _title: MutableLiveData<String> = MutableLiveData()
     val title: LiveData<String> get() = _title
@@ -32,13 +35,23 @@ class DetailViewModel(private val detailRepository: DetailRepository) : BaseView
     private val _errorState: MutableLiveData<Int> = MutableLiveData()
     val errorState: LiveData<Int> = _errorState
 
+    // 학과 코드, 게시글 번호 저장
+    fun setNoticeDetailInfo(code: Int, num: Int) {
+        _code.value = code
+        _num.value = num
+    }
+
     // 공지사항 리스트 호출
-    fun getNoticeDetail(code : Int, num : Int) {
+    fun getNoticeDetail() {
         _isLoading.postValue(true)
+
+        val departCode = _code.value!!
+        val boardNum = _num.value!!
+
         try {
             viewModelScope.launch(connectionHandler) {
-                val response = detailRepository.getNoticeDetail(code, num)
-                if(response.isSuccessful) {
+                val response = detailRepository.getNoticeDetail(departCode, boardNum)
+                if (response.isSuccessful) {
                     val noticeDetail = response.body()
                     _title.postValue(noticeDetail?.title)
                     _writer.postValue(noticeDetail?.writer)
@@ -51,7 +64,7 @@ class DetailViewModel(private val detailRepository: DetailRepository) : BaseView
                 }
                 _isLoading.postValue(false)
             }
-        } catch (e: Exception){
+        } catch (e: Exception) {
             log("에러 발생")
             _errorState.postValue(ERROR_NOTICE)
             _isLoading.postValue(false)
