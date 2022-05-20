@@ -24,7 +24,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:text="처리중"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="14dp" />
 
 
