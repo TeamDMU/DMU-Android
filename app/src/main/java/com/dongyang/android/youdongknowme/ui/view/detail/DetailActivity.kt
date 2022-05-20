@@ -1,6 +1,5 @@
 package com.dongyang.android.youdongknowme.ui.view.detail
 
-import CODE
 import android.app.DownloadManager
 import android.app.DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED
 import android.content.BroadcastReceiver
@@ -29,21 +28,17 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
     private lateinit var fileAdapter: FileAdapter
     private lateinit var imageAdapter: ImageAdapter
 
-    private val num: Int by lazy {
-        intent.getIntExtra("num", 0)
-    }
+    private val departCode: Int by lazy { intent.getIntExtra("departCode", 0) }
+    private val boardNum: Int by lazy { intent.getIntExtra("boardNum", 0) }
 
     private val mDownloadManager: DownloadManager by lazy {
         this.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
     }
     private var mDownloadQueueId: Long = 0
 
-
-    // TODO :: 로컬 데이터에서 받아온 것을 DEFAULT 값으로 설정
-    private val code = CODE.COMPUTER_SOFTWARE_ENGINE_CODE
-
-
     override fun initStartView() {
+        viewModel.setNoticeDetailInfo(departCode, boardNum)
+
         fileAdapter = FileAdapter().apply { setItemClickListener(this@DetailActivity) }
         binding.detailFileRcv.apply {
             this.adapter = fileAdapter
@@ -63,7 +58,8 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
         binding.viewModel = viewModel
 
         viewModel.isLoading.observe(this) {
-            if(it) showLoading()
+            log("로딩 옵저빙 $it")
+            if (it) showLoading()
             else dismissLoading()
         }
 
@@ -83,14 +79,12 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
     }
 
     override fun initAfterBinding() {
-        viewModel.getNoticeDetail(code, num)
+        viewModel.getNoticeDetail()
 
         // 뒤로가기 버튼 클릭 시
         binding.detailExit.setOnClickListener {
             finish()
         }
-
-        log(num.toString())
     }
 
     // 파일 클릭했을 때 동작
@@ -135,7 +129,11 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
                             val columnIndex = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS)
                             val status = cursor.getInt(columnIndex)
                             if (status == DownloadManager.STATUS_FAILED) {
-                                Toast.makeText(context, "${R.string.notice_detail_download_fail}", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    "${R.string.notice_detail_download_fail}",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }
                     }
