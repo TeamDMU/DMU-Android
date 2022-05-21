@@ -1,6 +1,5 @@
 package com.dongyang.android.youdongknowme.ui.view.schedule
 
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
@@ -8,6 +7,7 @@ import com.dongyang.android.youdongknowme.databinding.FragmentScheduleBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
 import com.dongyang.android.youdongknowme.standard.util.log
 import com.dongyang.android.youdongknowme.ui.adapter.ScheduleAdapter
+import com.prolificinteractive.materialcalendarview.CalendarDay
 import org.threeten.bp.LocalDate
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -24,7 +24,7 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
     private lateinit var adapter : ScheduleAdapter
 
     override fun initStartView() {
-        log(binding.scheduleCalendar.currentDate.date.toString()) // 달력 초기 데이터 (2022-04-01)
+        viewModel.setPickDate(binding.scheduleCalendar.currentDate)
         adapter = ScheduleAdapter()
         binding.scheduleRvList.apply {
             this.adapter = this@ScheduleFragment.adapter
@@ -35,17 +35,28 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
     }
 
     override fun initDataBinding() {
-        adapter.submitList(viewModel.testCode)
+        viewModel.pickMonth.observe(viewLifecycleOwner) {
+            viewModel.getScheduleList()
+        }
+
+        viewModel.scheduleList.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
     }
 
     override fun initAfterBinding() {
-
-        // TODO :: 월 변경될 때마다 일정 리스트도 변경하기
-        // TODO :: MinDate, MaxDate 설정 필요(리소스 감소)
+        
         binding.scheduleCalendar.setOnMonthChangedListener { _, date ->
-            val currentDate = date.year.toString() + "." + date.month.toString() // 2022.4
-            adapter.submitList(viewModel.testCode2)
-            log(currentDate)
+            viewModel.setPickDate(date)
+            log(date.month.toString())
+        }
+
+        // 최소 날짜, 최대 날짜 지정
+        binding.scheduleCalendar.apply {
+            this.state().edit().
+                setMinimumDate(CalendarDay.from(2022, 1, 1))
+                .setMaximumDate(CalendarDay.from(2023, 2, 28))
+                .commit()
         }
 
         // 연/월 방식으로 타이틀 처리

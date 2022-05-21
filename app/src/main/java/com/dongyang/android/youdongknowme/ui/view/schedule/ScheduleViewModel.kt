@@ -1,19 +1,49 @@
 package com.dongyang.android.youdongknowme.ui.view.schedule
 
-
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.data.remote.entity.Schedule
-
+import com.dongyang.android.youdongknowme.data.repository.ScheduleRepository
+import com.prolificinteractive.materialcalendarview.CalendarDay
+import kotlinx.coroutines.launch
 
 /* 학사 일정 뷰모델 */
-class ScheduleViewModel : BaseViewModel() {
-    val testCode = listOf(Schedule(0,"22.03.31(목) ~ 22.04.06(수)", "1차 강의 평가"),
-        Schedule(1,"22.04.05(화) ~ 22.04.06(수)", "등록금 분할납부(3회차)"),
-        Schedule(2,"22.04.21(목) ~ 22.04.27(수)", "중간고사"),
-        Schedule(3,"22.04.30(토) ~ 22.04.30(토)", "학기개시 60일 경과"))
+class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : BaseViewModel() {
 
-    val testCode2 = listOf(Schedule(4,"05.01 (일)", "근로자의 날"),
-        Schedule(5,"05.03 (화) ~ 05.04 (수)", "등록금 분할납부(4회차)"),
-        Schedule(6,"05.08 (일)", "부처님 오신날"),
-        Schedule(7,"05.11 (수) ~ 05.13 (금)", "3년제 학과 수업연한 연장 신청"))
+    private val _scheduleList = MutableLiveData<List<Schedule>>()
+    val scheduleList: LiveData<List<Schedule>> get() = _scheduleList
+
+    private val _pickYear = MutableLiveData<Int>()
+    val pickYear: LiveData<Int> get() = _pickYear
+
+    private val _pickMonth = MutableLiveData<Int>()
+    val pickMonth: LiveData<Int> get() = _pickMonth
+
+    fun setPickDate(date: CalendarDay) {
+        _pickYear.value = date.year
+        _pickMonth.value = date.month
+    }
+
+    fun getScheduleList() {
+        _isLoading.postValue(true)
+        try {
+            viewModelScope.launch(connectionHandler) {
+                val response = scheduleRepository.getNoticeList()
+
+                if(response.isSuccessful) {
+                    val scheduleList = response.body()!!.filter {
+                        it.year == pickYear.value.toString() &&
+                        it.month == pickMonth.value
+                    }
+
+                    _scheduleList.postValue(scheduleList)
+                }
+                _isLoading.postValue(false)
+            }
+        } catch (e: Exception) {
+            _isLoading.postValue(false)
+        }
+    }
 }

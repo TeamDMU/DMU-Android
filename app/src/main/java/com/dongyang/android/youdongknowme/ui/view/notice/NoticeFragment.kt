@@ -1,7 +1,6 @@
 package com.dongyang.android.youdongknowme.ui.view.notice
 
 import android.content.Intent
-import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,10 +10,9 @@ import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentNoticeBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
 import com.dongyang.android.youdongknowme.standard.util.hideKeyboard
-import com.dongyang.android.youdongknowme.standard.util.log
 import com.dongyang.android.youdongknowme.standard.util.showKeyboard
 import com.dongyang.android.youdongknowme.ui.adapter.NoticeAdapter
-import com.dongyang.android.youdongknowme.ui.view.LoadingDialog
+import com.dongyang.android.youdongknowme.ui.view.depart.DepartActivity
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailActivity
 import com.google.android.material.tabs.TabLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -106,6 +104,11 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
             }
 
             false
+        }
+
+        binding.noticeToolbar.toolbarAlarm.setOnClickListener {
+            val intent = Intent(requireActivity(), DepartActivity::class.java)
+            startActivity(intent)
         }
 
         // 툴바의 X버튼 눌렀을 때 동작
