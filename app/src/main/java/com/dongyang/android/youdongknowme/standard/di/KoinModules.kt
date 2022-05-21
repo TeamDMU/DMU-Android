@@ -1,9 +1,6 @@
 package com.dongyang.android.youdongknowme.standard.di
 
-import com.dongyang.android.youdongknowme.data.repository.DepartRepository
-import com.dongyang.android.youdongknowme.data.repository.DetailRepository
-import com.dongyang.android.youdongknowme.data.repository.NoticeRepository
-import com.dongyang.android.youdongknowme.data.repository.SplashRepository
+import com.dongyang.android.youdongknowme.data.repository.*
 import com.dongyang.android.youdongknowme.ui.view.depart.DepartViewModel
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailViewModel
 import com.dongyang.android.youdongknowme.ui.view.notice.NoticeViewModel
@@ -18,7 +15,7 @@ val viewModelModule = module {
         NoticeViewModel(get())
     }
     viewModel {
-        ScheduleViewModel()
+        ScheduleViewModel(get())
     }
     viewModel {
         SettingViewModel()
@@ -46,5 +43,8 @@ val repositoryModule = module {
     }
     single {
         DepartRepository()
+    }
+    single {
+        ScheduleRepository()
     }
 }

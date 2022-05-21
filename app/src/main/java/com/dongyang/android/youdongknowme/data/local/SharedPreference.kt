@@ -28,4 +28,8 @@ object SharedPreference {
     fun getCode(): Int? = pref?.getInt(CODE, 0)
     fun setCode(code: Int) = pref?.edit()?.putInt(CODE, code)?.apply()
 
+    // 학사 일정
+    private const val SCHEDULE = "SCHEDULE"
+    fun getSchedule(): String? = pref?.getString(SCHEDULE, "No Data")
+    fun setSchedule(schedule: String) = pref?.edit()?.putString(SCHEDULE, schedule)?.apply()
 }

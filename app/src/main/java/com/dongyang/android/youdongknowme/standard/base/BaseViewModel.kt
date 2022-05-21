@@ -18,6 +18,7 @@ abstract class BaseViewModel : ViewModel() {
 
     val connectionHandler = CoroutineExceptionHandler { _, e ->
         e.printStackTrace()
+        _isLoading.postValue(false)
         _errorConnectionState.postValue(ERROR_NETWORK)
     }
 
