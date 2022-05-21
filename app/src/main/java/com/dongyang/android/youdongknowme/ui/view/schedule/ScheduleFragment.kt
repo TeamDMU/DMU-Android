@@ -5,12 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentScheduleBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
-import com.dongyang.android.youdongknowme.standard.util.log
 import com.dongyang.android.youdongknowme.ui.adapter.ScheduleAdapter
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import org.threeten.bp.LocalDate
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
 
 /* 학사 일정 화면 */
 class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel>() {
@@ -35,8 +33,13 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
     }
 
     override fun initDataBinding() {
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            if(it) showLoading()
+            else dismissLoading()
+        }
+
         viewModel.pickMonth.observe(viewLifecycleOwner) {
-            viewModel.getScheduleList()
+            viewModel.getLocalScheduleList()
         }
 
         viewModel.scheduleList.observe(viewLifecycleOwner) {
@@ -45,10 +48,9 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
     }
 
     override fun initAfterBinding() {
-        
+
         binding.scheduleCalendar.setOnMonthChangedListener { _, date ->
             viewModel.setPickDate(date)
-            log(date.month.toString())
         }
 
         // 최소 날짜, 최대 날짜 지정
