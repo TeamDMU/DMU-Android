@@ -15,7 +15,7 @@ android {
         minSdk 21
         targetSdk 32
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         buildConfigField "String", "SERVER", properties['aws_server']
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -49,6 +49,9 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+
+    implementation 'androidx.preference:preference:1.1.0-rc01'
 
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
