@@ -61,6 +61,9 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         }
 
         viewModel.isUniversityTab.observe(viewLifecycleOwner) {
+            if(!it) {
+                binding.noticeTab.getTabAt(1)?.select()
+            }
             viewModel.setDepartmentCode()
         }
 
