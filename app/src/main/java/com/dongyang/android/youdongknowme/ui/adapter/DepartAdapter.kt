@@ -9,7 +9,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ItemDepartBinding
-import com.dongyang.android.youdongknowme.standard.util.log
 import com.dongyang.android.youdongknowme.ui.view.depart.DepartClickListener
 
 class DepartAdapter : RecyclerView.Adapter<DepartAdapter.ViewHolder>() {
