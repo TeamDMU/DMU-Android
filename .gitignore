@@ -278,3 +278,6 @@ lint/tmp/
 *.xml
 .idea/deploymentTargetDropDown.xml
 .idea/misc.xml
+
+# Google Services (e.g. APIs or Firebase)
+app/google-services.json
