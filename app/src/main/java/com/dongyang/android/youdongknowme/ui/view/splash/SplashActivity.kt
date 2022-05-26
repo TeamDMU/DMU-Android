@@ -34,12 +34,10 @@ class SplashActivity : AppCompatActivity() {
 
             viewModel.isDepart.observe(this@SplashActivity) {
                 if (!it) {
-                    logd("학과 정보 없음")
                     val intent = Intent(this@SplashActivity, DepartActivity::class.java)
                     startActivity(intent)
                     finish()
                 } else {
-                    logd("학과 정보 있음")
                     val intent = Intent(this@SplashActivity, MainActivity::class.java)
                     startActivity(intent)
                     finish()
