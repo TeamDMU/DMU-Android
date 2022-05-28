@@ -14,7 +14,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.standard.util.logw
-import com.dongyang.android.youdongknowme.ui.view.splash.SplashActivity
+import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -31,6 +31,7 @@ class FCMService : FirebaseMessagingService() {
         super.onNewToken(token)
     }
 
+    // TODO :: 알림 설정을 하지 않은 유저에 대한 예외처리 필요
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
 
@@ -42,7 +43,7 @@ class FCMService : FirebaseMessagingService() {
             createNotificationChannel()
 
             // Foreground 에 있을 때 알림 처리
-            val splashIntent = Intent(this, SplashActivity::class.java).apply {
+            val splashIntent = Intent(this, MainActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }
 
