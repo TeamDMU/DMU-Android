@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityDetailBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
-import com.dongyang.android.youdongknowme.standard.util.log
+import com.dongyang.android.youdongknowme.standard.util.logd
 import com.dongyang.android.youdongknowme.ui.adapter.FileAdapter
 import com.dongyang.android.youdongknowme.ui.adapter.ImageAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -58,7 +58,6 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
         binding.viewModel = viewModel
 
         viewModel.isLoading.observe(this) {
-            log("로딩 옵저빙 $it")
             if (it) showLoading()
             else dismissLoading()
         }

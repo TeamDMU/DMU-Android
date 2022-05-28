@@ -5,7 +5,7 @@ import android.content.Context
 import com.dongyang.android.youdongknowme.data.local.SharedPreference
 import com.dongyang.android.youdongknowme.standard.di.repositoryModule
 import com.dongyang.android.youdongknowme.standard.di.viewModelModule
-import com.dongyang.android.youdongknowme.standard.util.log
+import com.dongyang.android.youdongknowme.standard.util.logd
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
 import org.koin.core.context.GlobalContext.startKoin
@@ -26,7 +26,7 @@ class MyApplication : Application() {
     }
 
     override fun onCreate() {
-        log("application create")
+        logd("application create")
         super.onCreate()
 
         // SharedPreference 초기화

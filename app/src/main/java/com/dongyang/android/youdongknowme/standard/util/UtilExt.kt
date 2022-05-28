@@ -5,7 +5,9 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 
-fun log(message : String) = Log.d("YouDongKnowMe", message)
+fun logd(message : String) = Log.d("YouDongKnowMe", message)
+fun logw(message : String) = Log.w("YouDongKnowMe", message)
+fun loge(message : String) = Log.e("YouDongKnowMe", message)
 
 fun View.showKeyboard(isForced: Boolean = false) {
     val inputMethodManager = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager

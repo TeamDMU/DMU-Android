@@ -8,7 +8,7 @@ import com.dongyang.android.youdongknowme.data.remote.entity.NoticeDetail
 import com.dongyang.android.youdongknowme.data.remote.entity.NoticeFileUrl
 import com.dongyang.android.youdongknowme.data.repository.DetailRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
-import com.dongyang.android.youdongknowme.standard.util.log
+import com.dongyang.android.youdongknowme.standard.util.logd
 import kotlinx.coroutines.launch
 
 class DetailViewModel(private val detailRepository: DetailRepository) : BaseViewModel() {
@@ -65,7 +65,6 @@ class DetailViewModel(private val detailRepository: DetailRepository) : BaseView
                 _isLoading.postValue(false)
             }
         } catch (e: Exception) {
-            log("에러 발생")
             _errorState.postValue(ERROR_NOTICE)
             _isLoading.postValue(false)
         }
