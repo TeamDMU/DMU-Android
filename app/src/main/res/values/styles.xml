@@ -2,4 +2,14 @@
 <resources>
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
     </style>
+
+    <style name="Colors_Widget.MaterialComponents.Chip.Choice" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/bg_chip_select</item>
+        <item name="chipStrokeColor">@color/line</item>
+        <item name="chipStrokeWidth">0.4dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="rippleColor">@color/main</item>
+        <item name="chipMinTouchTargetSize">0dp</item>
+        <item name="android:textColor">@color/bg_chip_text_select</item>
+    </style>
 </resources>

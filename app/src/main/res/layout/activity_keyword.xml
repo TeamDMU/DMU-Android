@@ -8,5 +8,408 @@
         android:layout_height="match_parent"
         tools:context=".ui.view.keyword.KeywordActivity">
 
+        <TextView
+            android:id="@+id/keyword_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="키워드 선택"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/keyword_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/transparent"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:id="@+id/keyword_scroll_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:fillViewport="true"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/keyword_complete_btn"
+            app:layout_constraintTop_toBottomOf="@id/keyword_title">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/keyword_chip_first_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/keyword_first_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:text="수업"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:chipSpacingHorizontal="20dp"
+                        app:chipSpacingVertical="16dp"
+                        app:singleSelection="false">
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="시험" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="수강" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="특강" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="계절학기" />
+
+                    </com.google.android.material.chip.ChipGroup>
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/keyword_first_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/line"
+                    app:layout_constraintBottom_toTopOf="@id/keyword_chip_second_container"
+                    app:layout_constraintTop_toBottomOf="@id/keyword_chip_first_container" />
+
+                <LinearLayout
+                    android:id="@+id/keyword_chip_second_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="32dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/keyword_chip_first_container">
+
+                    <TextView
+                        android:id="@+id/keyword_second_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:text="학자금"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:chipSpacingHorizontal="20dp"
+                        app:chipSpacingVertical="16dp"
+                        app:singleSelection="false">
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="장학" />
+
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="국가장학" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="등록" />
+                    </com.google.android.material.chip.ChipGroup>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/line"
+                    app:layout_constraintBottom_toTopOf="@id/keyword_chip_third_container"
+                    app:layout_constraintTop_toBottomOf="@id/keyword_chip_second_container" />
+
+                <LinearLayout
+                    android:id="@+id/keyword_chip_third_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="32dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/keyword_chip_second_container">
+
+                    <TextView
+                        android:id="@+id/keyword_third_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:text="학적"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:chipSpacingHorizontal="20dp"
+                        app:chipSpacingVertical="16dp"
+                        app:singleSelection="false">
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="휴학" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="복학" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="졸업" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="전과" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="학기포기" />
+                    </com.google.android.material.chip.ChipGroup>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/line"
+                    app:layout_constraintBottom_toTopOf="@id/keyword_chip_four_container"
+                    app:layout_constraintTop_toBottomOf="@id/keyword_chip_third_container" />
+
+                <LinearLayout
+                    android:id="@+id/keyword_chip_four_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="18dp"
+                    android:layout_marginTop="32dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/keyword_chip_third_container">
+
+                    <TextView
+                        android:id="@+id/keyword_four_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:text="취업"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:chipSpacingHorizontal="20dp"
+                        app:chipSpacingVertical="16dp"
+                        app:singleSelection="false">
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="채용" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="공모전" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="현장실습" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="대회" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="봉사" />
+                    </com.google.android.material.chip.ChipGroup>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/line"
+                    app:layout_constraintBottom_toTopOf="@id/keyword_chip_five_container"
+                    app:layout_constraintTop_toBottomOf="@id/keyword_chip_four_container" />
+
+                <LinearLayout
+                    android:id="@+id/keyword_chip_five_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="18dp"
+                    android:layout_marginTop="32dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/keyword_chip_four_container">
+
+                    <TextView
+                        android:id="@+id/keyword_five_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:text="기타"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:chipSpacingHorizontal="20dp"
+                        app:chipSpacingVertical="16dp"
+                        app:singleSelection="false">
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="기숙사" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="코로나19" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="동아리" />
+                    </com.google.android.material.chip.ChipGroup>
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/keyword_complete_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:text="완료"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/keyword_scroll_view"
+            app:layout_constraintVertical_bias="0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
