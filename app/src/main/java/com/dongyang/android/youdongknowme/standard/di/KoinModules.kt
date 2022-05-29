@@ -3,6 +3,7 @@ package com.dongyang.android.youdongknowme.standard.di
 import com.dongyang.android.youdongknowme.data.repository.*
 import com.dongyang.android.youdongknowme.ui.view.depart.DepartViewModel
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailViewModel
+import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordViewModel
 import com.dongyang.android.youdongknowme.ui.view.main.MainViewModel
 import com.dongyang.android.youdongknowme.ui.view.notice.NoticeViewModel
 import com.dongyang.android.youdongknowme.ui.view.schedule.ScheduleViewModel
@@ -29,6 +30,9 @@ val viewModelModule = module {
     }
     viewModel {
         DepartViewModel(get())
+    }
+    viewModel {
+        KeywordViewModel()
     }
     viewModel {
         MainViewModel()

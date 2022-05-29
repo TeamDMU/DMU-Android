@@ -14,6 +14,7 @@ import com.dongyang.android.youdongknowme.standard.util.showKeyboard
 import com.dongyang.android.youdongknowme.ui.adapter.NoticeAdapter
 import com.dongyang.android.youdongknowme.ui.view.depart.DepartActivity
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailActivity
+import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordActivity
 import com.google.android.material.tabs.TabLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -110,7 +111,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         }
 
         binding.noticeToolbar.toolbarAlarm.setOnClickListener {
-            val intent = Intent(requireActivity(), DepartActivity::class.java)
+            val intent = Intent(requireActivity(), KeywordActivity::class.java)
             startActivity(intent)
         }
 
