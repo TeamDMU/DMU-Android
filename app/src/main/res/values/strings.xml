@@ -19,8 +19,6 @@
     <string name="notice_detail_download_description">다운로드를 진행 중입니다.</string>
     <string name="notice_detail_download_fail">다운로드를 실패했습니다.\n다시 시도해주세요.</string>
 
-
-
     <!-- schedule -->
     <string name="schedule_title">학사일정</string>
 
@@ -38,6 +36,36 @@
     <!-- calendar -->
     <string name="calendar_year">년</string>
     <string name="calendar_month">월</string>
+
+    <!-- keyword -->
+    <string name="keyword_title">키워드 선택</string>
+    <string name="keyword_complete">완료</string>
+    <string name="keyword_class">수업</string>
+    <string name="keyword_class_exam">시험</string>
+    <string name="keyword_class_course">수강</string>
+    <string name="keyword_class_lecture">특강</string>
+    <string name="keyword_class_season">계절학기</string>
+    <string name="keyword_money">학자금</string>
+    <string name="keyword_money_scholarship">장학</string>
+    <string name="keyword_money_kosaf">국가장학</string>
+    <string name="keyword_money_tuition">등록</string>
+    <string name="keyword_academic">학적</string>
+    <string name="keyword_academic_leave">휴학</string>
+    <string name="keyword_academic_return">복학</string>
+    <string name="keyword_academic_graduation">졸업</string>
+    <string name="keyword_academic_transfer">전과</string>
+    <string name="keyword_academic_drop">학기포기</string>
+    <string name="keyword_employment">취업</string>
+    <string name="keyword_employment_recruitment">채용</string>
+    <string name="keyword_employment_contest">공모전</string>
+    <string name="keyword_employment_field">현장실습</string>
+    <string name="keyword_employment_competition">대회</string>
+    <string name="keyword_employment_service">봉사</string>
+    <string name="keyword_etc">기타</string>
+    <string name="keyword_etc_dormitory">기숙사</string>
+    <string name="keyword_etc_corona">코로나19</string>
+    <string name="keyword_etc_club">동아리</string>
+
 
     <!-- error message -->
     <string name="error_network">서버에 오류가 발생하였습니다.\n 잠시 후 다시 실행해주세요.</string>

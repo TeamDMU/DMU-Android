@@ -81,7 +81,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
         viewModel.getNoticeDetail()
 
         // 뒤로가기 버튼 클릭 시
-        binding.detailExit.setOnClickListener {
+        binding.detailExitBtn.setOnClickListener {
             finish()
         }
     }

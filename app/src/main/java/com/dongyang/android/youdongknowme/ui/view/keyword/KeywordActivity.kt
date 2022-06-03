@@ -17,6 +17,12 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
     }
 
     override fun initAfterBinding() {
+
+
+        // 뒤로가기 버튼 눌렀을 때
+        binding.keywordExitBtn.setOnClickListener {
+            finish()
+        }
     }
 
 
