@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -40,9 +40,9 @@
             android:layout_marginBottom="16dp"
             android:fillViewport="true"
             app:layout_constrainedHeight="true"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/keyword_complete_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/keyword_title">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:id="@+id/keyword_chip_first_container"
+                    android:id="@+id/keyword_class_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
@@ -60,16 +60,16 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:id="@+id/keyword_first_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="start"
+                        android:layout_marginStart="5dp"
                         android:text="수업"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/keyword_class_chip_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -118,11 +118,11 @@
                     android:layout_height="0.5dp"
                     android:layout_marginTop="10dp"
                     android:background="@color/line"
-                    app:layout_constraintBottom_toTopOf="@id/keyword_chip_second_container"
-                    app:layout_constraintTop_toBottomOf="@id/keyword_chip_first_container" />
+                    app:layout_constraintBottom_toTopOf="@id/keyword_money_container"
+                    app:layout_constraintTop_toBottomOf="@id/keyword_class_container" />
 
                 <LinearLayout
-                    android:id="@+id/keyword_chip_second_container"
+                    android:id="@+id/keyword_money_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
@@ -130,19 +130,19 @@
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/keyword_chip_first_container">
+                    app:layout_constraintTop_toBottomOf="@id/keyword_class_container">
 
                     <TextView
-                        android:id="@+id/keyword_second_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="start"
+                        android:layout_marginStart="5dp"
                         android:text="학자금"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/keyword_money_chip_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -182,11 +182,11 @@
                     android:layout_height="0.5dp"
                     android:layout_marginTop="10dp"
                     android:background="@color/line"
-                    app:layout_constraintBottom_toTopOf="@id/keyword_chip_third_container"
-                    app:layout_constraintTop_toBottomOf="@id/keyword_chip_second_container" />
+                    app:layout_constraintBottom_toTopOf="@id/keyword_academic_container"
+                    app:layout_constraintTop_toBottomOf="@id/keyword_money_container" />
 
                 <LinearLayout
-                    android:id="@+id/keyword_chip_third_container"
+                    android:id="@+id/keyword_academic_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
@@ -194,19 +194,19 @@
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/keyword_chip_second_container">
+                    app:layout_constraintTop_toBottomOf="@id/keyword_money_container">
 
                     <TextView
-                        android:id="@+id/keyword_third_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="start"
+                        android:layout_marginStart="5dp"
                         android:text="학적"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/keyword_academic_chip_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -261,11 +261,11 @@
                     android:layout_height="0.5dp"
                     android:layout_marginTop="10dp"
                     android:background="@color/line"
-                    app:layout_constraintBottom_toTopOf="@id/keyword_chip_four_container"
-                    app:layout_constraintTop_toBottomOf="@id/keyword_chip_third_container" />
+                    app:layout_constraintBottom_toTopOf="@id/keyword_employment_container"
+                    app:layout_constraintTop_toBottomOf="@id/keyword_academic_container" />
 
                 <LinearLayout
-                    android:id="@+id/keyword_chip_four_container"
+                    android:id="@+id/keyword_employment_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="18dp"
@@ -273,19 +273,19 @@
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/keyword_chip_third_container">
+                    app:layout_constraintTop_toBottomOf="@id/keyword_academic_container">
 
                     <TextView
-                        android:id="@+id/keyword_four_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="start"
+                        android:layout_marginStart="5dp"
                         android:text="취업"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/keyword_employment_chip_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -340,11 +340,11 @@
                     android:layout_height="0.5dp"
                     android:layout_marginTop="10dp"
                     android:background="@color/line"
-                    app:layout_constraintBottom_toTopOf="@id/keyword_chip_five_container"
-                    app:layout_constraintTop_toBottomOf="@id/keyword_chip_four_container" />
+                    app:layout_constraintBottom_toTopOf="@id/keyword_etc_container"
+                    app:layout_constraintTop_toBottomOf="@id/keyword_employment_container" />
 
                 <LinearLayout
-                    android:id="@+id/keyword_chip_five_container"
+                    android:id="@+id/keyword_etc_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="18dp"
@@ -352,19 +352,19 @@
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/keyword_chip_four_container">
+                    app:layout_constraintTop_toBottomOf="@id/keyword_employment_container">
 
                     <TextView
-                        android:id="@+id/keyword_five_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="start"
+                        android:layout_marginStart="5dp"
                         android:text="기타"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/keyword_etc_chip_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
