@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.view.keyword.KeywordActivity">
+
+        <TextView
+            android:id="@+id/keyword_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/keyword_title"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/keyword_exit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:id="@+id/keyword_scroll_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:fillViewport="true"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintBottom_toTopOf="@id/keyword_complete_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/keyword_title">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/keyword_class_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/keyword_class"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/keyword_class_chip_group"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:chipSpacingHorizontal="20dp"
+                        app:chipSpacingVertical="16dp"
+                        app:singleSelection="false">
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="@string/keyword_class_exam" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="@string/keyword_class_course" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="@string/keyword_class_lecture" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="@string/keyword_class_season" />
+
+                    </com.google.android.material.chip.ChipGroup>
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/keyword_first_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/line"
+                    app:layout_constraintBottom_toTopOf="@id/keyword_money_container"
+                    app:layout_constraintTop_toBottomOf="@id/keyword_class_container" />
+
+                <LinearLayout
+                    android:id="@+id/keyword_money_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="32dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/keyword_class_container">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/keyword_money"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/keyword_money_chip_group"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:chipSpacingHorizontal="20dp"
+                        app:chipSpacingVertical="16dp"
+                        app:singleSelection="false">
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="@string/keyword_money_scholarship" />
+
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="@string/keyword_money_kosaf" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="@string/keyword_money_tuition" />
+                    </com.google.android.material.chip.ChipGroup>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/line"
+                    app:layout_constraintBottom_toTopOf="@id/keyword_academic_container"
+                    app:layout_constraintTop_toBottomOf="@id/keyword_money_container" />
+
+                <LinearLayout
+                    android:id="@+id/keyword_academic_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="32dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/keyword_money_container">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/keyword_academic"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/keyword_academic_chip_group"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:chipSpacingHorizontal="20dp"
+                        app:chipSpacingVertical="16dp"
+                        app:singleSelection="false">
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="@string/keyword_academic_leave" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="@string/keyword_academic_return" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="@string/keyword_academic_graduation" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="@string/keyword_academic_transfer" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="@string/keyword_academic_drop" />
+                    </com.google.android.material.chip.ChipGroup>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/line"
+                    app:layout_constraintBottom_toTopOf="@id/keyword_employment_container"
+                    app:layout_constraintTop_toBottomOf="@id/keyword_academic_container" />
+
+                <LinearLayout
+                    android:id="@+id/keyword_employment_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="18dp"
+                    android:layout_marginTop="32dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/keyword_academic_container">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/keyword_employment"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/keyword_employment_chip_group"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:chipSpacingHorizontal="20dp"
+                        app:chipSpacingVertical="16dp"
+                        app:singleSelection="false">
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="@string/keyword_employment_recruitment" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="@string/keyword_employment_contest" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="@string/keyword_employment_field" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="@string/keyword_employment_competition" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="@string/keyword_employment_service" />
+                    </com.google.android.material.chip.ChipGroup>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/line"
+                    app:layout_constraintBottom_toTopOf="@id/keyword_etc_container"
+                    app:layout_constraintTop_toBottomOf="@id/keyword_employment_container" />
+
+                <LinearLayout
+                    android:id="@+id/keyword_etc_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="18dp"
+                    android:layout_marginTop="32dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/keyword_employment_container">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/keyword_etc"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/keyword_etc_chip_group"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:chipSpacingHorizontal="20dp"
+                        app:chipSpacingVertical="16dp"
+                        app:singleSelection="false">
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="@string/keyword_etc_dormitory" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="@string/keyword_etc_corona" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="@string/keyword_etc_club" />
+                    </com.google.android.material.chip.ChipGroup>
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/keyword_complete_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:text="@string/keyword_complete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/keyword_scroll_view"
+            app:layout_constraintVertical_bias="0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

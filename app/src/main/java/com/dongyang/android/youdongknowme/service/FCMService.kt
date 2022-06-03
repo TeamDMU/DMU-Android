@@ -39,7 +39,7 @@ class FCMService : FirebaseMessagingService() {
 //        val content = message.notification?.body ?: ""
         val data = message.data
 
-        if (message.data["title"] != null) {
+        if (data["keyword"] != null) {
             createNotificationChannel()
 
             // Foreground 에 있을 때 알림 처리
@@ -60,8 +60,8 @@ class FCMService : FirebaseMessagingService() {
             val notificationBuilder = NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(R.drawable.ic_notification)
                 .setColor(ContextCompat.getColor(this, R.color.main))
-                .setContentTitle(data["title"])
-                .setContentText(data["content"])
+                .setContentTitle("${data["keyword"]}(이)가 포함된 공지사항이 올라왔어요!")
+//                .setContentText(data["content"])
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent)
