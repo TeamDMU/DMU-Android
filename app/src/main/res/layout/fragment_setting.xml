@@ -51,7 +51,7 @@
                     android:paddingTop="12dp"
                     android:background="@color/line"/>
 
-                <!-- text 없애고 선택한 학과가 나오도록 수정 해야함-->
+          
 
                 <TextView
                     android:id="@+id/setting_department"
