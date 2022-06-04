@@ -31,7 +31,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="16dp"
-                    android:layout_marginTop="16dp"
+                    android:paddingTop="16dp"
                     android:text="@string/setting_dmu"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -48,9 +48,10 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="12dp"
+                    android:paddingTop="12dp"
                     android:background="@color/line"/>
 
+                <!--Text 지우고 선택한 학과가 나타나게 수정 필요 -->
                 <TextView
                     android:id="@+id/setting_department"
                     android:layout_width="match_parent"
@@ -90,7 +91,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="12dp"
+                    android:paddingTop="12dp"
                     android:background="@color/line"/>
 
                 <TextView
@@ -160,7 +161,6 @@
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
-
 
             </LinearLayout>
         </ScrollView>
