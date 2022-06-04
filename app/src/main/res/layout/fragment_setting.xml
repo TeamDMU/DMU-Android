@@ -17,7 +17,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
+            android:paddingTop="16dp"
             android:fillViewport="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/setting_toolbar">
@@ -48,8 +48,10 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="12dp"
+                    android:paddingTop="12dp"
                     android:background="@color/line"/>
+
+                <!-- text 없애고 선택한 학과가 나오도록 수정 해야함-->
 
                 <TextView
                     android:id="@+id/setting_department"
@@ -90,7 +92,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="12dp"
+                    android:paddingTop="12dp"
                     android:background="@color/line"/>
 
                 <TextView
