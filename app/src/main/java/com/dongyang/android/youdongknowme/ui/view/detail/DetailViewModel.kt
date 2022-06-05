@@ -13,9 +13,6 @@ import kotlinx.coroutines.launch
 
 class DetailViewModel(private val detailRepository: DetailRepository) : BaseViewModel() {
 
-    private val _noticeDetail: MutableLiveData<NoticeDetail> = MutableLiveData()
-    val noticeDetail: LiveData<NoticeDetail> = _noticeDetail
-
     private val _num: MutableLiveData<Int> = MutableLiveData()
     private val _code: MutableLiveData<Int> = MutableLiveData()
 
