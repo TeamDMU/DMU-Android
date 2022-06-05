@@ -12,7 +12,7 @@ sealed class Department(
     object InfoCommunication : Department("정보통신공학과", CODE.INFO_COMMUNICATION_ENGINE_CODE)
     object ComputerSoftware : Department("컴퓨터소프트웨어공학과", CODE.COMPUTER_SOFTWARE_ENGINE_CODE)
     object ComputerInfo : Department("컴퓨터정보공학과", CODE.COMPUTER_INFO_ENGINE_CODE)
-    object Artificial : Department("인공지능공학과", CODE.ARTIFICIAL_ENGINE_CODE)
+    object Artificial : Department("인공지능소프트웨어학과", CODE.ARTIFICIAL_ENGINE_CODE)
     object Biochemical : Department("생명화학공학과", CODE.BIOCHEMICAL_ENGINE_CODE)
     object BioConvergence : Department("바이오융합공학과", CODE.BIO_CONVERGENCE_ENGINE_CODE)
     object Architecture : Department("건축과", CODE.ARCHITECTURE_CODE)
@@ -40,7 +40,7 @@ sealed class Department(
                 "정보통신공학과" -> InfoCommunication
                 "컴퓨터소프트웨어공학과" -> ComputerSoftware
                 "컴퓨터정보공학과" -> ComputerInfo
-                "인공지능공학과" -> Artificial
+                "인공지능소프트웨어학과" -> Artificial
                 "생명화학공학과" -> Biochemical
                 "바이오융합공학과" -> BioConvergence
                 "건축과" -> Architecture
