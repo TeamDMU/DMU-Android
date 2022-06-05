@@ -1,19 +1,24 @@
 package com.dongyang.android.youdongknowme.ui.view.detail
 
+import android.Manifest
 import android.app.DownloadManager
 import android.app.DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
+import android.provider.Settings
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityDetailBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
-import com.dongyang.android.youdongknowme.standard.util.logd
 import com.dongyang.android.youdongknowme.ui.adapter.FileAdapter
 import com.dongyang.android.youdongknowme.ui.adapter.ImageAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -88,7 +93,48 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
 
     // 파일 클릭했을 때 동작
     override fun fileClick(fileName: String, fileUri: String) {
+        openDownloadListener(fileName, fileUri)
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mDownloadManager.remove(mDownloadQueueId)
+    }
+
+    private fun openDownloadListener(fileName: String, fileUri: String) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            when {
+                ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED -> {
+                    // 사용자가 권한 부여를 완료한 경우
+                    setDownloadManager(fileName, fileUri)
+                }
+                // 사용자가 명시적으로 권한 부여를 거부한 경우
+                shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                -> {
+                    // TODO :: 권한 부여를 요청하는 다이얼로그 생성
+                    val intent = Intent(
+                        Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                        Uri.fromParts("package", "com.dongyang.android.youdongknowme", null)
+                    )
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+                }
+                // 사용자에게 최초로 권한을 요청하는 경우
+                else -> {
+                    ActivityCompat.requestPermissions(
+                        this,
+                        arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                        100
+                    )
+                }
+            }
+        }
+    }
+
+    private fun setDownloadManager(fileName: String, fileUri: String) {
         val filePath =
             Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_DOWNLOADS +
@@ -141,10 +187,5 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
         }
 
         registerReceiver(onDownloadComplete, intentFilter)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mDownloadManager.remove(mDownloadQueueId)
     }
 }
