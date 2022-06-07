@@ -10,7 +10,7 @@ import com.dongyang.android.youdongknowme.ui.view.notice.NoticeClickListener
 
 class NoticeAdapter : RecyclerView.Adapter<NoticeAdapter.ViewHolder>() {
 
-    private var item = arrayListOf<Notice>()
+    private var noticeList = arrayListOf<Notice>()
     private var itemClickListener : NoticeClickListener? = null
 
     inner class ViewHolder(private val binding: ItemNoticeBinding)
@@ -23,8 +23,8 @@ class NoticeAdapter : RecyclerView.Adapter<NoticeAdapter.ViewHolder>() {
 
     @SuppressLint("NotifyDataSetChanged")
     fun submitList(item : List<Notice>) {
-        this.item.clear()
-        this.item.addAll(item)
+        noticeList.clear()
+        noticeList.addAll(item)
         notifyDataSetChanged()
     }
 
@@ -37,10 +37,10 @@ class NoticeAdapter : RecyclerView.Adapter<NoticeAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(item[position])
+        holder.bind(noticeList[position])
     }
 
-    override fun getItemCount(): Int = item.size
+    override fun getItemCount(): Int = noticeList.size
 
     fun setItemClickListener(listener : NoticeClickListener) {
         itemClickListener = listener

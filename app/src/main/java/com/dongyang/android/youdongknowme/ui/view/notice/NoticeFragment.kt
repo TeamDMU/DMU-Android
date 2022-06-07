@@ -12,7 +12,6 @@ import com.dongyang.android.youdongknowme.standard.base.BaseFragment
 import com.dongyang.android.youdongknowme.standard.util.hideKeyboard
 import com.dongyang.android.youdongknowme.standard.util.showKeyboard
 import com.dongyang.android.youdongknowme.ui.adapter.NoticeAdapter
-import com.dongyang.android.youdongknowme.ui.view.depart.DepartActivity
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailActivity
 import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordActivity
 import com.google.android.material.tabs.TabLayout
@@ -28,7 +27,6 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     override val layoutResourceId: Int = R.layout.fragment_notice
     override val viewModel: NoticeViewModel by viewModel()
 
-
     private lateinit var adapter: NoticeAdapter
 
     override fun initStartView() {
@@ -37,6 +35,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         binding.noticeRvList.apply {
             this.adapter = this@NoticeFragment.adapter
             this.layoutManager = LinearLayoutManager(requireActivity())
+            this.itemAnimator = null
             this.setHasFixedSize(true)
             this.addItemDecoration(DividerItemDecoration(requireActivity(), 1))
         }
@@ -62,21 +61,18 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         }
 
         viewModel.isUniversityTab.observe(viewLifecycleOwner) {
+            // 구성 변경에 대비, 선택한 탭이 무엇인지 저장
+            viewModel.setDepartmentCode()
             if(!it) {
                 binding.noticeTab.getTabAt(1)?.select()
             }
-            viewModel.setDepartmentCode()
-        }
-
-        viewModel.departmentCode.observe(viewLifecycleOwner) {
-            viewModel.getNoticeList()
         }
     }
 
     override fun initAfterBinding() {
         // 새로고침 했을 때 동작
         binding.noticeSwipe.setOnRefreshListener {
-            viewModel.getNoticeList()
+            viewModel.refreshNoticeList()
             binding.noticeSwipe.isRefreshing = false
         }
 
