@@ -120,6 +120,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         binding.noticeTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 binding.noticeToolbar.toolbarSearchText.text.clear()
+                binding.noticeRvList.scrollToPosition(0)
                 if (tab.text == "대학") {
                     viewModel.setTabMode(true)
                 } else {
