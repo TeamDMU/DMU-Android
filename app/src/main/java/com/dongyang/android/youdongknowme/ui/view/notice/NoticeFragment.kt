@@ -35,7 +35,6 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         binding.noticeRvList.apply {
             this.adapter = this@NoticeFragment.adapter
             this.layoutManager = LinearLayoutManager(requireActivity())
-            this.itemAnimator = null
             this.setHasFixedSize(true)
             this.addItemDecoration(DividerItemDecoration(requireActivity(), 1))
         }
@@ -44,7 +43,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     override fun initDataBinding() {
 
         viewModel.isLoading.observe(viewLifecycleOwner) {
-            if(it) showLoading()
+            if (it) showLoading()
             else dismissLoading()
         }
 
@@ -63,7 +62,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         viewModel.isUniversityTab.observe(viewLifecycleOwner) {
             // 구성 변경에 대비, 선택한 탭이 무엇인지 저장
             viewModel.setDepartmentCode()
-            if(!it) {
+            if (!it) {
                 binding.noticeTab.getTabAt(1)?.select()
             }
         }
@@ -119,8 +118,10 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         // 각각 탭 버튼 눌렀을 때 동작
         binding.noticeTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                binding.noticeToolbar.toolbarSearchText.text.clear()
+
                 binding.noticeRvList.scrollToPosition(0)
+
+                binding.noticeToolbar.toolbarSearchText.text.clear()
                 if (tab.text == "대학") {
                     viewModel.setTabMode(true)
                 } else {
@@ -129,7 +130,11 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {} // 구현 X
-            override fun onTabReselected(tab: TabLayout.Tab?) {} // 구현 X
+
+            // 다시 클릭시 스크롤되게 설정
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                binding.noticeRvList.smoothScrollToPosition(-10)
+            }
         })
     }
 
