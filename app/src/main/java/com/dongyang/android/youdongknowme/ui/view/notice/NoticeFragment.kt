@@ -1,6 +1,7 @@
 package com.dongyang.android.youdongknowme.ui.view.notice
 
 import android.content.Intent
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,7 +31,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     private lateinit var adapter: NoticeAdapter
 
     override fun initStartView() {
-        binding.viewModel = viewModel
+        binding.vm = viewModel
         adapter = NoticeAdapter().apply { setItemClickListener(this@NoticeFragment) }
         binding.noticeRvList.apply {
             this.adapter = this@NoticeFragment.adapter
@@ -48,10 +49,6 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         }
 
         viewModel.noticeList.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-        }
-
-        viewModel.searchList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
 
@@ -100,6 +97,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
             if (actionId == EditorInfo.IME_ACTION_SEARCH && searchKeyword.isNotEmpty()) {
                 textView.hideKeyboard()
                 viewModel.getNoticeSearchList(searchKeyword)
+                binding.noticeRvList.scrollToPosition(0)
             }
 
             false

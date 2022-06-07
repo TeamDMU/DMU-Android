@@ -32,9 +32,6 @@ class NoticeViewModel(
     private val _noticeList: MutableLiveData<List<Notice>> = MutableLiveData()
     val noticeList: LiveData<List<Notice>> = _noticeList
 
-    private val _searchList: MutableLiveData<List<Notice>> = MutableLiveData()
-    val searchList: LiveData<List<Notice>> = _searchList
-
     private val _errorState: MutableLiveData<Int> = MutableLiveData()
     val errorState: LiveData<Int> = _errorState
 
@@ -85,7 +82,7 @@ class NoticeViewModel(
     }
 
     // 공지사항 리스트 호출
-    fun getNoticeList() {
+    private fun getNoticeList() {
         // 비어있을 때만 새로 갱신
         if (_universityNoticeList.value!!.isEmpty() or _facultyNoticeList.value!!.isEmpty()) {
             _isLoading.postValue(true)
@@ -130,7 +127,7 @@ class NoticeViewModel(
                 val response = noticeRepository.getNoticeSearchList(departmentCode.value!!, keyword)
                 if (response.isSuccessful) {
                     val searchList = response.body()
-                    _searchList.postValue(searchList!!)
+                    _noticeList.postValue(searchList!!)
                 } else {
                     _errorState.postValue(ERROR_NOTICE)
                 }
