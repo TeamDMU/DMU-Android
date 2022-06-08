@@ -7,11 +7,11 @@ import com.dongyang.android.youdongknowme.standard.network.RetrofitObject
 import retrofit2.Response
 
 class NoticeRepository {
-    suspend fun getNoticeList(code : Int) : Response<List<Notice>> {
+    suspend fun fetchNotices(code : Int) : Response<List<Notice>> {
         return RetrofitObject.getNetwork().create(NoticeService::class.java).getList(code)
     }
 
-    suspend fun getNoticeSearchList(code : Int, keyword : String) : Response<List<Notice>> {
+    suspend fun fetchSearchNotices(code : Int, keyword : String) : Response<List<Notice>> {
         return RetrofitObject.getNetwork().create(NoticeService::class.java).getSearchList(code, keyword)
     }
 

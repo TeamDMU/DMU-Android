@@ -22,7 +22,7 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
     private lateinit var adapter : ScheduleAdapter
 
     override fun initStartView() {
-        viewModel.setPickDate(binding.scheduleCalendar.currentDate)
+        viewModel.setPickedDate(binding.scheduleCalendar.currentDate)
         adapter = ScheduleAdapter()
         binding.scheduleRvList.apply {
             this.adapter = this@ScheduleFragment.adapter
@@ -39,7 +39,7 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
         }
 
         viewModel.pickMonth.observe(viewLifecycleOwner) {
-            viewModel.getLocalScheduleList()
+            viewModel.getSchedules()
         }
 
         viewModel.scheduleList.observe(viewLifecycleOwner) {
@@ -50,7 +50,7 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
     override fun initAfterBinding() {
 
         binding.scheduleCalendar.setOnMonthChangedListener { _, date ->
-            viewModel.setPickDate(date)
+            viewModel.setPickedDate(date)
         }
 
         // 최소 날짜, 최대 날짜 지정

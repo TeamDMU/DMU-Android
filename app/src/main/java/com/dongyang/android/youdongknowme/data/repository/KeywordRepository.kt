@@ -9,11 +9,11 @@ class KeywordRepository(
     private val userDao: UserDao
 ) {
 
-    fun getLocalKeywordList(): LiveData<List<KeywordEntity>> {
+    fun getUserKeywords(): LiveData<List<KeywordEntity>> {
         return userDao.getAllKeyword().asLiveData()
     }
 
-    suspend fun updateLocalKeyword(isSubscribe: Boolean, name: String) {
+    suspend fun updateUserKeywords(isSubscribe: Boolean, name: String) {
         userDao.updateKeyword(isSubscribe, name)
     }
 }

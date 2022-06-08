@@ -7,15 +7,15 @@ import com.dongyang.android.youdongknowme.standard.network.RetrofitObject
 import retrofit2.Response
 
 class ScheduleRepository {
-    suspend fun getNoticeList(): Response<List<Schedule>> {
+    suspend fun fetchSchedules(): Response<List<Schedule>> {
         return RetrofitObject.getNetwork().create(ScheduleService::class.java).getScheduleList()
     }
 
-    fun setLocalSchedule(schedule: String) {
+    fun setLocalSchedules(schedule: String) {
         SharedPreference.setSchedule(schedule)
     }
 
-    fun getLocalSchedule(): String {
+    fun getLocalSchedules(): String {
         return SharedPreference.getSchedule()!!
     }
 }

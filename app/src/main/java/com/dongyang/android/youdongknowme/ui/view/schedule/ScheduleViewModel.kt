@@ -28,23 +28,23 @@ class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : Ba
     private val _errorState: MutableLiveData<Int> = MutableLiveData()
     val errorState: LiveData<Int> = _errorState
 
-    fun setPickDate(date: CalendarDay) {
+    fun setPickedDate(date: CalendarDay) {
         _pickYear.value = date.year
         _pickMonth.value = date.month
     }
 
-    fun getLocalScheduleList() {
+    fun getSchedules() {
         // 로컬에 저장한 데이터가 없으면 네트워크에서 데이터를 받아와 로컬에 저장 및 화면에 출력
-        if (scheduleRepository.getLocalSchedule() == "No Data") {
+        if (scheduleRepository.getLocalSchedules() == "No Data") {
             _isLoading.postValue(true)
             try {
                 viewModelScope.launch(connectionHandler) {
-                    val response = scheduleRepository.getNoticeList()
+                    val response = scheduleRepository.fetchSchedules()
 
                     if (response.isSuccessful) {
                         // 선택한 연월 조건에 따라 리스트 출력
                         _scheduleList.postValue(response.body()?.filter { it.month == pickMonth.value && it.year == pickYear.value.toString() })
-                        scheduleRepository.setLocalSchedule(Gson().toJson(response.body()))
+                        scheduleRepository.setLocalSchedules(Gson().toJson(response.body()))
                     } else {
                         _errorState.postValue(ERROR_SCHEDULE)
                     }
@@ -56,7 +56,7 @@ class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : Ba
             }
         } else {
             // 저장한 데이터가 있으면 로컬에서 곧바로 데이터를 받아와 화면에 출력
-            val tmp = scheduleRepository.getLocalSchedule()
+            val tmp = scheduleRepository.getLocalSchedules()
             val scheduleList =
                 Gson().fromJson<List<Schedule>>(tmp, object : TypeToken<List<Schedule>>() {}.type).filter {
                     // 선택한 연월 조건에 따라 리스트 출력

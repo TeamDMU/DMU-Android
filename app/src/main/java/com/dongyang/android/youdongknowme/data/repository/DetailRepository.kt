@@ -6,7 +6,7 @@ import com.dongyang.android.youdongknowme.standard.network.RetrofitObject
 import retrofit2.Response
 
 class DetailRepository {
-    suspend fun getNoticeDetail(code : Int, num : Int) : Response<NoticeDetail> {
+    suspend fun fetchNoticeDetail(code : Int, num : Int) : Response<NoticeDetail> {
         return RetrofitObject.getNetwork().create(DetailService::class.java).getNoticeDetail(code, num)
     }
 }

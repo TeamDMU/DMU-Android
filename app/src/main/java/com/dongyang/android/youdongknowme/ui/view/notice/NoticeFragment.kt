@@ -67,7 +67,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     override fun initAfterBinding() {
         // 새로고침 했을 때 동작
         binding.noticeSwipe.setOnRefreshListener {
-            viewModel.refreshNoticeList()
+            viewModel.refreshNotices()
             binding.noticeSwipe.isRefreshing = false
         }
 
@@ -95,7 +95,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
             val searchKeyword = textView.text.toString()
             if (actionId == EditorInfo.IME_ACTION_SEARCH && searchKeyword.isNotEmpty()) {
                 textView.hideKeyboard()
-                viewModel.getNoticeSearchList(searchKeyword)
+                viewModel.fetchSearchNotices(searchKeyword)
                 binding.noticeRvList.scrollToPosition(0)
             }
 

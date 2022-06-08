@@ -8,7 +8,6 @@ import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.remote.entity.Notice
 import com.dongyang.android.youdongknowme.data.repository.NoticeRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
-import com.dongyang.android.youdongknowme.standard.util.logd
 import kotlinx.coroutines.launch
 
 /* 공지사항 뷰모델 */
@@ -47,7 +46,7 @@ class NoticeViewModel(
         } else {
             _departmentCode.value = noticeRepository.getDepartmentCode()
         }
-        getNoticeList()
+        fetchNotices()
     }
 
     // 검색 모드 활성화 상태 체크
@@ -55,11 +54,11 @@ class NoticeViewModel(
         _isSearchMode.postValue(value)
     }
 
-    fun refreshNoticeList() {
+    fun refreshNotices() {
         _isLoading.postValue(true)
         try {
             viewModelScope.launch(connectionHandler) {
-                val response = noticeRepository.getNoticeList(departmentCode.value!!)
+                val response = noticeRepository.fetchNotices(departmentCode.value!!)
                 if (response.isSuccessful) {
                     val noticeList = response.body()!!
                     if (departmentCode.value!! == CODE.SCHOOL_CODE) {
@@ -82,13 +81,13 @@ class NoticeViewModel(
     }
 
     // 공지사항 리스트 호출
-    private fun getNoticeList() {
+    private fun fetchNotices() {
         // 비어있을 때만 새로 갱신
         if (_universityNoticeList.value!!.isEmpty() or _facultyNoticeList.value!!.isEmpty()) {
             _isLoading.postValue(true)
             try {
                 viewModelScope.launch(connectionHandler) {
-                    val response = noticeRepository.getNoticeList(departmentCode.value!!)
+                    val response = noticeRepository.fetchNotices(departmentCode.value!!)
                     if (response.isSuccessful) {
                         val noticeList = response.body()!!
                         // 네트워크 호출을 줄이기 위해 학교, 학과별 리스트를 따로 보관
@@ -120,11 +119,11 @@ class NoticeViewModel(
     }
 
     // 검색어가 포함된 공지사항 리스트 호출
-    fun getNoticeSearchList(keyword: String) {
+    fun fetchSearchNotices(keyword: String) {
         _isLoading.postValue(true)
         try {
             viewModelScope.launch(connectionHandler) {
-                val response = noticeRepository.getNoticeSearchList(departmentCode.value!!, keyword)
+                val response = noticeRepository.fetchSearchNotices(departmentCode.value!!, keyword)
                 if (response.isSuccessful) {
                     val searchList = response.body()
                     _noticeList.postValue(searchList!!)
