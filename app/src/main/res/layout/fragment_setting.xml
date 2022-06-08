@@ -11,13 +11,12 @@
             layout="@layout/standard_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="@{@string/setting_title}">
-        </include>
+            app:title="@{@string/setting_title}"></include>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:fillViewport="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/setting_toolbar">
@@ -28,110 +27,154 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
+                    android:paddingStart="16dp"
+                    android:padding="4dp"
                     android:text="@string/setting_dmu"
+                    android:textColor="@color/main"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/main"/>
+                    android:textStyle="bold"/>
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/setting_notice"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginStart="16dp"
-                    android:textSize="16sp"
-                    android:text="@string/setting_notice"/>
+                    android:layout_height="wrap_content"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:minHeight="0dp"
+                    android:paddingStart="16dp"
+                    android:padding="12dp"
+                    android:text="@string/setting_notice"
+                    android:textSize="16sp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@color/line"/>
+                    android:background="@color/line"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="12dp"/>
 
+                <!--Text 지우고 선택한 학과가 나타나게 수정 필요 -->
                 <TextView
                     android:id="@+id/setting_department"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
+                    android:paddingStart="16dp"
+                    android:padding="4dp"
                     android:text="@string/setting_sw"
+                    android:textColor="@color/main"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/main"/>
+                    android:textStyle="bold" />
 
                 <androidx.appcompat.widget.SwitchCompat
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:textSize="16sp"
-                    android:text="@string/setting_notice"/>
-
-                <LinearLayout
+                    android:id="@+id/setting_switch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="true">
+                    android:foreground="?attr/selectableItemBackground"
+                    android:minHeight="0dp"
+                    android:paddingStart="16dp"
+                    android:padding="12dp"
+                    android:text="@string/setting_notice"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:id="@+id/setting_department_choice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="12dp"
+                    android:paddingStart="16dp">
 
                     <TextView
-                        android:id="@+id/setting_department_choice"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:background="#00ff0000"
-                        android:clickable="true"
                         android:text="@string/department_title"
                         android:textColor="@color/black"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@color/line"/>
+                    android:background="@color/line"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="12dp"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginStart="16dp"
-                    android:text="@string/setting_app_info"
-                    android:textStyle="bold"
-                    android:textColor="@color/main"
-                    android:textSize="16sp"/>
-
-                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="true">
+                    android:paddingStart="16dp"
+                    android:padding="4dp"
+                    android:text="@string/setting_keyword"
+                    android:textColor="@color/main"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/setting_keyword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="12dp"
+                    android:paddingStart="16dp">
+
                     <TextView
-                        android:id="@+id/setting_ask"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:background="#00ff0000"
-                        android:clickable="true"
+                        android:text="@string/setting_keyword_choice"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@color/line" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:padding="4dp"
+                    android:text="@string/setting_app_info"
+                    android:textColor="@color/main"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/setting_ask"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="12dp"
+                    android:paddingStart="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:text="@string/setting_app_help"
                         android:textColor="@color/black"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="12dp"
+                    android:paddingStart="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
                         android:text="@string/setting_app_version"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -142,21 +185,29 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
                         android:layout_weight="1"
-                        android:layout_marginTop="16dp"
                         android:textAlignment="textEnd"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/setting_license"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/setting_app_license"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/setting_app_license"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="12dp"
+                    android:paddingStart="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/setting_app_license"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
             </LinearLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
