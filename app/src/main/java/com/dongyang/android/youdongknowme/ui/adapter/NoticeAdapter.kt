@@ -10,6 +10,10 @@ import com.dongyang.android.youdongknowme.ui.view.notice.NoticeClickListener
 
 class NoticeAdapter : RecyclerView.Adapter<NoticeAdapter.ViewHolder>() {
 
+    init {
+        setHasStableIds(true)
+    }
+
     private var noticeList = arrayListOf<Notice>()
     private var itemClickListener : NoticeClickListener? = null
 
@@ -38,6 +42,10 @@ class NoticeAdapter : RecyclerView.Adapter<NoticeAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(noticeList[position])
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
     }
 
     override fun getItemCount(): Int = noticeList.size

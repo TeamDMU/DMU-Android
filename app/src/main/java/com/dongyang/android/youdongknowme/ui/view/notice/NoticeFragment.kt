@@ -1,7 +1,6 @@
 package com.dongyang.android.youdongknowme.ui.view.notice
 
 import android.content.Intent
-import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
