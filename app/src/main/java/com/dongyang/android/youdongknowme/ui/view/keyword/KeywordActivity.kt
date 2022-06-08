@@ -22,7 +22,7 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
         // 효율을 위해 단 한번만 옵저빙하여 이미 구독중인 항목을 선택 처리
         viewModel.localKeywordList.observe(this, object : Observer<List<KeywordEntity>> {
             override fun onChanged(t: List<KeywordEntity>?) {
-                viewModel.addAllCheckKeywordList(t?.filter { it.isSubscribe }?.map { it.name } ?: listOf(""))
+                viewModel.setAllKeywords(t?.filter { it.isSubscribe }?.map { it.name } ?: listOf(""))
                 setCheckChipChange(
                     binding.keywordClassChipGroup,
                     binding.keywordMoneyChipGroup,
@@ -43,7 +43,7 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
 
         // TODO :: 안드로이드 데이터베이스에 유저별 설정한 키워드 저장 및 파이어베이스 키워드 구독 설정
         binding.keywordCompleteBtn.setOnClickListener {
-            viewModel.subscribeCheckKeyword()
+            viewModel.subscribeCheckedKeyword()
             finish()
         }
     }
@@ -63,9 +63,9 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
 
                 chip.setOnCheckedChangeListener { view, isChecked ->
                     if (isChecked) {
-                        viewModel.addCheckKeywordList(view.text.toString())
+                        viewModel.setCheckedKeywords(view.text.toString())
                     } else {
-                        viewModel.removeCheckKeywordList(view.text.toString())
+                        viewModel.removeCheckedKeywords(view.text.toString())
                     }
                 }
             }

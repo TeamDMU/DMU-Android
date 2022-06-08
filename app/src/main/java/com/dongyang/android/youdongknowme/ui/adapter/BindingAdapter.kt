@@ -12,3 +12,13 @@ fun bindSearchView(view : View, condition: Boolean) {
 fun bindFileList(view : View, condition: Boolean) {
     view.visibility = if(condition) View.VISIBLE else View.GONE
 }
+
+@BindingAdapter("bind_visibility_notice_no_data")
+fun bindNoticeNoData(view : View, condition: Boolean) {
+    view.visibility = if(condition) View.VISIBLE else View.GONE
+}
+
+@BindingAdapter("bind_visibility_on_loading")
+fun bindLoadingVisible(view : View, condition: Boolean) {
+    view.visibility = if(condition) View.GONE else View.VISIBLE
+}

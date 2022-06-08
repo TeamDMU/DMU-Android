@@ -13,20 +13,20 @@ class KeywordViewModel(
 
     private val firebaseMessaging = FirebaseMessaging.getInstance()
 
-    private val _localKeywordList = keywordRepository.getLocalKeywordList()
+    private val _localKeywordList = keywordRepository.getUserKeywords()
     val localKeywordList get() = _localKeywordList
 
     private val _checkKeywordList = mutableSetOf<String>()
     val checkKeywordList get() = _checkKeywordList
 
-    fun subscribeCheckKeyword() {
+    fun subscribeCheckedKeyword() {
         for (localKeyword in localKeywordList.value!!) {
             if (checkKeywordList.contains(localKeyword.name)) {
                 // 선택했던 데이터를 중첩해서 바꾸면 효율성이 떨어지고, 파이어베이스 구독에 문제가 생길 수 있으므로 구독 여부도 함께 체크
                 if (!localKeyword.isSubscribe) {
                     logd("contains ${localKeyword.name}")
                     viewModelScope.launch {
-                        keywordRepository.updateLocalKeyword(true, localKeyword.name)
+                        keywordRepository.updateUserKeywords(true, localKeyword.name)
                     }
                     firebaseMessaging.subscribeToTopic(localKeyword.englishName)
                 }
@@ -34,7 +34,7 @@ class KeywordViewModel(
                 if (localKeyword.isSubscribe) {
                     logd("not contains ${localKeyword.name}")
                     viewModelScope.launch {
-                        keywordRepository.updateLocalKeyword(false, localKeyword.name)
+                        keywordRepository.updateUserKeywords(false, localKeyword.name)
                     }
                     firebaseMessaging.unsubscribeFromTopic(localKeyword.englishName)
                 }
@@ -42,15 +42,15 @@ class KeywordViewModel(
         }
     }
 
-    fun addAllCheckKeywordList(keyword: List<String>) {
+    fun setAllKeywords(keyword: List<String>) {
         _checkKeywordList.addAll(keyword)
     }
 
-    fun addCheckKeywordList(keyword: String) {
+    fun setCheckedKeywords(keyword: String) {
         _checkKeywordList.add(keyword)
     }
 
-    fun removeCheckKeywordList(keyword: String) {
+    fun removeCheckedKeywords(keyword: String) {
         _checkKeywordList.remove(keyword)
     }
 }

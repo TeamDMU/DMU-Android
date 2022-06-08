@@ -12,12 +12,12 @@ sealed class Department(
     object InfoCommunication : Department("정보통신공학과", CODE.INFO_COMMUNICATION_ENGINE_CODE)
     object ComputerSoftware : Department("컴퓨터소프트웨어공학과", CODE.COMPUTER_SOFTWARE_ENGINE_CODE)
     object ComputerInfo : Department("컴퓨터정보공학과", CODE.COMPUTER_INFO_ENGINE_CODE)
-    object Artificial : Department("인공지능공학과", CODE.ARTIFICIAL_ENGINE_CODE)
+    object Artificial : Department("인공지능소프트웨어학과", CODE.ARTIFICIAL_ENGINE_CODE)
     object Biochemical : Department("생명화학공학과", CODE.BIOCHEMICAL_ENGINE_CODE)
     object BioConvergence : Department("바이오융합공학과", CODE.BIO_CONVERGENCE_ENGINE_CODE)
     object Architecture : Department("건축과", CODE.ARCHITECTURE_CODE)
-    object InteriorDesign : Department("실내건축디자인학과", CODE.INTERIOR_DESIGN_CODE)
-    object VisualDesign : Department("시각디자인학과", CODE.VISUAL_DESIGN_CODE)
+    object InteriorDesign : Department("실내건축디자인과", CODE.INTERIOR_DESIGN_CODE)
+    object VisualDesign : Department("시각디자인과", CODE.VISUAL_DESIGN_CODE)
     object Business : Department("경영학과", CODE.BUSINESS_ADMINISTRATION_CODE)
     object TaxAccounting : Department("세무회계학과", CODE.TAX_ACCOUNTING_CODE)
     object DistributionMarketing : Department("유통마케팅학과", CODE.DISTRIBUTION_MARKETING_CODE)
@@ -40,16 +40,16 @@ sealed class Department(
                 "정보통신공학과" -> InfoCommunication
                 "컴퓨터소프트웨어공학과" -> ComputerSoftware
                 "컴퓨터정보공학과" -> ComputerInfo
-                "인공지능공학과" -> Artificial
+                "인공지능소프트웨어학과" -> Artificial
                 "생명화학공학과" -> Biochemical
                 "바이오융합공학과" -> BioConvergence
                 "건축과" -> Architecture
-                "실내건축디자인학과" -> InteriorDesign
-                "시각디자인학과" -> VisualDesign
+                "실내건축디자인과" -> InteriorDesign
+                "시각디자인과" -> VisualDesign
                 "세무회계학과" -> TaxAccounting
                 "유통마케팅학과" -> DistributionMarketing
                 "호텔관광학과" -> HotelTourism
-                "빅데이터경영학과" -> BigDataManagement
+                "빅데이터경영과" -> BigDataManagement
                 "로봇공학과" -> Robot
                 "자동화공학과" -> Automation
                 else -> throw IllegalArgumentException("올바른 타입이 아닙니다.")

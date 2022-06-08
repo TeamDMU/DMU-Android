@@ -4,11 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.dongyang.android.youdongknowme.R
-import com.dongyang.android.youdongknowme.data.remote.entity.NoticeDetail
 import com.dongyang.android.youdongknowme.data.remote.entity.NoticeFileUrl
 import com.dongyang.android.youdongknowme.data.repository.DetailRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
-import com.dongyang.android.youdongknowme.standard.util.logd
 import kotlinx.coroutines.launch
 
 class DetailViewModel(private val detailRepository: DetailRepository) : BaseViewModel() {
@@ -39,7 +37,7 @@ class DetailViewModel(private val detailRepository: DetailRepository) : BaseView
     }
 
     // 공지사항 리스트 호출
-    fun getNoticeDetail() {
+    fun fetchNoticeDetail() {
         _isLoading.postValue(true)
 
         val departCode = _code.value!!
@@ -47,7 +45,7 @@ class DetailViewModel(private val detailRepository: DetailRepository) : BaseView
 
         try {
             viewModelScope.launch(connectionHandler) {
-                val response = detailRepository.getNoticeDetail(departCode, boardNum)
+                val response = detailRepository.fetchNoticeDetail(departCode, boardNum)
                 if (response.isSuccessful) {
                     val noticeDetail = response.body()
                     _title.postValue(noticeDetail?.title)

@@ -12,7 +12,6 @@ import com.dongyang.android.youdongknowme.standard.base.BaseFragment
 import com.dongyang.android.youdongknowme.standard.util.hideKeyboard
 import com.dongyang.android.youdongknowme.standard.util.showKeyboard
 import com.dongyang.android.youdongknowme.ui.adapter.NoticeAdapter
-import com.dongyang.android.youdongknowme.ui.view.depart.DepartActivity
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailActivity
 import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordActivity
 import com.google.android.material.tabs.TabLayout
@@ -28,11 +27,10 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     override val layoutResourceId: Int = R.layout.fragment_notice
     override val viewModel: NoticeViewModel by viewModel()
 
-
     private lateinit var adapter: NoticeAdapter
 
     override fun initStartView() {
-        binding.viewModel = viewModel
+        binding.vm = viewModel
         adapter = NoticeAdapter().apply { setItemClickListener(this@NoticeFragment) }
         binding.noticeRvList.apply {
             this.adapter = this@NoticeFragment.adapter
@@ -45,15 +43,11 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     override fun initDataBinding() {
 
         viewModel.isLoading.observe(viewLifecycleOwner) {
-            if(it) showLoading()
+            if (it) showLoading()
             else dismissLoading()
         }
 
         viewModel.noticeList.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-        }
-
-        viewModel.searchList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
 
@@ -62,21 +56,18 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         }
 
         viewModel.isUniversityTab.observe(viewLifecycleOwner) {
-            if(!it) {
+            // 구성 변경에 대비, 선택한 탭이 무엇인지 저장
+            viewModel.setDepartmentCode()
+            if (!it) {
                 binding.noticeTab.getTabAt(1)?.select()
             }
-            viewModel.setDepartmentCode()
-        }
-
-        viewModel.departmentCode.observe(viewLifecycleOwner) {
-            viewModel.getNoticeList()
         }
     }
 
     override fun initAfterBinding() {
         // 새로고침 했을 때 동작
         binding.noticeSwipe.setOnRefreshListener {
-            viewModel.getNoticeList()
+            viewModel.refreshNotices()
             binding.noticeSwipe.isRefreshing = false
         }
 
@@ -104,7 +95,8 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
             val searchKeyword = textView.text.toString()
             if (actionId == EditorInfo.IME_ACTION_SEARCH && searchKeyword.isNotEmpty()) {
                 textView.hideKeyboard()
-                viewModel.getNoticeSearchList(searchKeyword)
+                viewModel.fetchSearchNotices(searchKeyword)
+                binding.noticeRvList.scrollToPosition(0)
             }
 
             false
@@ -123,6 +115,9 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         // 각각 탭 버튼 눌렀을 때 동작
         binding.noticeTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
+
+                binding.noticeRvList.scrollToPosition(0)
+
                 binding.noticeToolbar.toolbarSearchText.text.clear()
                 if (tab.text == "대학") {
                     viewModel.setTabMode(true)
@@ -132,7 +127,11 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {} // 구현 X
-            override fun onTabReselected(tab: TabLayout.Tab?) {} // 구현 X
+
+            // 다시 클릭시 스크롤되게 설정
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                binding.noticeRvList.smoothScrollToPosition(-10)
+            }
         })
     }
 

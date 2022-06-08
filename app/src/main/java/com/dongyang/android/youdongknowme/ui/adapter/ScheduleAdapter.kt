@@ -9,6 +9,10 @@ import com.dongyang.android.youdongknowme.databinding.ItemScheduleBinding
 
 class ScheduleAdapter : RecyclerView.Adapter<ScheduleAdapter.ViewHolder>() {
 
+    init {
+        setHasStableIds(true)
+    }
+
     private var item = arrayListOf<Schedule>()
 
     inner class ViewHolder(private val binding: ItemScheduleBinding)
@@ -31,6 +35,10 @@ class ScheduleAdapter : RecyclerView.Adapter<ScheduleAdapter.ViewHolder>() {
                 LayoutInflater.from(parent.context), parent, false
             )
         )
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

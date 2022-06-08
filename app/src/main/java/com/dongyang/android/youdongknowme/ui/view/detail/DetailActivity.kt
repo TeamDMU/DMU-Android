@@ -61,7 +61,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
     }
 
     override fun initDataBinding() {
-        binding.viewModel = viewModel
+        binding.vm = viewModel
 
         viewModel.isLoading.observe(this) {
             if (it) showLoading()
@@ -84,7 +84,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
     }
 
     override fun initAfterBinding() {
-        viewModel.getNoticeDetail()
+        viewModel.fetchNoticeDetail()
 
         // 뒤로가기 버튼 클릭 시
         binding.detailExitBtn.setOnClickListener {
@@ -190,10 +190,10 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
 
     private fun showDialogToGetPermission() {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle(resources.getString(R.string.detail_write_permission_dialog_title))
-            .setMessage(resources.getString(R.string.detail_write_permission_dialog_message))
+        builder.setTitle(getString(R.string.detail_write_permission_dialog_title))
+            .setMessage(getString(R.string.detail_write_permission_dialog_message))
 
-        builder.setPositiveButton("설정") { _, _ ->
+        builder.setPositiveButton(getString(R.string.detail_write_permission_dialog_ok)) { _, _ ->
             val intent = Intent(
                 Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                 Uri.fromParts("package", "com.dongyang.android.youdongknowme", null)
@@ -201,7 +201,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
-        builder.setNegativeButton("취소") { _, _ ->
+        builder.setNegativeButton(getString(R.string.detail_write_permission_dialog_no)) { _, _ ->
             // 거부
         }
         val dialog = builder.create()
