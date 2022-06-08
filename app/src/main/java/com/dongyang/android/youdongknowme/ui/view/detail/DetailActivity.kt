@@ -61,7 +61,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
     }
 
     override fun initDataBinding() {
-        binding.viewModel = viewModel
+        binding.vm = viewModel
 
         viewModel.isLoading.observe(this) {
             if (it) showLoading()

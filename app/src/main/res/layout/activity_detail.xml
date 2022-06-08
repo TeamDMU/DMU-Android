@@ -39,7 +39,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="68dp"
             android:layout_marginEnd="16dp"
-            android:text="@{viewModel.title}"
+            android:text="@{vm.title}"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -54,12 +54,11 @@
             android:layout_marginTop="6dp"
             android:layout_marginEnd="16dp"
             android:gravity="end"
-            android:text="@{viewModel.date}"
+            android:text="@{vm.date}"
             android:textColor="@color/black"
             android:textSize="13sp"
             app:layout_constraintEnd_toStartOf="@id/detail_writer"
             app:layout_constraintTop_toBottomOf="@id/detail_title" />
-
 
         <TextView
             android:id="@+id/detail_writer"
@@ -68,7 +67,7 @@
             android:layout_marginTop="6dp"
             android:layout_marginEnd="16dp"
             android:gravity="end"
-            android:text="@{viewModel.writer}"
+            android:text="@{vm.writer}"
             android:textColor="@color/black"
             android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -78,6 +77,7 @@
             android:id="@+id/detail_top_line"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
+            bind_visibility_on_loading="@{vm.isLoading()}"
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="16dp"
@@ -102,6 +102,7 @@
             android:id="@+id/detail_bot_line"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
+            bind_visibility_on_loading="@{vm.isLoading()}"
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="16dp"
@@ -129,7 +130,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{viewModel.content}"
+                    android:text="@{vm.content}"
                     android:textColor="#E81C1C1C" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -146,7 +147,7 @@
     <data>
 
         <variable
-            name="viewModel"
+            name="vm"
             type="com.dongyang.android.youdongknowme.ui.view.detail.DetailViewModel" />
 
         <variable
