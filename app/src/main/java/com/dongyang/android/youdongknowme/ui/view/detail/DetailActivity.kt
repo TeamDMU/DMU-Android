@@ -167,14 +167,14 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
                                 DownloadManager.STATUS_FAILED -> {
                                     Toast.makeText(
                                         context,
-                                        "${R.string.notice_detail_download_fail}",
+                                        getString(R.string.notice_detail_download_fail),
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
                                 DownloadManager.STATUS_SUCCESSFUL -> {
                                     Toast.makeText(
                                         context,
-                                        "${R.string.notice_detail_download_success}",
+                                        getString(R.string.notice_detail_download_success),
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }

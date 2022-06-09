@@ -53,11 +53,8 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
                 viewModel.setFirstLaunch(false)
                 val intent = Intent(this@KeywordActivity, MainActivity::class.java)
                 startActivity(intent)
-                finish()
-            } else {
-                finish()
             }
-
+            finish()
         }
     }
 
