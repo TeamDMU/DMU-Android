@@ -37,7 +37,7 @@
                     android:textStyle="bold"/>
 
                 <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/setting_notice"
+                    android:id="@+id/setting_school_alarm_switch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:foreground="?attr/selectableItemBackground"
@@ -67,7 +67,7 @@
                     android:textStyle="bold" />
 
                 <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/setting_switch"
+                    android:id="@+id/setting_department_alarm_switch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:foreground="?attr/selectableItemBackground"
