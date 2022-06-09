@@ -27,13 +27,12 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.checkDepart()
+        viewModel.checkFirstLaunch()
 
         intentJob = lifecycleScope.launch {
             delay(2000L)
-
-            viewModel.isDepart.observe(this@SplashActivity) {
-                if (!it) {
+            viewModel.isFirstLaunch.observe(this@SplashActivity) {
+                if(it) {
                     val intent = Intent(this@SplashActivity, DepartActivity::class.java)
                     startActivity(intent)
                     finish()
