@@ -35,6 +35,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         binding.noticeRvList.apply {
             this.adapter = this@NoticeFragment.adapter
             this.layoutManager = LinearLayoutManager(requireActivity())
+            this.itemAnimator = null
             this.setHasFixedSize(true)
             this.addItemDecoration(DividerItemDecoration(requireActivity(), 1))
         }
