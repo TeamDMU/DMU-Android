@@ -18,6 +18,11 @@ object SharedPreference {
         return this
     }
 
+    // 학과 설정
+    private const val DEPARTMENT = "DEPARTMENT"
+    fun getDepartment(): String? = pref?.getString(DEPARTMENT, "")
+    fun setDepartment(department: String) = pref?.edit()?.putString(DEPARTMENT, department)?.apply()
+
     // 학과 코드 설정
     private const val CODE = "CODE"
     fun getCode(): Int? = pref?.getInt(CODE, 0)
