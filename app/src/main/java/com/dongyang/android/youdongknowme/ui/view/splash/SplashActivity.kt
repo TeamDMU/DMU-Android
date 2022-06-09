@@ -34,8 +34,6 @@ class SplashActivity : AppCompatActivity() {
 
             if(viewModel.isFirstLaunch) {
                 val intent = Intent(this@SplashActivity, DepartActivity::class.java)
-                intent.putExtra("isFirstLaunch", true)
-                viewModel.setFirstLaunch(false)
                 startActivity(intent)
                 finish()
             } else {
