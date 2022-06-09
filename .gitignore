@@ -281,3 +281,4 @@ lint/tmp/
 
 # Google Services (e.g. APIs or Firebase)
 app/google-services.json
+.idea/misc.xml
