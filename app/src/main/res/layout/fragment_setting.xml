@@ -40,6 +40,7 @@
                     android:id="@+id/setting_school_alarm_switch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    bind_is_checked="@{vm.isAccessSchoolAlarm()}"
                     android:foreground="?attr/selectableItemBackground"
                     android:minHeight="0dp"
                     android:paddingStart="16dp"
@@ -70,6 +71,7 @@
                     android:id="@+id/setting_department_alarm_switch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    bind_is_checked="@{vm.isAccessDepartAlarm()}"
                     android:foreground="?attr/selectableItemBackground"
                     android:minHeight="0dp"
                     android:paddingStart="16dp"
@@ -211,4 +213,10 @@
             </LinearLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+        <variable
+            name="vm"
+            type="com.dongyang.android.youdongknowme.ui.view.setting.SettingViewModel" />
+    </data>
 </layout>
