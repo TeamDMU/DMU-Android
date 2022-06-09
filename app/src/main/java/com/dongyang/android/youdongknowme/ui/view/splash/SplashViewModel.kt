@@ -6,12 +6,18 @@ import com.dongyang.android.youdongknowme.data.repository.SplashRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 
 class SplashViewModel(private val splashRepository: SplashRepository) : BaseViewModel() {
-    private val _isFirstLaunch = MutableLiveData(false)
-    val isFirstLaunch: LiveData<Boolean> get() = _isFirstLaunch
+
+    private var _isFirstLaunch: Boolean = false
+    val isFirstLaunch: Boolean get() = _isFirstLaunch
 
     fun checkFirstLaunch() {
         if (splashRepository.getIsFirstLaunch() == true) {
-            _isFirstLaunch.value = true
+            _isFirstLaunch = true
         }
+    }
+
+    fun setFirstLaunch(isFirstLaunch : Boolean) {
+        _isFirstLaunch = isFirstLaunch
+        splashRepository.setIsFirstLaunch(isFirstLaunch)
     }
 }

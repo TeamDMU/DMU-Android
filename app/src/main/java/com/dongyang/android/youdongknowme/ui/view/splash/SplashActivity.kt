@@ -31,16 +31,17 @@ class SplashActivity : AppCompatActivity() {
 
         intentJob = lifecycleScope.launch {
             delay(2000L)
-            viewModel.isFirstLaunch.observe(this@SplashActivity) {
-                if(it) {
-                    val intent = Intent(this@SplashActivity, DepartActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                } else {
-                    val intent = Intent(this@SplashActivity, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
+
+            if(viewModel.isFirstLaunch) {
+                val intent = Intent(this@SplashActivity, DepartActivity::class.java)
+                intent.putExtra("isFirstLaunch", true)
+                viewModel.setFirstLaunch(false)
+                startActivity(intent)
+                finish()
+            } else {
+                val intent = Intent(this@SplashActivity, MainActivity::class.java)
+                startActivity(intent)
+                finish()
             }
         }
     }
