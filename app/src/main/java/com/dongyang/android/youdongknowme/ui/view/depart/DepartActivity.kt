@@ -72,12 +72,13 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
                     viewModel.setDepartment(items[viewModel.selectDepartPosition.value!!])
                     if(viewModel.isFirstLaunch.value!!) {
                         val intent = Intent(this, KeywordActivity::class.java)
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                         startActivity(intent)
+                        finish()
                     } else {
                         val intent = Intent(this, MainActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                         startActivity(intent)
+                        finish()
                     }
                 }
 
