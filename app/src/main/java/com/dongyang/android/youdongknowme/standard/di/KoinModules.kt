@@ -48,7 +48,7 @@ val viewModelModule = module {
         ScheduleViewModel(get())
     }
     viewModel {
-        SettingViewModel()
+        SettingViewModel(get())
     }
     viewModel {
         DetailViewModel(get())
@@ -85,6 +85,9 @@ val repositoryModule = module {
     }
     single {
         KeywordRepository(get())
+    }
+    single {
+        SettingRepository()
     }
 }
 
