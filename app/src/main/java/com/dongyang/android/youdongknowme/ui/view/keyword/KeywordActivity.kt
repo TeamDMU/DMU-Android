@@ -1,11 +1,13 @@
 package com.dongyang.android.youdongknowme.ui.view.keyword
 
+import android.content.Intent
 import androidx.lifecycle.Observer
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
 import com.dongyang.android.youdongknowme.databinding.ActivityKeywordBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.standard.util.logd
+import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -16,6 +18,7 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
     override val viewModel: KeywordViewModel by viewModel()
 
     override fun initStartView() {
+        binding.vm = viewModel
     }
 
     override fun initDataBinding() {
@@ -36,6 +39,8 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
     }
 
     override fun initAfterBinding() {
+        viewModel.checkFirstLaunch()
+
         // 뒤로가기 버튼 눌렀을 때
         binding.keywordExitBtn.setOnClickListener {
             finish()
@@ -44,7 +49,15 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
         // TODO :: 안드로이드 데이터베이스에 유저별 설정한 키워드 저장 및 파이어베이스 키워드 구독 설정
         binding.keywordCompleteBtn.setOnClickListener {
             viewModel.subscribeCheckedKeyword()
-            finish()
+            if(viewModel.isFirstLaunch.value!!) {
+                viewModel.setFirstLaunch(false)
+                val intent = Intent(this@KeywordActivity, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else {
+                finish()
+            }
+
         }
     }
 

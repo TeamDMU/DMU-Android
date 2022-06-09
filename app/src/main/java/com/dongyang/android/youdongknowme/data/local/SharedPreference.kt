@@ -32,4 +32,9 @@ object SharedPreference {
     private const val SCHEDULE = "SCHEDULE"
     fun getSchedule(): String? = pref?.getString(SCHEDULE, "No Data")
     fun setSchedule(schedule: String) = pref?.edit()?.putString(SCHEDULE, schedule)?.apply()
+
+    // 최초 접속 여부
+    private const val FIRST_LAUNCH = "FIRST_LAUNCH"
+    fun getIsFirstLaunch(): Boolean? = pref?.getBoolean(FIRST_LAUNCH, true)
+    fun setIsFirstLaunch(isFirstLaunch: Boolean) = pref?.edit()?.putBoolean(FIRST_LAUNCH, isFirstLaunch)?.apply()
 }

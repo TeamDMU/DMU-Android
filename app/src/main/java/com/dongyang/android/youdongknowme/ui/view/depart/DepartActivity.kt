@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityDepartBinding
+import com.dongyang.android.youdongknowme.standard.util.logd
 import com.dongyang.android.youdongknowme.ui.adapter.DepartAdapter
+import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordActivity
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG
@@ -24,6 +26,10 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
         binding = ActivityDepartBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.vm = viewModel
+
+        viewModel.checkFirstLaunch()
+
         // 학과 리스트
         val items =
             resources.getStringArray(R.array.dmu_department_list).toCollection(ArrayList<String>())
@@ -38,6 +44,10 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
             this.adapter = this@DepartActivity.adapter
             this.layoutManager = LinearLayoutManager(this@DepartActivity)
             this.setHasFixedSize(true)
+        }
+
+        binding.departExitBtn.setOnClickListener {
+            finish()
         }
 
         // 선택 포지션을 실시간 옵저빙
@@ -60,9 +70,15 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
             Snackbar.make(binding.departRcv, "학과 선택을 마치셨나요?", LENGTH_LONG)
                 .setAction("확인") {
                     viewModel.setDepartment(items[viewModel.selectDepartPosition.value!!])
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                    if(viewModel.isFirstLaunch.value!!) {
+                        val intent = Intent(this, KeywordActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        startActivity(intent)
+                    } else {
+                        val intent = Intent(this, MainActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        startActivity(intent)
+                    }
                 }
 
         snackbar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE

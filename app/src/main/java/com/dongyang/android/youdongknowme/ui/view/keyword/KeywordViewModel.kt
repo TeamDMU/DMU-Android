@@ -1,5 +1,7 @@
 package com.dongyang.android.youdongknowme.ui.view.keyword
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.dongyang.android.youdongknowme.data.repository.KeywordRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
@@ -13,11 +15,24 @@ class KeywordViewModel(
 
     private val firebaseMessaging = FirebaseMessaging.getInstance()
 
+    private val _isFirstLaunch: MutableLiveData<Boolean> = MutableLiveData()
+    val isFirstLaunch: LiveData<Boolean> get() = _isFirstLaunch
+
     private val _localKeywordList = keywordRepository.getUserKeywords()
     val localKeywordList get() = _localKeywordList
 
     private val _checkKeywordList = mutableSetOf<String>()
     val checkKeywordList get() = _checkKeywordList
+
+    fun checkFirstLaunch() {
+        if (keywordRepository.getIsFirstLaunch() == true) {
+            _isFirstLaunch.value = true
+        }
+    }
+
+    fun setFirstLaunch(isFirstLaunch : Boolean) {
+        keywordRepository.setIsFirstLaunch(isFirstLaunch)
+    }
 
     fun subscribeCheckedKeyword() {
         for (localKeyword in localKeywordList.value!!) {

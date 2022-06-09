@@ -22,3 +22,8 @@ fun bindNoticeNoData(view : View, condition: Boolean) {
 fun bindLoadingVisible(view : View, condition: Boolean) {
     view.visibility = if(condition) View.GONE else View.VISIBLE
 }
+
+@BindingAdapter("bind_visibility_is_first_launch")
+fun bindIsFirstLaunch(view : View, condition: Boolean) {
+    view.visibility = if(condition) View.GONE else View.VISIBLE
+}
