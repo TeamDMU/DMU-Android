@@ -40,12 +40,12 @@ object SharedPreference {
 
     // 학교 알림 설정 여부
     private const val ACCESS_SCHOOL_ALARM = "ACCESS_SCHOOL_ALARM"
-    fun getIsAccessSchoolAlarm(): Boolean? = pref?.getBoolean(ACCESS_SCHOOL_ALARM, false)
+    fun getIsAccessSchoolAlarm(): Boolean? = pref?.getBoolean(ACCESS_SCHOOL_ALARM, true)
     fun setIsAccessSchoolAlarm(isAccessSchoolAlarm: Boolean) = pref?.edit()?.putBoolean(ACCESS_SCHOOL_ALARM, isAccessSchoolAlarm)?.apply()
 
     // 학과 알림 설정 여부
     private const val ACCESS_DEPART_ALARM = "ACCESS_DEPART_ALARM"
-    fun getIsAccessDepartAlarm(): Boolean? = pref?.getBoolean(ACCESS_DEPART_ALARM, false)
+    fun getIsAccessDepartAlarm(): Boolean? = pref?.getBoolean(ACCESS_DEPART_ALARM, true)
     fun setIsAccessDepartAlarm(isAccessDepartAlarm: Boolean) = pref?.edit()?.putBoolean(ACCESS_DEPART_ALARM, isAccessDepartAlarm)?.apply()
 
 }
