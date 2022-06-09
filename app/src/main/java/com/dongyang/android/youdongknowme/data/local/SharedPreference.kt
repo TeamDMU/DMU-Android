@@ -37,4 +37,15 @@ object SharedPreference {
     private const val FIRST_LAUNCH = "FIRST_LAUNCH"
     fun getIsFirstLaunch(): Boolean? = pref?.getBoolean(FIRST_LAUNCH, true)
     fun setIsFirstLaunch(isFirstLaunch: Boolean) = pref?.edit()?.putBoolean(FIRST_LAUNCH, isFirstLaunch)?.apply()
+
+    // 학교 알림 설정 여부
+    private const val ACCESS_SCHOOL_ALARM = "ACCESS_SCHOOL_ALARM"
+    fun getIsAccessSchoolAlarm(): Boolean? = pref?.getBoolean(ACCESS_SCHOOL_ALARM, true)
+    fun setIsAccessSchoolAlarm(isAccessSchoolAlarm: Boolean) = pref?.edit()?.putBoolean(ACCESS_SCHOOL_ALARM, isAccessSchoolAlarm)?.apply()
+
+    // 학과 알림 설정 여부
+    private const val ACCESS_DEPART_ALARM = "ACCESS_DEPART_ALARM"
+    fun getIsAccessDepartAlarm(): Boolean? = pref?.getBoolean(ACCESS_DEPART_ALARM, true)
+    fun setIsAccessDepartAlarm(isAccessDepartAlarm: Boolean) = pref?.edit()?.putBoolean(ACCESS_SCHOOL_ALARM, isAccessDepartAlarm)?.apply()
+
 }
