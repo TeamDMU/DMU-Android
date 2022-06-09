@@ -15,7 +15,7 @@ class KeywordViewModel(
 
     private val firebaseMessaging = FirebaseMessaging.getInstance()
 
-    private val _isFirstLaunch: MutableLiveData<Boolean> = MutableLiveData()
+    private val _isFirstLaunch: MutableLiveData<Boolean> = MutableLiveData(false)
     val isFirstLaunch: LiveData<Boolean> get() = _isFirstLaunch
 
     private val _localKeywordList = keywordRepository.getUserKeywords()

@@ -7,7 +7,7 @@ import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 
 class DepartViewModel(private val departRepository: DepartRepository) : BaseViewModel() {
 
-    private val _isFirstLaunch: MutableLiveData<Boolean> = MutableLiveData()
+    private val _isFirstLaunch: MutableLiveData<Boolean> = MutableLiveData(false)
     val isFirstLaunch: LiveData<Boolean> get() = _isFirstLaunch
 
     private val _selectDepartPosition = MutableLiveData(-1)
