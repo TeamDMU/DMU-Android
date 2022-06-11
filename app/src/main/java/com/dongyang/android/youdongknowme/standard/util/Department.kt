@@ -1,4 +1,4 @@
-package com.dongyang.android.youdongknowme.data.local.entity
+package com.dongyang.android.youdongknowme.standard.util
 
 sealed class Department(
     var name: String,

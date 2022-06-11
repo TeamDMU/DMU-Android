@@ -1,7 +1,7 @@
 package com.dongyang.android.youdongknowme.data.repository
 
 import com.dongyang.android.youdongknowme.data.local.SharedPreference
-import com.dongyang.android.youdongknowme.data.local.entity.Department
+import com.dongyang.android.youdongknowme.standard.util.Department
 
 class DepartRepository {
     fun setDepartment(departName: String) {
