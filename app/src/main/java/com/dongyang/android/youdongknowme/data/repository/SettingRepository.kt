@@ -15,4 +15,8 @@ class SettingRepository {
     fun setIsAccessDepartAlarm(isAccessDepartAlarm: Boolean) {
         SharedPreference.setIsAccessDepartAlarm(isAccessDepartAlarm)
     }
+
+    fun getUserDepartment(): String? {
+        return SharedPreference.getDepartment()
+    }
 }

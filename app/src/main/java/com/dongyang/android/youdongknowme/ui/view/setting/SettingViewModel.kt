@@ -14,6 +14,9 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
     private val _isAccessDepartAlarm: MutableLiveData<Boolean> = MutableLiveData(true)
     val isAccessDepartAlarm: LiveData<Boolean> get() = _isAccessDepartAlarm
 
+    private val _myDepartment: MutableLiveData<String> = MutableLiveData()
+    val myDepartment: LiveData<String> get() = _myDepartment
+
     fun checkAccessAlarm() {
         val isAccessSchoolAlarm = settingRepository.getIsAccessSchoolAlarm()!!
         _isAccessSchoolAlarm.postValue(isAccessSchoolAlarm)
@@ -28,5 +31,10 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
 
     fun setIsAccessDepartAlarm(isAccessDepartAlarm: Boolean) {
         settingRepository.setIsAccessDepartAlarm(isAccessDepartAlarm)
+    }
+
+    fun getUserDepartment() {
+        val myDepartment = settingRepository.getUserDepartment()!!
+        _myDepartment.postValue(myDepartment)
     }
 }

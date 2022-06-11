@@ -33,6 +33,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
         binding.vm = viewModel
 
         viewModel.checkAccessAlarm()
+        viewModel.getUserDepartment()
 
         binding.settingSchoolAlarmSwitch.setOnCheckedChangeListener { compoundButton, _ ->
             if(compoundButton.isChecked) {
