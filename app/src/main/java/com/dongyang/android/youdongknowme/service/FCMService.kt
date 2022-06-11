@@ -14,8 +14,9 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.local.SharedPreference
-import com.dongyang.android.youdongknowme.standard.util.logd
 import com.dongyang.android.youdongknowme.standard.util.logw
+import com.dongyang.android.youdongknowme.standard.util.mapDepartmentCodeToKorean
+import com.dongyang.android.youdongknowme.standard.util.mapKeywordEnglishToKorean
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -32,33 +33,35 @@ class FCMService : FirebaseMessagingService() {
         logw("New Token :: $token")
         super.onNewToken(token)
     }
-    
+
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
 
         val data = message.data
 
-        val major_code: String? = data["major_code"]
-        val notice_num: String? = data["num"]
-        val title: String? = data["title"]
-        val keyword: String? = data["keyword"]
-
         if (data.isNotEmpty()) {
-            val alarmArea = if(major_code == "1") "학교" else "학과"
 
-            if (major_code == "1") {
+            val major_code: String? = data["major_code"]
+            val notice_num: String? = data["num"]
+            val title: String? = data["title"]
+            val keyword: String? = data["keyword"]
+
+            val department = mapDepartmentCodeToKorean(major_code!!.toInt())
+            val koreanKeyword = mapKeywordEnglishToKorean(keyword!!)
+
+            if (department == "학교") {
                 if (SharedPreference.getIsAccessSchoolAlarm()!!) {
-                    createNotificationChannel(keyword!!, alarmArea)
+                    createNotificationChannel(koreanKeyword, department)
                 }
             } else {
                 if (SharedPreference.getIsAccessDepartAlarm()!!) {
-                    createNotificationChannel(keyword!!, alarmArea)
+                    createNotificationChannel(koreanKeyword, department)
                 }
             }
         }
     }
 
-    private fun createNotificationChannel(keyword: String, alarmArea: String) {
+    private fun createNotificationChannel(keyword: String, department: String) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val description = "FCM 메세지 알림"
             val importance = NotificationManager.IMPORTANCE_DEFAULT
@@ -91,7 +94,7 @@ class FCMService : FirebaseMessagingService() {
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.drawable.ic_notification)
             .setColor(ContextCompat.getColor(this, R.color.main))
-            .setContentTitle("${keyword}(이)가 포함된 공지사항이 ${alarmArea}에 올라왔어요!")
+            .setContentTitle("${keyword}(이)가 포함된 공지사항이 ${department}에 올라왔어요!")
             .setAutoCancel(true)
             .setSound(defaultSoundUri)
             .setContentIntent(pendingIntent)
