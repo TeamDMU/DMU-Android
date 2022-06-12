@@ -1,25 +1,24 @@
 package com.dongyang.android.youdongknowme.data.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.asLiveData
 import com.dongyang.android.youdongknowme.data.local.SharedPreference
-import com.dongyang.android.youdongknowme.data.local.dao.UserDao
+import com.dongyang.android.youdongknowme.data.local.dao.KeywordDao
 import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
+import kotlinx.coroutines.flow.Flow
 
 class KeywordRepository(
-    private val userDao: UserDao
+    private val keywordDao: KeywordDao
 ) {
-    fun getUserKeywords(): LiveData<List<KeywordEntity>> {
-        return userDao.getAllKeyword().asLiveData()
+    fun getUserKeywords(): Flow<List<KeywordEntity>> {
+        return keywordDao.getAllKeyword()
     }
 
     suspend fun updateUserKeywords(isSubscribe: Boolean, name: String) {
-        userDao.updateKeyword(isSubscribe, name)
+        keywordDao.updateKeyword(isSubscribe, name)
     }
 
     fun getIsFirstLaunch(): Boolean? = SharedPreference.getIsFirstLaunch()
 
-    fun setIsFirstLaunch(isFirstLaunch : Boolean) {
+    fun setIsFirstLaunch(isFirstLaunch: Boolean) {
         SharedPreference.setIsFirstLaunch(isFirstLaunch)
     }
 }

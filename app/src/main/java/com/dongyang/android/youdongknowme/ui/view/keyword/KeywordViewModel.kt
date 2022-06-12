@@ -3,10 +3,12 @@ package com.dongyang.android.youdongknowme.ui.view.keyword
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
 import com.dongyang.android.youdongknowme.data.repository.KeywordRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.standard.util.logd
 import com.google.firebase.messaging.FirebaseMessaging
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class KeywordViewModel(
@@ -18,11 +20,19 @@ class KeywordViewModel(
     private val _isFirstLaunch: MutableLiveData<Boolean> = MutableLiveData(false)
     val isFirstLaunch: LiveData<Boolean> get() = _isFirstLaunch
 
-    private val _localKeywordList = keywordRepository.getUserKeywords()
-    val localKeywordList get() = _localKeywordList
+    private val _localKeywordList: MutableLiveData<List<KeywordEntity>> = MutableLiveData()
+    val localKeywordList: LiveData<List<KeywordEntity>> get() = _localKeywordList
 
     private val _checkKeywordList = mutableSetOf<String>()
     val checkKeywordList get() = _checkKeywordList
+
+    fun getLocalKeywordList() {
+        viewModelScope.launch {
+            keywordRepository.getUserKeywords().collect { keywordList ->
+                _localKeywordList.postValue(keywordList)
+            }
+        }
+    }
 
     fun checkFirstLaunch() {
         if (keywordRepository.getIsFirstLaunch() == true) {
@@ -30,7 +40,7 @@ class KeywordViewModel(
         }
     }
 
-    fun setFirstLaunch(isFirstLaunch : Boolean) {
+    fun setFirstLaunch(isFirstLaunch: Boolean) {
         keywordRepository.setIsFirstLaunch(isFirstLaunch)
     }
 

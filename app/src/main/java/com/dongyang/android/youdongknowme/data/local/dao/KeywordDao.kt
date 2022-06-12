@@ -8,7 +8,7 @@ import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface UserDao {
+interface KeywordDao {
     @Query("SELECT * FROM keyword ORDER BY name DESC")
     fun getAllKeyword(): Flow<List<KeywordEntity>>
 
