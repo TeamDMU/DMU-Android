@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YouDongKnowMe">
         <activity
-            android:name=".AlarmActivity"
+            android:name=".ui.view.alarm.AlarmActivity"
             android:exported="false" />
         <activity
             android:name=".ui.view.keyword.KeywordActivity"
