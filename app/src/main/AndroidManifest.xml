@@ -18,15 +18,15 @@
         android:roundIcon="@mipmap/ic_main_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.YouDongKnowMe">
-
+        <activity
+            android:name=".ui.view.alarm.AlarmActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.view.keyword.KeywordActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.view.depart.DepartActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.view.splash.SplashActivity"
             android:exported="true"
@@ -37,16 +37,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.view.detail.DetailActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.view.main.MainActivity"
-            android:exported="false" />
-
-        <!-- Firebase Cloud Messaging -->
+            android:exported="false" /> <!-- Firebase Cloud Messaging -->
         <service
             android:name=".service.FCMService"
             android:exported="false">

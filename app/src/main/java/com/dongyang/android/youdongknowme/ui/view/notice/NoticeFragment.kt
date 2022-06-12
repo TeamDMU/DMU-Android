@@ -1,5 +1,6 @@
 package com.dongyang.android.youdongknowme.ui.view.notice
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.inputmethod.EditorInfo
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -12,8 +13,10 @@ import com.dongyang.android.youdongknowme.standard.base.BaseFragment
 import com.dongyang.android.youdongknowme.standard.util.hideKeyboard
 import com.dongyang.android.youdongknowme.standard.util.showKeyboard
 import com.dongyang.android.youdongknowme.ui.adapter.NoticeAdapter
+import com.dongyang.android.youdongknowme.ui.view.alarm.AlarmActivity
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailActivity
-import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordActivity
+import com.google.android.material.badge.BadgeDrawable
+import com.google.android.material.badge.BadgeUtils
 import com.google.android.material.tabs.TabLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -26,6 +29,10 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
 
     override val layoutResourceId: Int = R.layout.fragment_notice
     override val viewModel: NoticeViewModel by viewModel()
+
+    private val badgeDrawable : BadgeDrawable by lazy {
+        BadgeDrawable.create(requireActivity())
+    }
 
     private lateinit var adapter: NoticeAdapter
 
@@ -41,6 +48,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         }
     }
 
+    @SuppressLint("UnsafeOptInUsageError")
     override fun initDataBinding() {
 
         viewModel.isLoading.observe(viewLifecycleOwner) {
@@ -63,9 +71,32 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
                 binding.noticeTab.getTabAt(1)?.select()
             }
         }
+
+        // 알람 카운트가 0이 아닌 경우에 뱃지 추가
+        viewModel.unVisitedAlarmCount.observe(viewLifecycleOwner) { count ->
+            if(count == 0) {
+                binding.noticeToolbar.toolbarAlarm.post {
+                    BadgeUtils.detachBadgeDrawable(
+                        badgeDrawable,
+                        binding.noticeToolbar.toolbarAlarm
+                    )
+                }
+            } else {
+                badgeDrawable.number = count
+                binding.noticeToolbar.toolbarAlarm.post {
+                    BadgeUtils.attachBadgeDrawable(
+                        badgeDrawable,
+                        binding.noticeToolbar.toolbarAlarm,
+                        binding.noticeToolbar.toolbarAlarmContainer
+                    )
+                }
+            }
+        }
     }
 
     override fun initAfterBinding() {
+        viewModel.getUnVisitedAlarm()
+
         // 새로고침 했을 때 동작
         binding.noticeSwipe.setOnRefreshListener {
             viewModel.refreshNotices()
@@ -104,7 +135,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         }
 
         binding.noticeToolbar.toolbarAlarm.setOnClickListener {
-            val intent = Intent(requireActivity(), KeywordActivity::class.java)
+            val intent = Intent(requireActivity(), AlarmActivity::class.java)
             startActivity(intent)
         }
 

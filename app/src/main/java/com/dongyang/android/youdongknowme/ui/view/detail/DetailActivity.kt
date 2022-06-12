@@ -139,7 +139,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
         val fileUrl = Uri.parse(fileUri)
         val request = DownloadManager.Request(fileUrl)
             .setTitle(fileName)
-            .setDescription("${R.string.notice_detail_download_description}")
+            .setDescription("${R.string.detail_download_description}")
             .setDestinationUri(Uri.fromFile(filePath))
             .setNotificationVisibility(VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             .setAllowedOverMetered(true)
@@ -167,14 +167,14 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
                                 DownloadManager.STATUS_FAILED -> {
                                     Toast.makeText(
                                         context,
-                                        getString(R.string.notice_detail_download_fail),
+                                        getString(R.string.detail_download_fail),
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
                                 DownloadManager.STATUS_SUCCESSFUL -> {
                                     Toast.makeText(
                                         context,
-                                        getString(R.string.notice_detail_download_success),
+                                        getString(R.string.detail_download_success),
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }

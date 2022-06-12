@@ -2,6 +2,7 @@
 <resources>
     <color name="main">#5265FF</color>
     <color name="sub">#D75265FF</color>
+    <color name="lightMain">#665265FF</color>
     <color name="logo">#0F498C</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF0F498C</color>

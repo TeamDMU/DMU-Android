@@ -275,10 +275,6 @@ lint/tmp/
 .idea/dynamic.xml
 .idea/uiDesigner.xml
 .idea/deploymentTargetDropDown.xml
-*.xml
-.idea/deploymentTargetDropDown.xml
-.idea/misc.xml
 
 # Google Services (e.g. APIs or Firebase)
 app/google-services.json
-.idea/misc.xml
