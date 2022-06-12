@@ -83,6 +83,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 android:text="@string/notice_notice_not_found_data"/>
 
         </LinearLayout>
