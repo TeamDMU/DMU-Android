@@ -6,6 +6,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.dongyang.android.youdongknowme.data.local.UserDatabase
 import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
 import com.dongyang.android.youdongknowme.data.repository.*
+import com.dongyang.android.youdongknowme.ui.view.alarm.AlarmViewModel
 import com.dongyang.android.youdongknowme.ui.view.depart.DepartViewModel
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailViewModel
 import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordViewModel
@@ -29,14 +30,17 @@ val databaseModule = module{
                 override fun onCreate(db: SupportSQLiteDatabase) {
                     super.onCreate(db)
                     CoroutineScope(IO).launch{
-                        get<UserDatabase>().userDao().insertKeywordList(defaultKeywordList)
+                        get<UserDatabase>().keywordDao().insertKeywordList(defaultKeywordList)
                     }
                 }
             })
             .build()
     }
     single{
-        get<UserDatabase>().userDao()
+        get<UserDatabase>().keywordDao()
+    }
+    single{
+        get<UserDatabase>().alarmDao()
     }
 }
 
@@ -65,6 +69,9 @@ val viewModelModule = module {
     viewModel {
         MainViewModel()
     }
+    viewModel {
+        AlarmViewModel(get())
+    }
 }
 
 val repositoryModule = module {
@@ -88,6 +95,9 @@ val repositoryModule = module {
     }
     single {
         SettingRepository()
+    }
+    single {
+        AlarmRepository(get())
     }
 }
 
