@@ -15,14 +15,14 @@
     <string name="notice_tab_university">대학</string>
     <string name="notice_tab_faculty">학부</string>
     <string name="notice_search_message">검색어를 입력해주세요.</string>
-    <string name="notice_notice_not_found_data">&#128517; 데이터가 존재하지 않습니다.</string>
-    <string name="notice_file_not_found_message">&#128517; 첨부 파일이 존재하지 않습니다.</string>
-    <string name="notice_detail_download_description">다운로드를 진행 중입니다.</string>
-    <string name="notice_detail_download_fail">다운로드를 실패했습니다.\n다시 시도해주세요.</string>
-    <string name="notice_detail_download_success">파일 다운로드가 완료되었습니다.</string>
+    <string name="notice_notice_not_found_data">데이터가 존재하지 않아요!</string>
 
     <!-- detail -->
     <string name="detail_title">공지사항</string>
+    <string name="detail_file_not_found_message">&#128517; 첨부 파일이 존재하지 않습니다.</string>
+    <string name="detail_download_description">다운로드를 진행 중입니다.</string>
+    <string name="detail_download_fail">다운로드를 실패했습니다.\n다시 시도해주세요.</string>
+    <string name="detail_download_success">파일 다운로드가 완료되었습니다.</string>
     <string name="detail_write_permission_dialog_title">파일 접근 권한 허용을 거부하였습니다.</string>
     <string name="detail_write_permission_dialog_message">파일을 다운로드 하기 위해서는 접근 권한이 필요합니다. 권한을 허용하시겠습니까?</string>
     <string name="detail_write_permission_dialog_ok">설정</string>

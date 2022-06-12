@@ -13,7 +13,7 @@
             android:visibility="gone"
             android:padding="6dp"
             android:textSize="12sp"
-            android:text="@string/notice_file_not_found_message"
+            android:text="@string/detail_file_not_found_message"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
