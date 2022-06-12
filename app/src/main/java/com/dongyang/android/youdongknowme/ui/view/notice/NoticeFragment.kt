@@ -1,5 +1,6 @@
 package com.dongyang.android.youdongknowme.ui.view.notice
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.inputmethod.EditorInfo
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -12,8 +13,11 @@ import com.dongyang.android.youdongknowme.standard.base.BaseFragment
 import com.dongyang.android.youdongknowme.standard.util.hideKeyboard
 import com.dongyang.android.youdongknowme.standard.util.showKeyboard
 import com.dongyang.android.youdongknowme.ui.adapter.NoticeAdapter
+import com.dongyang.android.youdongknowme.ui.view.alarm.AlarmActivity
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailActivity
 import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordActivity
+import com.google.android.material.badge.BadgeDrawable
+import com.google.android.material.badge.BadgeUtils
 import com.google.android.material.tabs.TabLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -29,6 +33,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
 
     private lateinit var adapter: NoticeAdapter
 
+    @SuppressLint("UnsafeOptInUsageError")
     override fun initStartView() {
         binding.vm = viewModel
         adapter = NoticeAdapter().apply { setItemClickListener(this@NoticeFragment) }
@@ -38,6 +43,11 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
             this.itemAnimator = null
             this.setHasFixedSize(true)
             this.addItemDecoration(DividerItemDecoration(requireActivity(), 1))
+        }
+        binding.noticeToolbar.toolbarAlarm.post {
+            val badgeDrawable = BadgeDrawable.create(requireActivity())
+            badgeDrawable.number = 1
+            BadgeUtils.attachBadgeDrawable(badgeDrawable, binding.noticeToolbar.toolbarAlarm, binding.noticeToolbar.toolbarAlarmContainer)
         }
     }
 
@@ -104,7 +114,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         }
 
         binding.noticeToolbar.toolbarAlarm.setOnClickListener {
-            val intent = Intent(requireActivity(), KeywordActivity::class.java)
+            val intent = Intent(requireActivity(), AlarmActivity::class.java)
             startActivity(intent)
         }
 
