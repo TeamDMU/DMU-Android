@@ -7,6 +7,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentSettingBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
+import com.dongyang.android.youdongknowme.standard.util.logd
 import com.dongyang.android.youdongknowme.ui.view.depart.DepartActivity
 import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordActivity
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
@@ -26,10 +27,30 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
     }
 
     override fun initDataBinding() {
-
     }
 
     override fun initAfterBinding() {
+        binding.vm = viewModel
+
+        viewModel.checkAccessAlarm()
+        viewModel.getUserDepartment()
+
+        binding.settingSchoolAlarmSwitch.setOnCheckedChangeListener { compoundButton, _ ->
+            if(compoundButton.isChecked) {
+                viewModel.setIsAccessSchoolAlarm(true)
+            } else {
+                viewModel.setIsAccessSchoolAlarm(false)
+            }
+        }
+
+        binding.settingDepartmentAlarmSwitch.setOnCheckedChangeListener { compoundButton, _ ->
+            if(compoundButton.isChecked) {
+                viewModel.setIsAccessDepartAlarm(true)
+            } else {
+                viewModel.setIsAccessDepartAlarm(false)
+            }
+        }
+
         // 이메일 연동 코드
         binding.settingAsk.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)

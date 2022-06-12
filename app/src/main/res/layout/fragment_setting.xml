@@ -11,7 +11,7 @@
             layout="@layout/standard_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="@{@string/setting_title}"></include>
+            app:title="@{@string/setting_title}" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -37,9 +37,10 @@
                     android:textStyle="bold"/>
 
                 <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/setting_notice"
+                    android:id="@+id/setting_school_alarm_switch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    bind_is_checked="@{vm.isAccessSchoolAlarm()}"
                     android:foreground="?attr/selectableItemBackground"
                     android:minHeight="0dp"
                     android:paddingStart="16dp"
@@ -61,15 +62,16 @@
                     android:layout_height="wrap_content"
                     android:paddingStart="16dp"
                     android:padding="4dp"
-                    android:text="@string/setting_sw"
+                    android:text="@{vm.myDepartment, default = 컴퓨터소프트웨어공학과}"
                     android:textColor="@color/main"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/setting_switch"
+                    android:id="@+id/setting_department_alarm_switch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    bind_is_checked="@{vm.isAccessDepartAlarm()}"
                     android:foreground="?attr/selectableItemBackground"
                     android:minHeight="0dp"
                     android:paddingStart="16dp"
@@ -211,4 +213,10 @@
             </LinearLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+        <variable
+            name="vm"
+            type="com.dongyang.android.youdongknowme.ui.view.setting.SettingViewModel" />
+    </data>
 </layout>
