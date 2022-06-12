@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface AlarmDao {
-    @Query("SELECT * FROM alarm ORDER BY id ASC")
+    @Query("SELECT * FROM alarm ORDER BY id DESC")
     fun getAllAlarm(): Flow<List<AlarmEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

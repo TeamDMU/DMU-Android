@@ -13,12 +13,21 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.local.SharedPreference
+import com.dongyang.android.youdongknowme.data.local.UserDatabase
+import com.dongyang.android.youdongknowme.data.local.dao.AlarmDao
+import com.dongyang.android.youdongknowme.data.local.entity.AlarmEntity
+import com.dongyang.android.youdongknowme.data.repository.FCMRepository
 import com.dongyang.android.youdongknowme.standard.util.logw
 import com.dongyang.android.youdongknowme.standard.util.mapDepartmentCodeToKorean
 import com.dongyang.android.youdongknowme.standard.util.mapKeywordEnglishToKorean
 import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
 
 class FCMService : FirebaseMessagingService() {
@@ -27,6 +36,9 @@ class FCMService : FirebaseMessagingService() {
         const val channelId = "Youdongknowme_id"
         const val channelName = "Youdongknowme_name"
     }
+
+    private val job = SupervisorJob()
+    private val scope = CoroutineScope(Dispatchers.IO + job)
 
     override fun onCreate() {
         super.onCreate()
@@ -44,7 +56,6 @@ class FCMService : FirebaseMessagingService() {
         val data = message.data
 
         if (data.isNotEmpty()) {
-
             val major_code: String? = data["major_code"]
             val notice_num: String? = data["num"]
             val title: String? = data["title"]
@@ -52,6 +63,9 @@ class FCMService : FirebaseMessagingService() {
 
             val department = mapDepartmentCodeToKorean(major_code!!.toInt())
             val koreanKeyword = mapKeywordEnglishToKorean(keyword!!)
+
+            val alarmEntity = AlarmEntity(null, title!!, department, koreanKeyword, notice_num!!.toInt(), false)
+            insertAlarmData(alarmEntity)
 
             if (department == "학교") {
                 if (SharedPreference.getIsAccessSchoolAlarm()!!) {
@@ -110,5 +124,22 @@ class FCMService : FirebaseMessagingService() {
             val notificationId = 100
             notify(notificationId, notificationBuilder.build())
         }
+    }
+
+    private fun insertAlarmData(alarmEntity: AlarmEntity) {
+        val alarmDao : AlarmDao by inject()
+
+        if(alarmEntity.department == "학교") {
+            alarmEntity.department = "동양미래대학교"
+        }
+
+        scope.launch {
+            alarmDao.insertAlarm(alarmEntity)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        job.cancel()
     }
 }
