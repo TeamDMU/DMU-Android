@@ -9,6 +9,7 @@ import com.dongyang.android.youdongknowme.data.remote.entity.Notice
 import com.dongyang.android.youdongknowme.data.repository.NoticeRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
@@ -33,6 +34,9 @@ class NoticeViewModel(
     private val _noticeList: MutableLiveData<List<Notice>> = MutableLiveData()
     val noticeList: LiveData<List<Notice>> = _noticeList
 
+    private val _unVisitedAlarmCount: MutableLiveData<Int> = MutableLiveData()
+    val unVisitedAlarmCount: LiveData<Int> = _unVisitedAlarmCount
+
     private val _errorState: MutableLiveData<Int> = MutableLiveData()
     val errorState: LiveData<Int> = _errorState
 
@@ -42,7 +46,6 @@ class NoticeViewModel(
         _errorConnectionState.postValue(ERROR_NETWORK)
         _noticeList.postValue(emptyList())
     }
-
 
     // 선택한 탭에 대한 데이터 저장
     fun setTabMode(isUniversityMode: Boolean) {
@@ -151,4 +154,11 @@ class NoticeViewModel(
         const val ERROR_NOTICE = R.string.error_notice
     }
 
+    fun getUnVisitedAlarm() {
+        viewModelScope.launch {
+            noticeRepository.getUnVisitedAlarmCount().collect { count ->
+                _unVisitedAlarmCount.postValue(count)
+            }
+        }
+    }
 }
