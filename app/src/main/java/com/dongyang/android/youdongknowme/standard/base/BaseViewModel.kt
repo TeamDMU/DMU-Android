@@ -13,10 +13,10 @@ abstract class BaseViewModel : ViewModel() {
     val isLoading: LiveData<Boolean> get() = _isLoading
 
     // 서버 연결 확인
-    private val _errorConnectionState: MutableLiveData<Int> = MutableLiveData()
+    protected val _errorConnectionState: MutableLiveData<Int> = MutableLiveData()
     val errorConnectionState: LiveData<Int> = _errorConnectionState
 
-    val connectionHandler = CoroutineExceptionHandler { _, e ->
+    open val connectionHandler = CoroutineExceptionHandler { _, e ->
         e.printStackTrace()
         _isLoading.postValue(false)
         _errorConnectionState.postValue(ERROR_NETWORK)

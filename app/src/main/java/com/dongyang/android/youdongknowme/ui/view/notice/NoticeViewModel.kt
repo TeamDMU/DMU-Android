@@ -8,6 +8,8 @@ import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.remote.entity.Notice
 import com.dongyang.android.youdongknowme.data.repository.NoticeRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 /* 공지사항 뷰모델 */
@@ -33,6 +35,14 @@ class NoticeViewModel(
 
     private val _errorState: MutableLiveData<Int> = MutableLiveData()
     val errorState: LiveData<Int> = _errorState
+
+    override val connectionHandler = CoroutineExceptionHandler { _, e ->
+        e.printStackTrace()
+        _isLoading.postValue(false)
+        _errorConnectionState.postValue(ERROR_NETWORK)
+        _noticeList.postValue(emptyList())
+    }
+
 
     // 선택한 탭에 대한 데이터 저장
     fun setTabMode(isUniversityMode: Boolean) {
@@ -67,7 +77,6 @@ class NoticeViewModel(
                     } else {
                         _facultyNoticeList.value = noticeList
                         _noticeList.postValue(noticeList)
-
                     }
                 } else {
                     _errorState.postValue(ERROR_NOTICE)
