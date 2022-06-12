@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="알림함"
+            android:text="@string/alarm_title"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -40,5 +40,39 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/alarm_title"/>
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            bind_visibility_notice_no_data="@{vm.alarmList.empty}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/alarm_title">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_no_data"/>
+
+            <TextView
+                android:id="@+id/notice_no_data"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="@string/notice_notice_not_found_data"/>
+
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+        <variable
+            name="vm"
+            type="com.dongyang.android.youdongknowme.ui.view.alarm.AlarmViewModel" />
+    </data>
 </layout>

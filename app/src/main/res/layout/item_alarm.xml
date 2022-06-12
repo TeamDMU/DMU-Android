@@ -12,6 +12,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
+            android:onClick="@{() -> itemClickListener.itemClick(alarm)}"
             android:clickable="true"
             android:focusable="true"
             app:cardCornerRadius="16dp"
@@ -21,15 +22,14 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
-                android:background="#CCD2D7FF">
-
+                bind_background="@{alarm.visited}">
                 <TextView
                     android:id="@+id/item_alarm_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="12dp"
-                    android:text="전자출결 푸시(PUSH) 서비스 운영에 따른 전자출결 앱 업데이트 안내"
+                    android:text="@{alarm.title}"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -43,7 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:text="동양미래대학교"
+                    android:text="@{alarm.department}"
                     android:textColor="@color/main"
                     android:textSize="12sp"
                     android:textStyle="bold"
@@ -67,7 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:text="코로나19"
+                    android:text="@{alarm.keyword}"
                     android:textColor="@color/main"
                     android:textSize="12sp"
                     android:textStyle="bold"
@@ -89,4 +89,14 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+        <variable
+            name="alarm"
+            type="com.dongyang.android.youdongknowme.data.local.entity.AlarmEntity" />
+
+        <variable
+            name="itemClickListener"
+            type="com.dongyang.android.youdongknowme.ui.view.alarm.AlarmClickListener" />
+    </data>
 </layout>

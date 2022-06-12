@@ -14,4 +14,8 @@ class AlarmRepository(
     suspend fun insertAlarm(alarmEntity: AlarmEntity) {
         alarmDao.insertAlarm(alarmEntity)
     }
+
+    suspend fun updateIsVisitedAlarm(isVisited: Boolean, id: Int) {
+        alarmDao.updateIsVisitedAlarm(isVisited, id)
+    }
 }

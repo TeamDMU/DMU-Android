@@ -6,17 +6,22 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dongyang.android.youdongknowme.data.local.entity.AlarmEntity
 import com.dongyang.android.youdongknowme.databinding.ItemAlarmBinding
+import com.dongyang.android.youdongknowme.ui.view.alarm.AlarmClickListener
 
 class AlarmAdapter : RecyclerView.Adapter<AlarmAdapter.ViewHolder>() {
 
     private val item = ArrayList<AlarmEntity>()
+    private var itemClickListener: AlarmClickListener? = null
+
+    init {
+        setHasStableIds(true)
+    }
 
     inner class ViewHolder(private val binding: ItemAlarmBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: AlarmEntity) {
-            binding.itemAlarmTitle.text = item.title
-            binding.itemAlarmKeyword.text = item.keyword
-            binding.itemAlarmDeparmtent.text = item.department
+        fun bind(item: AlarmEntity, position: Int) {
+            binding.alarm = item
+            binding.itemClickListener = itemClickListener
         }
     }
 
@@ -36,9 +41,16 @@ class AlarmAdapter : RecyclerView.Adapter<AlarmAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(item[position])
+        holder.bind(item[position], position)
+    }
+
+    override fun getItemId(position: Int): Long {
+        return item[position].id!!.toLong()
     }
 
     override fun getItemCount(): Int = item.size
 
+    fun setItemClickListener(listener: AlarmClickListener) {
+        itemClickListener = listener
+    }
 }

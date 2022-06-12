@@ -14,6 +14,15 @@ class AlarmViewModel(private val alarmRepository: AlarmRepository) : BaseViewMod
     private val _alarmList: MutableLiveData<List<AlarmEntity>> = MutableLiveData()
     val alarmList: LiveData<List<AlarmEntity>> get() = _alarmList
 
+    private val _title: MutableLiveData<String> = MutableLiveData()
+    val title: LiveData<String> get() = _title
+
+    private val _department: MutableLiveData<String> = MutableLiveData()
+    val department: LiveData<String> get() = _department
+
+    private val _keyword: MutableLiveData<String> = MutableLiveData()
+    val keyword: LiveData<String> get() = _keyword
+
     fun getAlarms() {
         viewModelScope.launch {
             alarmRepository.getUserAlarms().collect { alarmList ->
@@ -22,11 +31,9 @@ class AlarmViewModel(private val alarmRepository: AlarmRepository) : BaseViewMod
         }
     }
 
-    fun insertAlarm() {
-        val testAlarm = AlarmEntity(null, "타이틀 테스트입니다.", "컴퓨터소프트웨어공학과", "시험", 10, false)
+    fun updateIsVisitedAlarm(isVisited: Boolean, id: Int) {
         viewModelScope.launch {
-            alarmRepository.insertAlarm(testAlarm)
+            alarmRepository.updateIsVisitedAlarm(isVisited, id)
         }
     }
-
 }
