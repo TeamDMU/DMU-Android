@@ -40,7 +40,6 @@ class FCMService : FirebaseMessagingService() {
 
     override fun onCreate() {
         super.onCreate()
-        logw("Service onCreate")
     }
 
     override fun onNewToken(token: String) {
@@ -61,18 +60,18 @@ class FCMService : FirebaseMessagingService() {
 
             val department = mapDepartmentCodeToKorean(major_code!!.toInt())
             val koreanKeyword = mapKeywordEnglishToKorean(keyword!!)
-
             val alarmEntity =
                 AlarmEntity(null, title!!, department, koreanKeyword, notice_num!!.toInt(), false)
-            insertAlarmData(alarmEntity)
 
             if (department == "학교") {
                 if (SharedPreference.getIsAccessSchoolAlarm()!!) {
                     createNotificationChannel(koreanKeyword, department)
+                    insertAlarmData(alarmEntity)
                 }
             } else {
-                if (SharedPreference.getIsAccessDepartAlarm()!!) {
+                if (SharedPreference.getIsAccessDepartAlarm()!! && isUserKeyword(department)) {
                     createNotificationChannel(koreanKeyword, department)
+                    insertAlarmData(alarmEntity)
                 }
             }
         }
@@ -125,6 +124,7 @@ class FCMService : FirebaseMessagingService() {
         }
     }
 
+    // 알람이 오면 알림함에 데이터를 저장
     private fun insertAlarmData(alarmEntity: AlarmEntity) {
         val alarmDao: AlarmDao by inject()
 
@@ -135,6 +135,10 @@ class FCMService : FirebaseMessagingService() {
         scope.launch {
             alarmDao.insertAlarm(alarmEntity)
         }
+    }
+
+    private fun isUserKeyword(department: String) : Boolean {
+        return department == SharedPreference.getDepartment()
     }
 
     override fun onDestroy() {
