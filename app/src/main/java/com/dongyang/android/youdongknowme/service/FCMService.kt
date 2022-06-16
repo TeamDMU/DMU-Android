@@ -38,10 +38,6 @@ class FCMService : FirebaseMessagingService() {
     private val job = SupervisorJob()
     private val scope = CoroutineScope(Dispatchers.IO + job)
 
-    override fun onCreate() {
-        super.onCreate()
-    }
-
     override fun onNewToken(token: String) {
         logw("New Token :: $token")
         super.onNewToken(token)
@@ -53,25 +49,26 @@ class FCMService : FirebaseMessagingService() {
         val data = message.data
 
         if (data.isNotEmpty()) {
-            val major_code: String? = data["major_code"]
-            val notice_num: String? = data["num"]
-            val title: String? = data["title"]
-            val keyword: String? = data["keyword"]
+            val departmentCode: String = data["major_code"]!!
+            val noticeNum: Int = data["num"]!!.toInt()
+            val title: String = data["title"]!!
+            val keyword: String = data["keyword"]!!
 
-            val department = mapDepartmentCodeToKorean(major_code!!.toInt())
-            val koreanKeyword = mapKeywordEnglishToKorean(keyword!!)
-            val alarmEntity =
-                AlarmEntity(null, title!!, department, koreanKeyword, notice_num!!.toInt(), false)
+            val department = mapDepartmentCodeToKorean(departmentCode.toInt())
+            val koreanKeyword = mapKeywordEnglishToKorean(keyword)
 
-            if (department == "학교") {
+            val alarmData =
+                AlarmEntity(null, title, department, koreanKeyword, noticeNum, false)
+
+            if (department == resources.getString(R.string.school)) {
                 if (SharedPreference.getIsAccessSchoolAlarm()!!) {
                     createNotificationChannel(koreanKeyword, department)
-                    insertAlarmData(alarmEntity)
+                    insertAlarmData(alarmData)
                 }
             } else {
                 if (SharedPreference.getIsAccessDepartAlarm()!! && isUserKeyword(department)) {
                     createNotificationChannel(koreanKeyword, department)
-                    insertAlarmData(alarmEntity)
+                    insertAlarmData(alarmData)
                 }
             }
         }
@@ -96,9 +93,7 @@ class FCMService : FirebaseMessagingService() {
             notificationManager.createNotificationChannel(channel)
         }
 
-        val splashIntent = Intent(this, AlarmActivity::class.java).apply {
-            // flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
+        val splashIntent = Intent(this, AlarmActivity::class.java)
 
         val pendingIntent = PendingIntent.getActivity(
             this, 0, splashIntent,
@@ -128,8 +123,9 @@ class FCMService : FirebaseMessagingService() {
     private fun insertAlarmData(alarmEntity: AlarmEntity) {
         val alarmDao: AlarmDao by inject()
 
-        if (alarmEntity.department == "학교") {
-            alarmEntity.department = "동양미래대학교"
+        // 학교 -> 동양미래대학교 변환
+        if (alarmEntity.department == resources.getString(R.string.school)) {
+            alarmEntity.department = resources.getString(R.string.dmu)
         }
 
         scope.launch {
@@ -137,7 +133,7 @@ class FCMService : FirebaseMessagingService() {
         }
     }
 
-    private fun isUserKeyword(department: String) : Boolean {
+    private fun isUserKeyword(department: String): Boolean {
         return department == SharedPreference.getDepartment()
     }
 
