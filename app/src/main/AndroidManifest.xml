@@ -30,7 +30,7 @@
         <activity
             android:name=".ui.view.splash.SplashActivity"
             android:exported="true"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/Theme.YouDongKnowMe.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -42,7 +42,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.view.main.MainActivity"
-            android:exported="false" /> <!-- Firebase Cloud Messaging -->
+            android:exported="false" />
+        <!-- Firebase Cloud Messaging -->
         <service
             android:name=".service.FCMService"
             android:exported="false">
