@@ -24,7 +24,7 @@ class ScheduleRepository(
         SharedPreference.setSchedule(schedule)
     }
 
-    fun getLocalSchedules(): String? {
+    fun getLocalSchedules(): String {
         return SharedPreference.getSchedule()
     }
 }

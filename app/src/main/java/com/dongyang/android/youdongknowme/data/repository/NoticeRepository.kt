@@ -36,5 +36,5 @@ class NoticeRepository(
 
     fun getUnVisitedAlarmCount(): Flow<Int> = alarmDao.getUnVisitedAlarmCount()
 
-    fun getDepartmentCode(): Int? = SharedPreference.getCode()
+    fun getDepartmentCode(): Int = SharedPreference.getCode()
 }
