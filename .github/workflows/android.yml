@@ -22,8 +22,8 @@ jobs:
       run: chmod +x gradlew
     - name: Generate Environment Variables File for Production
       env:
-        api_key: ${{ secrets.api_key }}
+        API_KEY: ${{ secrets.API_KEY }}
       run: |
-        echo api_key=\"$api_key\" >> ./local.properties
+        echo api_key=\"$API_KEY\" >> ./local.properties
     - name: Build with Gradle
       run: ./gradlew build
