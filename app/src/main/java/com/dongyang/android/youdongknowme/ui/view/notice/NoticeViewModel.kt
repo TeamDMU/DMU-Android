@@ -4,13 +4,11 @@ import CODE
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.remote.entity.Notice
 import com.dongyang.android.youdongknowme.data.repository.NoticeRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
+import com.dongyang.android.youdongknowme.standard.network.NetworkResult
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 /* 공지사항 뷰모델 */
@@ -37,16 +35,6 @@ class NoticeViewModel(
     private val _unVisitedAlarmCount: MutableLiveData<Int> = MutableLiveData()
     val unVisitedAlarmCount: LiveData<Int> = _unVisitedAlarmCount
 
-    private val _errorState: MutableLiveData<Int> = MutableLiveData()
-    val errorState: LiveData<Int> = _errorState
-
-    override val connectionHandler = CoroutineExceptionHandler { _, e ->
-        e.printStackTrace()
-        _isLoading.postValue(false)
-        _errorConnectionState.postValue(ERROR_NETWORK)
-        _noticeList.postValue(emptyList())
-    }
-
     // 선택한 탭에 대한 데이터 저장
     fun setTabMode(isUniversityMode: Boolean) {
         _isUniversityTab.value = isUniversityMode
@@ -68,12 +56,12 @@ class NoticeViewModel(
     }
 
     fun refreshNotices() {
-        _isLoading.postValue(true)
-        try {
-            viewModelScope.launch(connectionHandler) {
-                val response = noticeRepository.fetchNotices(departmentCode.value!!)
-                if (response.isSuccessful) {
-                    val noticeList = response.body()!!
+        showLoading()
+        viewModelScope.launch(connectionHandler) {
+            when (val result = noticeRepository.fetchNotices(departmentCode.value!!)) {
+                is NetworkResult.Success -> {
+                    val noticeList = result.data
+                    // 네트워크 호출을 줄이기 위해 학교, 학과별 리스트를 따로 보관
                     if (departmentCode.value!! == CODE.SCHOOL_CODE) {
                         _universityNoticeList.value = noticeList
                         _noticeList.postValue(noticeList)
@@ -81,14 +69,12 @@ class NoticeViewModel(
                         _facultyNoticeList.value = noticeList
                         _noticeList.postValue(noticeList)
                     }
-                } else {
-                    _errorState.postValue(ERROR_NOTICE)
                 }
-                _isLoading.postValue(false)
+                is NetworkResult.Error -> {
+                    handleError(result)
+                    dismissLoading()
+                }
             }
-        } catch (e: Exception) {
-            _errorState.postValue(ERROR_NOTICE)
-            _isLoading.postValue(false)
         }
     }
 
@@ -96,12 +82,12 @@ class NoticeViewModel(
     private fun fetchNotices() {
         // 비어있을 때만 새로 갱신
         if (_universityNoticeList.value!!.isEmpty() or _facultyNoticeList.value!!.isEmpty()) {
-            _isLoading.postValue(true)
-            try {
-                viewModelScope.launch(connectionHandler) {
-                    val response = noticeRepository.fetchNotices(departmentCode.value!!)
-                    if (response.isSuccessful) {
-                        val noticeList = response.body()!!
+            showLoading()
+
+            viewModelScope.launch(connectionHandler) {
+                when (val result = noticeRepository.fetchNotices(departmentCode.value!!)) {
+                    is NetworkResult.Success -> {
+                        val noticeList = result.data
                         // 네트워크 호출을 줄이기 위해 학교, 학과별 리스트를 따로 보관
                         if (departmentCode.value!! == CODE.SCHOOL_CODE) {
                             _universityNoticeList.value = noticeList
@@ -110,14 +96,12 @@ class NoticeViewModel(
                             _facultyNoticeList.value = noticeList
                             _noticeList.postValue(noticeList)
                         }
-                    } else {
-                        _errorState.postValue(ERROR_NOTICE)
                     }
-                    _isLoading.postValue(false)
+                    is NetworkResult.Error -> {
+                        handleError(result)
+                        dismissLoading()
+                    }
                 }
-            } catch (e: Exception) {
-                _errorState.postValue(ERROR_NOTICE)
-                _isLoading.postValue(false)
             }
         }
         // 비어있지 않을 때는 저장 데이터 바로 사용
@@ -132,26 +116,20 @@ class NoticeViewModel(
 
     // 검색어가 포함된 공지사항 리스트 호출
     fun fetchSearchNotices(keyword: String) {
-        _isLoading.postValue(true)
-        try {
-            viewModelScope.launch(connectionHandler) {
-                val response = noticeRepository.fetchSearchNotices(departmentCode.value!!, keyword)
-                if (response.isSuccessful) {
-                    val searchList = response.body()
-                    _noticeList.postValue(searchList!!)
-                } else {
-                    _errorState.postValue(ERROR_NOTICE)
-                }
-                _isLoading.postValue(false)
-            }
-        } catch (e: Exception) {
-            _errorState.postValue(ERROR_NOTICE)
-            _isLoading.postValue(false)
-        }
-    }
+        showLoading()
 
-    companion object {
-        const val ERROR_NOTICE = R.string.error_notice
+        viewModelScope.launch(connectionHandler) {
+            when (val result = noticeRepository.fetchSearchNotices(departmentCode.value!!, keyword)) {
+                is NetworkResult.Success -> {
+                    val searchList = result.data
+                    _noticeList.postValue(searchList)
+                }
+                is NetworkResult.Error -> {
+                    handleError(result)
+                    dismissLoading()
+                }
+            }
+        }
     }
 
     fun getUnVisitedAlarm() {

@@ -84,7 +84,7 @@ val viewModelModule = module {
 
 val repositoryModule = module {
     single {
-        NoticeRepository(get())
+        NoticeRepository(get(), get())
     }
     single {
         DetailRepository(get())
