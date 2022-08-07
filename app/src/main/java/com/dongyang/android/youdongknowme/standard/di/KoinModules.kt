@@ -87,7 +87,7 @@ val repositoryModule = module {
         NoticeRepository(get())
     }
     single {
-        DetailRepository()
+        DetailRepository(get())
     }
     single {
         SplashRepository()
