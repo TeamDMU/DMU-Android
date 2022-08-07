@@ -34,7 +34,6 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     protected fun handleError(result: NetworkResult.Error) {
-        _isLoading.postValue(false)
         when (result.errorType) {
             is NetworkError.Unknown -> {
                 _errorState.postValue(ERROR_UNKNOWN)
