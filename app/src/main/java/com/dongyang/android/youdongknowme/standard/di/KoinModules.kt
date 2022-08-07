@@ -9,6 +9,7 @@ import com.dongyang.android.youdongknowme.data.repository.*
 import com.dongyang.android.youdongknowme.standard.network.ErrorResponseHandler
 import com.dongyang.android.youdongknowme.standard.network.RetrofitObject
 import com.dongyang.android.youdongknowme.ui.view.alarm.AlarmViewModel
+import com.dongyang.android.youdongknowme.ui.view.cafeteria.CafeteriaViewModel
 import com.dongyang.android.youdongknowme.ui.view.depart.DepartViewModel
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailViewModel
 import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordViewModel
@@ -80,6 +81,9 @@ val viewModelModule = module {
     viewModel {
         AlarmViewModel(get())
     }
+    viewModel {
+        CafeteriaViewModel(get())
+    }
 }
 
 val repositoryModule = module {
@@ -106,6 +110,9 @@ val repositoryModule = module {
     }
     single {
         AlarmRepository(get())
+    }
+    single {
+        CafeteriaRepository(get())
     }
 }
 
