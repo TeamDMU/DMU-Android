@@ -36,7 +36,7 @@ class SplashActivity : AppCompatActivity() {
         viewModel.checkFirstLaunch()
 
         intentJob = lifecycleScope.launch {
-            delay(1500L)
+            delay(SPLASH_TIME_MILLIS)
 
             if(viewModel.isFirstLaunch) {
                 val intent = Intent(this@SplashActivity, DepartActivity::class.java)
@@ -58,5 +58,9 @@ class SplashActivity : AppCompatActivity() {
     override fun onDestroy() {
         intentJob?.cancel()
         super.onDestroy()
+    }
+
+    companion object {
+        private const val SPLASH_TIME_MILLIS = 1_500L
     }
 }
