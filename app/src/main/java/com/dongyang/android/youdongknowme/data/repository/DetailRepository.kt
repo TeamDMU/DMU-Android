@@ -10,7 +10,6 @@ class DetailRepository(
     private val errorResponseHandler: ErrorResponseHandler
 ) {
     suspend fun fetchNoticeDetail(code: Int, num: Int): NetworkResult<NoticeDetail> {
-
         return try {
             val response = RetrofitObject.getNetwork().create(DetailService::class.java)
                 .getNoticeDetail(code, num)

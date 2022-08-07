@@ -11,7 +11,6 @@ class CafeteriaRepository(
 ) {
 
     suspend fun fetchMenuList(code: Int, num: Int): NetworkResult<List<Cafeteria>> {
-
         return try {
             val response = RetrofitObject.getNetwork().create(CafeteriaService::class.java).getMenuList()
             NetworkResult.Success(response)
