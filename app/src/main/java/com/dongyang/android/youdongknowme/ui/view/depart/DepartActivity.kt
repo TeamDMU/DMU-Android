@@ -69,8 +69,8 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
         val snackbar =
             Snackbar.make(binding.departRcv, "학과 선택을 마치셨나요?", LENGTH_LONG)
                 .setAction("확인") {
-                    viewModel.setDepartment(items[viewModel.selectDepartPosition.value!!])
-                    if(viewModel.isFirstLaunch.value!!) {
+                    viewModel.setDepartment(items[viewModel.selectDepartPosition.value ?: 0])
+                    if(viewModel.isFirstLaunch.value == true) {
                         val intent = Intent(this, KeywordActivity::class.java)
                         startActivity(intent)
                         finish()

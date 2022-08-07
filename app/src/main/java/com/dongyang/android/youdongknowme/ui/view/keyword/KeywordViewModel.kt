@@ -20,7 +20,7 @@ class KeywordViewModel(
     private val _isFirstLaunch: MutableLiveData<Boolean> = MutableLiveData(false)
     val isFirstLaunch: LiveData<Boolean> get() = _isFirstLaunch
 
-    private val _localKeywordList: MutableLiveData<List<KeywordEntity>> = MutableLiveData()
+    private val _localKeywordList: MutableLiveData<List<KeywordEntity>> = MutableLiveData(emptyList())
     val localKeywordList: LiveData<List<KeywordEntity>> get() = _localKeywordList
 
     private val _checkKeywordList = mutableSetOf<String>()
@@ -45,7 +45,7 @@ class KeywordViewModel(
     }
 
     fun subscribeCheckedKeyword() {
-        for (localKeyword in localKeywordList.value!!) {
+        for (localKeyword in localKeywordList.value ?: emptyList()) {
             if (checkKeywordList.contains(localKeyword.name)) {
                 // 선택했던 데이터를 중첩해서 바꾸면 효율성이 떨어지고, 파이어베이스 구독에 문제가 생길 수 있으므로 구독 여부도 함께 체크
                 if (!localKeyword.isSubscribe) {

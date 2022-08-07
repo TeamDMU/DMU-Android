@@ -38,8 +38,8 @@ class DetailViewModel(private val detailRepository: DetailRepository) : BaseView
     fun fetchNoticeDetail() {
         showLoading()
 
-        val departCode = _code.value!!
-        val boardNum = _num.value!!
+        val departCode = _code.value ?: DEFAULT_VALUE
+        val boardNum = _num.value ?: DEFAULT_VALUE
 
         viewModelScope.launch {
             when(val result = detailRepository.fetchNoticeDetail(departCode, boardNum)) {
@@ -59,5 +59,9 @@ class DetailViewModel(private val detailRepository: DetailRepository) : BaseView
                 }
             }
         }
+    }
+
+    companion object {
+        private const val DEFAULT_VALUE = 0
     }
 }

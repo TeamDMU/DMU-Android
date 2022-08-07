@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class AlarmViewModel(private val alarmRepository: AlarmRepository) : BaseViewModel() {
 
-    private val _alarmList: MutableLiveData<List<AlarmEntity>> = MutableLiveData()
+    private val _alarmList: MutableLiveData<List<AlarmEntity>> = MutableLiveData(emptyList())
     val alarmList: LiveData<List<AlarmEntity>> get() = _alarmList
 
     private val _title: MutableLiveData<String> = MutableLiveData()

@@ -3,6 +3,7 @@ package com.dongyang.android.youdongknowme.ui.view.schedule
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.dongyang.android.youdongknowme.data.local.SharedPreference.NO_SCHEDULE
 import com.dongyang.android.youdongknowme.data.remote.entity.Schedule
 import com.dongyang.android.youdongknowme.data.repository.ScheduleRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
@@ -32,7 +33,7 @@ class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : Ba
 
     fun getSchedules() {
         // 로컬에 저장한 데이터가 없으면 네트워크에서 데이터를 받아와 로컬에 저장 및 화면에 출력
-        if (scheduleRepository.getLocalSchedules() == "No Data") {
+        if (scheduleRepository.getLocalSchedules() == NO_SCHEDULE) {
             showLoading()
 
             viewModelScope.launch() {

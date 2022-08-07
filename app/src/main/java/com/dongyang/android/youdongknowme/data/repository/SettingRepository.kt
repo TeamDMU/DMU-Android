@@ -4,9 +4,9 @@ import com.dongyang.android.youdongknowme.data.local.SharedPreference
 
 class SettingRepository {
 
-    fun getIsAccessSchoolAlarm(): Boolean? = SharedPreference.getIsAccessSchoolAlarm()
+    fun getIsAccessSchoolAlarm(): Boolean = SharedPreference.getIsAccessSchoolAlarm()
 
-    fun getIsAccessDepartAlarm(): Boolean? = SharedPreference.getIsAccessDepartAlarm()
+    fun getIsAccessDepartAlarm(): Boolean = SharedPreference.getIsAccessDepartAlarm()
 
     fun setIsAccessSchoolAlarm(isAccessSchoolAlarm: Boolean) {
         SharedPreference.setIsAccessSchoolAlarm(isAccessSchoolAlarm)
@@ -16,7 +16,7 @@ class SettingRepository {
         SharedPreference.setIsAccessDepartAlarm(isAccessDepartAlarm)
     }
 
-    fun getUserDepartment(): String? {
+    fun getUserDepartment(): String {
         return SharedPreference.getDepartment()
     }
 }

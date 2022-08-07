@@ -46,7 +46,7 @@ class AlarmActivity : BaseActivity<ActivityAlarmBinding, AlarmViewModel>(), Alar
     override fun itemClick(alarmEntity: AlarmEntity) {
         val departCode = mapDepartmentKoreanToCode(alarmEntity.department)
 
-        viewModel.updateIsVisitedAlarm(true, alarmEntity.id!!)
+        alarmEntity.id?.let { viewModel.updateIsVisitedAlarm(true, it) }
 
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra("departCode", departCode)
