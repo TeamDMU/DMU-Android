@@ -27,5 +27,3 @@ jobs:
         echo api_key=\"$api_key\" >> ./local.properties
     - name: Build with Gradle
       run: ./gradlew build
-    - name: Build with Gradle
-      run: ./gradlew build
