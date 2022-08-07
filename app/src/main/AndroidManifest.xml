@@ -42,7 +42,11 @@
             android:exported="false" />
         <activity
             android:name=".ui.view.main.MainActivity"
-            android:exported="false" /> <!-- Firebase Cloud Messaging -->
+            android:exported="false" />
+        <activity
+            android:name=".ui.view.cafeteria.CafeteriaActivity"
+            android:exported="false" />
+        <!-- Firebase Cloud Messaging -->
         <service
             android:name=".service.FCMService"
             android:exported="false">
