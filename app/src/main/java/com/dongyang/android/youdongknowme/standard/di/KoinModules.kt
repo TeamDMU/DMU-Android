@@ -96,7 +96,7 @@ val repositoryModule = module {
         DepartRepository()
     }
     single {
-        ScheduleRepository()
+        ScheduleRepository(get())
     }
     single {
         KeywordRepository(get())
