@@ -17,14 +17,15 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: gradle
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
     - name: Generate Environment Variables File for Production
       env:
-        BASE_URL: ${{ secrets.api_key }}
+        api_key: ${{ secrets.api_key }}
       run: |
         echo api_key=\"$api_key\" >> ./local.properties
     - name: Build with Gradle
       run: ./gradlew build
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
