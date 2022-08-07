@@ -51,7 +51,7 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
         // TODO :: 안드로이드 데이터베이스에 유저별 설정한 키워드 저장 및 파이어베이스 키워드 구독 설정
         binding.keywordCompleteBtn.setOnClickListener {
             viewModel.subscribeCheckedKeyword()
-            if (viewModel.isFirstLaunch.value!!) {
+            if (viewModel.isFirstLaunch.value == true) {
                 viewModel.setFirstLaunch(false)
                 val intent = Intent(this@KeywordActivity, MainActivity::class.java)
                 startActivity(intent)

@@ -45,7 +45,7 @@ abstract class BaseActivity<T : ViewDataBinding, R : BaseViewModel> : AppCompatA
     }
 
     private fun connectionCheck() {
-        viewModel.errorConnectionState.observe(this) { resId ->
+        viewModel.errorState.observe(this) { resId ->
             showToast(getString(resId))
         }
     }

@@ -6,6 +6,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.dongyang.android.youdongknowme.data.local.UserDatabase
 import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
 import com.dongyang.android.youdongknowme.data.repository.*
+import com.dongyang.android.youdongknowme.standard.network.ErrorResponseHandler
+import com.dongyang.android.youdongknowme.standard.network.RetrofitObject
 import com.dongyang.android.youdongknowme.ui.view.alarm.AlarmViewModel
 import com.dongyang.android.youdongknowme.ui.view.depart.DepartViewModel
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailViewModel
@@ -44,6 +46,12 @@ val databaseModule = module{
     }
 }
 
+val networkModule = module {
+    single {
+        ErrorResponseHandler()
+    }
+}
+
 val viewModelModule = module {
     viewModel {
         NoticeViewModel(get())
@@ -76,10 +84,10 @@ val viewModelModule = module {
 
 val repositoryModule = module {
     single {
-        NoticeRepository(get())
+        NoticeRepository(get(), get())
     }
     single {
-        DetailRepository()
+        DetailRepository(get())
     }
     single {
         SplashRepository()
@@ -88,7 +96,7 @@ val repositoryModule = module {
         DepartRepository()
     }
     single {
-        ScheduleRepository()
+        ScheduleRepository(get())
     }
     single {
         KeywordRepository(get())

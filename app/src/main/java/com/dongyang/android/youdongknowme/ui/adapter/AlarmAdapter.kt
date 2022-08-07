@@ -19,7 +19,7 @@ class AlarmAdapter : RecyclerView.Adapter<AlarmAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ItemAlarmBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: AlarmEntity, position: Int) {
+        fun bind(item: AlarmEntity) {
             binding.alarm = item
             binding.itemClickListener = itemClickListener
         }
@@ -41,11 +41,12 @@ class AlarmAdapter : RecyclerView.Adapter<AlarmAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(item[position], position)
+        holder.bind(item[position])
     }
 
     override fun getItemId(position: Int): Long {
-        return item[position].id!!.toLong()
+        val id = item[position].id ?: 0
+        return id.toLong()
     }
 
     override fun getItemCount(): Int = item.size

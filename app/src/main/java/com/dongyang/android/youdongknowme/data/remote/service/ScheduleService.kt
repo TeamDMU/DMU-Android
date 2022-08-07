@@ -7,5 +7,5 @@ import retrofit2.http.GET
 interface ScheduleService {
     @GET("/schedule")
     suspend fun getScheduleList(
-    ) : Response<List<Schedule>>
+    ) : List<Schedule>
 }
