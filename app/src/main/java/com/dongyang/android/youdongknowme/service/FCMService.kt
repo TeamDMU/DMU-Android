@@ -43,6 +43,7 @@ class FCMService : FirebaseMessagingService() {
         super.onNewToken(token)
     }
 
+    // TODO : NULL 처리
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
 
