@@ -2,7 +2,7 @@ name: Android CI
 
 on:
   pull_request:
-    branches: [ dev ]
+    branches: [ develop ]
 
 jobs:
   build:
@@ -20,5 +20,10 @@ jobs:
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+    - name: Access API key
+      env:
+        API_KEY: ${{ secrets.API_KEY }}
+      run:
+        echo API_KEY=\"$API_KEY\" > ./local.properties
     - name: Build with Gradle
       run: ./gradlew build
