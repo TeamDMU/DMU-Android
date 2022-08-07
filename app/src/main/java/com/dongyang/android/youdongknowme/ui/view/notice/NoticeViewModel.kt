@@ -57,7 +57,7 @@ class NoticeViewModel(
 
     fun refreshNotices() {
         showLoading()
-        viewModelScope.launch(connectionHandler) {
+        viewModelScope.launch {
             when (val result = noticeRepository.fetchNotices(departmentCode.value!!)) {
                 is NetworkResult.Success -> {
                     val noticeList = result.data
@@ -69,6 +69,7 @@ class NoticeViewModel(
                         _facultyNoticeList.value = noticeList
                         _noticeList.postValue(noticeList)
                     }
+                    dismissLoading()
                 }
                 is NetworkResult.Error -> {
                     handleError(result)
@@ -84,7 +85,7 @@ class NoticeViewModel(
         if (_universityNoticeList.value!!.isEmpty() or _facultyNoticeList.value!!.isEmpty()) {
             showLoading()
 
-            viewModelScope.launch(connectionHandler) {
+            viewModelScope.launch {
                 when (val result = noticeRepository.fetchNotices(departmentCode.value!!)) {
                     is NetworkResult.Success -> {
                         val noticeList = result.data
@@ -96,6 +97,7 @@ class NoticeViewModel(
                             _facultyNoticeList.value = noticeList
                             _noticeList.postValue(noticeList)
                         }
+                        dismissLoading()
                     }
                     is NetworkResult.Error -> {
                         handleError(result)
@@ -118,7 +120,7 @@ class NoticeViewModel(
     fun fetchSearchNotices(keyword: String) {
         showLoading()
 
-        viewModelScope.launch(connectionHandler) {
+        viewModelScope.launch {
             when (val result = noticeRepository.fetchSearchNotices(departmentCode.value!!, keyword)) {
                 is NetworkResult.Success -> {
                     val searchList = result.data

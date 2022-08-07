@@ -19,12 +19,6 @@ abstract class BaseViewModel : ViewModel() {
     private val _errorState: MutableLiveData<Int> = MutableLiveData()
     val errorState: LiveData<Int> = _errorState
 
-    open val connectionHandler = CoroutineExceptionHandler { _, e ->
-        e.printStackTrace()
-        _isLoading.postValue(false)
-        _errorState.postValue(ERROR_NETWORK)
-    }
-
     fun showLoading() {
         _isLoading.postValue(true)
     }
@@ -48,7 +42,7 @@ abstract class BaseViewModel : ViewModel() {
                 val code = (result.errorType).code
                 val msg = (result.errorType).message
                 Log.w("Exception", "BadReuqest :: $code - $msg")
-                _errorState.postValue(ERROR_NETWORK)
+                _errorState.postValue(ERROR_BAD_REQUEST)
             }
         }
     }
@@ -57,6 +51,6 @@ abstract class BaseViewModel : ViewModel() {
         private const val ERROR_UNKNOWN = R.string.error_unknown
         private const val ERROR_TIMEOUT = R.string.error_timeout
         private const val ERROR_INTERNAL_SERVER = R.string.error_internal_server
-        private const val ERROR_NETWORK = R.string.error_network
+        private const val ERROR_BAD_REQUEST = R.string.error_bad_request
     }
 }
