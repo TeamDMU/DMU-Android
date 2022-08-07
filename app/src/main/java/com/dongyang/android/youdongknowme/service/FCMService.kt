@@ -49,10 +49,10 @@ class FCMService : FirebaseMessagingService() {
         val data = message.data
 
         if (data.isNotEmpty()) {
-            val departmentCode: String = data["major_code"]!!
-            val noticeNum: Int = data["num"]!!.toInt()
-            val title: String = data["title"]!!
-            val keyword: String = data["keyword"]!!
+            val departmentCode: String = data["major_code"] ?: ""
+            val noticeNum: Int = data["num"]?.toInt() ?: 0
+            val title: String = data["title"] ?: ""
+            val keyword: String = data["keyword"] ?: ""
 
             val department = mapDepartmentCodeToKorean(departmentCode.toInt())
             val koreanKeyword = mapKeywordEnglishToKorean(keyword)
@@ -61,12 +61,12 @@ class FCMService : FirebaseMessagingService() {
                 AlarmEntity(null, title, department, koreanKeyword, noticeNum, false)
 
             if (department == resources.getString(R.string.school)) {
-                if (SharedPreference.getIsAccessSchoolAlarm()!!) {
+                if (SharedPreference.getIsAccessSchoolAlarm()) {
                     createNotificationChannel(koreanKeyword, department)
                     insertAlarmData(alarmData)
                 }
             } else {
-                if (SharedPreference.getIsAccessDepartAlarm()!! && isUserKeyword(department)) {
+                if (SharedPreference.getIsAccessDepartAlarm() && isUserKeyword(department)) {
                     createNotificationChannel(koreanKeyword, department)
                     insertAlarmData(alarmData)
                 }

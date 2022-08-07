@@ -35,7 +35,7 @@ class KeywordViewModel(
     }
 
     fun checkFirstLaunch() {
-        if (keywordRepository.getIsFirstLaunch() == true) {
+        if (keywordRepository.getIsFirstLaunch()) {
             _isFirstLaunch.value = true
         }
     }

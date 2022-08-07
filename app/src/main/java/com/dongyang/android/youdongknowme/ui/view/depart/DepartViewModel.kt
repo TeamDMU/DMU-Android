@@ -22,7 +22,7 @@ class DepartViewModel(private val departRepository: DepartRepository) : BaseView
     }
 
     fun checkFirstLaunch() {
-        if (departRepository.getIsFirstLaunch() == true) {
+        if (departRepository.getIsFirstLaunch()) {
             _isFirstLaunch.value = true
         }
     }
