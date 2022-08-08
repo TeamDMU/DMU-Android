@@ -10,13 +10,12 @@
 
         <TextView
             android:id="@+id/keyword_title"
+            style="@style/PretendardBold20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/keyword_title"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -63,11 +62,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        style="@style/PretendardBold16"
                         android:layout_marginStart="5dp"
                         android:text="@string/keyword_class"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textColor="@color/black" />
 
                     <com.google.android.material.chip.ChipGroup
                         android:id="@+id/keyword_class_chip_group"
@@ -136,11 +134,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        style="@style/PretendardBold16"
                         android:layout_marginStart="5dp"
                         android:text="@string/keyword_money"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textColor="@color/black" />
 
                     <com.google.android.material.chip.ChipGroup
                         android:id="@+id/keyword_money_chip_group"
@@ -200,11 +197,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        style="@style/PretendardBold16"
                         android:layout_marginStart="5dp"
                         android:text="@string/keyword_academic"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textColor="@color/black" />
 
                     <com.google.android.material.chip.ChipGroup
                         android:id="@+id/keyword_academic_chip_group"
@@ -279,11 +275,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        style="@style/PretendardBold16"
                         android:layout_marginStart="5dp"
                         android:text="@string/keyword_employment"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textColor="@color/black" />
 
                     <com.google.android.material.chip.ChipGroup
                         android:id="@+id/keyword_employment_chip_group"
@@ -358,11 +353,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        style="@style/PretendardBold16"
                         android:layout_marginStart="5dp"
                         android:text="@string/keyword_etc"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textColor="@color/black" />
 
                     <com.google.android.material.chip.ChipGroup
                         android:id="@+id/keyword_etc_chip_group"
@@ -405,8 +399,10 @@
             android:id="@+id/keyword_complete_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/PretendardBold16"
             android:layout_marginHorizontal="16dp"
             android:text="@string/keyword_complete"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -415,8 +411,10 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <data>
+
         <variable
             name="vm"
-            type="com.dongyang.android.youdongknowme.ui.view.keyword.KeywordViewModel" /> />
+            type="com.dongyang.android.youdongknowme.ui.view.keyword.KeywordViewModel" />
+        />
     </data>
 </layout>

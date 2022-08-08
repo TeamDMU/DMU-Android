@@ -11,6 +11,8 @@
 
     <!-- department -->
     <string name="department_title">학과선택</string>
+    <string name="department_snackbar_title">학과 선택을 마치셨나요?</string>
+    <string name="department_snackbar_positive_button">확인</string>
 
     <!-- notice -->
     <string name="notice_title">공지사항</string>
@@ -86,6 +88,9 @@
     <string name="error_bad_request">잘못된 요청입니다.\n 잠시 후 다시 실행해주세요.</string>
     <string name="error_notice">공지사항을 불러올 수 없습니다.\n 잠시 후 다시 실행해주세요.</string>
     <string name="error_schedule">학사일정을 불러올 수 없습니다.\n 잠시 후 다시 실행해주세요.</string>
+
+    <!-- loading -->
+    <string name="loading_text">처리중</string>
 
     <!-- alarm -->
     <string name="alarm_title">알림함</string>

@@ -151,7 +151,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
                 binding.noticeRvList.scrollToPosition(0)
 
                 binding.noticeToolbar.toolbarSearchText.text.clear()
-                if (tab.text == "대학") {
+                if (tab.text == getString(R.string.notice_tab_university)) {
                     viewModel.setTabMode(true)
                 } else {
                     viewModel.setTabMode(false)
