@@ -12,26 +12,27 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
-            android:onClick="@{() -> itemClickListener.itemClick(alarm)}"
             android:clickable="true"
             android:focusable="true"
+            android:onClick="@{() -> itemClickListener.itemClick(alarm)}"
             app:cardCornerRadius="16dp"
             app:cardElevation="8dp"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                bind_background="@{alarm.visited}"
                 android:layout_width="match_parent"
-                android:layout_height="90dp"
-                bind_background="@{alarm.visited}">
+                android:layout_height="90dp">
+
                 <TextView
                     android:id="@+id/item_alarm_title"
+                    style="@style/PretendardBold14"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="12dp"
                     android:text="@{alarm.title}"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/item_alarm_arrow"
                     app:layout_constraintStart_toStartOf="parent"
@@ -40,13 +41,13 @@
 
                 <TextView
                     android:id="@+id/item_alarm_deparmtent"
+                    style="@style/PretendardBold12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:text="@{alarm.department}"
                     android:textColor="@color/main"
                     android:textSize="12sp"
-                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/item_alarm_title"
@@ -64,13 +65,12 @@
 
                 <TextView
                     android:id="@+id/item_alarm_keyword"
+                    style="@style/PretendardBold12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:text="@{alarm.keyword}"
                     android:textColor="@color/main"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/item_alarm_deparmtent"
                     app:layout_constraintTop_toBottomOf="@id/item_alarm_title"
@@ -91,6 +91,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <data>
+
         <variable
             name="alarm"
             type="com.dongyang.android.youdongknowme.data.local.entity.AlarmEntity" />

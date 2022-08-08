@@ -9,13 +9,12 @@
         tools:context=".ui.view.detail.DetailActivity">
 
         <TextView
+            style="@style/PretendardBold20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/detail_title"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,6 +33,7 @@
 
         <TextView
             android:id="@+id/detail_title"
+            style="@style/PretendardBold16"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -41,14 +41,13 @@
             android:layout_marginEnd="16dp"
             android:text="@{vm.title}"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/detail_date"
+            style="@style/PretendardRegular12"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
@@ -56,28 +55,26 @@
             android:gravity="end"
             android:text="@{vm.date}"
             android:textColor="@color/black"
-            android:textSize="13sp"
             app:layout_constraintEnd_toStartOf="@id/detail_writer"
             app:layout_constraintTop_toBottomOf="@id/detail_title" />
 
         <TextView
             android:id="@+id/detail_writer"
+            style="@style/PretendardRegular12"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:layout_marginEnd="16dp"
             android:gravity="end"
             android:text="@{vm.writer}"
-            android:textColor="@color/black"
-            android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/detail_title" />
 
         <View
             android:id="@+id/detail_top_line"
+            bind_visibility_on_loading="@{vm.isLoading()}"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            bind_visibility_on_loading="@{vm.isLoading()}"
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="16dp"
@@ -90,19 +87,19 @@
             android:id="@+id/detail_file_rcv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/detail_top_line"
-            tools:listitem="@layout/item_file"/>
+            tools:listitem="@layout/item_file" />
 
         <View
             android:id="@+id/detail_bot_line"
+            bind_visibility_on_loading="@{vm.isLoading()}"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            bind_visibility_on_loading="@{vm.isLoading()}"
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="16dp"
@@ -130,6 +127,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/PretendardRegular12"
                     android:text="@{vm.content}"
                     android:textColor="#E81C1C1C" />
 
@@ -138,7 +136,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="16dp"
-                    tools:listitem="@layout/item_image"/>
+                    tools:listitem="@layout/item_image" />
             </LinearLayout>
         </ScrollView>
 

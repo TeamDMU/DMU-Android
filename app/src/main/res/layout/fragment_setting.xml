@@ -27,57 +27,54 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/PretendardBold16"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingStart="16dp"
                     android:padding="4dp"
+                    android:paddingStart="16dp"
                     android:text="@string/setting_dmu"
-                    android:textColor="@color/main"
-                    android:textSize="16sp"
-                    android:textStyle="bold"/>
+                    android:textColor="@color/main" />
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/setting_school_alarm_switch"
+                    style="@style/PretendardRegular16"
+                    bind_is_checked="@{vm.isAccessSchoolAlarm()}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    bind_is_checked="@{vm.isAccessSchoolAlarm()}"
                     android:foreground="?attr/selectableItemBackground"
                     android:minHeight="0dp"
-                    android:paddingStart="16dp"
                     android:padding="12dp"
-                    android:text="@string/setting_notice"
-                    android:textSize="16sp" />
+                    android:paddingStart="16dp"
+                    android:text="@string/setting_notice" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/line"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="12dp"/>
+                    android:layout_marginBottom="12dp"
+                    android:background="@color/line" />
 
-                <!--Text 지우고 선택한 학과가 나타나게 수정 필요 -->
                 <TextView
                     android:id="@+id/setting_department"
+                    style="@style/PretendardBold16"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingStart="16dp"
                     android:padding="4dp"
+                    android:paddingStart="16dp"
                     android:text="@{vm.myDepartment, default = 컴퓨터소프트웨어공학과}"
-                    android:textColor="@color/main"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/main" />
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/setting_department_alarm_switch"
+                    style="@style/PretendardRegular16"
+                    bind_is_checked="@{vm.isAccessDepartAlarm()}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    bind_is_checked="@{vm.isAccessDepartAlarm()}"
                     android:foreground="?attr/selectableItemBackground"
                     android:minHeight="0dp"
-                    android:paddingStart="16dp"
                     android:padding="12dp"
-                    android:text="@string/setting_notice"
-                    android:textSize="16sp" />
+                    android:paddingStart="16dp"
+                    android:text="@string/setting_notice" />
 
                 <LinearLayout
                     android:id="@+id/setting_department_choice"
@@ -90,29 +87,28 @@
                     android:paddingStart="16dp">
 
                     <TextView
+                        style="@style/PretendardRegular16"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/department_title"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/line"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="12dp"/>
+                    android:layout_marginBottom="12dp"
+                    android:background="@color/line" />
 
                 <TextView
+                    style="@style/PretendardBold16"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingStart="16dp"
                     android:padding="4dp"
+                    android:paddingStart="16dp"
                     android:text="@string/setting_keyword"
-                    android:textColor="@color/main"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/main" />
 
                 <LinearLayout
                     android:id="@+id/setting_keyword"
@@ -125,11 +121,11 @@
                     android:paddingStart="16dp">
 
                     <TextView
+                        style="@style/PretendardRegular16"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/setting_keyword_choice"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
                 <View
@@ -140,14 +136,13 @@
                     android:background="@color/line" />
 
                 <TextView
+                    style="@style/PretendardBold16"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingStart="16dp"
                     android:padding="4dp"
+                    android:paddingStart="16dp"
                     android:text="@string/setting_app_info"
-                    android:textColor="@color/main"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/main" />
 
                 <LinearLayout
                     android:id="@+id/setting_ask"
@@ -160,11 +155,11 @@
                     android:paddingStart="16dp">
 
                     <TextView
+                        style="@style/PretendardRegular16"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/setting_app_help"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -175,14 +170,15 @@
                     android:paddingStart="16dp">
 
                     <TextView
+                        style="@style/PretendardRegular16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/setting_app_version"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/setting_version"
+                        style="@style/PretendardRegular16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
@@ -203,11 +199,11 @@
                     android:paddingStart="16dp">
 
                     <TextView
+                        style="@style/PretendardRegular16"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/setting_app_license"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -215,6 +211,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <data>
+
         <variable
             name="vm"
             type="com.dongyang.android.youdongknowme.ui.view.setting.SettingViewModel" />

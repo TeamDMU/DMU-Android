@@ -135,6 +135,7 @@ class NoticeViewModel(
                 is NetworkResult.Success -> {
                     val searchList = result.data
                     _noticeList.postValue(searchList)
+                    dismissLoading()
                 }
                 is NetworkResult.Error -> {
                     handleError(result)

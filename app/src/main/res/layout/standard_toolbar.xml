@@ -21,13 +21,12 @@
 
         <TextView
             android:id="@+id/toolbar_title"
+            style="@style/PretendardBold20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@{title}"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -55,6 +54,7 @@
 
                 <EditText
                     android:id="@+id/toolbar_search_text"
+                    style="@style/PretendardRegular12"
                     android:layout_width="0dp"
                     android:layout_height="35dp"
                     android:layout_gravity="center"
@@ -65,8 +65,7 @@
                     android:imeOptions="actionSearch"
                     android:inputType="text"
                     android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:textSize="12sp" />
+                    android:paddingEnd="8dp" />
 
                 <ImageButton
                     android:id="@+id/toolbar_search_text_clear"
@@ -99,9 +98,9 @@
             android:id="@+id/toolbar_alarm_container"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintStart_toEndOf="@id/toolbar_search"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/toolbar_search"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageButton
