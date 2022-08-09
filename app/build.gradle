@@ -100,4 +100,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-messaging:23.0.5'
 
+    // Timber
+    implementation 'com.jakewharton.timber:timber:5.0.1'
+
 }
