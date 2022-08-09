@@ -26,6 +26,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import timber.log.Timber
 
 
 class FCMService : FirebaseMessagingService() {
@@ -39,7 +40,7 @@ class FCMService : FirebaseMessagingService() {
     private val scope = CoroutineScope(Dispatchers.IO + job)
 
     override fun onNewToken(token: String) {
-        logw("New Token :: $token")
+        Timber.w("New Token :: $token")
         super.onNewToken(token)
     }
 
