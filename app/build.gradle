@@ -103,4 +103,6 @@ dependencies {
     // Timber
     implementation 'com.jakewharton.timber:timber:5.0.1'
 
+    implementation 'com.github.kizitonwose:CalendarView:1.0.4'
+
 }

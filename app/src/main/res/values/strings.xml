@@ -94,4 +94,14 @@
 
     <!-- alarm -->
     <string name="alarm_title">알림함</string>
+
+    <!-- cafeteria -->
+    <string name="cafeteria_main">금주의 식단</string>
+    <string name="cafeteria_student">학생식당</string>
+    <string name="cafeteria_employee">교직원식당</string>
+    <string name="cafeteria_menu">메뉴</string>
+    <string name="cafeteria_lunch">점심</string>
+    <string name="cafeteria_time">이용시간 : 11시 30분 부터 ~ 14시까지 운영</string>
+    <string name="cafeteria_place">위치 : 8호관 3층</string>
+    <string name="cafeteria_info">주말/공휴일/방학기간 휴무</string>
 </resources>

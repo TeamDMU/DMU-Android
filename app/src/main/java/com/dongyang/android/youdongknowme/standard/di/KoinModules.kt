@@ -55,6 +55,9 @@ val networkModule = module {
 
 val viewModelModule = module {
     viewModel {
+        CafeteriaViewModel(get())
+    }
+    viewModel {
         NoticeViewModel(get())
     }
     viewModel {
