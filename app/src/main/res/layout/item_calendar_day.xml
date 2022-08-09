@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/selectableItemBackground"
-        tools:background="@color/black">
+        tools:background="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,9 +20,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="14sp"
-                android:text="@{calendar, default = `Aug`}" />
+                tools:text="Jun" />
 
             <TextView
                 android:id="@+id/DateText"
@@ -32,9 +31,9 @@
                 android:layout_marginTop="4dp"
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="18sp"
-                android:text="@{calendar, default = `4`}"/>
+                tools:text="16" />
 
             <TextView
                 android:id="@+id/DayText"
@@ -43,15 +42,10 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="4dp"
                 android:gravity="center"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="14sp"
-                android:text="@{calendar, default = `Mon`}"/>
+                tools:text="Mon" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <data>
-        <variable
-            name="calendar"
-            type="String" />
-    </data>
 </layout>
