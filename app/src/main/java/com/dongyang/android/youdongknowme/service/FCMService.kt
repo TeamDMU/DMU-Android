@@ -15,7 +15,6 @@ import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.local.SharedPreference
 import com.dongyang.android.youdongknowme.data.local.dao.AlarmDao
 import com.dongyang.android.youdongknowme.data.local.entity.AlarmEntity
-import com.dongyang.android.youdongknowme.standard.util.logw
 import com.dongyang.android.youdongknowme.standard.util.mapDepartmentCodeToKorean
 import com.dongyang.android.youdongknowme.standard.util.mapKeywordEnglishToKorean
 import com.dongyang.android.youdongknowme.ui.view.alarm.AlarmActivity
@@ -26,6 +25,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import timber.log.Timber
 
 
 class FCMService : FirebaseMessagingService() {
@@ -39,7 +39,7 @@ class FCMService : FirebaseMessagingService() {
     private val scope = CoroutineScope(Dispatchers.IO + job)
 
     override fun onNewToken(token: String) {
-        logw("New Token :: $token")
+        Timber.w("New Token :: $token")
         super.onNewToken(token)
     }
 

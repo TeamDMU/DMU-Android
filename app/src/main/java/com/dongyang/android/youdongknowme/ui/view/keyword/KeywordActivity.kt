@@ -6,11 +6,11 @@ import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
 import com.dongyang.android.youdongknowme.databinding.ActivityKeywordBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
-import com.dongyang.android.youdongknowme.standard.util.logd
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>() {
 
@@ -62,7 +62,7 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
 
     private fun setCheckChipChange(vararg chipGroups: ChipGroup) {
 
-        logd("checkList :: ${viewModel.checkKeywordList}")
+        Timber.d("checkList :: ${viewModel.checkKeywordList}")
 
         for (chipGroup in chipGroups) {
             for (index in 0 until chipGroup.childCount) {

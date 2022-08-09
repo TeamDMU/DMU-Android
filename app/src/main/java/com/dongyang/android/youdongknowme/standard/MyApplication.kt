@@ -7,10 +7,10 @@ import com.dongyang.android.youdongknowme.standard.di.databaseModule
 import com.dongyang.android.youdongknowme.standard.di.networkModule
 import com.dongyang.android.youdongknowme.standard.di.repositoryModule
 import com.dongyang.android.youdongknowme.standard.di.viewModelModule
-import com.dongyang.android.youdongknowme.standard.util.logd
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
 import org.koin.core.context.GlobalContext.startKoin
+import timber.log.Timber
 
 /**
  * 앱 실행 시 가장 먼저 진입
@@ -28,8 +28,13 @@ class MyApplication : Application() {
     }
 
     override fun onCreate() {
-        logd("application create")
         super.onCreate()
+
+        Timber.plant(object : Timber.DebugTree() {
+            override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
+                super.log(priority, "Debug[$tag]", message, t)
+            }
+        })
 
         // SharedPreference 초기화
         SharedPreference.getInstance(this)
