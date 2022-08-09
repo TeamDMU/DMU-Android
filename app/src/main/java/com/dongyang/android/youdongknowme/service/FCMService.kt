@@ -15,7 +15,6 @@ import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.local.SharedPreference
 import com.dongyang.android.youdongknowme.data.local.dao.AlarmDao
 import com.dongyang.android.youdongknowme.data.local.entity.AlarmEntity
-import com.dongyang.android.youdongknowme.standard.util.logw
 import com.dongyang.android.youdongknowme.standard.util.mapDepartmentCodeToKorean
 import com.dongyang.android.youdongknowme.standard.util.mapKeywordEnglishToKorean
 import com.dongyang.android.youdongknowme.ui.view.alarm.AlarmActivity

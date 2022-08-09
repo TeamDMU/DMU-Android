@@ -7,7 +7,6 @@ import com.dongyang.android.youdongknowme.standard.di.databaseModule
 import com.dongyang.android.youdongknowme.standard.di.networkModule
 import com.dongyang.android.youdongknowme.standard.di.repositoryModule
 import com.dongyang.android.youdongknowme.standard.di.viewModelModule
-import com.dongyang.android.youdongknowme.standard.util.logd
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
 import org.koin.core.context.GlobalContext.startKoin

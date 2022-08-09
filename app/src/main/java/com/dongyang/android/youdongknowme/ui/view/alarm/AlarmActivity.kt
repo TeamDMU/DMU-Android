@@ -6,7 +6,6 @@ import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.local.entity.AlarmEntity
 import com.dongyang.android.youdongknowme.databinding.ActivityAlarmBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
-import com.dongyang.android.youdongknowme.standard.util.logd
 import com.dongyang.android.youdongknowme.standard.util.mapDepartmentKoreanToCode
 import com.dongyang.android.youdongknowme.ui.adapter.AlarmAdapter
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailActivity
