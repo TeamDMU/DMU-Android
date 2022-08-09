@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class CafeteriaViewModel(private val cafeteriaRepository: CafeteriaRepository) : BaseViewModel() {
 
-    private val _menuList: MutableLiveData<List<Cafeteria>> = MutableLiveData(emptyList())
+    private val _menuList: MutableLiveData<List<Cafeteria>> = MutableLiveData()
     val menuList: LiveData<List<Cafeteria>> = _menuList
 
     fun fetchCafeteria() {
