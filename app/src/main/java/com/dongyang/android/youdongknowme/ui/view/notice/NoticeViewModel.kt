@@ -25,11 +25,11 @@ class NoticeViewModel(
     private val _isSearchMode = MutableLiveData(false)
     val isSearchMode: LiveData<Boolean> get() = _isSearchMode
 
-    private val _universityNoticeList: MutableLiveData<List<Notice>> = MutableLiveData(emptyList())
+    private val _universityNoticeList: MutableLiveData<List<Notice>> = MutableLiveData()
 
-    private val _facultyNoticeList: MutableLiveData<List<Notice>> = MutableLiveData(emptyList())
+    private val _facultyNoticeList: MutableLiveData<List<Notice>> = MutableLiveData()
 
-    private val _noticeList: MutableLiveData<List<Notice>> = MutableLiveData(emptyList())
+    private val _noticeList: MutableLiveData<List<Notice>> = MutableLiveData()
     val noticeList: LiveData<List<Notice>> = _noticeList
 
     private val _unVisitedAlarmCount: MutableLiveData<Int> = MutableLiveData()

@@ -20,7 +20,7 @@ class KeywordViewModel(
     private val _isFirstLaunch: MutableLiveData<Boolean> = MutableLiveData(false)
     val isFirstLaunch: LiveData<Boolean> get() = _isFirstLaunch
 
-    private val _localKeywordList: MutableLiveData<List<KeywordEntity>> = MutableLiveData(emptyList())
+    private val _localKeywordList: MutableLiveData<List<KeywordEntity>> = MutableLiveData()
     val localKeywordList: LiveData<List<KeywordEntity>> get() = _localKeywordList
 
     private val _checkKeywordList = mutableSetOf<String>()
