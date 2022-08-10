@@ -10,7 +10,7 @@
         android:title="@string/menu_main_bottom_calendar" />
     <item
         android:id="@+id/menu_main_cafeteria"
-        android:icon="@drawable/ic_menu_calendar"
+        android:icon="@drawable/ic_menu_cafeteria"
         android:title="@string/cafeteria_main"/>
     <item
         android:id="@+id/menu_main_setting"
