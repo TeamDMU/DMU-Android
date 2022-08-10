@@ -55,14 +55,12 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             this.adapter = this@CafeteriaFragment.cafeteriaAdapter
             this.layoutManager = LinearLayoutManager(requireActivity())
             this.setHasFixedSize(true)
-            this.addItemDecoration(DividerItemDecoration(requireActivity(), 1))
         }
 
         binding.employeeMenuList.apply {
             this.adapter = this@CafeteriaFragment.cafeteriaEmployeeAdapter
             this.layoutManager = LinearLayoutManager(requireActivity())
             this.setHasFixedSize(true)
-            this.addItemDecoration(DividerItemDecoration(requireActivity(), 1))
         }
 
         val dm = DisplayMetrics()
@@ -70,7 +68,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
         // TODO : deprecated -> 수정 필요
         wm.defaultDisplay.getMetrics(dm)
-        binding.exSevenCalendar.apply {
+        binding.CafeteriaCalendar.apply {
             val dayWidth = dm.widthPixels / 5
             val dayHeight = (dayWidth * 1.25).toInt()
             daySize = Size(dayWidth, dayHeight)
@@ -82,30 +80,30 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
             init {
                 view.setOnClickListener {
-                    val firstDay = binding.exSevenCalendar.findFirstVisibleDay()
-                    val lastDay = binding.exSevenCalendar.findLastVisibleDay()
+                    val firstDay = binding.CafeteriaCalendar.findFirstVisibleDay()
+                    val lastDay = binding.CafeteriaCalendar.findLastVisibleDay()
                     if (firstDay == day) {
-                        binding.exSevenCalendar.smoothScrollToDate(day.date)
+                        binding.CafeteriaCalendar.smoothScrollToDate(day.date)
                     } else if (lastDay == day) {
-                        binding.exSevenCalendar.smoothScrollToDate(day.date.minusDays(4))
+                        binding.CafeteriaCalendar.smoothScrollToDate(day.date.minusDays(4))
                     }
 
                     if (selectedDate != day.date) {
                         val oldDate = selectedDate
                         selectedDate = day.date
-                        binding.exSevenCalendar.notifyDateChanged(day.date)
-                        oldDate?.let { binding.exSevenCalendar.notifyDateChanged(it) }
+                        binding.CafeteriaCalendar.notifyDateChanged(day.date)
+                        oldDate?.let { binding.CafeteriaCalendar.notifyDateChanged(it) }
                     }
                 }
             }
 
             fun bind(day: CalendarDay) {
                 this.day = day
-                bind.DateText.text = dateFormatter.format(day.date)
-                bind.DayText.text = dayFormatter.format(day.date)
-                bind.MonthText.text = monthFormatter.format(day.date)
+                bind.itemCalendarDate.text = dateFormatter.format(day.date)
+                bind.itemCalendarDay.text = dayFormatter.format(day.date)
+                bind.itemCalendarMonth.text = monthFormatter.format(day.date)
 
-                bind.DateText.setTextColor(
+                bind.itemCalendarDate.setTextColor(
                     ContextCompat.getColor(
                         view.context,
                         if (day.date == selectedDate) R.color.main else R.color.black
@@ -114,7 +112,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             }
         }
 
-        binding.exSevenCalendar.dayBinder = object : DayBinder<DayViewContainer> {
+        binding.CafeteriaCalendar.dayBinder = object : DayBinder<DayViewContainer> {
             override fun create(view: View) = DayViewContainer(view)
             override fun bind(container: DayViewContainer, day: CalendarDay) = container.bind(day)
         }
@@ -129,13 +127,13 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         // 현재달
         val currentMonth = YearMonth.now()
         // 최소 달,최대 달 입력하는 부분
-        binding.exSevenCalendar.setup(
+        binding.CafeteriaCalendar.setup(
             currentMonth.minusMonths(3),
             currentMonth.plusMonths(12),
             DayOfWeek.values().random()
         )
         // 초기 날짜 세팅
-        binding.exSevenCalendar.scrollToDate(LocalDate.now())
+        binding.CafeteriaCalendar.scrollToDate(LocalDate.now())
     }
 }
 

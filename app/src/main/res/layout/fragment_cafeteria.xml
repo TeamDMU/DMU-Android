@@ -25,7 +25,7 @@
             app:layout_constraintTop_toBottomOf="@id/cafeteria_toolbar">
 
             <com.kizitonwose.calendarview.CalendarView
-                android:id="@+id/exSevenCalendar"
+                android:id="@+id/Cafeteria_Calendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cv_dayViewResource="@layout/item_calendar_day"
