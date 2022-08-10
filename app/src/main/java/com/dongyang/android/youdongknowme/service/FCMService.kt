@@ -15,9 +15,11 @@ import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.local.SharedPreference
 import com.dongyang.android.youdongknowme.data.local.dao.AlarmDao
 import com.dongyang.android.youdongknowme.data.local.entity.AlarmEntity
+import com.dongyang.android.youdongknowme.standard.MyApplication
 import com.dongyang.android.youdongknowme.standard.util.mapDepartmentCodeToKorean
 import com.dongyang.android.youdongknowme.standard.util.mapKeywordEnglishToKorean
 import com.dongyang.android.youdongknowme.ui.view.alarm.AlarmActivity
+import com.dongyang.android.youdongknowme.ui.view.splash.SplashActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import kotlinx.coroutines.CoroutineScope
@@ -25,8 +27,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
-import timber.log.Timber
-
 
 class FCMService : FirebaseMessagingService() {
 
@@ -39,7 +39,6 @@ class FCMService : FirebaseMessagingService() {
     private val scope = CoroutineScope(Dispatchers.IO + job)
 
     override fun onNewToken(token: String) {
-        Timber.w("New Token :: $token")
         super.onNewToken(token)
     }
 
@@ -93,12 +92,20 @@ class FCMService : FirebaseMessagingService() {
             notificationManager.createNotificationChannel(channel)
         }
 
-        val splashIntent = Intent(this, AlarmActivity::class.java)
+        val splashIntent = Intent(this, SplashActivity::class.java)
+        val alarmIntent = Intent(this, AlarmActivity::class.java)
 
-        val pendingIntent = PendingIntent.getActivity(
-            this, 0, splashIntent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-        )
+        val pendingIntent = if(MyApplication.isForeground) {
+            PendingIntent.getActivity(
+                this, 0, alarmIntent,
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            )
+        } else {
+            PendingIntent.getActivity(
+                this, 0, splashIntent,
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            )
+        }
 
         val defaultSoundUri: Uri =
             RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
