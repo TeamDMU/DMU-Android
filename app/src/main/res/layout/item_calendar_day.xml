@@ -2,7 +2,8 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/selectableItemBackground"
@@ -15,35 +16,34 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/MonthText"
+                style="@style/PretendardRegular12"
+                android:id="@+id/item_calendar_month"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:textSize="14sp"
                 tools:text="Jun" />
 
             <TextView
-                android:id="@+id/DateText"
+                style="@style/PretendardRegular14"
+                android:id="@+id/item_calendar_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:fontFamily="sans-serif-medium"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:textSize="18sp"
                 tools:text="16" />
 
             <TextView
-                android:id="@+id/DayText"
+                style="@style/PretendardRegular12"
+                android:id="@+id/item_calendar_day"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="4dp"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:textSize="14sp"
                 tools:text="Mon" />
         </LinearLayout>
 

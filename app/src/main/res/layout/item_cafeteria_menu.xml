@@ -9,12 +9,12 @@
         android:paddingVertical="10dp">
 
         <TextView
+            style="@style/PretendardRegular14"
             android:id="@+id/item_cafeteria_st_menu"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="0dp"
             android:text="@{menu, default = `시금치된장국`}"
-            android:textSize="14sp"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
