@@ -13,8 +13,8 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.local.SharedPreference
-import com.dongyang.android.youdongknowme.data.local.dao.AlarmDao
 import com.dongyang.android.youdongknowme.data.local.entity.AlarmEntity
+import com.dongyang.android.youdongknowme.data.repository.AlarmRepository
 import com.dongyang.android.youdongknowme.standard.MyApplication
 import com.dongyang.android.youdongknowme.standard.util.mapDepartmentCodeToKorean
 import com.dongyang.android.youdongknowme.standard.util.mapKeywordEnglishToKorean
@@ -128,7 +128,7 @@ class FCMService : FirebaseMessagingService() {
 
     // 알람이 오면 알림함에 데이터를 저장
     private fun insertAlarmData(alarmEntity: AlarmEntity) {
-        val alarmDao: AlarmDao by inject()
+        val alarmRepository: AlarmRepository by inject()
 
         // 학교 -> 동양미래대학교 변환
         if (alarmEntity.department == resources.getString(R.string.school)) {
@@ -136,7 +136,7 @@ class FCMService : FirebaseMessagingService() {
         }
 
         scope.launch {
-            alarmDao.insertAlarm(alarmEntity)
+            alarmRepository.insertAlarm(alarmEntity)
         }
     }
 
