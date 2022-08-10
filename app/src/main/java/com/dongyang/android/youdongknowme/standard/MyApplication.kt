@@ -2,6 +2,10 @@ package com.dongyang.android.youdongknowme.standard
 
 import android.app.Application
 import android.content.Context
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ProcessLifecycleOwner
 import com.dongyang.android.youdongknowme.data.local.SharedPreference
 import com.dongyang.android.youdongknowme.standard.di.databaseModule
 import com.dongyang.android.youdongknowme.standard.di.networkModule
@@ -15,8 +19,10 @@ import timber.log.Timber
 /**
  * 앱 실행 시 가장 먼저 진입
  */
-class MyApplication : Application() {
+class MyApplication : Application(), LifecycleEventObserver {
     companion object {
+        var isForeground = false
+
         lateinit var instance: MyApplication
         fun applicationContext(): Context {
             return instance.applicationContext
@@ -39,10 +45,20 @@ class MyApplication : Application() {
         // SharedPreference 초기화
         SharedPreference.getInstance(this)
 
+        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
+
         startKoin {
             androidContext(this@MyApplication)
             androidFileProperties()
             modules(listOf(databaseModule, repositoryModule, viewModelModule, networkModule))
+        }
+    }
+
+    override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+        if (event == Lifecycle.Event.ON_START) {
+            isForeground = true
+        } else if (event == Lifecycle.Event.ON_STOP) {
+            isForeground = false
         }
     }
 }
