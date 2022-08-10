@@ -41,7 +41,7 @@
             android:id="@+id/cafeteria_info_place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="8dp"
             android:text="@string/cafeteria_place"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -71,7 +71,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintTop_toBottomOf="@id/cafeteria_info">
 
             <LinearLayout
@@ -84,25 +84,24 @@
                     android:id="@+id/cafeteria_st_container"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="12dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
+                        style="@style/PretendardBold20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginStart="5dp"
                         android:text="@string/cafeteria_student"
-                        android:textColor="@color/main"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textColor="@color/main"/>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/stu_menu_list"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="12dp"
                         tools:listitem="@layout/item_cafeteria_menu" />
                 </LinearLayout>
 
@@ -110,29 +109,27 @@
                     android:id="@+id/cafeteria_employee_container"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="12dp"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:paddingStart="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/cafeteria_st_container"
                     app:layout_constraintTop_toBottomOf="@id/cafeteria_st_container">
 
                     <TextView
+                        style="@style/PretendardBold20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginStart="5dp"
                         android:text="@string/cafeteria_employee"
-                        android:textColor="@color/main"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textColor="@color/main"/>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/employee_menu_list"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="12dp"
                         tools:listitem="@layout/item_cafeteria_menu" />
                 </LinearLayout>
             </LinearLayout>
