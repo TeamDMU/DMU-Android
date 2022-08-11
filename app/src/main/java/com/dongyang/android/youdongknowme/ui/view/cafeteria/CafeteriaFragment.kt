@@ -68,7 +68,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
         // TODO : deprecated -> 수정 필요
         wm.defaultDisplay.getMetrics(dm)
-        binding.CafeteriaCalendar.apply {
+        binding.cafeteriaCalendar.apply {
             val dayWidth = dm.widthPixels / 5
             val dayHeight = (dayWidth * 1.25).toInt()
             daySize = Size(dayWidth, dayHeight)
@@ -80,19 +80,19 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
             init {
                 view.setOnClickListener {
-                    val firstDay = binding.CafeteriaCalendar.findFirstVisibleDay()
-                    val lastDay = binding.CafeteriaCalendar.findLastVisibleDay()
+                    val firstDay = binding.cafeteriaCalendar.findFirstVisibleDay()
+                    val lastDay = binding.cafeteriaCalendar.findLastVisibleDay()
                     if (firstDay == day) {
-                        binding.CafeteriaCalendar.smoothScrollToDate(day.date)
+                        binding.cafeteriaCalendar.smoothScrollToDate(day.date)
                     } else if (lastDay == day) {
-                        binding.CafeteriaCalendar.smoothScrollToDate(day.date.minusDays(4))
+                        binding.cafeteriaCalendar.smoothScrollToDate(day.date.minusDays(4))
                     }
 
                     if (selectedDate != day.date) {
                         val oldDate = selectedDate
                         selectedDate = day.date
-                        binding.CafeteriaCalendar.notifyDateChanged(day.date)
-                        oldDate?.let { binding.CafeteriaCalendar.notifyDateChanged(it) }
+                        binding.cafeteriaCalendar.notifyDateChanged(day.date)
+                        oldDate?.let { binding.cafeteriaCalendar.notifyDateChanged(it) }
                     }
                 }
             }
@@ -112,7 +112,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             }
         }
 
-        binding.CafeteriaCalendar.dayBinder = object : DayBinder<DayViewContainer> {
+        binding.cafeteriaCalendar.dayBinder = object : DayBinder<DayViewContainer> {
             override fun create(view: View) = DayViewContainer(view)
             override fun bind(container: DayViewContainer, day: CalendarDay) = container.bind(day)
         }
@@ -127,13 +127,13 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         // 현재달
         val currentMonth = YearMonth.now()
         // 최소 달,최대 달 입력하는 부분
-        binding.CafeteriaCalendar.setup(
+        binding.cafeteriaCalendar.setup(
             currentMonth.minusMonths(3),
             currentMonth.plusMonths(12),
             DayOfWeek.values().random()
         )
         // 초기 날짜 세팅
-        binding.CafeteriaCalendar.scrollToDate(LocalDate.now().minusDays(2))
+        binding.cafeteriaCalendar.scrollToDate(LocalDate.now().minusDays(2))
     }
 }
 
