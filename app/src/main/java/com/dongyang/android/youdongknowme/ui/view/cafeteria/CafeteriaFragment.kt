@@ -114,8 +114,8 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     override fun initAfterBinding() {
         val currentMonth = YearMonth.now()
         binding.cafeteriaCalendar.setup(
-            currentMonth.minusMonths(3),
-            currentMonth.plusMonths(12),
+            currentMonth.minusMonths(1),
+            currentMonth.plusMonths(1),
             DayOfWeek.values().random()
         )
         binding.cafeteriaCalendar.scrollToDate(LocalDate.now().minusDays(2))
