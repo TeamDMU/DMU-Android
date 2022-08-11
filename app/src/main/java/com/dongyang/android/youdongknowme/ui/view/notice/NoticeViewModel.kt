@@ -58,18 +58,19 @@ class NoticeViewModel(
     fun refreshNotices() {
         showLoading()
         viewModelScope.launch {
-            when (val result = noticeRepository.fetchNotices(departmentCode.value ?: DEFAULT_VALUE)) {
+            when (val result = noticeRepository.fetchAllNotices()) {
                 is NetworkResult.Success -> {
-                    val noticeList = result.data
-                    // 네트워크 호출을 줄이기 위해 학교, 학과별 리스트를 따로 보관
+                    val noticeMap = result.data
+
+                    _universityNoticeList.value = noticeMap["school"]
+                    _facultyNoticeList.value = noticeMap["depart"]
+
                     when(departmentCode.value) {
                         CODE.SCHOOL_CODE -> {
-                            _universityNoticeList.value = noticeList
-                            _noticeList.postValue(noticeList)
+                            _noticeList.postValue(noticeMap["school"])
                         }
                         else -> {
-                            _facultyNoticeList.value = noticeList
-                            _noticeList.postValue(noticeList)
+                            _noticeList.postValue(noticeMap["depart"])
                         }
                     }
                     dismissLoading()
@@ -85,7 +86,6 @@ class NoticeViewModel(
     // 공지사항 리스트 호출
     private fun fetchNotices() {
         // 비어있을 때만 새로 갱신
-
         val universityNoticeList = _universityNoticeList.value ?: emptyList()
         val facultyNoticeList = _facultyNoticeList.value ?: emptyList()
 
@@ -145,7 +145,7 @@ class NoticeViewModel(
         }
     }
 
-    fun getUnVisitedAlarm() {
+    fun getUnVisitedAlarmCount() {
         viewModelScope.launch {
             noticeRepository.getUnVisitedAlarmCount().collect { count ->
                 _unVisitedAlarmCount.postValue(count)
