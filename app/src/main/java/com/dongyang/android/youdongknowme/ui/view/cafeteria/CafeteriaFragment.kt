@@ -80,10 +80,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             init {
                 view.setOnClickListener {
                     if (selectedDate != day.date) {
-                        val oldDate = selectedDate
-                        selectedDate = day.date
-                        binding.cafeteriaCalendar.notifyDateChanged(day.date)
-                        oldDate?.let { binding.cafeteriaCalendar.notifyDateChanged(it) }
+                        notifyDateChanged(day.date)
                     }
                 }
             }
@@ -115,15 +112,12 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     }
 
     override fun initAfterBinding() {
-        // 현재달
         val currentMonth = YearMonth.now()
-        // 최소 달,최대 달 입력하는 부분
         binding.cafeteriaCalendar.setup(
             currentMonth.minusMonths(3),
             currentMonth.plusMonths(12),
             DayOfWeek.values().random()
         )
-        // 초기 날짜 세팅
         binding.cafeteriaCalendar.scrollToDate(LocalDate.now().minusDays(2))
     }
 
@@ -132,8 +126,15 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         if (!hidden) {
             binding.cafeteriaCalendar.stopScroll()
             binding.cafeteriaCalendar.scrollToDate(LocalDate.now().minusDays(2))
-            selectedDate = LocalDate.now()
+            notifyDateChanged(LocalDate.now())
         }
+    }
+
+    fun notifyDateChanged(selectedDate: LocalDate) {
+        val oldDate = this.selectedDate
+        this.selectedDate = selectedDate
+        binding.cafeteriaCalendar.notifyDateChanged(selectedDate)
+        oldDate.let { binding.cafeteriaCalendar.notifyDateChanged(it) }
     }
 }
 
