@@ -5,7 +5,6 @@ import android.util.DisplayMetrics
 import android.view.View
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentCafeteriaBinding
@@ -80,14 +79,6 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
             init {
                 view.setOnClickListener {
-                    val firstDay = binding.cafeteriaCalendar.findFirstVisibleDay()
-                    val lastDay = binding.cafeteriaCalendar.findLastVisibleDay()
-                    if (firstDay == day) {
-                        binding.cafeteriaCalendar.smoothScrollToDate(day.date)
-                    } else if (lastDay == day) {
-                        binding.cafeteriaCalendar.smoothScrollToDate(day.date.minusDays(4))
-                    }
-
                     if (selectedDate != day.date) {
                         val oldDate = selectedDate
                         selectedDate = day.date
@@ -134,6 +125,15 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         )
         // 초기 날짜 세팅
         binding.cafeteriaCalendar.scrollToDate(LocalDate.now().minusDays(2))
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden) {
+            binding.cafeteriaCalendar.stopScroll()
+            binding.cafeteriaCalendar.scrollToDate(LocalDate.now().minusDays(2))
+            selectedDate = LocalDate.now()
+        }
     }
 }
 
