@@ -7,7 +7,6 @@ import com.dongyang.android.youdongknowme.data.local.UserDatabase
 import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
 import com.dongyang.android.youdongknowme.data.repository.*
 import com.dongyang.android.youdongknowme.standard.network.ErrorResponseHandler
-import com.dongyang.android.youdongknowme.standard.network.RetrofitObject
 import com.dongyang.android.youdongknowme.ui.view.alarm.AlarmViewModel
 import com.dongyang.android.youdongknowme.ui.view.cafeteria.CafeteriaViewModel
 import com.dongyang.android.youdongknowme.ui.view.depart.DepartViewModel
@@ -24,25 +23,27 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val databaseModule = module{
-    single{
-        Room.databaseBuilder(get(),
-            UserDatabase::class.java,"YouDongKnowMe_DB")
+val databaseModule = module {
+    single {
+        Room.databaseBuilder(
+            get(),
+            UserDatabase::class.java, "YouDongKnowMe_DB"
+        )
             .fallbackToDestructiveMigration()
-            .addCallback(object: RoomDatabase.Callback(){
+            .addCallback(object : RoomDatabase.Callback() {
                 override fun onCreate(db: SupportSQLiteDatabase) {
                     super.onCreate(db)
-                    CoroutineScope(IO).launch{
+                    CoroutineScope(IO).launch {
                         get<UserDatabase>().keywordDao().insertKeywordList(defaultKeywordList)
                     }
                 }
             })
             .build()
     }
-    single{
+    single {
         get<UserDatabase>().keywordDao()
     }
-    single{
+    single {
         get<UserDatabase>().alarmDao()
     }
 }

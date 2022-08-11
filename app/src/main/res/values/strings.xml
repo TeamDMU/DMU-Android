@@ -94,4 +94,13 @@
 
     <!-- alarm -->
     <string name="alarm_title">알림함</string>
+
+    <!-- cafeteria -->
+    <string name="cafeteria_main">오늘의 식단</string>
+    <string name="cafeteria_student">학생식당</string>
+    <string name="cafeteria_employee">교직원식당</string>
+    <string name="cafeteria_menu">메뉴</string>
+    <string name="cafeteria_lunch">점심</string>
+    <string name="cafeteria_time">11:30 ~ 14:00</string>
+    <string name="cafeteria_place">8호관 3층</string>
 </resources>

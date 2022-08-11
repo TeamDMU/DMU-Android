@@ -33,6 +33,10 @@
         <item name="android:textSize">@dimen/font_size_16</item>
     </style>
 
+    <style name="PretendardRegular18" parent="PretendardRegular">
+        <item name="android:textSize">@dimen/font_size_18</item>
+    </style>
+
     <style name="PretendardRegular20" parent="PretendardRegular">
         <item name="android:textSize">@dimen/font_size_20</item>
     </style>
@@ -55,6 +59,10 @@
 
     <style name="PretendardBold16" parent="PretendardBold">
         <item name="android:textSize">@dimen/font_size_16</item>
+    </style>
+
+    <style name="PretendardBold18" parent="PretendardBold">
+        <item name="android:textSize">@dimen/font_size_18</item>
     </style>
 
     <style name="PretendardBold20" parent="PretendardBold">

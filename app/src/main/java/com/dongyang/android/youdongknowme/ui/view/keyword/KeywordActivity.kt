@@ -9,6 +9,7 @@ import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import com.google.firebase.FirebaseApp
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -18,6 +19,7 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
     override val viewModel: KeywordViewModel by viewModel()
 
     override fun initStartView() {
+        FirebaseApp.initializeApp(this)
         binding.vm = viewModel
     }
 
