@@ -133,7 +133,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             DayOfWeek.values().random()
         )
         // 초기 날짜 세팅
-        binding.CafeteriaCalendar.scrollToDate(LocalDate.now())
+        binding.CafeteriaCalendar.scrollToDate(LocalDate.now().minusDays(2))
     }
 }
 
