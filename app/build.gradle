@@ -107,6 +107,9 @@ dependencies {
     // Horizontal CalendarView
     implementation 'com.github.kizitonwose:CalendarView:1.0.4'
 
+    // Flexbox
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
+
     // MinSdk
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 

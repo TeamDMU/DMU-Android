@@ -44,7 +44,7 @@
 
 # Environment
 - Android Studio Chipmunk | 2021.2.1
-- minSdkVersion 21
+- minSdkVersion 24
 - targetSdkVersion 32
 - Test Device | Galaxy Note 8
 

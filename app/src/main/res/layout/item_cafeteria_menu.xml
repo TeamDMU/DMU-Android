@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/item_menu_container"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingVertical="10dp">
+        android:paddingHorizontal="4dp">
 
-        <TextView
-            android:id="@+id/item_cafeteria_st_menu"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="16dp"
-            android:text="@{menu, default = `시금치된장국`}"
-            android:textSize="14sp"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            style="@style/PretendardRegular12"
+            android:clickable="false"
+            android:textAlignment="center"
+            android:text="@{menu, default = 해바라기멸치볶음}"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
     <data>
         <variable
