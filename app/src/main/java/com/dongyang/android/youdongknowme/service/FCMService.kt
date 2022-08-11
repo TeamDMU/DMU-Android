@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.*
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
@@ -93,8 +94,12 @@ class FCMService : FirebaseMessagingService() {
             notificationManager.createNotificationChannel(channel)
         }
 
-        val splashIntent = Intent(this, SplashActivity::class.java)
         val alarmIntent = Intent(this, AlarmActivity::class.java)
+
+        val splashIntent = Intent(this, SplashActivity::class.java).apply {
+            flags = FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK
+        }
+
 
         val pendingIntent = if (MyApplication.isForeground) {
             PendingIntent.getActivity(
