@@ -11,11 +11,13 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.local.SharedPreference
 import com.dongyang.android.youdongknowme.data.local.entity.AlarmEntity
 import com.dongyang.android.youdongknowme.data.repository.AlarmRepository
 import com.dongyang.android.youdongknowme.standard.MyApplication
+import com.dongyang.android.youdongknowme.standard.util.ACTION
 import com.dongyang.android.youdongknowme.standard.util.mapDepartmentCodeToKorean
 import com.dongyang.android.youdongknowme.standard.util.mapKeywordEnglishToKorean
 import com.dongyang.android.youdongknowme.ui.view.alarm.AlarmActivity
@@ -31,16 +33,12 @@ import org.koin.android.ext.android.inject
 class FCMService : FirebaseMessagingService() {
 
     companion object {
-        const val channelId = "Youdongknowme_id"
-        const val channelName = "Youdongknowme_name"
+        private const val CHANNEL_ID = "Youdongknowme_id"
+        private const val CHANNEL_NAME = "Youdongknowme_name"
     }
 
     private val job = SupervisorJob()
     private val scope = CoroutineScope(Dispatchers.IO + job)
-
-    override fun onNewToken(token: String) {
-        super.onNewToken(token)
-    }
 
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
@@ -48,6 +46,9 @@ class FCMService : FirebaseMessagingService() {
         val data = message.data
 
         if (data.isNotEmpty()) {
+
+            sendBroadcast()
+
             val departmentCode: String = data["major_code"] ?: ""
             val noticeNum: Int = data["num"]?.toInt() ?: 0
             val title: String = data["title"] ?: ""
@@ -81,7 +82,7 @@ class FCMService : FirebaseMessagingService() {
             val description = "FCM 메세지 알림"
             val importance = NotificationManager.IMPORTANCE_DEFAULT
             val channel = NotificationChannel(
-                channelId, channelName, importance
+                CHANNEL_ID, CHANNEL_NAME, importance
             ).apply {
                 this.description = description
             }
@@ -95,7 +96,7 @@ class FCMService : FirebaseMessagingService() {
         val splashIntent = Intent(this, SplashActivity::class.java)
         val alarmIntent = Intent(this, AlarmActivity::class.java)
 
-        val pendingIntent = if(MyApplication.isForeground) {
+        val pendingIntent = if (MyApplication.isForeground) {
             PendingIntent.getActivity(
                 this, 0, alarmIntent,
                 PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
@@ -110,7 +111,7 @@ class FCMService : FirebaseMessagingService() {
         val defaultSoundUri: Uri =
             RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
-        val notificationBuilder = NotificationCompat.Builder(this, channelId)
+        val notificationBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification)
             .setColor(ContextCompat.getColor(this, R.color.main))
             .setContentTitle("키워드 알림이 도착했어요!")
@@ -124,6 +125,12 @@ class FCMService : FirebaseMessagingService() {
             val notificationId = 100
             notify(notificationId, notificationBuilder.build())
         }
+    }
+
+    private fun sendBroadcast() {
+        val intent = Intent()
+        intent.action = ACTION.FCM_ACTION_NAME
+        LocalBroadcastManager.getInstance(baseContext).sendBroadcast(intent)
     }
 
     // 알람이 오면 알림함에 데이터를 저장
