@@ -48,8 +48,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     }
 
     override fun initStartView() {
-        val intentFilter = IntentFilter(ACTION.FCM_ACTION_NAME)
-        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(localBroadCast, intentFilter)
+
 
         binding.vm = viewModel
         adapter = NoticeAdapter().apply { setItemClickListener(this@NoticeFragment) }
@@ -179,6 +178,18 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
                 binding.noticeRvList.smoothScrollToPosition(-10)
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // TODO : LocalBroadcastManager 대신 Livedata 를 활용하는 방법을 알아보기
+        val intentFilter = IntentFilter(ACTION.FCM_ACTION_NAME)
+        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(localBroadCast, intentFilter)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(localBroadCast)
     }
 
     // 아이템 클릭시 자세히 보기 화면으로 이동
