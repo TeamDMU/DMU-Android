@@ -5,13 +5,14 @@ import android.util.DisplayMetrics
 import android.view.View
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentCafeteriaBinding
 import com.dongyang.android.youdongknowme.databinding.ItemCalendarDayBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
 import com.dongyang.android.youdongknowme.ui.adapter.CafeteriaAdapter
 import com.dongyang.android.youdongknowme.ui.adapter.CafeteriaEmployeeAdapter
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexboxLayoutManager
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.ViewContainer
@@ -40,10 +41,8 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     private lateinit var cafeteriaAdapter: CafeteriaAdapter
     private lateinit var cafeteriaEmployeeAdapter: CafeteriaEmployeeAdapter
 
-    private var menuList =
-        arrayListOf("시금치된장국", "오이냉국", "시금치된장국", "오이냉국", "시금치된장국", "오이냉국", "시금치된장국", "오이냉국")
-    private var employeeMenuList =
-        arrayListOf("짜장덮밥", "닭볶음탕", "무생채", "알감자조림", "도시락김", "치킨마요덮밥", "매운닭갈비", "간장")
+    private var menuList = arrayListOf("잡곡밥", "소고기육개장", "계란말이", "미트볼떡조림", "치커리유자청무침", "석박지")
+    private var employeeMenuList = arrayListOf("짜장덮밥", "닭볶음탕", "무생채", "알감자조림", "도시락김", "치킨마요덮밥", "매운닭갈비", "간장")
 
     override fun initStartView() {
 
@@ -51,14 +50,18 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         cafeteriaEmployeeAdapter = CafeteriaEmployeeAdapter()
 
         binding.stuMenuList.apply {
+            val layoutManager = FlexboxLayoutManager(context)
+            layoutManager.flexDirection = FlexDirection.ROW
             this.adapter = this@CafeteriaFragment.cafeteriaAdapter
-            this.layoutManager = LinearLayoutManager(requireActivity())
+            this.layoutManager = layoutManager
             this.setHasFixedSize(true)
         }
 
         binding.employeeMenuList.apply {
+            val layoutManager = FlexboxLayoutManager(context)
+            layoutManager.flexDirection = FlexDirection.ROW
             this.adapter = this@CafeteriaFragment.cafeteriaEmployeeAdapter
-            this.layoutManager = LinearLayoutManager(requireActivity())
+            this.layoutManager = layoutManager
             this.setHasFixedSize(true)
         }
 
@@ -125,7 +128,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         super.onHiddenChanged(hidden)
         if (!hidden) {
             binding.cafeteriaCalendar.stopScroll()
-            binding.cafeteriaCalendar.scrollToDate(LocalDate.now().minusDays(2))
+            binding.cafeteriaCalendar.smoothScrollToDate(LocalDate.now().minusDays(2))
             notifyDateChanged(LocalDate.now())
         }
     }
