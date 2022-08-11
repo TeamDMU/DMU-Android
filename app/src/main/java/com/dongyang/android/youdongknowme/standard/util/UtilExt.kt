@@ -14,3 +14,7 @@ fun View.hideKeyboard() {
     val inputMethodManager = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
 }
+
+object ACTION {
+    const val FCM_ACTION_NAME = "com.google.firebase.MESSAGING_EVENT"
+}

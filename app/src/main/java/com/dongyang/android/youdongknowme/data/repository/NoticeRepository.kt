@@ -14,6 +14,20 @@ class NoticeRepository(
     private val alarmDao: AlarmDao,
     private val errorResponseHandler: ErrorResponseHandler
 ) {
+    suspend fun fetchAllNotices(): NetworkResult<Map<String,List<Notice>>> {
+        return try {
+            val departNotices = RetrofitObject.getNetwork().create(NoticeService::class.java).getList(SharedPreference.getCode())
+            val schoolNotices = RetrofitObject.getNetwork().create(NoticeService::class.java).getList(CODE.SCHOOL_CODE)
+
+            val result : Map<String,List<Notice>> = mapOf("school" to schoolNotices, "depart" to departNotices)
+
+            NetworkResult.Success(result)
+        } catch (exception: Exception) {
+            val error = errorResponseHandler.getError(exception)
+            NetworkResult.Error(error)
+        }
+    }
+
     suspend fun fetchNotices(code: Int): NetworkResult<List<Notice>> {
         return try {
             val response = RetrofitObject.getNetwork().create(NoticeService::class.java).getList(code)
