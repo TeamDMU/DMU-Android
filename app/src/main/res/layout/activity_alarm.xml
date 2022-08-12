@@ -42,7 +42,7 @@
         <LinearLayout
             bind_visibility_notice_no_data="@{vm.alarmList.empty}"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="250dp"
             android:orientation="vertical"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -52,18 +52,16 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="200dp"
                 android:src="@drawable/ic_no_data" />
 
             <TextView
-                android:id="@+id/notice_no_data"
-                style="@style/PretendardBold16"
+                style="@style/PretendardRegular16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="4dp"
                 android:gravity="center"
-                android:text="@string/notice_notice_not_found_data"
+                android:text="@string/error_not_found_data"
                 android:textColor="@color/line" />
 
         </LinearLayout>
