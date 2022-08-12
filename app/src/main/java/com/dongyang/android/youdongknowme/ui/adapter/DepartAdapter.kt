@@ -28,7 +28,6 @@ class DepartAdapter : RecyclerView.Adapter<DepartAdapter.ViewHolder>() {
             // 선택한 포지션이 맞을 때 강조 표시
             if (currentPosition == position) {
                 binding.itemDepartCheck.visibility = View.VISIBLE
-                binding.itemDepartName.typeface = Typeface.DEFAULT_BOLD
                 binding.itemDepartName.setTextColor(
                     ContextCompat.getColor(
                         binding.root.context,
@@ -37,7 +36,6 @@ class DepartAdapter : RecyclerView.Adapter<DepartAdapter.ViewHolder>() {
                 )
             } else {
                 binding.itemDepartCheck.visibility = View.INVISIBLE
-                binding.itemDepartName.typeface = Typeface.DEFAULT
                 binding.itemDepartName.setTextColor(
                     ContextCompat.getColor(
                         binding.root.context,
