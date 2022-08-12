@@ -147,7 +147,7 @@
         <LinearLayout
             bind_visibility_existence="@{vm.errorState != null}"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="250dp"
             android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -156,18 +156,16 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="200dp"
                 android:src="@drawable/ic_error" />
 
             <TextView
-                android:id="@+id/notice_no_data"
                 style="@style/PretendardRegular16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="4dp"
                 android:gravity="center"
-                android:text="@string/notice_notice_not_found_data"
+                android:text="@string/error_network"
                 android:textColor="@color/line" />
 
         </LinearLayout>
