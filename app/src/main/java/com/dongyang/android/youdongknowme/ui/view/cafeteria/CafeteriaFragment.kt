@@ -77,6 +77,10 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             else dismissLoading()
         }
 
+        viewModel.errorState.observe(this) { resId ->
+            showToast(getString(resId))
+        }
+
         viewModel.stuMenuList.observe(viewLifecycleOwner) {
             cafeteriaAdapter.submitList(it)
         }
