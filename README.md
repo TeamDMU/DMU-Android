@@ -1,6 +1,6 @@
-# 유동노미 (Project YouDongKnowMe)
+# DMU (Project DM for U)
 
-![image](https://user-images.githubusercontent.com/85336456/183292196-a1b792b1-09af-49fd-b7c1-40bc89f84598.png)
+![DMU_HORIZONTAL_LOGO](https://user-images.githubusercontent.com/85336456/184391677-dfdbc579-891f-4cbf-98ec-188aa74f7c18.png)
 
 동양미래대에 대한 모든 정보를 학생들에게 **편리하고 빠르게** 제공하기 위해 만들어진 어플리케이션입니다.
 
