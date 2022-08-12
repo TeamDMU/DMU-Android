@@ -7,10 +7,14 @@ import com.dongyang.android.youdongknowme.data.remote.entity.Cafeteria
 import com.dongyang.android.youdongknowme.data.repository.CafeteriaRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.standard.network.NetworkResult
+import com.dongyang.android.youdongknowme.ui.view.util.ResourceProvider
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
-class CafeteriaViewModel(private val cafeteriaRepository: CafeteriaRepository) : BaseViewModel() {
+class CafeteriaViewModel(
+    private val cafeteriaRepository: CafeteriaRepository,
+    private val resourceProvider: ResourceProvider,
+) : BaseViewModel() {
 
     private val _selectedDate: MutableLiveData<LocalDate> = MutableLiveData(LocalDate.now())
     val selectedDate: LiveData<LocalDate> = _selectedDate
@@ -36,7 +40,6 @@ class CafeteriaViewModel(private val cafeteriaRepository: CafeteriaRepository) :
     private fun updateMenuList(selectedDate: String) {
         val cafeterias = _cafeteriaList.value ?: emptyList()
 
-        // TODO : 파싱 관련 로직은 모두 dataSource 클래스로 옮기기
         cafeterias.forEach{ it.date = it.date.substring(0 until 10) }
 
         val stuMenu = cafeterias.find {

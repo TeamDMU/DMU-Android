@@ -17,9 +17,11 @@ import com.dongyang.android.youdongknowme.ui.view.notice.NoticeViewModel
 import com.dongyang.android.youdongknowme.ui.view.schedule.ScheduleViewModel
 import com.dongyang.android.youdongknowme.ui.view.setting.SettingViewModel
 import com.dongyang.android.youdongknowme.ui.view.splash.SplashViewModel
+import com.dongyang.android.youdongknowme.ui.view.util.ResourceProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -83,7 +85,7 @@ val viewModelModule = module {
         AlarmViewModel(get())
     }
     viewModel {
-        CafeteriaViewModel(get())
+        CafeteriaViewModel(get(), get())
     }
 }
 
@@ -114,6 +116,12 @@ val repositoryModule = module {
     }
     single {
         CafeteriaRepository(get())
+    }
+}
+
+val utilModule = module {
+    single {
+        ResourceProvider(androidContext())
     }
 }
 
