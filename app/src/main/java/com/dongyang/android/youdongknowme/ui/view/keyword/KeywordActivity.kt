@@ -19,7 +19,6 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
     override val viewModel: KeywordViewModel by viewModel()
 
     override fun initStartView() {
-        FirebaseApp.initializeApp(this)
         binding.vm = viewModel
     }
 
