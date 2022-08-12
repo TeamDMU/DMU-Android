@@ -20,10 +20,11 @@ class CafeteriaViewModel(
     private val _selectedDate: MutableLiveData<LocalDate> = MutableLiveData(LocalDate.now())
     val selectedDate: LiveData<LocalDate> = _selectedDate
 
-    private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
-    val isLoading: LiveData<Boolean> get() = _isLoading
+    private val _isLoading: MutableLiveData<Boolean> = MutableLiveData(true)
+    val isLoading: LiveData<Boolean> = _isLoading
 
     private val _cafeteriaList: MutableLiveData<List<Cafeteria>> = MutableLiveData()
+    val cafeteriaList = _cafeteriaList
 
     private val _stuMenuList: MutableLiveData<List<String>> = MutableLiveData()
     val stuMenuList: LiveData<List<String>> = _stuMenuList
@@ -36,7 +37,7 @@ class CafeteriaViewModel(
         updateSelectedDate(LocalDate.now())
     }
 
-    private fun fetchCafeteria() {
+    fun fetchCafeteria() {
         viewModelScope.launch {
             _isLoading.postValue(true)
             when (val result = cafeteriaRepository.fetchMenuList()) {

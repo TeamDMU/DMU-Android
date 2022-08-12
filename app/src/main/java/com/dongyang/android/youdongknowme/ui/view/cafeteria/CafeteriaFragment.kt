@@ -106,6 +106,8 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             binding.cafeteriaCalendar.stopScroll()
             binding.cafeteriaCalendar.smoothScrollToDate(LocalDate.now().minusDays(2))
             notifyDateChanged(viewModel, binding.cafeteriaCalendar, viewModel.selectedDate.value, LocalDate.now())
+
+            if(viewModel.cafeteriaList.value == null) viewModel.fetchCafeteria()
         }
     }
 }
