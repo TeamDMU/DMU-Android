@@ -17,16 +17,16 @@ class NoticeViewModel(
 ) : BaseViewModel() {
 
     private val _isUniversityTab = MutableLiveData(true)
-    val isUniversityTab: LiveData<Boolean> get() = _isUniversityTab
+    val isUniversityTab: LiveData<Boolean> = _isUniversityTab
 
     private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
-    val isLoading: LiveData<Boolean> get() = _isLoading
+    val isLoading: LiveData<Boolean> = _isLoading
 
     private val _departmentCode: MutableLiveData<Int> = MutableLiveData()
-    val departmentCode: LiveData<Int> get() = _departmentCode
+    val departmentCode: LiveData<Int> = _departmentCode
 
     private val _isSearchMode = MutableLiveData(false)
-    val isSearchMode: LiveData<Boolean> get() = _isSearchMode
+    val isSearchMode: LiveData<Boolean> = _isSearchMode
 
     private val _universityNoticeList: MutableLiveData<List<Notice>> = MutableLiveData()
 
@@ -68,7 +68,7 @@ class NoticeViewModel(
                     _universityNoticeList.value = noticeMap["school"]
                     _facultyNoticeList.value = noticeMap["depart"]
 
-                    when(departmentCode.value) {
+                    when (departmentCode.value) {
                         CODE.SCHOOL_CODE -> {
                             _noticeList.postValue(noticeMap["school"])
                         }
@@ -80,6 +80,7 @@ class NoticeViewModel(
                 }
                 is NetworkResult.Error -> {
                     handleError(result)
+                    _noticeList.postValue(emptyList())
                     _isLoading.postValue(false)
                 }
             }
@@ -100,7 +101,7 @@ class NoticeViewModel(
                     is NetworkResult.Success -> {
                         val noticeList = result.data
                         // 네트워크 호출을 줄이기 위해 학교, 학과별 리스트를 따로 보관
-                        when(departmentCode.value) {
+                        when (departmentCode.value) {
                             CODE.SCHOOL_CODE -> {
                                 _universityNoticeList.value = noticeList
                                 _noticeList.postValue(noticeList)
