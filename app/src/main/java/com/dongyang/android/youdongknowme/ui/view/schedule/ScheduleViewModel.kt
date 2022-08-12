@@ -20,8 +20,10 @@ class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : Ba
     private val _scheduleList = MutableLiveData<List<Schedule>>()
     val scheduleList: LiveData<List<Schedule>> get() = _scheduleList
 
+    private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val isLoading: LiveData<Boolean> get() = _isLoading
+
     private val _pickYear = MutableLiveData<Int>()
-    val pickYear: LiveData<Int> get() = _pickYear
 
     private val _pickMonth = MutableLiveData<Int>()
     val pickMonth: LiveData<Int> get() = _pickMonth
@@ -32,22 +34,22 @@ class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : Ba
     }
 
     fun getSchedules() {
+
         // 로컬에 저장한 데이터가 없으면 네트워크에서 데이터를 받아와 로컬에 저장 및 화면에 출력
         if (scheduleRepository.getLocalSchedules() == NO_SCHEDULE) {
-            showLoading()
-
+            _isLoading.postValue(true)
             viewModelScope.launch() {
                 when (val result = scheduleRepository.fetchSchedules()) {
                     is NetworkResult.Success -> {
                         val scheduleList = result.data
                         // 선택한 연월 조건에 따라 리스트 출력
-                        _scheduleList.postValue(scheduleList.filter { it.month == pickMonth.value && it.year == pickYear.value.toString() })
+                        _scheduleList.postValue(scheduleList.filter { it.month == pickMonth.value && it.year == _pickYear.value.toString() })
                         scheduleRepository.setLocalSchedules(Gson().toJson(scheduleList))
-                        dismissLoading()
+                        _isLoading.postValue(false)
                     }
                     is NetworkResult.Error -> {
                         handleError(result)
-                        dismissLoading()
+                        _isLoading.postValue(false)
                     }
                 }
             }
@@ -57,7 +59,7 @@ class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : Ba
             val scheduleList =
                 Gson().fromJson<List<Schedule>>(localSchedules, object : TypeToken<List<Schedule>>() {}.type).filter {
                     // 선택한 연월 조건에 따라 리스트 출력
-                    it.month == pickMonth.value && it.year == pickYear.value.toString()
+                    it.month == pickMonth.value && it.year == _pickYear.value.toString()
                 }
 
             _scheduleList.postValue(scheduleList)

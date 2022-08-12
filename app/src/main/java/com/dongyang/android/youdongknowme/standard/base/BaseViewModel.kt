@@ -11,21 +11,9 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 
 abstract class BaseViewModel : ViewModel() {
 
-    // 로딩 유무 확인
-    private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
-    val isLoading: LiveData<Boolean> get() = _isLoading
-
     // 서버 연결 확인
     private val _errorState: MutableLiveData<Int> = MutableLiveData()
     val errorState: LiveData<Int> = _errorState
-
-    fun showLoading() {
-        _isLoading.postValue(true)
-    }
-
-    fun dismissLoading() {
-        _isLoading.postValue(false)
-    }
 
     protected fun handleError(result: NetworkResult.Error) {
         when (result.errorType) {

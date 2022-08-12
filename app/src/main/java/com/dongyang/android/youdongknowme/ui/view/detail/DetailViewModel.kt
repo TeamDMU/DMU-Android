@@ -3,7 +3,6 @@ package com.dongyang.android.youdongknowme.ui.view.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.remote.entity.NoticeFileUrl
 import com.dongyang.android.youdongknowme.data.repository.DetailRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
@@ -11,6 +10,9 @@ import com.dongyang.android.youdongknowme.standard.network.NetworkResult
 import kotlinx.coroutines.launch
 
 class DetailViewModel(private val detailRepository: DetailRepository) : BaseViewModel() {
+
+    private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val isLoading: LiveData<Boolean> get() = _isLoading
 
     private val _num: MutableLiveData<Int> = MutableLiveData()
     private val _code: MutableLiveData<Int> = MutableLiveData()
@@ -36,13 +38,13 @@ class DetailViewModel(private val detailRepository: DetailRepository) : BaseView
 
     // 공지사항 리스트 호출
     fun fetchNoticeDetail() {
-        showLoading()
+        _isLoading.postValue(true)
 
         val departCode = _code.value ?: DEFAULT_VALUE
         val boardNum = _num.value ?: DEFAULT_VALUE
 
         viewModelScope.launch {
-            when(val result = detailRepository.fetchNoticeDetail(departCode, boardNum)) {
+            when (val result = detailRepository.fetchNoticeDetail(departCode, boardNum)) {
                 is NetworkResult.Success -> {
                     val noticeDetail = result.data
                     _title.postValue(noticeDetail.title)
@@ -51,11 +53,11 @@ class DetailViewModel(private val detailRepository: DetailRepository) : BaseView
                     _content.postValue(noticeDetail.content)
                     _imgUrl.postValue(noticeDetail.imgUrl)
                     _fileUrl.postValue(noticeDetail.fileUrl)
-                    dismissLoading()
+                    _isLoading.postValue(false)
                 }
                 is NetworkResult.Error -> {
                     handleError(result)
-                    dismissLoading()
+                    _isLoading.postValue(false)
                 }
             }
         }

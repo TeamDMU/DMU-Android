@@ -32,6 +32,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     private lateinit var cafeteriaEmployeeAdapter: CafeteriaEmployeeAdapter
 
     override fun initStartView() {
+        binding.vm = viewModel
 
         cafeteriaAdapter = CafeteriaAdapter()
         cafeteriaEmployeeAdapter = CafeteriaEmployeeAdapter()
@@ -70,6 +71,11 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     }
 
     override fun initDataBinding() {
+
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            if (it) showLoading()
+            else dismissLoading()
+        }
 
         viewModel.stuMenuList.observe(viewLifecycleOwner) {
             cafeteriaAdapter.submitList(it)

@@ -19,6 +19,9 @@ class NoticeViewModel(
     private val _isUniversityTab = MutableLiveData(true)
     val isUniversityTab: LiveData<Boolean> get() = _isUniversityTab
 
+    private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val isLoading: LiveData<Boolean> get() = _isLoading
+
     private val _departmentCode: MutableLiveData<Int> = MutableLiveData()
     val departmentCode: LiveData<Int> get() = _departmentCode
 
@@ -56,7 +59,7 @@ class NoticeViewModel(
     }
 
     fun refreshNotices() {
-        showLoading()
+        _isLoading.postValue(true)
         viewModelScope.launch {
             when (val result = noticeRepository.fetchAllNotices()) {
                 is NetworkResult.Success -> {
@@ -73,11 +76,11 @@ class NoticeViewModel(
                             _noticeList.postValue(noticeMap["depart"])
                         }
                     }
-                    dismissLoading()
+                    _isLoading.postValue(false)
                 }
                 is NetworkResult.Error -> {
                     handleError(result)
-                    dismissLoading()
+                    _isLoading.postValue(false)
                 }
             }
         }
@@ -90,7 +93,7 @@ class NoticeViewModel(
         val facultyNoticeList = _facultyNoticeList.value ?: emptyList()
 
         if (universityNoticeList.isEmpty() or facultyNoticeList.isEmpty()) {
-            showLoading()
+            _isLoading.postValue(true)
 
             viewModelScope.launch {
                 when (val result = noticeRepository.fetchNotices(departmentCode.value ?: DEFAULT_VALUE)) {
@@ -107,11 +110,12 @@ class NoticeViewModel(
                                 _noticeList.postValue(noticeList)
                             }
                         }
-                        dismissLoading()
+                        _isLoading.postValue(false)
                     }
                     is NetworkResult.Error -> {
                         handleError(result)
-                        dismissLoading()
+                        _noticeList.postValue(emptyList())
+                        _isLoading.postValue(false)
                     }
                 }
             }
@@ -128,18 +132,18 @@ class NoticeViewModel(
 
     // 검색어가 포함된 공지사항 리스트 호출
     fun fetchSearchNotices(keyword: String) {
-        showLoading()
+        _isLoading.postValue(true)
 
         viewModelScope.launch {
             when (val result = noticeRepository.fetchSearchNotices(departmentCode.value ?: DEFAULT_VALUE, keyword)) {
                 is NetworkResult.Success -> {
                     val searchList = result.data
                     _noticeList.postValue(searchList)
-                    dismissLoading()
+                    _isLoading.postValue(false)
                 }
                 is NetworkResult.Error -> {
                     handleError(result)
-                    dismissLoading()
+                    _isLoading.postValue(false)
                 }
             }
         }
