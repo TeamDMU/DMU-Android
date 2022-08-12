@@ -31,9 +31,6 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     private lateinit var cafeteriaAdapter: CafeteriaAdapter
     private lateinit var cafeteriaEmployeeAdapter: CafeteriaEmployeeAdapter
 
-    private var menuList = arrayListOf("잡곡밥", "소고기육개장", "계란말이", "미트볼떡조림", "치커리유자청무침", "석박지")
-    private var employeeMenuList = arrayListOf("짜장덮밥", "닭볶음탕", "무생채", "알감자조림", "도시락김", "치킨마요덮밥", "매운닭갈비", "간장")
-
     override fun initStartView() {
 
         cafeteriaAdapter = CafeteriaAdapter()
@@ -73,17 +70,23 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     }
 
     override fun initDataBinding() {
-        cafeteriaAdapter.submitList(menuList)
-        cafeteriaEmployeeAdapter.submitList(employeeMenuList)
+
+        viewModel.stuMenuList.observe(viewLifecycleOwner) {
+            cafeteriaAdapter.submitList(it)
+        }
+
+        viewModel.eduMenuList.observe(viewLifecycleOwner) {
+            cafeteriaEmployeeAdapter.submitList(it)
+        }
     }
 
     override fun initAfterBinding() {
-        val currentMonth = YearMonth.now()
         binding.cafeteriaCalendar.setup(
-            currentMonth.minusMonths(1),
-            currentMonth.plusMonths(1),
+            YearMonth.now().minusMonths(1),
+            YearMonth.now().plusMonths(1),
             DayOfWeek.values().random()
         )
+
         binding.cafeteriaCalendar.scrollToDate(LocalDate.now().minusDays(2))
     }
 
