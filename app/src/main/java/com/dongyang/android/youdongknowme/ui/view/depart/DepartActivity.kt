@@ -65,6 +65,7 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
         viewModel.setSelectPosition(position)
     }
 
+    // TODO : StringResource
     // 확인 버튼을 누르면 내부 DB에 학과를 담고 메인 액티비티로 이동
     private fun getSnackBar(items: ArrayList<String>): Snackbar {
         val snackbar =

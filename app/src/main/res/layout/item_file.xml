@@ -29,7 +29,8 @@
             android:text="@{file.name}"
             android:textColor="@color/main"
             android:textSize="12sp"
-            android:textStyle="bold"
+            android:textStyle="normal"
+            android:fontFamily="@font/pretendard_bold"
             app:bind_visibility_existence="@{!file.name.empty}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

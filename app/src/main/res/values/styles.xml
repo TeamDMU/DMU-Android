@@ -13,4 +13,10 @@
         <item name="chipMinTouchTargetSize">0dp</item>
         <item name="android:textColor">@color/bg_chip_text_select</item>
     </style>
+
+    <style name="Colors_Widget.MaterialComponents.Chip" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:textAppearance">@style/PretendardRegular12</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>

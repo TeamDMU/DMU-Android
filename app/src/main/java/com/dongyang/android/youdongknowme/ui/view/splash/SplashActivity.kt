@@ -2,7 +2,9 @@ package com.dongyang.android.youdongknowme.ui.view.splash
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.dongyang.android.youdongknowme.databinding.ActivitySplashBinding
@@ -26,10 +28,15 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val content: View = findViewById(android.R.id.content)
+            content.viewTreeObserver.addOnPreDrawListener { false }
+        }
+
         viewModel.checkFirstLaunch()
 
         intentJob = lifecycleScope.launch {
-            delay(2000L)
+            delay(SPLASH_TIME_MILLIS)
 
             if(viewModel.isFirstLaunch) {
                 val intent = Intent(this@SplashActivity, DepartActivity::class.java)
@@ -51,5 +58,9 @@ class SplashActivity : AppCompatActivity() {
     override fun onDestroy() {
         intentJob?.cancel()
         super.onDestroy()
+    }
+
+    companion object {
+        private const val SPLASH_TIME_MILLIS = 1_500L
     }
 }

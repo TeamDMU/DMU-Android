@@ -117,8 +117,8 @@ class FCMService : FirebaseMessagingService() {
             RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
         val notificationBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_notification)
-            .setColor(ContextCompat.getColor(this, R.color.main))
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setColor(ContextCompat.getColor(this, R.color.white))
             .setContentTitle("키워드 알림이 도착했어요!")
             .setContentText("${keyword}(이)가 포함된 공지사항이 ${department}에 올라왔어요!")
             .setAutoCancel(true)
