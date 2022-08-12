@@ -9,7 +9,7 @@ class SplashViewModel(private val splashRepository: SplashRepository) : BaseView
     val isFirstLaunch: Boolean get() = _isFirstLaunch
 
     fun checkFirstLaunch() {
-        if (splashRepository.getIsFirstLaunch() == true) {
+        if (splashRepository.getIsFirstLaunch()) {
             _isFirstLaunch = true
         }
     }

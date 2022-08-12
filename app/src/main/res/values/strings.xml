@@ -11,6 +11,8 @@
 
     <!-- department -->
     <string name="department_title">학과선택</string>
+    <string name="department_snackbar_title">학과 선택을 마치셨나요?</string>
+    <string name="department_snackbar_positive_button">확인</string>
 
     <!-- notice -->
     <string name="notice_title">공지사항</string>
@@ -80,10 +82,26 @@
     <string name="keyword_etc_club">동아리</string>
 
     <!-- error message -->
-    <string name="error_network">서버에 오류가 발생하였습니다.\n 잠시 후 다시 실행해주세요.</string>
-    <string name="error_notice">공지사항을 불러올 수 없습니다.</string>
-    <string name="error_schedule">학사일정을 불러올 수 없습니다.</string>
+    <string name="error_unknown">알 수 없는 오류가 발생했습니다.\n 잠시 후 다시 실행해주세요.</string>
+    <string name="error_internal_server">서버에 오류가 발생하였습니다.\n 잠시 후 다시 실행해주세요.</string>
+    <string name="error_timeout">요청 시간이 초과되었습니다.\n 잠시 후 다시 실행해주세요.</string>
+    <string name="error_bad_request">잘못된 요청입니다.\n 잠시 후 다시 실행해주세요.</string>
+    <string name="error_notice">공지사항을 불러올 수 없습니다.\n 잠시 후 다시 실행해주세요.</string>
+    <string name="error_schedule">학사일정을 불러올 수 없습니다.\n 잠시 후 다시 실행해주세요.</string>
+
+    <!-- loading -->
+    <string name="loading_text">처리중</string>
 
     <!-- alarm -->
     <string name="alarm_title">알림함</string>
+
+    <!-- cafeteria -->
+    <string name="cafeteria_main">오늘의 식단</string>
+    <string name="cafeteria_student">학생식당</string>
+    <string name="cafeteria_employee">교직원식당</string>
+    <string name="cafeteria_menu">메뉴</string>
+    <string name="cafeteria_lunch">점심</string>
+    <string name="cafeteria_time">11:30 ~ 14:00</string>
+    <string name="cafeteria_place">8호관 3층</string>
+    <string name="cafeteria_no_menu">&#128517; 등록된 메뉴가 없어요.</string>
 </resources>

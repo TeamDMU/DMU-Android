@@ -16,7 +16,7 @@ class KeywordRepository(
         keywordDao.updateKeyword(isSubscribe, name)
     }
 
-    fun getIsFirstLaunch(): Boolean? = SharedPreference.getIsFirstLaunch()
+    fun getIsFirstLaunch(): Boolean = SharedPreference.getIsFirstLaunch()
 
     fun setIsFirstLaunch(isFirstLaunch: Boolean) {
         SharedPreference.setIsFirstLaunch(isFirstLaunch)

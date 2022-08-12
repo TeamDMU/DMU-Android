@@ -1,8 +1,12 @@
 package com.dongyang.android.youdongknowme.ui.view.notice
 
 import android.annotation.SuppressLint
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.view.inputmethod.EditorInfo
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.daimajia.androidanimations.library.Techniques
@@ -10,6 +14,7 @@ import com.daimajia.androidanimations.library.YoYo
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentNoticeBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
+import com.dongyang.android.youdongknowme.standard.util.ACTION
 import com.dongyang.android.youdongknowme.standard.util.hideKeyboard
 import com.dongyang.android.youdongknowme.standard.util.showKeyboard
 import com.dongyang.android.youdongknowme.ui.adapter.NoticeAdapter
@@ -30,13 +35,21 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     override val layoutResourceId: Int = R.layout.fragment_notice
     override val viewModel: NoticeViewModel by viewModel()
 
-    private val badgeDrawable : BadgeDrawable by lazy {
+    private val badgeDrawable: BadgeDrawable by lazy {
         BadgeDrawable.create(requireActivity())
     }
 
     private lateinit var adapter: NoticeAdapter
 
+    private val localBroadCast = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            viewModel.refreshNotices()
+        }
+    }
+
     override fun initStartView() {
+
+
         binding.vm = viewModel
         adapter = NoticeAdapter().apply { setItemClickListener(this@NoticeFragment) }
         binding.noticeRvList.apply {
@@ -74,7 +87,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
 
         // 알람 카운트가 0이 아닌 경우에 뱃지 추가
         viewModel.unVisitedAlarmCount.observe(viewLifecycleOwner) { count ->
-            if(count == 0) {
+            if (count == 0) {
                 binding.noticeToolbar.toolbarAlarm.post {
                     BadgeUtils.detachBadgeDrawable(
                         badgeDrawable,
@@ -95,7 +108,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     }
 
     override fun initAfterBinding() {
-        viewModel.getUnVisitedAlarm()
+        viewModel.getUnVisitedAlarmCount()
 
         // 새로고침 했을 때 동작
         binding.noticeSwipe.setOnRefreshListener {
@@ -151,7 +164,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
                 binding.noticeRvList.scrollToPosition(0)
 
                 binding.noticeToolbar.toolbarSearchText.text.clear()
-                if (tab.text == "대학") {
+                if (tab.text == getString(R.string.notice_tab_university)) {
                     viewModel.setTabMode(true)
                 } else {
                     viewModel.setTabMode(false)
@@ -165,6 +178,18 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
                 binding.noticeRvList.smoothScrollToPosition(-10)
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // TODO : LocalBroadcastManager 대신 Livedata 를 활용하는 방법을 알아보기
+        val intentFilter = IntentFilter(ACTION.FCM_ACTION_NAME)
+        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(localBroadCast, intentFilter)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(localBroadCast)
     }
 
     // 아이템 클릭시 자세히 보기 화면으로 이동

@@ -1,28 +1,56 @@
 package com.dongyang.android.youdongknowme.standard.base
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dongyang.android.youdongknowme.R
+import com.dongyang.android.youdongknowme.standard.network.NetworkError
+import com.dongyang.android.youdongknowme.standard.network.NetworkResult
 import kotlinx.coroutines.CoroutineExceptionHandler
 
 abstract class BaseViewModel : ViewModel() {
 
     // 로딩 유무 확인
-    protected val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
+    private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
     val isLoading: LiveData<Boolean> get() = _isLoading
 
     // 서버 연결 확인
-    protected val _errorConnectionState: MutableLiveData<Int> = MutableLiveData()
-    val errorConnectionState: LiveData<Int> = _errorConnectionState
+    private val _errorState: MutableLiveData<Int> = MutableLiveData()
+    val errorState: LiveData<Int> = _errorState
 
-    open val connectionHandler = CoroutineExceptionHandler { _, e ->
-        e.printStackTrace()
+    fun showLoading() {
+        _isLoading.postValue(true)
+    }
+
+    fun dismissLoading() {
         _isLoading.postValue(false)
-        _errorConnectionState.postValue(ERROR_NETWORK)
+    }
+
+    protected fun handleError(result: NetworkResult.Error) {
+        when (result.errorType) {
+            is NetworkError.Unknown -> {
+                _errorState.postValue(ERROR_UNKNOWN)
+            }
+            is NetworkError.Timeout -> {
+                _errorState.postValue(ERROR_TIMEOUT)
+            }
+            is NetworkError.InternalServer -> {
+                _errorState.postValue(ERROR_INTERNAL_SERVER)
+            }
+            is NetworkError.BadRequest -> {
+                val code = (result.errorType).code
+                val msg = (result.errorType).message
+                Log.w("Exception", "BadReuqest :: $code - $msg")
+                _errorState.postValue(ERROR_BAD_REQUEST)
+            }
+        }
     }
 
     companion object {
-        const val ERROR_NETWORK = R.string.error_network
+        private const val ERROR_UNKNOWN = R.string.error_unknown
+        private const val ERROR_TIMEOUT = R.string.error_timeout
+        private const val ERROR_INTERNAL_SERVER = R.string.error_internal_server
+        private const val ERROR_BAD_REQUEST = R.string.error_bad_request
     }
 }

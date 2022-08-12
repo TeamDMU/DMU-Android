@@ -47,7 +47,7 @@ abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel> : Fragment()
     }
 
     private fun connectionCheck() {
-        viewModel.errorConnectionState.observe(viewLifecycleOwner) { resId ->
+        viewModel.errorState.observe(viewLifecycleOwner) { resId ->
             showToast(getString(resId))
         }
     }

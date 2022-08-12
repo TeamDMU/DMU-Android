@@ -6,7 +6,9 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.dongyang.android.youdongknowme.data.local.UserDatabase
 import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
 import com.dongyang.android.youdongknowme.data.repository.*
+import com.dongyang.android.youdongknowme.standard.network.ErrorResponseHandler
 import com.dongyang.android.youdongknowme.ui.view.alarm.AlarmViewModel
+import com.dongyang.android.youdongknowme.ui.view.cafeteria.CafeteriaViewModel
 import com.dongyang.android.youdongknowme.ui.view.depart.DepartViewModel
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailViewModel
 import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordViewModel
@@ -15,32 +17,42 @@ import com.dongyang.android.youdongknowme.ui.view.notice.NoticeViewModel
 import com.dongyang.android.youdongknowme.ui.view.schedule.ScheduleViewModel
 import com.dongyang.android.youdongknowme.ui.view.setting.SettingViewModel
 import com.dongyang.android.youdongknowme.ui.view.splash.SplashViewModel
+import com.dongyang.android.youdongknowme.ui.view.util.ResourceProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val databaseModule = module{
-    single{
-        Room.databaseBuilder(get(),
-            UserDatabase::class.java,"YouDongKnowMe_DB")
+val databaseModule = module {
+    single {
+        Room.databaseBuilder(
+            get(),
+            UserDatabase::class.java, "YouDongKnowMe_DB"
+        )
             .fallbackToDestructiveMigration()
-            .addCallback(object: RoomDatabase.Callback(){
+            .addCallback(object : RoomDatabase.Callback() {
                 override fun onCreate(db: SupportSQLiteDatabase) {
                     super.onCreate(db)
-                    CoroutineScope(IO).launch{
+                    CoroutineScope(IO).launch {
                         get<UserDatabase>().keywordDao().insertKeywordList(defaultKeywordList)
                     }
                 }
             })
             .build()
     }
-    single{
+    single {
         get<UserDatabase>().keywordDao()
     }
-    single{
+    single {
         get<UserDatabase>().alarmDao()
+    }
+}
+
+val networkModule = module {
+    single {
+        ErrorResponseHandler()
     }
 }
 
@@ -72,14 +84,17 @@ val viewModelModule = module {
     viewModel {
         AlarmViewModel(get())
     }
+    viewModel {
+        CafeteriaViewModel(get(), get())
+    }
 }
 
 val repositoryModule = module {
     single {
-        NoticeRepository(get())
+        NoticeRepository(get(), get())
     }
     single {
-        DetailRepository()
+        DetailRepository(get())
     }
     single {
         SplashRepository()
@@ -88,7 +103,7 @@ val repositoryModule = module {
         DepartRepository()
     }
     single {
-        ScheduleRepository()
+        ScheduleRepository(get())
     }
     single {
         KeywordRepository(get())
@@ -98,6 +113,15 @@ val repositoryModule = module {
     }
     single {
         AlarmRepository(get())
+    }
+    single {
+        CafeteriaRepository(get())
+    }
+}
+
+val utilModule = module {
+    single {
+        ResourceProvider(androidContext())
     }
 }
 

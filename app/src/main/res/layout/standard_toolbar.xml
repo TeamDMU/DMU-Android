@@ -2,32 +2,18 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <import type="android.view.View" />
-
-        <variable
-            name="title"
-            type="String" />
-
-        <variable
-            name="vm"
-            type="com.dongyang.android.youdongknowme.ui.view.notice.NoticeViewModel" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/toolbar_title"
+            style="@style/PretendardBold20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@{title}"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -55,6 +41,7 @@
 
                 <EditText
                     android:id="@+id/toolbar_search_text"
+                    style="@style/PretendardRegular12"
                     android:layout_width="0dp"
                     android:layout_height="35dp"
                     android:layout_gravity="center"
@@ -65,8 +52,7 @@
                     android:imeOptions="actionSearch"
                     android:inputType="text"
                     android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:textSize="12sp" />
+                    android:paddingEnd="8dp" />
 
                 <ImageButton
                     android:id="@+id/toolbar_search_text_clear"
@@ -99,9 +85,9 @@
             android:id="@+id/toolbar_alarm_container"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintStart_toEndOf="@id/toolbar_search"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/toolbar_search"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageButton
@@ -118,4 +104,16 @@
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="vm"
+            type="com.dongyang.android.youdongknowme.ui.view.notice.NoticeViewModel" />
+    </data>
 </layout>

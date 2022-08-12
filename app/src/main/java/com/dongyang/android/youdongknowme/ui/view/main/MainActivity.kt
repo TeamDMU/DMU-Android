@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityMainBinding
+import com.dongyang.android.youdongknowme.ui.view.cafeteria.CafeteriaFragment
 import com.dongyang.android.youdongknowme.ui.view.notice.NoticeFragment
 import com.dongyang.android.youdongknowme.ui.view.schedule.ScheduleFragment
 import com.dongyang.android.youdongknowme.ui.view.setting.SettingFragment
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     enum class Tab {
         NOTICE,
         SCHEDULE,
+        CAFETERIA,
         SETTING
     }
 
@@ -42,6 +44,7 @@ class MainActivity : AppCompatActivity() {
                 when (item.itemId) {
                     R.id.menu_main_home -> viewModel.setCurrentFragment(Tab.NOTICE)
                     R.id.menu_main_schedule -> viewModel.setCurrentFragment(Tab.SCHEDULE)
+                    R.id.menu_main_cafeteria -> viewModel.setCurrentFragment(Tab.CAFETERIA)
                     R.id.menu_main_setting -> viewModel.setCurrentFragment(Tab.SETTING)
                     else -> throw IllegalArgumentException("메뉴 아이템을 찾을 수 없습니다.")
                 }
@@ -76,6 +79,7 @@ class MainActivity : AppCompatActivity() {
         return when (tab) {
             Tab.NOTICE -> NoticeFragment.newInstance()
             Tab.SCHEDULE -> ScheduleFragment.newInstance()
+            Tab.CAFETERIA -> CafeteriaFragment.newInstance()
             Tab.SETTING -> SettingFragment.newInstance()
         }
     }

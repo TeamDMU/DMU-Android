@@ -7,6 +7,7 @@ import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.remote.entity.NoticeFileUrl
 import com.dongyang.android.youdongknowme.data.repository.DetailRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
+import com.dongyang.android.youdongknowme.standard.network.NetworkResult
 import kotlinx.coroutines.launch
 
 class DetailViewModel(private val detailRepository: DetailRepository) : BaseViewModel() {
@@ -27,9 +28,6 @@ class DetailViewModel(private val detailRepository: DetailRepository) : BaseView
     private val _fileUrl: MutableLiveData<List<NoticeFileUrl>> = MutableLiveData()
     val fileUrl: LiveData<List<NoticeFileUrl>> get() = _fileUrl
 
-    private val _errorState: MutableLiveData<Int> = MutableLiveData()
-    val errorState: LiveData<Int> = _errorState
-
     // 학과 코드, 게시글 번호 저장
     fun setNoticeDetailInfo(code: Int, num: Int) {
         _code.value = code
@@ -38,34 +36,32 @@ class DetailViewModel(private val detailRepository: DetailRepository) : BaseView
 
     // 공지사항 리스트 호출
     fun fetchNoticeDetail() {
-        _isLoading.postValue(true)
+        showLoading()
 
-        val departCode = _code.value!!
-        val boardNum = _num.value!!
+        val departCode = _code.value ?: DEFAULT_VALUE
+        val boardNum = _num.value ?: DEFAULT_VALUE
 
-        try {
-            viewModelScope.launch(connectionHandler) {
-                val response = detailRepository.fetchNoticeDetail(departCode, boardNum)
-                if (response.isSuccessful) {
-                    val noticeDetail = response.body()
-                    _title.postValue(noticeDetail?.title)
-                    _writer.postValue(noticeDetail?.writer)
-                    _date.postValue(noticeDetail?.date)
-                    _content.postValue(noticeDetail?.content)
-                    _imgUrl.postValue(noticeDetail?.imgUrl)
-                    _fileUrl.postValue(noticeDetail?.fileUrl)
-                } else {
-                    _errorState.postValue(ERROR_NOTICE)
+        viewModelScope.launch {
+            when(val result = detailRepository.fetchNoticeDetail(departCode, boardNum)) {
+                is NetworkResult.Success -> {
+                    val noticeDetail = result.data
+                    _title.postValue(noticeDetail.title)
+                    _writer.postValue(noticeDetail.writer)
+                    _date.postValue(noticeDetail.date)
+                    _content.postValue(noticeDetail.content)
+                    _imgUrl.postValue(noticeDetail.imgUrl)
+                    _fileUrl.postValue(noticeDetail.fileUrl)
+                    dismissLoading()
                 }
-                _isLoading.postValue(false)
+                is NetworkResult.Error -> {
+                    handleError(result)
+                    dismissLoading()
+                }
             }
-        } catch (e: Exception) {
-            _errorState.postValue(ERROR_NOTICE)
-            _isLoading.postValue(false)
         }
     }
 
     companion object {
-        const val ERROR_NOTICE = R.string.error_notice
+        private const val DEFAULT_VALUE = 0
     }
 }

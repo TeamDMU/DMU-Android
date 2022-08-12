@@ -1,12 +1,13 @@
 package com.dongyang.android.youdongknowme.ui.view.depart
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityDepartBinding
-import com.dongyang.android.youdongknowme.standard.util.logd
 import com.dongyang.android.youdongknowme.ui.adapter.DepartAdapter
 import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordActivity
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
@@ -68,10 +69,10 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
     // 확인 버튼을 누르면 내부 DB에 학과를 담고 메인 액티비티로 이동
     private fun getSnackBar(items: ArrayList<String>): Snackbar {
         val snackbar =
-            Snackbar.make(binding.departRcv, "학과 선택을 마치셨나요?", LENGTH_LONG)
-                .setAction("확인") {
-                    viewModel.setDepartment(items[viewModel.selectDepartPosition.value!!])
-                    if(viewModel.isFirstLaunch.value!!) {
+            Snackbar.make(binding.departRcv, getString(R.string.department_snackbar_title), LENGTH_LONG)
+                .setAction(getString(R.string.department_snackbar_positive_button)) {
+                    viewModel.setDepartment(items[viewModel.selectDepartPosition.value ?: 0])
+                    if(viewModel.isFirstLaunch.value == true) {
                         val intent = Intent(this, KeywordActivity::class.java)
                         startActivity(intent)
                         finish()
@@ -82,6 +83,11 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
                         finish()
                     }
                 }
+
+
+        val snackBarView = snackbar.view
+        val snackBarText = snackBarView.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+        snackBarText.typeface = Typeface.createFromAsset(this.assets, "pretendard_regular.otf")
 
         snackbar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
 

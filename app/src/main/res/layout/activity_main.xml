@@ -14,9 +14,9 @@
             android:layout_height="0dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@id/main_nv_bottom"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <com.google.android.material.bottomnavigation.BottomNavigationView

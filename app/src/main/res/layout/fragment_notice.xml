@@ -13,8 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
             app:title="@{@string/notice_title}"
-            app:vm="@{vm}">
-        </include>
+            app:vm="@{vm}" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/notice_main_container"
@@ -27,10 +26,11 @@
                 android:id="@+id/notice_tab"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:tabMode="fixed"
-                app:tabMaxWidth="0dp"
+                app:layout_constraintTop_toTopOf="parent"
                 app:tabGravity="fill"
-                app:layout_constraintTop_toTopOf="parent">
+                app:tabMaxWidth="0dp"
+                app:tabMode="fixed"
+                app:tabTextAppearance="@style/PretendardRegular16">
 
                 <com.google.android.material.tabs.TabItem
                     android:id="@+id/notice_tab_university"
@@ -46,7 +46,7 @@
 
             </com.google.android.material.tabs.TabLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-        
+
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/notice_swipe"
             android:layout_width="match_parent"
@@ -61,35 +61,36 @@
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <LinearLayout
+            bind_visibility_notice_no_data="@{vm.noticeList.empty}"
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:orientation="vertical"
-            bind_visibility_notice_no_data="@{vm.noticeList.empty}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/notice_main_container">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:src="@drawable/ic_no_data"/>
+                android:src="@drawable/ic_no_data" />
 
             <TextView
                 android:id="@+id/notice_no_data"
-                android:layout_marginTop="16dp"
+                style="@style/PretendardBold16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:gravity="center"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:text="@string/notice_notice_not_found_data"/>
+                android:text="@string/notice_notice_not_found_data"
+                android:textColor="@color/line" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <data>
+
         <variable
             name="vm"
             type="com.dongyang.android.youdongknowme.ui.view.notice.NoticeViewModel" />

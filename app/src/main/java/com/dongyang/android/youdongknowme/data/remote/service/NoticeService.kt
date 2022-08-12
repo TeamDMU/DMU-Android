@@ -11,12 +11,12 @@ interface NoticeService {
     @GET("/notice/{code}")
     suspend fun getList(
         @Path("code") code : Int
-    ) : Response<List<Notice>>
+    ) : List<Notice>
 
     @GET("/notice/{code}/search")
     suspend fun getSearchList(
         @Path("code") code : Int,
         @Query("keyword") keyword : String
-    ) : Response<List<Notice>>
+    ) : List<Notice>
 }
 

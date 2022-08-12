@@ -6,11 +6,12 @@ import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
 import com.dongyang.android.youdongknowme.databinding.ActivityKeywordBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
-import com.dongyang.android.youdongknowme.standard.util.logd
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import com.google.firebase.FirebaseApp
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>() {
 
@@ -51,7 +52,7 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
         // TODO :: 안드로이드 데이터베이스에 유저별 설정한 키워드 저장 및 파이어베이스 키워드 구독 설정
         binding.keywordCompleteBtn.setOnClickListener {
             viewModel.subscribeCheckedKeyword()
-            if (viewModel.isFirstLaunch.value!!) {
+            if (viewModel.isFirstLaunch.value == true) {
                 viewModel.setFirstLaunch(false)
                 val intent = Intent(this@KeywordActivity, MainActivity::class.java)
                 startActivity(intent)
@@ -62,7 +63,7 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
 
     private fun setCheckChipChange(vararg chipGroups: ChipGroup) {
 
-        logd("checkList :: ${viewModel.checkKeywordList}")
+        Timber.d("checkList :: ${viewModel.checkKeywordList}")
 
         for (chipGroup in chipGroups) {
             for (index in 0 until chipGroup.childCount) {

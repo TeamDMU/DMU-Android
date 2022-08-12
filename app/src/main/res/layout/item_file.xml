@@ -7,13 +7,13 @@
 
         <TextView
             android:id="@+id/item_file_not_found"
+            style="@style/PretendardRegular12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:bind_visibility_existence="@{file.name.empty}"
-            android:visibility="gone"
             android:padding="6dp"
-            android:textSize="12sp"
             android:text="@string/detail_file_not_found_message"
+            android:visibility="gone"
+            app:bind_visibility_existence="@{file.name.empty}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,21 +22,22 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:bind_visibility_existence="@{!file.name.empty}"
-            android:text="@{file.name}"
             android:gravity="center_vertical"
             android:minHeight="0dp"
-            android:padding="0dp"
             android:onClick="@{() -> itemClickListener.fileClick(file.name, file.url)}"
+            android:padding="0dp"
+            android:text="@{file.name}"
             android:textColor="@color/main"
             android:textSize="12sp"
             android:textStyle="bold"
+            app:bind_visibility_existence="@{!file.name.empty}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <data>
+
         <variable
             name="itemClickListener"
             type="com.dongyang.android.youdongknowme.ui.view.detail.DetailClickListener" />

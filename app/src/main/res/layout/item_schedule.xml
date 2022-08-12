@@ -10,34 +10,35 @@
 
         <TextView
             android:id="@+id/item_schedule_date"
+            style="@style/PretendardRegular12"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="@{schedule.date, default = `05.01 (일) ~ 06.21(화)`}"
-            android:textSize="13sp"
             android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/item_schedule_contents"
             app:layout_constraintHorizontal_weight="0.4"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/item_schedule_contents"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/item_schedule_contents"
+            style="@style/PretendardRegular12"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@{schedule.content, default = `근로자의 날`}"
             android:textSize="13sp"
-            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="0.6"
             app:layout_constraintStart_toEndOf="@id/item_schedule_date"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <data>
+
         <variable
             name="schedule"
             type="com.dongyang.android.youdongknowme.data.remote.entity.Schedule" />

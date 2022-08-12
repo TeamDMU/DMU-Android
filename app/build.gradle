@@ -13,12 +13,12 @@ android {
 
     defaultConfig {
         applicationId "com.dongyang.android.youdongknowme"
-        minSdk 21
+        minSdk 24
         targetSdk 32
         versionCode 1
         versionName "1.0.0"
 
-        buildConfigField "String", "API_KEY", properties['api_key']
+        buildConfigField "String", "API_KEY", properties['API_KEY']
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -29,6 +29,7 @@ android {
         }
     }
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -64,7 +65,11 @@ dependencies {
     def retrofit_version = "2.9.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation "com.squareup.okhttp3:okhttp:4.9.1"
+
+    // OkHttp
+    implementation "com.squareup.okhttp3:okhttp:4.9.3"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"
+    implementation "com.squareup.okhttp3:okhttp-urlconnection:4.9.1"
 
     // Gson
     implementation 'com.google.code.gson:gson:2.8.9'
@@ -95,5 +100,17 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:30.0.0')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-messaging:23.0.5'
+
+    // Timber
+    implementation 'com.jakewharton.timber:timber:5.0.1'
+
+    // Horizontal CalendarView
+    implementation 'com.github.kizitonwose:CalendarView:1.0.4'
+
+    // Flexbox
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
+
+    // MinSdk
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
 }

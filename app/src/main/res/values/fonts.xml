@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="PretendardRegular" parent="android:TextAppearance">
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">@font/pretendard_regular</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="PretendardBold" parent="android:TextAppearance">
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="PretendardRegular10" parent="PretendardRegular">
+        <item name="android:textSize">@dimen/font_size_10</item>
+    </style>
+
+    <style name="PretendardRegular11" parent="PretendardRegular">
+        <item name="android:textSize">@dimen/font_size_11</item>
+    </style>
+
+    <style name="PretendardRegular12" parent="PretendardRegular">
+        <item name="android:textSize">@dimen/font_size_12</item>
+    </style>
+
+    <style name="PretendardRegular14" parent="PretendardRegular">
+        <item name="android:textSize">@dimen/font_size_14</item>
+    </style>
+
+    <style name="PretendardRegular16" parent="PretendardRegular">
+        <item name="android:textSize">@dimen/font_size_16</item>
+    </style>
+
+    <style name="PretendardRegular18" parent="PretendardRegular">
+        <item name="android:textSize">@dimen/font_size_18</item>
+    </style>
+
+    <style name="PretendardRegular20" parent="PretendardRegular">
+        <item name="android:textSize">@dimen/font_size_20</item>
+    </style>
+
+    <style name="PretendardBold10" parent="PretendardBold">
+        <item name="android:textSize">@dimen/font_size_10</item>
+    </style>
+
+    <style name="PretendardBold11" parent="PretendardBold">
+        <item name="android:textSize">@dimen/font_size_11</item>
+    </style>
+
+    <style name="PretendardBold12" parent="PretendardBold">
+        <item name="android:textSize">@dimen/font_size_12</item>
+    </style>
+
+    <style name="PretendardBold14" parent="PretendardBold">
+        <item name="android:textSize">@dimen/font_size_14</item>
+    </style>
+
+    <style name="PretendardBold16" parent="PretendardBold">
+        <item name="android:textSize">@dimen/font_size_16</item>
+    </style>
+
+    <style name="PretendardBold18" parent="PretendardBold">
+        <item name="android:textSize">@dimen/font_size_18</item>
+    </style>
+
+    <style name="PretendardBold20" parent="PretendardBold">
+        <item name="android:textSize">@dimen/font_size_20</item>
+    </style>
+
+    <style name="PretendardBold24" parent="PretendardBold">
+        <item name="android:textSize">@dimen/font_size_24</item>
+    </style>
+
+</resources>

@@ -7,10 +7,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentSettingBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
-import com.dongyang.android.youdongknowme.standard.util.logd
 import com.dongyang.android.youdongknowme.ui.view.depart.DepartActivity
 import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordActivity
-import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 
 /* 설정 화면 */
 class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>() {

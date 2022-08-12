@@ -4,13 +4,11 @@ import CODE
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.remote.entity.Notice
 import com.dongyang.android.youdongknowme.data.repository.NoticeRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
+import com.dongyang.android.youdongknowme.standard.network.NetworkResult
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 /* 공지사항 뷰모델 */
@@ -27,25 +25,15 @@ class NoticeViewModel(
     private val _isSearchMode = MutableLiveData(false)
     val isSearchMode: LiveData<Boolean> get() = _isSearchMode
 
-    private val _universityNoticeList: MutableLiveData<List<Notice>> = MutableLiveData(emptyList())
+    private val _universityNoticeList: MutableLiveData<List<Notice>> = MutableLiveData()
 
-    private val _facultyNoticeList: MutableLiveData<List<Notice>> = MutableLiveData(emptyList())
+    private val _facultyNoticeList: MutableLiveData<List<Notice>> = MutableLiveData()
 
     private val _noticeList: MutableLiveData<List<Notice>> = MutableLiveData()
     val noticeList: LiveData<List<Notice>> = _noticeList
 
     private val _unVisitedAlarmCount: MutableLiveData<Int> = MutableLiveData()
     val unVisitedAlarmCount: LiveData<Int> = _unVisitedAlarmCount
-
-    private val _errorState: MutableLiveData<Int> = MutableLiveData()
-    val errorState: LiveData<Int> = _errorState
-
-    override val connectionHandler = CoroutineExceptionHandler { _, e ->
-        e.printStackTrace()
-        _isLoading.postValue(false)
-        _errorConnectionState.postValue(ERROR_NETWORK)
-        _noticeList.postValue(emptyList())
-    }
 
     // 선택한 탭에 대한 데이터 저장
     fun setTabMode(isUniversityMode: Boolean) {
@@ -54,7 +42,7 @@ class NoticeViewModel(
 
     // 선택 학부에 따라 보여지는 공지사항이 달라지게 설정
     fun setDepartmentCode() {
-        if (isUniversityTab.value!!) { // 대학 공지사항 탭 클릭시 대학 공지사항이 보이게 설정
+        if (isUniversityTab.value == true) { // 대학 공지사항 탭 클릭시 대학 공지사항이 보이게 설정
             _departmentCode.value = CODE.SCHOOL_CODE
         } else {
             _departmentCode.value = noticeRepository.getDepartmentCode()
@@ -68,97 +56,104 @@ class NoticeViewModel(
     }
 
     fun refreshNotices() {
-        _isLoading.postValue(true)
-        try {
-            viewModelScope.launch(connectionHandler) {
-                val response = noticeRepository.fetchNotices(departmentCode.value!!)
-                if (response.isSuccessful) {
-                    val noticeList = response.body()!!
-                    if (departmentCode.value!! == CODE.SCHOOL_CODE) {
-                        _universityNoticeList.value = noticeList
-                        _noticeList.postValue(noticeList)
-                    } else {
-                        _facultyNoticeList.value = noticeList
-                        _noticeList.postValue(noticeList)
+        showLoading()
+        viewModelScope.launch {
+            when (val result = noticeRepository.fetchAllNotices()) {
+                is NetworkResult.Success -> {
+                    val noticeMap = result.data
+
+                    _universityNoticeList.value = noticeMap["school"]
+                    _facultyNoticeList.value = noticeMap["depart"]
+
+                    when(departmentCode.value) {
+                        CODE.SCHOOL_CODE -> {
+                            _noticeList.postValue(noticeMap["school"])
+                        }
+                        else -> {
+                            _noticeList.postValue(noticeMap["depart"])
+                        }
                     }
-                } else {
-                    _errorState.postValue(ERROR_NOTICE)
+                    dismissLoading()
                 }
-                _isLoading.postValue(false)
+                is NetworkResult.Error -> {
+                    handleError(result)
+                    dismissLoading()
+                }
             }
-        } catch (e: Exception) {
-            _errorState.postValue(ERROR_NOTICE)
-            _isLoading.postValue(false)
         }
     }
 
     // 공지사항 리스트 호출
     private fun fetchNotices() {
         // 비어있을 때만 새로 갱신
-        if (_universityNoticeList.value!!.isEmpty() or _facultyNoticeList.value!!.isEmpty()) {
-            _isLoading.postValue(true)
-            try {
-                viewModelScope.launch(connectionHandler) {
-                    val response = noticeRepository.fetchNotices(departmentCode.value!!)
-                    if (response.isSuccessful) {
-                        val noticeList = response.body()!!
+        val universityNoticeList = _universityNoticeList.value ?: emptyList()
+        val facultyNoticeList = _facultyNoticeList.value ?: emptyList()
+
+        if (universityNoticeList.isEmpty() or facultyNoticeList.isEmpty()) {
+            showLoading()
+
+            viewModelScope.launch {
+                when (val result = noticeRepository.fetchNotices(departmentCode.value ?: DEFAULT_VALUE)) {
+                    is NetworkResult.Success -> {
+                        val noticeList = result.data
                         // 네트워크 호출을 줄이기 위해 학교, 학과별 리스트를 따로 보관
-                        if (departmentCode.value!! == CODE.SCHOOL_CODE) {
-                            _universityNoticeList.value = noticeList
-                            _noticeList.postValue(noticeList)
-                        } else {
-                            _facultyNoticeList.value = noticeList
-                            _noticeList.postValue(noticeList)
+                        when(departmentCode.value) {
+                            CODE.SCHOOL_CODE -> {
+                                _universityNoticeList.value = noticeList
+                                _noticeList.postValue(noticeList)
+                            }
+                            else -> {
+                                _facultyNoticeList.value = noticeList
+                                _noticeList.postValue(noticeList)
+                            }
                         }
-                    } else {
-                        _errorState.postValue(ERROR_NOTICE)
+                        dismissLoading()
                     }
-                    _isLoading.postValue(false)
+                    is NetworkResult.Error -> {
+                        handleError(result)
+                        dismissLoading()
+                    }
                 }
-            } catch (e: Exception) {
-                _errorState.postValue(ERROR_NOTICE)
-                _isLoading.postValue(false)
             }
         }
         // 비어있지 않을 때는 저장 데이터 바로 사용
         else {
-            if (departmentCode.value!! == CODE.SCHOOL_CODE) {
-                _noticeList.postValue(_universityNoticeList.value!!)
+            if (departmentCode.value == CODE.SCHOOL_CODE) {
+                _noticeList.postValue(_universityNoticeList.value)
             } else {
-                _noticeList.postValue(_facultyNoticeList.value!!)
+                _noticeList.postValue(_facultyNoticeList.value)
             }
         }
     }
 
     // 검색어가 포함된 공지사항 리스트 호출
     fun fetchSearchNotices(keyword: String) {
-        _isLoading.postValue(true)
-        try {
-            viewModelScope.launch(connectionHandler) {
-                val response = noticeRepository.fetchSearchNotices(departmentCode.value!!, keyword)
-                if (response.isSuccessful) {
-                    val searchList = response.body()
-                    _noticeList.postValue(searchList!!)
-                } else {
-                    _errorState.postValue(ERROR_NOTICE)
+        showLoading()
+
+        viewModelScope.launch {
+            when (val result = noticeRepository.fetchSearchNotices(departmentCode.value ?: DEFAULT_VALUE, keyword)) {
+                is NetworkResult.Success -> {
+                    val searchList = result.data
+                    _noticeList.postValue(searchList)
+                    dismissLoading()
                 }
-                _isLoading.postValue(false)
+                is NetworkResult.Error -> {
+                    handleError(result)
+                    dismissLoading()
+                }
             }
-        } catch (e: Exception) {
-            _errorState.postValue(ERROR_NOTICE)
-            _isLoading.postValue(false)
         }
     }
 
-    companion object {
-        const val ERROR_NOTICE = R.string.error_notice
-    }
-
-    fun getUnVisitedAlarm() {
+    fun getUnVisitedAlarmCount() {
         viewModelScope.launch {
             noticeRepository.getUnVisitedAlarmCount().collect { count ->
                 _unVisitedAlarmCount.postValue(count)
             }
         }
+    }
+
+    companion object {
+        private const val DEFAULT_VALUE = 0
     }
 }
