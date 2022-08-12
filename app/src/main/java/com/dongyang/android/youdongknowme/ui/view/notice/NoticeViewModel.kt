@@ -17,13 +17,16 @@ class NoticeViewModel(
 ) : BaseViewModel() {
 
     private val _isUniversityTab = MutableLiveData(true)
-    val isUniversityTab: LiveData<Boolean> get() = _isUniversityTab
+    val isUniversityTab: LiveData<Boolean> = _isUniversityTab
+
+    private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val isLoading: LiveData<Boolean> = _isLoading
 
     private val _departmentCode: MutableLiveData<Int> = MutableLiveData()
-    val departmentCode: LiveData<Int> get() = _departmentCode
+    val departmentCode: LiveData<Int> = _departmentCode
 
     private val _isSearchMode = MutableLiveData(false)
-    val isSearchMode: LiveData<Boolean> get() = _isSearchMode
+    val isSearchMode: LiveData<Boolean> = _isSearchMode
 
     private val _universityNoticeList: MutableLiveData<List<Notice>> = MutableLiveData()
 
@@ -56,7 +59,7 @@ class NoticeViewModel(
     }
 
     fun refreshNotices() {
-        showLoading()
+        _isLoading.postValue(true)
         viewModelScope.launch {
             when (val result = noticeRepository.fetchAllNotices()) {
                 is NetworkResult.Success -> {
@@ -65,7 +68,7 @@ class NoticeViewModel(
                     _universityNoticeList.value = noticeMap["school"]
                     _facultyNoticeList.value = noticeMap["depart"]
 
-                    when(departmentCode.value) {
+                    when (departmentCode.value) {
                         CODE.SCHOOL_CODE -> {
                             _noticeList.postValue(noticeMap["school"])
                         }
@@ -73,11 +76,12 @@ class NoticeViewModel(
                             _noticeList.postValue(noticeMap["depart"])
                         }
                     }
-                    dismissLoading()
+                    _isLoading.postValue(false)
                 }
                 is NetworkResult.Error -> {
                     handleError(result)
-                    dismissLoading()
+                    _noticeList.postValue(emptyList())
+                    _isLoading.postValue(false)
                 }
             }
         }
@@ -90,14 +94,14 @@ class NoticeViewModel(
         val facultyNoticeList = _facultyNoticeList.value ?: emptyList()
 
         if (universityNoticeList.isEmpty() or facultyNoticeList.isEmpty()) {
-            showLoading()
+            _isLoading.postValue(true)
 
             viewModelScope.launch {
                 when (val result = noticeRepository.fetchNotices(departmentCode.value ?: DEFAULT_VALUE)) {
                     is NetworkResult.Success -> {
                         val noticeList = result.data
                         // 네트워크 호출을 줄이기 위해 학교, 학과별 리스트를 따로 보관
-                        when(departmentCode.value) {
+                        when (departmentCode.value) {
                             CODE.SCHOOL_CODE -> {
                                 _universityNoticeList.value = noticeList
                                 _noticeList.postValue(noticeList)
@@ -107,11 +111,12 @@ class NoticeViewModel(
                                 _noticeList.postValue(noticeList)
                             }
                         }
-                        dismissLoading()
+                        _isLoading.postValue(false)
                     }
                     is NetworkResult.Error -> {
                         handleError(result)
-                        dismissLoading()
+                        _noticeList.postValue(emptyList())
+                        _isLoading.postValue(false)
                     }
                 }
             }
@@ -128,18 +133,18 @@ class NoticeViewModel(
 
     // 검색어가 포함된 공지사항 리스트 호출
     fun fetchSearchNotices(keyword: String) {
-        showLoading()
+        _isLoading.postValue(true)
 
         viewModelScope.launch {
             when (val result = noticeRepository.fetchSearchNotices(departmentCode.value ?: DEFAULT_VALUE, keyword)) {
                 is NetworkResult.Success -> {
                     val searchList = result.data
                     _noticeList.postValue(searchList)
-                    dismissLoading()
+                    _isLoading.postValue(false)
                 }
                 is NetworkResult.Error -> {
                     handleError(result)
-                    dismissLoading()
+                    _isLoading.postValue(false)
                 }
             }
         }

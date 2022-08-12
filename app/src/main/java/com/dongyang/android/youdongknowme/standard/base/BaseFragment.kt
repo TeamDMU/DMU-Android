@@ -12,12 +12,12 @@ import com.dongyang.android.youdongknowme.ui.view.LoadingDialog
 
 abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel> : Fragment() {
 
-    private var _binding : T? = null
+    private var _binding: T? = null
     val binding get() = _binding!!
     abstract val layoutResourceId: Int
     abstract val viewModel: R
 
-    private val loadingDialog : LoadingDialog by lazy {
+    private val loadingDialog: LoadingDialog by lazy {
         LoadingDialog(requireActivity())
     }
 
@@ -36,7 +36,6 @@ abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel> : Fragment()
         binding.lifecycleOwner = viewLifecycleOwner
 
         initStartView()
-        connectionCheck()
         initDataBinding()
         initAfterBinding()
     }
@@ -44,12 +43,6 @@ abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel> : Fragment()
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun connectionCheck() {
-        viewModel.errorState.observe(viewLifecycleOwner) { resId ->
-            showToast(getString(resId))
-        }
     }
 
     protected fun showToast(message: String) =
@@ -77,7 +70,7 @@ abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel> : Fragment()
      * ex) rxjava observe, databinding observe..
      */
 
-    abstract fun initDataBinding( )
+    abstract fun initDataBinding()
 
     /**
      * 바인딩 이후에 할 일을 여기에 구현.

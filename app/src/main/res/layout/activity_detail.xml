@@ -30,115 +30,147 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
-        <TextView
-            android:id="@+id/detail_title"
-            style="@style/PretendardBold16"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginTop="68dp"
-            android:layout_marginEnd="16dp"
-            android:text="@{vm.title}"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            bind_is_loading="@{vm.isLoading()}"
+            bind_is_error="@{vm.title == null}">
 
-        <TextView
-            android:id="@+id/detail_date"
-            style="@style/PretendardRegular12"
+            <TextView
+                android:id="@+id/detail_title"
+                style="@style/PretendardBold16"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@{vm.title}"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/detail_date"
+                style="@style/PretendardRegular12"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="end"
+                android:text="@{vm.date}"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@id/detail_writer"
+                app:layout_constraintTop_toBottomOf="@id/detail_title" />
+
+            <TextView
+                android:id="@+id/detail_writer"
+                style="@style/PretendardRegular12"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="end"
+                android:text="@{vm.writer}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detail_title" />
+
+            <View
+                android:id="@+id/detail_top_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                android:background="#A1333232"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detail_writer" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/detail_file_rcv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detail_top_line"
+                tools:listitem="@layout/item_file" />
+
+            <View
+                android:id="@+id/detail_bot_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                android:background="#A1333232"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detail_file_rcv" />
+
+            <ScrollView
+                android:id="@+id/detail_scroll_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="16dp"
+                android:fillViewport="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detail_bot_line">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/PretendardRegular12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{vm.content}"
+                        android:textColor="#E81C1C1C" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/detail_image_rcv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="16dp"
+                        tools:listitem="@layout/item_image" />
+                </LinearLayout>
+            </ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            bind_visibility_existence="@{vm.errorState != null}"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="16dp"
-            android:gravity="end"
-            android:text="@{vm.date}"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toStartOf="@id/detail_writer"
-            app:layout_constraintTop_toBottomOf="@id/detail_title" />
-
-        <TextView
-            android:id="@+id/detail_writer"
-            style="@style/PretendardRegular12"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="16dp"
-            android:gravity="end"
-            android:text="@{vm.writer}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail_title" />
-
-        <View
-            android:id="@+id/detail_top_line"
-            bind_visibility_on_loading="@{vm.isLoading()}"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="16dp"
-            android:background="#A1333232"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detail_writer" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/detail_file_rcv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail_top_line"
-            tools:listitem="@layout/item_file" />
-
-        <View
-            android:id="@+id/detail_bot_line"
-            bind_visibility_on_loading="@{vm.isLoading()}"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="16dp"
-            android:background="#A1333232"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detail_file_rcv" />
-
-        <ScrollView
-            android:id="@+id/detail_scroll_view"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="16dp"
-            android:fillViewport="true"
+            android:layout_height="200dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detail_bot_line">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-            <LinearLayout
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_error" />
+
+            <TextView
+                android:id="@+id/notice_no_data"
+                style="@style/PretendardRegular16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/notice_notice_not_found_data"
+                android:textColor="@color/line" />
 
-                <TextView
-                    style="@style/PretendardRegular12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{vm.content}"
-                    android:textColor="#E81C1C1C" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/detail_image_rcv"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="16dp"
-                    tools:listitem="@layout/item_image" />
-            </LinearLayout>
-        </ScrollView>
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -147,10 +179,6 @@
         <variable
             name="vm"
             type="com.dongyang.android.youdongknowme.ui.view.detail.DetailViewModel" />
-
-        <variable
-            name="detail"
-            type="com.dongyang.android.youdongknowme.data.remote.entity.NoticeDetail" />
     </data>
 
 </layout>

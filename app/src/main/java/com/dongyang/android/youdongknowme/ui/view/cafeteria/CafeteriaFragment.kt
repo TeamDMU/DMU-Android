@@ -32,6 +32,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     private lateinit var cafeteriaEmployeeAdapter: CafeteriaEmployeeAdapter
 
     override fun initStartView() {
+        binding.vm = viewModel
 
         cafeteriaAdapter = CafeteriaAdapter()
         cafeteriaEmployeeAdapter = CafeteriaEmployeeAdapter()
@@ -71,6 +72,15 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
     override fun initDataBinding() {
 
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            if (it) showLoading()
+            else dismissLoading()
+        }
+
+        viewModel.errorState.observe(this) { resId ->
+            showToast(getString(resId))
+        }
+
         viewModel.stuMenuList.observe(viewLifecycleOwner) {
             cafeteriaAdapter.submitList(it)
         }
@@ -96,6 +106,8 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             binding.cafeteriaCalendar.stopScroll()
             binding.cafeteriaCalendar.smoothScrollToDate(LocalDate.now().minusDays(2))
             notifyDateChanged(viewModel, binding.cafeteriaCalendar, viewModel.selectedDate.value, LocalDate.now())
+
+            if(viewModel.cafeteriaList.value == null) viewModel.fetchCafeteria()
         }
     }
 }
