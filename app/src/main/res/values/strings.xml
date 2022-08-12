@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DM for U</string>
+    <string name="app_name">DMU</string>
     <string name="shared_pref_key">YDKM_DB</string>
     <string name="school">학교</string>
     <string name="dmu">동양미래대학교</string>
