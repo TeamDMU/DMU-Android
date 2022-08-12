@@ -2,8 +2,7 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/selectableItemBackground"
@@ -16,8 +15,8 @@
             android:orientation="vertical">
 
             <TextView
-                style="@style/PretendardRegular12"
                 android:id="@+id/item_calendar_month"
+                style="@style/PretendardRegular12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -26,8 +25,8 @@
                 tools:text="Jun" />
 
             <TextView
-                style="@style/PretendardRegular14"
                 android:id="@+id/item_calendar_date"
+                style="@style/PretendardRegular14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -36,8 +35,8 @@
                 tools:text="16" />
 
             <TextView
-                style="@style/PretendardRegular12"
                 android:id="@+id/item_calendar_day"
+                style="@style/PretendardRegular12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

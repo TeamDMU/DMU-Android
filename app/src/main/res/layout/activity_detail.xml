@@ -125,9 +125,9 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/PretendardRegular12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/PretendardRegular12"
                     android:text="@{vm.content}"
                     android:textColor="#E81C1C1C" />
 

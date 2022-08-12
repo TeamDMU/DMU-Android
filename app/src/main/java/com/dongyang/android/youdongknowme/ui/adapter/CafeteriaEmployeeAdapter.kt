@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dongyang.android.youdongknowme.databinding.ItemCafeteriaMenuBinding
 
-class CafeteriaEmployeeAdapter : RecyclerView.Adapter<CafeteriaEmployeeAdapter.ViewHolder>(){
+class CafeteriaEmployeeAdapter : RecyclerView.Adapter<CafeteriaEmployeeAdapter.ViewHolder>() {
     init {
         setHasStableIds(true)
     }
@@ -14,7 +14,7 @@ class CafeteriaEmployeeAdapter : RecyclerView.Adapter<CafeteriaEmployeeAdapter.V
     private var employee_menu = arrayListOf<String>()
 
     inner class ViewHolder(private val binding: ItemCafeteriaMenuBinding) :
-            RecyclerView.ViewHolder(binding.root) {
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(item: String) {
             binding.menu = item
         }

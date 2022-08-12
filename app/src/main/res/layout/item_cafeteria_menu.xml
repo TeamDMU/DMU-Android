@@ -8,16 +8,17 @@
         android:paddingHorizontal="4dp">
 
         <com.google.android.material.chip.Chip
+            style="@style/PretendardRegular12"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            style="@style/PretendardRegular12"
             android:clickable="false"
-            android:textAlignment="center"
-            android:text="@{menu, default = 해바라기멸치볶음}"/>
+            android:text="@{menu, default = 해바라기멸치볶음}"
+            android:textAlignment="center" />
 
     </LinearLayout>
 
     <data>
+
         <variable
             name="menu"
             type="String" />
