@@ -36,6 +36,11 @@ fun bindIsChecked(view: SwitchCompat, condition: Boolean) {
     view.isChecked = condition
 }
 
+@BindingAdapter("bind_is_loading", "bind_is_error")
+fun bindShowScreen(view: View, isLoading: Boolean, isError: Boolean) {
+    view.visibility = if (isLoading || isError) View.GONE else View.VISIBLE
+}
+
 @SuppressLint("UseCompatLoadingForDrawables")
 @BindingAdapter("bind_background")
 fun bindIsVisited(view: View, condition: Boolean) {
