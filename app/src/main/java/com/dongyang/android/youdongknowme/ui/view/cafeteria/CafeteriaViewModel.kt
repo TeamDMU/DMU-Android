@@ -8,13 +8,25 @@ import com.dongyang.android.youdongknowme.data.repository.CafeteriaRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.standard.network.NetworkResult
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 
 class CafeteriaViewModel(private val cafeteriaRepository: CafeteriaRepository) : BaseViewModel() {
+
+    private val _selectedDate: MutableLiveData<LocalDate> = MutableLiveData(LocalDate.now())
+    val selectedDate: LiveData<LocalDate> = _selectedDate
 
     private val _menuList: MutableLiveData<List<Cafeteria>> = MutableLiveData()
     val menuList: LiveData<List<Cafeteria>> = _menuList
 
-    fun fetchCafeteria() {
+    init {
+        fetchCafeteria()
+    }
+
+    fun updateSelectedDate(selectedDate: LocalDate) {
+        _selectedDate.postValue(selectedDate)
+    }
+
+    private fun fetchCafeteria() {
         viewModelScope.launch {
             showLoading()
             when (val result = cafeteriaRepository.fetchMenuList()) {

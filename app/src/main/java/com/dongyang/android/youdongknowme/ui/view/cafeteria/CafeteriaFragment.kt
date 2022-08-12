@@ -4,10 +4,8 @@ import android.content.Context
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.WindowManager
-import androidx.core.content.ContextCompat
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentCafeteriaBinding
-import com.dongyang.android.youdongknowme.databinding.ItemCalendarDayBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
 import com.dongyang.android.youdongknowme.ui.adapter.CafeteriaAdapter
 import com.dongyang.android.youdongknowme.ui.adapter.CafeteriaEmployeeAdapter
@@ -15,15 +13,13 @@ import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.ui.DayBinder
-import com.kizitonwose.calendarview.ui.ViewContainer
 import com.kizitonwose.calendarview.utils.Size
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
-import java.time.format.DateTimeFormatter
 
-class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewModel>() {
+class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewModel>(), CalendarInterface {
 
     companion object {
         fun newInstance() = CafeteriaFragment()
@@ -31,12 +27,6 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
     override val layoutResourceId: Int = R.layout.fragment_cafeteria
     override val viewModel: CafeteriaViewModel by viewModel()
-
-    private var selectedDate = LocalDate.now()
-
-    private val dateFormatter = DateTimeFormatter.ofPattern("dd")
-    private val dayFormatter = DateTimeFormatter.ofPattern("EEE")
-    private val monthFormatter = DateTimeFormatter.ofPattern("MMM")
 
     private lateinit var cafeteriaAdapter: CafeteriaAdapter
     private lateinit var cafeteriaEmployeeAdapter: CafeteriaEmployeeAdapter
@@ -76,36 +66,9 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             daySize = Size(dayWidth, dayHeight)
         }
 
-        class DayViewContainer(view: View) : ViewContainer(view) {
-            val bind = ItemCalendarDayBinding.bind(view)
-            lateinit var day: CalendarDay
-
-            init {
-                view.setOnClickListener {
-                    if (selectedDate != day.date) {
-                        notifyDateChanged(day.date)
-                    }
-                }
-            }
-
-            fun bind(day: CalendarDay) {
-                this.day = day
-                bind.itemCalendarDate.text = dateFormatter.format(day.date)
-                bind.itemCalendarDay.text = dayFormatter.format(day.date)
-                bind.itemCalendarMonth.text = monthFormatter.format(day.date)
-
-                bind.itemCalendarDate.setTextColor(
-                    ContextCompat.getColor(
-                        view.context,
-                        if (day.date == selectedDate) R.color.main else R.color.black
-                    )
-                )
-            }
-        }
-
-        binding.cafeteriaCalendar.dayBinder = object : DayBinder<DayViewContainer> {
-            override fun create(view: View) = DayViewContainer(view)
-            override fun bind(container: DayViewContainer, day: CalendarDay) = container.bind(day)
+        binding.cafeteriaCalendar.dayBinder = object : DayBinder<CafeteriaContainer> {
+            override fun create(view: View): CafeteriaContainer = CafeteriaContainer(view, binding.cafeteriaCalendar, viewModel)
+            override fun bind(container: CafeteriaContainer, day: CalendarDay) = container.bind(day)
         }
     }
 
@@ -129,16 +92,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         if (!hidden) {
             binding.cafeteriaCalendar.stopScroll()
             binding.cafeteriaCalendar.smoothScrollToDate(LocalDate.now().minusDays(2))
-            notifyDateChanged(LocalDate.now())
+            notifyDateChanged(viewModel, binding.cafeteriaCalendar, viewModel.selectedDate.value, LocalDate.now())
         }
     }
-
-    fun notifyDateChanged(selectedDate: LocalDate) {
-        val oldDate = this.selectedDate
-        this.selectedDate = selectedDate
-        binding.cafeteriaCalendar.notifyDateChanged(selectedDate)
-        oldDate.let { binding.cafeteriaCalendar.notifyDateChanged(it) }
-    }
 }
-
-
