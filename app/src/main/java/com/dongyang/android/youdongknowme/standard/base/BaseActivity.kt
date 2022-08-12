@@ -13,7 +13,7 @@ abstract class BaseActivity<T : ViewDataBinding, R : BaseViewModel> : AppCompatA
     abstract val layoutResourceId: Int
     abstract val viewModel: R
 
-    private val loadingDialog : LoadingDialog by lazy {
+    private val loadingDialog: LoadingDialog by lazy {
         LoadingDialog(this)
     }
 
@@ -24,7 +24,6 @@ abstract class BaseActivity<T : ViewDataBinding, R : BaseViewModel> : AppCompatA
         setContentView(binding.root)
 
         initStartView()
-        connectionCheck()
         initDataBinding()
         initAfterBinding()
     }
@@ -42,12 +41,6 @@ abstract class BaseActivity<T : ViewDataBinding, R : BaseViewModel> : AppCompatA
 
     protected fun configureToolbar() {
         TODO()
-    }
-
-    private fun connectionCheck() {
-        viewModel.errorState.observe(this) { resId ->
-            showToast(getString(resId))
-        }
     }
 
     /**
