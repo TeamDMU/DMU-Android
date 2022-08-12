@@ -56,15 +56,15 @@ class CafeteriaViewModel(
     }
 
     private fun updateMenuList(selectedDate: String) {
-        val cafeterias = _cafeteriaList.value ?: emptyList()
+        val cafeteriaList = _cafeteriaList.value ?: emptyList()
 
-        cafeterias.forEach { it.date = it.date.substring(0 until 10) }
+        cafeteriaList.forEach { it.date = it.date.substring(0 until 10) }
 
-        val stuMenu = cafeterias.find {
+        val stuMenu = cafeteriaList.find {
             it.date == selectedDate && it.restaurant == resourceProvider.getString(R.string.cafeteria_student) && it.menuContent != "-"
         }?.menuContent ?: ""
 
-        val eduMenu = cafeterias.find {
+        val eduMenu = cafeteriaList.find {
             it.date == selectedDate && it.restaurant == resourceProvider.getString(R.string.cafeteria_employee) && it.menuContent != "-"
         }?.menuContent ?: ""
 
