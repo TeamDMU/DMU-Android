@@ -62,10 +62,10 @@
             <TextView
                 android:id="@+id/cafeteria_info_time"
                 style="@style/PretendardRegular12"
-                android:layout_marginStart="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginStart="4dp"
                 android:text="@string/cafeteria_time"
                 android:textColor="@color/line"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -86,8 +86,8 @@
                 style="@style/PretendardBold16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
                 android:text="@string/cafeteria_student"
                 android:textColor="@color/black" />
 
@@ -95,8 +95,8 @@
                 android:id="@+id/stu_menu_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="36dp"
                 tools:listitem="@layout/item_cafeteria_menu" />
 
         </com.google.android.material.card.MaterialCardView>
@@ -116,8 +116,8 @@
                 style="@style/PretendardBold16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
                 android:text="@string/cafeteria_employee"
                 android:textColor="@color/black" />
 
@@ -125,8 +125,8 @@
                 android:id="@+id/employee_menu_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="36dp"
                 tools:listitem="@layout/item_cafeteria_menu" />
 
         </com.google.android.material.card.MaterialCardView>

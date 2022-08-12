@@ -10,44 +10,44 @@
         <TextView
             android:id="@+id/alarm_title"
             style="@style/PretendardBold20"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/alarm_title"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/alarm_exit_btn"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_back" />
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/alarm_rcv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            tools:listitem="@layout/item_alarm"
             android:layout_marginTop="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/alarm_title" />
+            app:layout_constraintTop_toBottomOf="@id/alarm_title"
+            tools:listitem="@layout/item_alarm" />
 
         <LinearLayout
+            bind_visibility_notice_no_data="@{vm.alarmList.empty}"
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:orientation="vertical"
             android:visibility="gone"
-            bind_visibility_notice_no_data="@{vm.alarmList.empty}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/alarm_title">
 
             <ImageView
@@ -59,11 +59,12 @@
             <TextView
                 android:id="@+id/notice_no_data"
                 style="@style/PretendardBold16"
-                android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:gravity="center"
-                android:text="@string/notice_notice_not_found_data" />
+                android:text="@string/notice_notice_not_found_data"
+                android:textColor="@color/line" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

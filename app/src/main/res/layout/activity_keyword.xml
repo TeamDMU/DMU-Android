@@ -60,9 +60,9 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
+                        style="@style/PretendardBold16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/PretendardBold16"
                         android:layout_marginStart="5dp"
                         android:text="@string/keyword_class"
                         android:textColor="@color/black" />
@@ -132,9 +132,9 @@
                     app:layout_constraintTop_toBottomOf="@id/keyword_class_container">
 
                     <TextView
+                        style="@style/PretendardBold16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/PretendardBold16"
                         android:layout_marginStart="5dp"
                         android:text="@string/keyword_money"
                         android:textColor="@color/black" />
@@ -195,9 +195,9 @@
                     app:layout_constraintTop_toBottomOf="@id/keyword_money_container">
 
                     <TextView
+                        style="@style/PretendardBold16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/PretendardBold16"
                         android:layout_marginStart="5dp"
                         android:text="@string/keyword_academic"
                         android:textColor="@color/black" />
@@ -273,9 +273,9 @@
                     app:layout_constraintTop_toBottomOf="@id/keyword_academic_container">
 
                     <TextView
+                        style="@style/PretendardBold16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/PretendardBold16"
                         android:layout_marginStart="5dp"
                         android:text="@string/keyword_employment"
                         android:textColor="@color/black" />
@@ -351,9 +351,9 @@
                     app:layout_constraintTop_toBottomOf="@id/keyword_employment_container">
 
                     <TextView
+                        style="@style/PretendardBold16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/PretendardBold16"
                         android:layout_marginStart="5dp"
                         android:text="@string/keyword_etc"
                         android:textColor="@color/black" />
@@ -397,9 +397,9 @@
 
         <Button
             android:id="@+id/keyword_complete_btn"
+            style="@style/PretendardBold16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/PretendardBold16"
             android:layout_marginHorizontal="16dp"
             android:text="@string/keyword_complete"
             android:textColor="@color/white"
