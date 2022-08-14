@@ -17,11 +17,14 @@ import kotlinx.coroutines.launch
 /* 학사 일정 뷰모델 */
 class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : BaseViewModel() {
 
-    private val _scheduleList = MutableLiveData<List<Schedule>>()
-    val scheduleList: LiveData<List<Schedule>> get() = _scheduleList
+    private val _errorState: MutableLiveData<Int> = MutableLiveData()
+    val errorState: LiveData<Int> = _errorState
 
     private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
     val isLoading: LiveData<Boolean> get() = _isLoading
+
+    private val _scheduleList = MutableLiveData<List<Schedule>>()
+    val scheduleList: LiveData<List<Schedule>> get() = _scheduleList
 
     private val _pickYear = MutableLiveData<Int>()
 
@@ -48,7 +51,7 @@ class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : Ba
                         _isLoading.postValue(false)
                     }
                     is NetworkResult.Error -> {
-                        handleError(result)
+                        handleError(result, _errorState)
                         _isLoading.postValue(false)
                     }
                 }
