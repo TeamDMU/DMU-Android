@@ -73,7 +73,8 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cafeteria_stu_menu_container"
-            bind_visibility_on_loading="@{vm.isLoading}"
+            bind_is_error="@{vm.cafeteriaList == null}"
+            bind_is_loading="@{vm.isLoading()}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -104,7 +105,8 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cafeteria_emp_menu_container"
-            bind_visibility_on_loading="@{vm.isLoading}"
+            bind_is_error="@{vm.cafeteriaList == null}"
+            bind_is_loading="@{vm.isLoading()}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -132,6 +134,49 @@
                 tools:listitem="@layout/item_cafeteria_menu" />
 
         </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            bind_is_error="@{vm.cafeteriaList != null}"
+            bind_is_loading="@{vm.isLoading()}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintVertical_bias="0.6"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/ic_error" />
+
+            <TextView
+                android:id="@+id/notice_no_data"
+                style="@style/PretendardRegular16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="@string/error_network"
+                android:textColor="@color/line" />
+
+            <Button
+                android:id="@+id/cafeteria_refresh"
+                style="@style/PretendardRegular12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_button_main_radius"
+                android:drawableLeft="@drawable/ic_refresh"
+                android:minHeight="0dp"
+                android:text="@string/error_refresh"
+                android:textColor="@color/main" />
+
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <data>

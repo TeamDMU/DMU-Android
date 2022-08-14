@@ -16,11 +16,17 @@ class NoticeViewModel(
     private val noticeRepository: NoticeRepository
 ) : BaseViewModel() {
 
-    private val _isUniversityTab = MutableLiveData(true)
-    val isUniversityTab: LiveData<Boolean> = _isUniversityTab
+    private val _errorState: MutableLiveData<Int> = MutableLiveData()
+    val errorState: LiveData<Int> = _errorState
 
     private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
     val isLoading: LiveData<Boolean> = _isLoading
+
+    private val _isError: MutableLiveData<Boolean> = MutableLiveData()
+    val isError: LiveData<Boolean> = _isError
+
+    private val _isUniversityTab = MutableLiveData(true)
+    val isUniversityTab: LiveData<Boolean> = _isUniversityTab
 
     private val _departmentCode: MutableLiveData<Int> = MutableLiveData()
     val departmentCode: LiveData<Int> = _departmentCode
@@ -76,11 +82,12 @@ class NoticeViewModel(
                             _noticeList.postValue(noticeMap["depart"])
                         }
                     }
+                    _isError.postValue(false)
                     _isLoading.postValue(false)
                 }
                 is NetworkResult.Error -> {
-                    handleError(result)
-                    _noticeList.postValue(emptyList())
+                    handleError(result, _errorState)
+                    _isError.postValue(true)
                     _isLoading.postValue(false)
                 }
             }
@@ -111,11 +118,12 @@ class NoticeViewModel(
                                 _noticeList.postValue(noticeList)
                             }
                         }
+                        _isError.postValue(false)
                         _isLoading.postValue(false)
                     }
                     is NetworkResult.Error -> {
-                        handleError(result)
-                        _noticeList.postValue(emptyList())
+                        handleError(result, _errorState)
+                        _isError.postValue(true)
                         _isLoading.postValue(false)
                     }
                 }
@@ -140,10 +148,12 @@ class NoticeViewModel(
                 is NetworkResult.Success -> {
                     val searchList = result.data
                     _noticeList.postValue(searchList)
+                    _isError.postValue(false)
                     _isLoading.postValue(false)
                 }
                 is NetworkResult.Error -> {
-                    handleError(result)
+                    handleError(result, _errorState)
+                    _isError.postValue(true)
                     _isLoading.postValue(false)
                 }
             }

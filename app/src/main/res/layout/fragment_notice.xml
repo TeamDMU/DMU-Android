@@ -56,36 +56,89 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/notice_rv_list"
+                bind_is_error="@{vm.isError()}"
+                bind_is_loading="@{vm.isLoading()}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-        <LinearLayout
-            bind_visibility_notice_no_data="@{vm.noticeList.empty}"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
-            android:layout_height="250dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/notice_main_container">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:src="@drawable/ic_error" />
+            <LinearLayout
+                android:id="@+id/notice_error_container"
+                bind_is_error="@{!vm.isError()}"
+                bind_is_loading="@{vm.isLoading()}"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/notice_no_data"
-                style="@style/PretendardRegular16"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:gravity="center"
-                android:text="@string/error_network"
-                android:textColor="@color/line" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/ic_error" />
 
-        </LinearLayout>
+                <TextView
+                    style="@style/PretendardRegular16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="@string/error_network"
+                    android:textColor="@color/line" />
+
+                <Button
+                    android:id="@+id/notice_refresh"
+                    style="@style/PretendardRegular12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_button_main_radius"
+                    android:drawableLeft="@drawable/ic_refresh"
+                    android:minHeight="0dp"
+                    android:text="@string/error_refresh"
+                    android:textColor="@color/main" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/notice_no_data_container"
+                bind_is_error="@{!vm.noticeList.empty}"
+                bind_is_loading="@{vm.isLoading()}"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/ic_no_data" />
+
+                <TextView
+                    style="@style/PretendardRegular16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/error_not_found_data"
+                    android:textColor="@color/line" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <data>

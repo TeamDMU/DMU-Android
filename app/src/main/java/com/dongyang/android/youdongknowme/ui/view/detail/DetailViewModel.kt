@@ -11,6 +11,9 @@ import kotlinx.coroutines.launch
 
 class DetailViewModel(private val detailRepository: DetailRepository) : BaseViewModel() {
 
+    private val _errorState: MutableLiveData<Int> = MutableLiveData()
+    val errorState: LiveData<Int> = _errorState
+
     private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
     val isLoading: LiveData<Boolean> get() = _isLoading
 
@@ -56,7 +59,7 @@ class DetailViewModel(private val detailRepository: DetailRepository) : BaseView
                     _isLoading.postValue(false)
                 }
                 is NetworkResult.Error -> {
-                    handleError(result)
+                    handleError(result, _errorState)
                     _isLoading.postValue(false)
                 }
             }
