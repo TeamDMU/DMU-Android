@@ -139,7 +139,7 @@
             bind_is_error="@{vm.cafeteriaList != null}"
             bind_is_loading="@{vm.isLoading()}"
             android:layout_width="0dp"
-            android:layout_height="250dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintVertical_bias="0.6"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -161,6 +161,19 @@
                 android:gravity="center"
                 android:text="@string/error_network"
                 android:textColor="@color/line" />
+
+            <Button
+                android:id="@+id/cafeteria_refresh"
+                style="@style/PretendardRegular12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_button_main_radius"
+                android:drawableLeft="@drawable/ic_refresh"
+                android:minHeight="0dp"
+                android:text="@string/error_refresh"
+                android:textColor="@color/main" />
 
         </LinearLayout>
 

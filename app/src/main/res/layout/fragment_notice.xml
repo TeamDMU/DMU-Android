@@ -73,15 +73,15 @@
 
             <LinearLayout
                 android:id="@+id/notice_error_container"
+                bind_is_error="@{!vm.isError()}"
+                bind_is_loading="@{vm.isLoading()}"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                bind_is_error="@{!vm.isError()}"
-                bind_is_loading="@{vm.isLoading()}"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -99,30 +99,30 @@
 
                 <Button
                     android:id="@+id/notice_refresh"
-                    android:background="@drawable/bg_button_main_radius"
                     style="@style/PretendardRegular12"
-                    android:text="다시 시도"
-                    android:layout_marginTop="12dp"
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/main"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_button_main_radius"
                     android:drawableLeft="@drawable/ic_refresh"
-                    android:minHeight="0dp"/>
+                    android:minHeight="0dp"
+                    android:text="@string/error_refresh"
+                    android:textColor="@color/main" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/notice_no_data_container"
+                bind_is_error="@{!vm.noticeList.empty}"
+                bind_is_loading="@{vm.isLoading()}"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                bind_is_error="@{!vm.noticeList.empty}"
-                bind_is_loading="@{vm.isLoading()}"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -135,7 +135,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/error_not_found_data"
-                    android:textColor="@color/line"/>
+                    android:textColor="@color/line" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
