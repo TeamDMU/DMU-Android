@@ -178,6 +178,10 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
                 binding.noticeRvList.smoothScrollToPosition(-10)
             }
         })
+
+        binding.noticeRefresh.setOnClickListener {
+            viewModel.refreshNotices()
+        }
     }
 
     override fun onResume() {
