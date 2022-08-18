@@ -7,19 +7,16 @@ import com.dongyang.android.youdongknowme.databinding.FragmentScheduleBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
 import com.dongyang.android.youdongknowme.ui.adapter.ScheduleAdapter
 import com.prolificinteractive.materialcalendarview.CalendarDay
-import org.threeten.bp.LocalDate
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.threeten.bp.LocalDate
 
 /* 학사 일정 화면 */
 class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel>() {
-    companion object {
-        fun newInstance() = ScheduleFragment()
-    }
 
     override val layoutResourceId: Int = R.layout.fragment_schedule
     override val viewModel: ScheduleViewModel by viewModel()
 
-    private lateinit var adapter : ScheduleAdapter
+    private lateinit var adapter: ScheduleAdapter
 
     override fun initStartView() {
         viewModel.setPickedDate(binding.scheduleCalendar.currentDate)
@@ -34,7 +31,7 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
 
     override fun initDataBinding() {
         viewModel.isLoading.observe(viewLifecycleOwner) {
-            if(it) showLoading()
+            if (it) showLoading()
             else dismissLoading()
         }
 
@@ -55,8 +52,7 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
 
         // 최소 날짜, 최대 날짜 지정
         binding.scheduleCalendar.apply {
-            this.state().edit().
-                setMinimumDate(CalendarDay.from(2022, 1, 1))
+            this.state().edit().setMinimumDate(CalendarDay.from(2022, 1, 1))
                 .setMaximumDate(CalendarDay.from(2023, 2, 28))
                 .commit()
         }

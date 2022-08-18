@@ -21,10 +21,6 @@ import java.time.YearMonth
 
 class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewModel>(), CalendarInterface {
 
-    companion object {
-        fun newInstance() = CafeteriaFragment()
-    }
-
     override val layoutResourceId: Int = R.layout.fragment_cafeteria
     override val viewModel: CafeteriaViewModel by viewModel()
 
@@ -65,7 +61,9 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         }
 
         binding.cafeteriaCalendar.dayBinder = object : DayBinder<CafeteriaContainer> {
-            override fun create(view: View): CafeteriaContainer = CafeteriaContainer(view, binding.cafeteriaCalendar, viewModel)
+            override fun create(view: View): CafeteriaContainer =
+                CafeteriaContainer(view, binding.cafeteriaCalendar, viewModel)
+
             override fun bind(container: CafeteriaContainer, day: CalendarDay) = container.bind(day)
         }
     }
@@ -109,9 +107,14 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         if (!hidden) {
             binding.cafeteriaCalendar.stopScroll()
             binding.cafeteriaCalendar.smoothScrollToDate(LocalDate.now().minusDays(2))
-            notifyDateChanged(viewModel, binding.cafeteriaCalendar, viewModel.selectedDate.value, LocalDate.now())
+            notifyDateChanged(
+                viewModel,
+                binding.cafeteriaCalendar,
+                viewModel.selectedDate.value,
+                LocalDate.now()
+            )
 
-            if(viewModel.cafeteriaList.value == null) viewModel.fetchCafeteria()
+            if (viewModel.cafeteriaList.value == null) viewModel.fetchCafeteria()
         }
     }
 }

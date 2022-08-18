@@ -28,10 +28,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 /* 공지 사항 화면 */
 class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), NoticeClickListener {
 
-    companion object {
-        fun newInstance() = NoticeFragment()
-    }
-
     override val layoutResourceId: Int = R.layout.fragment_notice
     override val viewModel: NoticeViewModel by viewModel()
 
@@ -48,8 +44,6 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     }
 
     override fun initStartView() {
-
-
         binding.vm = viewModel
         adapter = NoticeAdapter().apply { setItemClickListener(this@NoticeFragment) }
         binding.noticeRvList.apply {
@@ -188,7 +182,8 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         super.onResume()
         // TODO : LocalBroadcastManager 대신 Livedata 를 활용하는 방법을 알아보기
         val intentFilter = IntentFilter(ACTION.FCM_ACTION_NAME)
-        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(localBroadCast, intentFilter)
+        LocalBroadcastManager.getInstance(requireContext())
+            .registerReceiver(localBroadCast, intentFilter)
     }
 
     override fun onStop() {
