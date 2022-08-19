@@ -31,7 +31,7 @@ class NoticeViewModel(
     private val _departmentCode: MutableLiveData<Int> = MutableLiveData()
     val departmentCode: LiveData<Int> = _departmentCode
 
-    private val _isSearchMode = MutableLiveData(false)
+    private val _isSearchMode: MutableLiveData<Boolean> = MutableLiveData()
     val isSearchMode: LiveData<Boolean> = _isSearchMode
 
     private val _universityNoticeList: MutableLiveData<List<Notice>> = MutableLiveData()
@@ -45,57 +45,24 @@ class NoticeViewModel(
     val unVisitedAlarmCount: LiveData<Int> = _unVisitedAlarmCount
 
     init {
-        _selectedTab.value = Event(NoticeTabType.SCHOOL)
+        updateSelectedTabType(NoticeTabType.SCHOOL)
+        updateSearchMode(false)
     }
 
     // 선택한 탭에 대한 데이터 저장
     fun updateSelectedTabType(tabType: NoticeTabType) {
         _selectedTab.value = Event(tabType)
+        setDepartmentCode()
     }
 
     // 선택 학부에 따라 보여지는 공지사항이 달라지게 설정
-    fun setDepartmentCode() {
+    private fun setDepartmentCode() {
         if (selectedTab.value?.peekContent() == NoticeTabType.SCHOOL) { // 대학 공지사항 탭 클릭시 대학 공지사항이 보이게 설정
             _departmentCode.value = CODE.SCHOOL_CODE
         } else {
             _departmentCode.value = noticeRepository.getDepartmentCode()
         }
         fetchNotices()
-    }
-
-    // 검색 모드 활성화 상태 체크
-    fun updateSearchMode(value: Boolean) {
-        _isSearchMode.postValue(value)
-    }
-
-    fun refreshNotices() {
-        _isLoading.postValue(true)
-        viewModelScope.launch {
-            when (val result = noticeRepository.fetchAllNotices()) {
-                is NetworkResult.Success -> {
-                    val noticeMap = result.data
-
-                    _universityNoticeList.value = noticeMap["school"]
-                    _facultyNoticeList.value = noticeMap["depart"]
-
-                    when (departmentCode.value) {
-                        CODE.SCHOOL_CODE -> {
-                            _noticeList.postValue(noticeMap["school"])
-                        }
-                        else -> {
-                            _noticeList.postValue(noticeMap["depart"])
-                        }
-                    }
-                    _isError.postValue(false)
-                    _isLoading.postValue(false)
-                }
-                is NetworkResult.Error -> {
-                    handleError(result, _errorState)
-                    _isError.postValue(true)
-                    _isLoading.postValue(false)
-                }
-            }
-        }
     }
 
     // 공지사항 리스트 호출
@@ -136,10 +103,40 @@ class NoticeViewModel(
         }
         // 비어있지 않을 때는 저장 데이터 바로 사용
         else {
-            if (departmentCode.value == CODE.SCHOOL_CODE) {
+            if (departmentCode.value == CODE.SCHOOL_CODE)
                 _noticeList.postValue(_universityNoticeList.value)
-            } else {
+            else
                 _noticeList.postValue(_facultyNoticeList.value)
+
+        }
+    }
+
+    fun refreshNotices() {
+        _isLoading.postValue(true)
+        viewModelScope.launch {
+            when (val result = noticeRepository.fetchAllNotices()) {
+                is NetworkResult.Success -> {
+                    val noticeMap = result.data
+
+                    _universityNoticeList.value = noticeMap["school"]
+                    _facultyNoticeList.value = noticeMap["depart"]
+
+                    when (departmentCode.value) {
+                        CODE.SCHOOL_CODE -> {
+                            _noticeList.postValue(noticeMap["school"])
+                        }
+                        else -> {
+                            _noticeList.postValue(noticeMap["depart"])
+                        }
+                    }
+                    _isError.postValue(false)
+                    _isLoading.postValue(false)
+                }
+                is NetworkResult.Error -> {
+                    handleError(result, _errorState)
+                    _isError.postValue(true)
+                    _isLoading.postValue(false)
+                }
             }
         }
     }
@@ -166,6 +163,11 @@ class NoticeViewModel(
                 }
             }
         }
+    }
+
+    // 검색 모드 활성화 상태 체크
+    fun updateSearchMode(value: Boolean) {
+        _isSearchMode.postValue(value)
     }
 
     fun getUnVisitedAlarmCount() {

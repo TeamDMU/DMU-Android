@@ -54,6 +54,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
             this.setHasFixedSize(true)
             this.addItemDecoration(DividerItemDecoration(requireActivity(), 1))
         }
+        setupTabLayout()
     }
 
     @SuppressLint("UnsafeOptInUsageError")
@@ -70,14 +71,6 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
 
         viewModel.errorState.observe(viewLifecycleOwner, EventObserver { resId ->
             showToast(getString(resId))
-        })
-
-        viewModel.selectedTab.observe(viewLifecycleOwner, EventObserver { tab ->
-            // 구성 변경에 대비, 선택한 탭이 무엇인지 저장
-            viewModel.setDepartmentCode()
-            if (tab == NoticeTabType.FACULTY) {
-                binding.noticeTab.getTabAt(1)?.select()
-            }
         })
 
         // 알람 카운트가 0이 아닌 경우에 뱃지 추가
@@ -159,14 +152,13 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
                 binding.noticeRvList.scrollToPosition(0)
 
                 binding.noticeToolbar.toolbarSearchText.text.clear()
-                if (tab.text == getString(R.string.notice_tab_university)) {
+                if (tab.text == getString(R.string.notice_tab_university))
                     viewModel.updateSelectedTabType(NoticeTabType.SCHOOL)
-                } else {
+                else
                     viewModel.updateSelectedTabType(NoticeTabType.FACULTY)
-                }
             }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {} // 구현 X
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
 
             // 다시 클릭시 스크롤되게 설정
             override fun onTabReselected(tab: TabLayout.Tab?) {
@@ -179,9 +171,13 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         }
     }
 
+    private fun setupTabLayout() {
+        if (viewModel.selectedTab.value?.peekContent() == NoticeTabType.FACULTY)
+            binding.noticeTab.getTabAt(1)?.select()
+    }
+
     override fun onResume() {
         super.onResume()
-        // TODO : LocalBroadcastManager 대신 Livedata 를 활용하는 방법을 알아보기
         val intentFilter = IntentFilter(ACTION.FCM_ACTION_NAME)
         LocalBroadcastManager.getInstance(requireContext())
             .registerReceiver(localBroadCast, intentFilter)
