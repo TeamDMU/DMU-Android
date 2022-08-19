@@ -22,6 +22,7 @@ import com.dongyang.android.youdongknowme.databinding.ActivityDetailBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.adapter.FileAdapter
 import com.dongyang.android.youdongknowme.ui.adapter.ImageAdapter
+import com.dongyang.android.youdongknowme.ui.view.util.EventObserver
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 
@@ -68,9 +69,9 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
             else dismissLoading()
         }
 
-        viewModel.errorState.observe(this) { resId ->
+        viewModel.errorState.observe(this, EventObserver { resId ->
             showToast(getString(resId))
-        }
+        })
 
         viewModel.fileUrl.observe(this) {
             if (it.isNotEmpty())

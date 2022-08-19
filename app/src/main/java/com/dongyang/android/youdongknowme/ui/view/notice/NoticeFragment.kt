@@ -20,6 +20,7 @@ import com.dongyang.android.youdongknowme.standard.util.showKeyboard
 import com.dongyang.android.youdongknowme.ui.adapter.NoticeAdapter
 import com.dongyang.android.youdongknowme.ui.view.alarm.AlarmActivity
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailActivity
+import com.dongyang.android.youdongknowme.ui.view.util.EventObserver
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.badge.BadgeUtils
 import com.google.android.material.tabs.TabLayout
@@ -67,17 +68,17 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
             adapter.submitList(it)
         }
 
-        viewModel.errorState.observe(viewLifecycleOwner) { resId ->
+        viewModel.errorState.observe(viewLifecycleOwner, EventObserver { resId ->
             showToast(getString(resId))
-        }
+        })
 
-        viewModel.isUniversityTab.observe(viewLifecycleOwner) {
+        viewModel.selectedTab.observe(viewLifecycleOwner, EventObserver { tab ->
             // 구성 변경에 대비, 선택한 탭이 무엇인지 저장
             viewModel.setDepartmentCode()
-            if (!it) {
+            if (tab == NoticeTabType.FACULTY) {
                 binding.noticeTab.getTabAt(1)?.select()
             }
-        }
+        })
 
         // 알람 카운트가 0이 아닌 경우에 뱃지 추가
         viewModel.unVisitedAlarmCount.observe(viewLifecycleOwner) { count ->
@@ -116,14 +117,14 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
             if (viewModel.isSearchMode.value == false) {
                 binding.noticeToolbar.toolbarSearchText.requestFocus()
                 binding.noticeToolbar.toolbarSearchText.showKeyboard()
-                viewModel.setSearchMode(true)
+                viewModel.updateSearchMode(true)
                 YoYo.with(Techniques.FadeInUp)
                     .duration(400)
                     .playOn(binding.noticeToolbar.toolbarSearchView)
             } else {
                 binding.noticeToolbar.toolbarSearchText.hideKeyboard()
                 binding.noticeToolbar.toolbarSearchText.text.clear()
-                viewModel.setSearchMode(false)
+                viewModel.updateSearchMode(false)
                 YoYo.with(Techniques.FadeOutDown)
                     .duration(400)
                     .playOn(binding.noticeToolbar.toolbarSearchView)
@@ -159,9 +160,9 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
 
                 binding.noticeToolbar.toolbarSearchText.text.clear()
                 if (tab.text == getString(R.string.notice_tab_university)) {
-                    viewModel.setTabMode(true)
+                    viewModel.updateSelectedTabType(NoticeTabType.SCHOOL)
                 } else {
-                    viewModel.setTabMode(false)
+                    viewModel.updateSelectedTabType(NoticeTabType.FACULTY)
                 }
             }
 

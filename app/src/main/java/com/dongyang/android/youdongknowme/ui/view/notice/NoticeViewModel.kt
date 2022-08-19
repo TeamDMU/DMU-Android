@@ -8,7 +8,7 @@ import com.dongyang.android.youdongknowme.data.remote.entity.Notice
 import com.dongyang.android.youdongknowme.data.repository.NoticeRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.standard.network.NetworkResult
-import kotlinx.coroutines.flow.collect
+import com.dongyang.android.youdongknowme.ui.view.util.Event
 import kotlinx.coroutines.launch
 
 /* 공지사항 뷰모델 */
@@ -16,8 +16,8 @@ class NoticeViewModel(
     private val noticeRepository: NoticeRepository
 ) : BaseViewModel() {
 
-    private val _errorState: MutableLiveData<Int> = MutableLiveData()
-    val errorState: LiveData<Int> = _errorState
+    private val _errorState: MutableLiveData<Event<Int>> = MutableLiveData()
+    val errorState: LiveData<Event<Int>> = _errorState
 
     private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -25,8 +25,8 @@ class NoticeViewModel(
     private val _isError: MutableLiveData<Boolean> = MutableLiveData()
     val isError: LiveData<Boolean> = _isError
 
-    private val _isUniversityTab = MutableLiveData(true)
-    val isUniversityTab: LiveData<Boolean> = _isUniversityTab
+    private val _selectedTab: MutableLiveData<Event<NoticeTabType>> = MutableLiveData()
+    val selectedTab: LiveData<Event<NoticeTabType>> = _selectedTab
 
     private val _departmentCode: MutableLiveData<Int> = MutableLiveData()
     val departmentCode: LiveData<Int> = _departmentCode
@@ -44,14 +44,18 @@ class NoticeViewModel(
     private val _unVisitedAlarmCount: MutableLiveData<Int> = MutableLiveData()
     val unVisitedAlarmCount: LiveData<Int> = _unVisitedAlarmCount
 
+    init {
+        _selectedTab.value = Event(NoticeTabType.SCHOOL)
+    }
+
     // 선택한 탭에 대한 데이터 저장
-    fun setTabMode(isUniversityMode: Boolean) {
-        _isUniversityTab.value = isUniversityMode
+    fun updateSelectedTabType(tabType: NoticeTabType) {
+        _selectedTab.value = Event(tabType)
     }
 
     // 선택 학부에 따라 보여지는 공지사항이 달라지게 설정
     fun setDepartmentCode() {
-        if (isUniversityTab.value == true) { // 대학 공지사항 탭 클릭시 대학 공지사항이 보이게 설정
+        if (selectedTab.value?.peekContent() == NoticeTabType.SCHOOL) { // 대학 공지사항 탭 클릭시 대학 공지사항이 보이게 설정
             _departmentCode.value = CODE.SCHOOL_CODE
         } else {
             _departmentCode.value = noticeRepository.getDepartmentCode()
@@ -60,7 +64,7 @@ class NoticeViewModel(
     }
 
     // 검색 모드 활성화 상태 체크
-    fun setSearchMode(value: Boolean) {
+    fun updateSearchMode(value: Boolean) {
         _isSearchMode.postValue(value)
     }
 
@@ -104,7 +108,8 @@ class NoticeViewModel(
             _isLoading.postValue(true)
 
             viewModelScope.launch {
-                when (val result = noticeRepository.fetchNotices(departmentCode.value ?: DEFAULT_VALUE)) {
+                when (val result =
+                    noticeRepository.fetchNotices(departmentCode.value ?: DEFAULT_VALUE)) {
                     is NetworkResult.Success -> {
                         val noticeList = result.data
                         // 네트워크 호출을 줄이기 위해 학교, 학과별 리스트를 따로 보관
@@ -144,7 +149,10 @@ class NoticeViewModel(
         _isLoading.postValue(true)
 
         viewModelScope.launch {
-            when (val result = noticeRepository.fetchSearchNotices(departmentCode.value ?: DEFAULT_VALUE, keyword)) {
+            when (val result = noticeRepository.fetchSearchNotices(
+                departmentCode.value ?: DEFAULT_VALUE,
+                keyword
+            )) {
                 is NetworkResult.Success -> {
                     val searchList = result.data
                     _noticeList.postValue(searchList)

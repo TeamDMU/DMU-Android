@@ -7,12 +7,13 @@ import com.dongyang.android.youdongknowme.data.remote.entity.NoticeFileUrl
 import com.dongyang.android.youdongknowme.data.repository.DetailRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.standard.network.NetworkResult
+import com.dongyang.android.youdongknowme.ui.view.util.Event
 import kotlinx.coroutines.launch
 
 class DetailViewModel(private val detailRepository: DetailRepository) : BaseViewModel() {
 
-    private val _errorState: MutableLiveData<Int> = MutableLiveData()
-    val errorState: LiveData<Int> = _errorState
+    private val _errorState: MutableLiveData<Event<Int>> = MutableLiveData()
+    val errorState: LiveData<Event<Int>> = _errorState
 
     private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
     val isLoading: LiveData<Boolean> get() = _isLoading

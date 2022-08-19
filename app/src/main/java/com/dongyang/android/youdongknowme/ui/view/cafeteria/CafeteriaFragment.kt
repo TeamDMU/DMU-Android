@@ -9,6 +9,7 @@ import com.dongyang.android.youdongknowme.databinding.FragmentCafeteriaBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
 import com.dongyang.android.youdongknowme.ui.adapter.CafeteriaAdapter
 import com.dongyang.android.youdongknowme.ui.adapter.CafeteriaEmployeeAdapter
+import com.dongyang.android.youdongknowme.ui.view.util.EventObserver
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.kizitonwose.calendarview.model.CalendarDay
@@ -75,9 +76,9 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             else dismissLoading()
         }
 
-        viewModel.errorState.observe(this) { resId ->
+        viewModel.errorState.observe(viewLifecycleOwner, EventObserver { resId ->
             showToast(getString(resId))
-        }
+        })
 
         viewModel.stuMenuList.observe(viewLifecycleOwner) {
             cafeteriaAdapter.submitList(it)
