@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dmu_navigation"
+    app:startDestination="@id/noticeFragment">
+
+    <keep_state_fragment
+        android:id="@+id/noticeFragment"
+        android:name="com.dongyang.android.youdongknowme.ui.view.notice.NoticeFragment"
+        android:label="NoticeFragment"
+        tools:layout="@layout/fragment_notice"/>
+    <keep_state_fragment
+        android:id="@+id/scheduleFragment"
+        android:name="com.dongyang.android.youdongknowme.ui.view.schedule.ScheduleFragment"
+        android:label="ScheduleFragment"
+        tools:layout="@layout/fragment_schedule"/>
+    <keep_state_fragment
+        android:id="@+id/cafeteriaFragment"
+        android:name="com.dongyang.android.youdongknowme.ui.view.cafeteria.CafeteriaFragment"
+        android:label="CafeteriaFragment"
+        tools:layout="@layout/fragment_cafeteria"/>
+    <keep_state_fragment
+        android:id="@+id/settingFragment"
+        android:name="com.dongyang.android.youdongknowme.ui.view.setting.SettingFragment"
+        android:label="SettingFragment"
+        tools:layout="@layout/fragment_setting"/>
+</navigation>

@@ -2,28 +2,18 @@ package com.dongyang.android.youdongknowme.ui.view.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.plusAssign
+import androidx.navigation.ui.setupWithNavController
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityMainBinding
-import com.dongyang.android.youdongknowme.ui.view.cafeteria.CafeteriaFragment
-import com.dongyang.android.youdongknowme.ui.view.notice.NoticeFragment
-import com.dongyang.android.youdongknowme.ui.view.schedule.ScheduleFragment
-import com.dongyang.android.youdongknowme.ui.view.setting.SettingFragment
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.dongyang.android.youdongknowme.ui.view.util.KeepStateNavigator
 
 
 /* 메인 액티비티 */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val viewModel: MainViewModel by viewModel()
-
-    enum class Tab {
-        NOTICE,
-        SCHEDULE,
-        CAFETERIA,
-        SETTING
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,56 +21,14 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        initNavigationView()
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.main_nav_container) as NavHostFragment
+        val navController = navHostFragment.navController
 
-        viewModel.currentFragmentType.observe(this) {
-            changeFragment(it)
-        }
-    }
-
-    private fun initNavigationView() {
-        binding.mainNvBottom.run {
-            setOnItemSelectedListener { item ->
-                when (item.itemId) {
-                    R.id.menu_main_home -> viewModel.setCurrentFragment(Tab.NOTICE)
-                    R.id.menu_main_schedule -> viewModel.setCurrentFragment(Tab.SCHEDULE)
-                    R.id.menu_main_cafeteria -> viewModel.setCurrentFragment(Tab.CAFETERIA)
-                    R.id.menu_main_setting -> viewModel.setCurrentFragment(Tab.SETTING)
-                    else -> throw IllegalArgumentException("메뉴 아이템을 찾을 수 없습니다.")
-                }
-                true
-            }
-        }
-    }
-
-    private fun changeFragment(tab: Tab) {
-        val transaction = supportFragmentManager.beginTransaction()
-        var target = supportFragmentManager.findFragmentByTag(tab.name)
-
-        if (target == null) {
-            target = getFragment(tab)
-            transaction.add(R.id.main_container, target, tab.name)
-        }
-
-        transaction.show(target)
-
-        Tab.values()
-            .filterNot { it == tab }
-            .forEach { type ->
-                supportFragmentManager.findFragmentByTag(type.name)?.let { it ->
-                    transaction.hide(it)
-                }
-            }
-
-        transaction.commitAllowingStateLoss()
-    }
-
-    private fun getFragment(tab: Tab): Fragment {
-        return when (tab) {
-            Tab.NOTICE -> NoticeFragment.newInstance()
-            Tab.SCHEDULE -> ScheduleFragment.newInstance()
-            Tab.CAFETERIA -> CafeteriaFragment.newInstance()
-            Tab.SETTING -> SettingFragment.newInstance()
-        }
+        val navigator =
+            KeepStateNavigator(this, navHostFragment.childFragmentManager, binding.mainNavContainer.id)
+        navController.navigatorProvider += navigator
+        navController.setGraph(R.navigation.dmu_navigation)
+        binding.mainNvBottom.setupWithNavController(navController)
     }
 }
