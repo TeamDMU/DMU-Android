@@ -166,7 +166,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
             }
         })
 
-        binding.noticeRefresh.setOnClickListener {
+        binding.noticeErrorContainer.refresh.setOnClickListener {
             viewModel.refreshNotices()
         }
     }

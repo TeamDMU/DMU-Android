@@ -107,7 +107,6 @@ class NoticeViewModel(
                 _noticeList.postValue(_universityNoticeList.value)
             else
                 _noticeList.postValue(_facultyNoticeList.value)
-
         }
     }
 

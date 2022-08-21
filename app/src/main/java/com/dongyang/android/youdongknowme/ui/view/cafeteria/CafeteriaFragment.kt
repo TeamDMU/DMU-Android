@@ -98,7 +98,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
         binding.cafeteriaCalendar.scrollToDate(LocalDate.now().minusDays(2))
 
-        binding.cafeteriaRefresh.setOnClickListener {
+        binding.cafeteriaErrorContainer.refresh.setOnClickListener {
             viewModel.fetchCafeteria()
         }
     }

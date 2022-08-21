@@ -91,6 +91,10 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
         binding.detailExitBtn.setOnClickListener {
             finish()
         }
+
+        binding.detailErrorContainer.refresh.setOnClickListener {
+            viewModel.fetchNoticeDetail()
+        }
     }
 
     // 파일 클릭했을 때 동작
