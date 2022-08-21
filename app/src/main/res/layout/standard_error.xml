@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_error" />
+
+        <TextView
+            style="@style/PretendardRegular14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/error_network"
+            android:textColor="@color/line" />
+
+        <Button
+            android:id="@+id/refresh"
+            style="@style/PretendardRegular12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_button_main_radius"
+            android:drawableLeft="@drawable/ic_refresh"
+            android:minHeight="0dp"
+            android:text="@string/error_refresh"
+            android:textColor="@color/main" />
+
+    </LinearLayout>
+</layout>
