@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.dongyang.android.youdongknowme.ui.view.LoadingDialog
+import com.dongyang.android.youdongknowme.ui.view.util.toast
 
 abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel> : Fragment() {
 
@@ -45,8 +45,10 @@ abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel> : Fragment()
         _binding = null
     }
 
-    protected fun showToast(message: String) =
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    protected fun showToast(message: String) {
+        requireActivity().applicationContext.toast(message)
+    }
+
 
     protected fun showLoading() {
         loadingDialog.show()

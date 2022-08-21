@@ -1,11 +1,11 @@
 package com.dongyang.android.youdongknowme.standard.base
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.dongyang.android.youdongknowme.ui.view.LoadingDialog
+import com.dongyang.android.youdongknowme.ui.view.util.toast
 
 abstract class BaseActivity<T : ViewDataBinding, R : BaseViewModel> : AppCompatActivity() {
 
@@ -28,8 +28,10 @@ abstract class BaseActivity<T : ViewDataBinding, R : BaseViewModel> : AppCompatA
         initAfterBinding()
     }
 
-    protected fun showToast(message: String) =
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    protected fun showToast(message: String) {
+        applicationContext.toast(message)
+    }
+
 
     protected fun showLoading() {
         loadingDialog.show()
