@@ -17,6 +17,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/notice_main_container"
+            bind_is_error="@{vm.isError()}"
+            bind_is_loading="@{vm.isLoading()}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/notice_toolbar"
@@ -62,83 +64,43 @@
                 android:layout_height="match_parent" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
+            bind_is_error="@{!vm.isError()}"
+            bind_is_loading="@{vm.isLoading()}"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/notice_main_container">
 
-            <LinearLayout
+            <include
                 android:id="@+id/notice_error_container"
-                bind_is_error="@{!vm.isError()}"
-                bind_is_loading="@{vm.isLoading()}"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                layout="@layout/standard_error"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center" />
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:src="@drawable/ic_error" />
+        </ScrollView>
 
-                <TextView
-                    style="@style/PretendardRegular16"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center"
-                    android:text="@string/error_network"
-                    android:textColor="@color/line" />
+        <ScrollView
+            bind_is_error="@{!vm.noticeList.empty}"
+            bind_is_loading="@{vm.isLoading()}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/notice_main_container">
 
-                <Button
-                    android:id="@+id/notice_refresh"
-                    style="@style/PretendardRegular12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="12dp"
-                    android:background="@drawable/bg_button_main_radius"
-                    android:drawableLeft="@drawable/ic_refresh"
-                    android:minHeight="0dp"
-                    android:text="@string/error_refresh"
-                    android:textColor="@color/main" />
-
-            </LinearLayout>
-
-            <LinearLayout
+            <include
                 android:id="@+id/notice_no_data_container"
-                bind_is_error="@{!vm.noticeList.empty}"
-                bind_is_loading="@{vm.isLoading()}"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                layout="@layout/standard_no_data"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center" />
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:src="@drawable/ic_no_data" />
-
-                <TextView
-                    style="@style/PretendardRegular16"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/error_not_found_data"
-                    android:textColor="@color/line" />
-            </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <data>
