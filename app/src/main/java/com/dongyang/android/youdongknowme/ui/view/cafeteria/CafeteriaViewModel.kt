@@ -21,6 +21,9 @@ class CafeteriaViewModel(
     private val _errorState: MutableLiveData<Event<Int>> = MutableLiveData()
     val errorState: LiveData<Event<Int>> = _errorState
 
+    private val _isError: MutableLiveData<Boolean> = MutableLiveData()
+    val isError: LiveData<Boolean> = _isError
+
     private val _isLoading: MutableLiveData<Boolean> = MutableLiveData(true)
     val isLoading: LiveData<Boolean> = _isLoading
 
@@ -48,10 +51,12 @@ class CafeteriaViewModel(
                 is NetworkResult.Success -> {
                     val menuList = result.data
                     _cafeteriaList.postValue(menuList)
+                    _isError.postValue(false)
                     _isLoading.postValue(false)
                 }
                 is NetworkResult.Error -> {
                     handleError(result, _errorState)
+                    _isError.postValue(true)
                     _isLoading.postValue(false)
                 }
             }
