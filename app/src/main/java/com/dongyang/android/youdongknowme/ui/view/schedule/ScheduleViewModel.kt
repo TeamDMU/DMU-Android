@@ -8,6 +8,7 @@ import com.dongyang.android.youdongknowme.data.remote.entity.Schedule
 import com.dongyang.android.youdongknowme.data.repository.ScheduleRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.standard.network.NetworkResult
+import com.dongyang.android.youdongknowme.ui.view.util.Event
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.prolificinteractive.materialcalendarview.CalendarDay
@@ -17,8 +18,8 @@ import kotlinx.coroutines.launch
 /* 학사 일정 뷰모델 */
 class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : BaseViewModel() {
 
-    private val _errorState: MutableLiveData<Int> = MutableLiveData()
-    val errorState: LiveData<Int> = _errorState
+    private val _errorState: MutableLiveData<Event<Int>> = MutableLiveData()
+    val errorState: LiveData<Event<Int>> = _errorState
 
     private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
     val isLoading: LiveData<Boolean> get() = _isLoading

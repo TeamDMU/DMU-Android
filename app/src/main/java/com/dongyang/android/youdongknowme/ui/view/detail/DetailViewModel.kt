@@ -7,12 +7,16 @@ import com.dongyang.android.youdongknowme.data.remote.entity.NoticeFileUrl
 import com.dongyang.android.youdongknowme.data.repository.DetailRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.standard.network.NetworkResult
+import com.dongyang.android.youdongknowme.ui.view.util.Event
 import kotlinx.coroutines.launch
 
 class DetailViewModel(private val detailRepository: DetailRepository) : BaseViewModel() {
 
-    private val _errorState: MutableLiveData<Int> = MutableLiveData()
-    val errorState: LiveData<Int> = _errorState
+    private val _errorState: MutableLiveData<Event<Int>> = MutableLiveData()
+    val errorState: LiveData<Event<Int>> = _errorState
+
+    private val _isError: MutableLiveData<Boolean> = MutableLiveData()
+    val isError: LiveData<Boolean> = _isError
 
     private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
     val isLoading: LiveData<Boolean> get() = _isLoading
@@ -56,10 +60,12 @@ class DetailViewModel(private val detailRepository: DetailRepository) : BaseView
                     _content.postValue(noticeDetail.content)
                     _imgUrl.postValue(noticeDetail.imgUrl)
                     _fileUrl.postValue(noticeDetail.fileUrl)
+                    _isError.postValue(false)
                     _isLoading.postValue(false)
                 }
                 is NetworkResult.Error -> {
                     handleError(result, _errorState)
+                    _isError.postValue(true)
                     _isLoading.postValue(false)
                 }
             }

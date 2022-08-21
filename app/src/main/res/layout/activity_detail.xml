@@ -145,29 +145,17 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
-            bind_visibility_existence="@{vm.errorState != null}"
-            android:layout_width="0dp"
-            android:layout_height="250dp"
-            android:orientation="vertical"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            bind_is_error="@{!vm.isError}"
+            bind_is_loading="@{vm.isLoading()}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <ImageView
+            <include
+                android:id="@+id/detail_error_container"
+                layout="@layout/standard_error"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:src="@drawable/ic_error" />
-
-            <TextView
-                style="@style/PretendardRegular16"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:gravity="center"
-                android:text="@string/error_network"
-                android:textColor="@color/line" />
-
+                android:layout_height="match_parent"
+                android:layout_gravity="center" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,6 +8,7 @@ import com.dongyang.android.youdongknowme.data.remote.entity.Cafeteria
 import com.dongyang.android.youdongknowme.data.repository.CafeteriaRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.standard.network.NetworkResult
+import com.dongyang.android.youdongknowme.ui.view.util.Event
 import com.dongyang.android.youdongknowme.ui.view.util.ResourceProvider
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -17,13 +18,16 @@ class CafeteriaViewModel(
     private val resourceProvider: ResourceProvider,
 ) : BaseViewModel() {
 
-    private val _errorState: MutableLiveData<Int> = MutableLiveData()
-    val errorState: LiveData<Int> = _errorState
+    private val _errorState: MutableLiveData<Event<Int>> = MutableLiveData()
+    val errorState: LiveData<Event<Int>> = _errorState
+
+    private val _isError: MutableLiveData<Boolean> = MutableLiveData()
+    val isError: LiveData<Boolean> = _isError
 
     private val _isLoading: MutableLiveData<Boolean> = MutableLiveData(true)
     val isLoading: LiveData<Boolean> = _isLoading
 
-    private val _selectedDate: MutableLiveData<LocalDate> = MutableLiveData(LocalDate.now())
+    private val _selectedDate: MutableLiveData<LocalDate> = MutableLiveData()
     val selectedDate: LiveData<LocalDate> = _selectedDate
 
     private val _cafeteriaList: MutableLiveData<List<Cafeteria>> = MutableLiveData()
@@ -47,10 +51,12 @@ class CafeteriaViewModel(
                 is NetworkResult.Success -> {
                     val menuList = result.data
                     _cafeteriaList.postValue(menuList)
+                    _isError.postValue(false)
                     _isLoading.postValue(false)
                 }
                 is NetworkResult.Error -> {
                     handleError(result, _errorState)
+                    _isError.postValue(true)
                     _isLoading.postValue(false)
                 }
             }

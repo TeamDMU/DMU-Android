@@ -20,6 +20,7 @@ import com.dongyang.android.youdongknowme.standard.util.showKeyboard
 import com.dongyang.android.youdongknowme.ui.adapter.NoticeAdapter
 import com.dongyang.android.youdongknowme.ui.view.alarm.AlarmActivity
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailActivity
+import com.dongyang.android.youdongknowme.ui.view.util.EventObserver
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.badge.BadgeUtils
 import com.google.android.material.tabs.TabLayout
@@ -53,6 +54,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
             this.setHasFixedSize(true)
             this.addItemDecoration(DividerItemDecoration(requireActivity(), 1))
         }
+        setupTabLayout()
     }
 
     @SuppressLint("UnsafeOptInUsageError")
@@ -67,17 +69,9 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
             adapter.submitList(it)
         }
 
-        viewModel.errorState.observe(viewLifecycleOwner) { resId ->
+        viewModel.errorState.observe(viewLifecycleOwner, EventObserver { resId ->
             showToast(getString(resId))
-        }
-
-        viewModel.isUniversityTab.observe(viewLifecycleOwner) {
-            // 구성 변경에 대비, 선택한 탭이 무엇인지 저장
-            viewModel.setDepartmentCode()
-            if (!it) {
-                binding.noticeTab.getTabAt(1)?.select()
-            }
-        }
+        })
 
         // 알람 카운트가 0이 아닌 경우에 뱃지 추가
         viewModel.unVisitedAlarmCount.observe(viewLifecycleOwner) { count ->
@@ -116,14 +110,14 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
             if (viewModel.isSearchMode.value == false) {
                 binding.noticeToolbar.toolbarSearchText.requestFocus()
                 binding.noticeToolbar.toolbarSearchText.showKeyboard()
-                viewModel.setSearchMode(true)
+                viewModel.updateSearchMode(true)
                 YoYo.with(Techniques.FadeInUp)
                     .duration(400)
                     .playOn(binding.noticeToolbar.toolbarSearchView)
             } else {
                 binding.noticeToolbar.toolbarSearchText.hideKeyboard()
                 binding.noticeToolbar.toolbarSearchText.text.clear()
-                viewModel.setSearchMode(false)
+                viewModel.updateSearchMode(false)
                 YoYo.with(Techniques.FadeOutDown)
                     .duration(400)
                     .playOn(binding.noticeToolbar.toolbarSearchView)
@@ -158,14 +152,13 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
                 binding.noticeRvList.scrollToPosition(0)
 
                 binding.noticeToolbar.toolbarSearchText.text.clear()
-                if (tab.text == getString(R.string.notice_tab_university)) {
-                    viewModel.setTabMode(true)
-                } else {
-                    viewModel.setTabMode(false)
-                }
+                if (tab.text == getString(R.string.notice_tab_university))
+                    viewModel.updateSelectedTabType(NoticeTabType.SCHOOL)
+                else
+                    viewModel.updateSelectedTabType(NoticeTabType.FACULTY)
             }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {} // 구현 X
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
 
             // 다시 클릭시 스크롤되게 설정
             override fun onTabReselected(tab: TabLayout.Tab?) {
@@ -173,14 +166,18 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
             }
         })
 
-        binding.noticeRefresh.setOnClickListener {
+        binding.noticeErrorContainer.refresh.setOnClickListener {
             viewModel.refreshNotices()
         }
     }
 
+    private fun setupTabLayout() {
+        if (viewModel.selectedTab.value?.peekContent() == NoticeTabType.FACULTY)
+            binding.noticeTab.getTabAt(1)?.select()
+    }
+
     override fun onResume() {
         super.onResume()
-        // TODO : LocalBroadcastManager 대신 Livedata 를 활용하는 방법을 알아보기
         val intentFilter = IntentFilter(ACTION.FCM_ACTION_NAME)
         LocalBroadcastManager.getInstance(requireContext())
             .registerReceiver(localBroadCast, intentFilter)

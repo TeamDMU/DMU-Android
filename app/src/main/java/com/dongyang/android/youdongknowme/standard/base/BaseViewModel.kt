@@ -1,32 +1,30 @@
 package com.dongyang.android.youdongknowme.standard.base
 
-import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.standard.network.NetworkError
 import com.dongyang.android.youdongknowme.standard.network.NetworkResult
-import kotlinx.coroutines.CoroutineExceptionHandler
+import com.dongyang.android.youdongknowme.ui.view.util.Event
 
 abstract class BaseViewModel : ViewModel() {
 
-    protected fun handleError(result: NetworkResult.Error, errorState: MutableLiveData<Int>) {
+    protected fun handleError(
+        result: NetworkResult.Error,
+        errorState: MutableLiveData<Event<Int>>
+    ) {
         when (result.errorType) {
             is NetworkError.Unknown -> {
-                errorState.postValue(ERROR_UNKNOWN)
+                errorState.postValue(Event(ERROR_UNKNOWN))
             }
             is NetworkError.Timeout -> {
-                errorState.postValue(ERROR_TIMEOUT)
+                errorState.postValue(Event(ERROR_TIMEOUT))
             }
             is NetworkError.InternalServer -> {
-                errorState.postValue(ERROR_INTERNAL_SERVER)
+                errorState.postValue(Event(ERROR_INTERNAL_SERVER))
             }
             is NetworkError.BadRequest -> {
-                val code = (result.errorType).code
-                val msg = (result.errorType).message
-                Log.w("Exception", "BadReuqest :: $code - $msg")
-                errorState.postValue(ERROR_BAD_REQUEST)
+                errorState.postValue(Event(ERROR_BAD_REQUEST))
             }
         }
     }
