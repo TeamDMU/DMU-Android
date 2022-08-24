@@ -12,6 +12,7 @@ import com.dongyang.android.youdongknowme.ui.view.cafeteria.CafeteriaViewModel
 import com.dongyang.android.youdongknowme.ui.view.depart.DepartViewModel
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailViewModel
 import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordViewModel
+import com.dongyang.android.youdongknowme.ui.view.license.LicenseViewModel
 import com.dongyang.android.youdongknowme.ui.view.notice.NoticeViewModel
 import com.dongyang.android.youdongknowme.ui.view.schedule.ScheduleViewModel
 import com.dongyang.android.youdongknowme.ui.view.setting.SettingViewModel
@@ -82,6 +83,9 @@ val viewModelModule = module {
     }
     viewModel {
         CafeteriaViewModel(get(), get())
+    }
+    viewModel {
+        LicenseViewModel()
     }
 }
 
