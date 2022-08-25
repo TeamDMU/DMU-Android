@@ -6,6 +6,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ImageButton
+            android:id="@+id/toolbar_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:visibility="@{exitVisible ? View.VISIBLE:View.GONE}"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/toolbar_title"
             style="@style/PretendardBold20"
@@ -25,7 +37,6 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
-            android:visibility="visible"
             app:bind_visibility_search="@{vm.isSearchMode}"
             app:cardCornerRadius="18dp"
             app:cardUseCompatPadding="true"
@@ -63,9 +74,7 @@
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:gravity="center"
                     android:src="@drawable/ic_close_black" />
-
             </LinearLayout>
-
         </androidx.cardview.widget.CardView>
 
         <ImageButton
@@ -79,7 +88,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <FrameLayout
             android:id="@+id/toolbar_alarm_container"
@@ -105,8 +113,11 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <data>
-
         <import type="android.view.View" />
+
+        <variable
+            name="exitVisible"
+            type="java.lang.Boolean"/>
 
         <variable
             name="title"
