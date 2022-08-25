@@ -47,7 +47,7 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
             this.setHasFixedSize(true)
         }
 
-        binding.departExitBtn.setOnClickListener {
+        binding.departToolbar.toolbarExit.setOnClickListener {
             finish()
         }
 
