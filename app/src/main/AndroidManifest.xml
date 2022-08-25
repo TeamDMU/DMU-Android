@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YouDongKnowMe">
         <activity
-            android:name=".LicenseActivity"
+            android:name=".ui.view.license.LicenseActivity"
             android:exported="false" />
         <activity
             android:name=".ui.view.alarm.AlarmActivity"
