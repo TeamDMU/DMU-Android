@@ -8,14 +8,22 @@
         android:layout_height="match_parent"
         tools:context=".ui.view.license.LicenseActivity">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="empty activity"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+        <include
+            android:id="@+id/license_toolbar"
+            layout="@layout/standard_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            app:title="@{@string/license_title}"
+            app:exitVisible="@{true}"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/license_rcv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/license_toolbar"
+            tools:listitem="@layout/item_license"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
