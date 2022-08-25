@@ -8,23 +8,23 @@ data class OpenSourceEntity(
     companion object {
         val openSourceList = listOf<OpenSourceEntity>(
             OpenSourceEntity(
-                "okhttp3",
-                "https://github.com/square/okhttp/blob/master/LICENSE.txt",
-                "Apache"
-            ),
-            OpenSourceEntity(
-                "retrofit2",
-                "https://github.com/square/retrofit/blob/master/LICENSE.txt",
-                "Apache"
-            ),
-            OpenSourceEntity(
-                "firebase",
+                "Firebase",
                 "https://firebase.google.com/terms",
                 "Apache"
             ),
             OpenSourceEntity(
                 "glide",
                 "https://github.com/bumptech/glide/blob/master/LICENSE",
+                "Apache"
+            ),
+            OpenSourceEntity(
+                "okhttp",
+                "https://github.com/square/okhttp/blob/master/LICENSE.txt",
+                "Apache"
+            ),
+            OpenSourceEntity(
+                "retrofit",
+                "https://github.com/square/retrofit/blob/master/LICENSE.txt",
                 "Apache"
             ),
             OpenSourceEntity(
