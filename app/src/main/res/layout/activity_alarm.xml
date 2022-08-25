@@ -7,28 +7,13 @@
         android:layout_height="match_parent"
         tools:context=".ui.view.alarm.AlarmActivity">
 
-        <TextView
-            android:id="@+id/alarm_title"
-            style="@style/PretendardBold20"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/alarm_title"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/alarm_exit_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_back"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <include
+            android:id="@+id/alarm_toolbar"
+            layout="@layout/standard_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            app:exitVisible="@{true}"
+            app:title="@{@string/alarm_title}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/alarm_rcv"
@@ -36,7 +21,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/alarm_title"
+            app:layout_constraintTop_toBottomOf="@id/alarm_toolbar"
             tools:listitem="@layout/item_alarm" />
 
         <LinearLayout
@@ -48,7 +33,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/alarm_title">
+            app:layout_constraintTop_toBottomOf="@id/alarm_toolbar">
 
             <ImageView
                 android:layout_width="match_parent"

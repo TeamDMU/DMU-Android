@@ -19,9 +19,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YouDongKnowMe">
         <activity
-            android:name=".ui.view.alarm.AlarmActivity"
-            android:launchMode="singleTask"
+            android:name=".ui.view.license.LicenseActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.view.alarm.AlarmActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
         <activity
             android:name=".ui.view.keyword.KeywordActivity"
             android:exported="false" />

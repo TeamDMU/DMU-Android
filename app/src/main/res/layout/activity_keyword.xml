@@ -8,29 +8,13 @@
         android:layout_height="match_parent"
         tools:context=".ui.view.keyword.KeywordActivity">
 
-        <TextView
-            android:id="@+id/keyword_title"
-            style="@style/PretendardBold20"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/keyword_title"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/keyword_exit_btn"
-            bind_visibility_is_first_launch="@{vm.isFirstLaunch()}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_back"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <include
+            android:id="@+id/keyword_toolbar"
+            layout="@layout/standard_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            app:title="@{@string/keyword_title}"
+            app:exitVisible="@{!vm.isFirstLaunch()}"/>
 
         <ScrollView
             android:id="@+id/keyword_scroll_view"
@@ -43,7 +27,7 @@
             app:layout_constraintBottom_toTopOf="@id/keyword_complete_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/keyword_title">
+            app:layout_constraintTop_toBottomOf="@id/keyword_toolbar">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

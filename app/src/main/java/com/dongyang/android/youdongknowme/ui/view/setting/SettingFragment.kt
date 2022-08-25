@@ -6,6 +6,7 @@ import com.dongyang.android.youdongknowme.databinding.FragmentSettingBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
 import com.dongyang.android.youdongknowme.ui.view.depart.DepartActivity
 import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordActivity
+import com.dongyang.android.youdongknowme.ui.view.license.LicenseActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /* 설정 화면 */
@@ -58,6 +59,11 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
 
         binding.settingKeyword.setOnClickListener {
             val intent = Intent(requireActivity(), KeywordActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.settingAppLicense.setOnClickListener {
+            val intent = Intent(requireActivity(), LicenseActivity::class.java)
             startActivity(intent)
         }
     }

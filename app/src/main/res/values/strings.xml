@@ -45,7 +45,7 @@
     <string name="setting_app_info">앱 정보</string>
     <string name="setting_app_help">문의하기</string>
     <string name="setting_app_version">앱 버전</string>
-    <string name="setting_app_license">오픈소스 라이선스</string>
+    <string name="setting_app_license">오픈소스 라이센스</string>
 
     <!-- calendar -->
     <string name="calendar_year">년</string>
@@ -106,4 +106,7 @@
     <string name="cafeteria_time">11:30 ~ 14:00</string>
     <string name="cafeteria_place">8호관 3층</string>
     <string name="cafeteria_no_menu">&#128517; 등록된 메뉴가 없어요.</string>
+
+    <!-- license -->
+    <string name="license_title">오픈소스 라이센스</string>
 </resources>

@@ -45,7 +45,7 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
         viewModel.getLocalKeywordList()
 
         // 뒤로가기 버튼 눌렀을 때
-        binding.keywordExitBtn.setOnClickListener {
+        binding.keywordToolbar.toolbarExit.setOnClickListener {
             finish()
         }
 
