@@ -1,9 +1,7 @@
 package com.dongyang.android.youdongknowme.ui.view.cafeteria
 
-import android.content.Context
-import android.util.DisplayMetrics
 import android.view.View
-import android.view.WindowManager
+import androidx.window.layout.WindowMetricsCalculator
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentCafeteriaBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
@@ -20,7 +18,9 @@ import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
 
-class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewModel>(), CalendarInterface {
+
+class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewModel>(),
+    CalendarInterface {
 
     override val layoutResourceId: Int = R.layout.fragment_cafeteria
     override val viewModel: CafeteriaViewModel by viewModel()
@@ -50,14 +50,13 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             this.setHasFixedSize(true)
         }
 
-        val dm = DisplayMetrics()
-        val wm = requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val wmc =
+            WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(requireActivity())
 
-        // TODO : deprecated -> 수정 필요
-        wm.defaultDisplay.getMetrics(dm)
         binding.cafeteriaCalendar.apply {
-            val dayWidth = dm.widthPixels / 5
-            val dayHeight = (dayWidth * 1.25).toInt()
+            val dayWidth = wmc.bounds.width() / 5
+            val dayHeight: Int = (dayWidth * 1.25).toInt()
+
             daySize = Size(dayWidth, dayHeight)
         }
 
@@ -91,7 +90,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
     override fun initAfterBinding() {
         binding.cafeteriaCalendar.setup(
-            YearMonth.now().minusMonths(1),
+            YearMonth.now().minusMonths(2),
             YearMonth.now().plusMonths(1),
             DayOfWeek.values().random()
         )
