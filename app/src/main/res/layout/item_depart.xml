@@ -8,7 +8,7 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/item_depart_container"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
@@ -18,6 +18,8 @@
             android:onClick="@{() -> itemClickListener.containerClick(currentPosition)}"
             app:cardCornerRadius="16dp"
             app:cardElevation="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout

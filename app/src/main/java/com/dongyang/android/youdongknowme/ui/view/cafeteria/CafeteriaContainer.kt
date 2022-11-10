@@ -39,7 +39,11 @@ class CafeteriaContainer(
         bind.itemCalendarDate.setTextColor(
             ContextCompat.getColor(
                 view.context,
-                if (day.date == viewModel.selectedDate.value) R.color.main else R.color.black
+                if (day.date == viewModel.selectedDate.value) {
+                    R.color.main
+                } else {
+                    R.color.black
+                }
             )
         )
     }
