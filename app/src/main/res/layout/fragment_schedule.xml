@@ -11,8 +11,10 @@
         <include
             android:id="@+id/schedule_toolbar"
             layout="@layout/standard_toolbar"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="?android:attr/actionBarSize"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:title="@{@string/schedule_title}" />
 
         <com.prolificinteractive.materialcalendarview.MaterialCalendarView
@@ -29,9 +31,11 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/schedule_rv_list"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/schedule_calendar"
             tools:listitem="@layout/item_schedule" />

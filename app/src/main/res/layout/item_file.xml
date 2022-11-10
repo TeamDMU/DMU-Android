@@ -8,20 +8,22 @@
         <TextView
             android:id="@+id/item_file_not_found"
             style="@style/PretendardRegular12"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="6dp"
             android:text="@string/detail_file_not_found_message"
             android:visibility="gone"
             app:bind_visibility_existence="@{file.name.empty}"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/item_file_btn"
             style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_bold"
             android:gravity="center_vertical"
             android:minHeight="0dp"
             android:onClick="@{() -> itemClickListener.fileClick(file.name, file.url)}"
@@ -30,8 +32,8 @@
             android:textColor="@color/main"
             android:textSize="12sp"
             android:textStyle="normal"
-            android:fontFamily="@font/pretendard_bold"
             app:bind_visibility_existence="@{!file.name.empty}"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

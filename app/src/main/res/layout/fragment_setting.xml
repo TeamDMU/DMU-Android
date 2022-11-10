@@ -9,15 +9,19 @@
         <include
             android:id="@+id/setting_toolbar"
             layout="@layout/standard_toolbar"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:title="@{@string/setting_title}" />
 
         <ScrollView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="24dp"
             android:fillViewport="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/setting_toolbar">
 
