@@ -64,7 +64,7 @@ class CafeteriaViewModel(
     }
 
     fun updateSelectedDate(selectedDate: LocalDate) {
-        _selectedDate.postValue(selectedDate)
+        _selectedDate.value = selectedDate
         updateMenuList(selectedDate.toString().replace("-", "."))
     }
 
