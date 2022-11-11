@@ -6,7 +6,6 @@ import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentCafeteriaBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
 import com.dongyang.android.youdongknowme.ui.adapter.CafeteriaAdapter
-import com.dongyang.android.youdongknowme.ui.adapter.CafeteriaEmployeeAdapter
 import com.dongyang.android.youdongknowme.ui.view.util.EventObserver
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -25,27 +24,47 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     override val layoutResourceId: Int = R.layout.fragment_cafeteria
     override val viewModel: CafeteriaViewModel by viewModel()
 
-    private lateinit var cafeteriaAdapter: CafeteriaAdapter
-    private lateinit var cafeteriaEmployeeAdapter: CafeteriaEmployeeAdapter
+    private lateinit var stuKoreanMenuAdapter: CafeteriaAdapter
+    private lateinit var stuAnotherMenuAdapter: CafeteriaAdapter
+    private lateinit var eduKoreanMenuAdapter: CafeteriaAdapter
+    private lateinit var eduAnotherMenuAdapter: CafeteriaAdapter
 
     override fun initStartView() {
         binding.vm = viewModel
 
-        cafeteriaAdapter = CafeteriaAdapter()
-        cafeteriaEmployeeAdapter = CafeteriaEmployeeAdapter()
+        stuKoreanMenuAdapter = CafeteriaAdapter()
+        stuAnotherMenuAdapter = CafeteriaAdapter()
+        eduKoreanMenuAdapter = CafeteriaAdapter()
+        eduAnotherMenuAdapter = CafeteriaAdapter()
 
-        binding.stuMenuList.apply {
+        binding.cafeteriaStuKoreanMenuList.apply {
             val layoutManager = FlexboxLayoutManager(context)
             layoutManager.flexDirection = FlexDirection.ROW
-            this.adapter = this@CafeteriaFragment.cafeteriaAdapter
+            this.adapter = this@CafeteriaFragment.stuKoreanMenuAdapter
             this.layoutManager = layoutManager
             this.setHasFixedSize(true)
         }
 
-        binding.employeeMenuList.apply {
+        binding.cafeteriaStuAnotherMenuList.apply {
             val layoutManager = FlexboxLayoutManager(context)
             layoutManager.flexDirection = FlexDirection.ROW
-            this.adapter = this@CafeteriaFragment.cafeteriaEmployeeAdapter
+            this.adapter = this@CafeteriaFragment.stuAnotherMenuAdapter
+            this.layoutManager = layoutManager
+            this.setHasFixedSize(true)
+        }
+
+        binding.cafeteriaEduKoreanMenuList.apply {
+            val layoutManager = FlexboxLayoutManager(context)
+            layoutManager.flexDirection = FlexDirection.ROW
+            this.adapter = this@CafeteriaFragment.eduKoreanMenuAdapter
+            this.layoutManager = layoutManager
+            this.setHasFixedSize(true)
+        }
+
+        binding.cafeteriaEduAnotherMenuList.apply {
+            val layoutManager = FlexboxLayoutManager(context)
+            layoutManager.flexDirection = FlexDirection.ROW
+            this.adapter = this@CafeteriaFragment.eduAnotherMenuAdapter
             this.layoutManager = layoutManager
             this.setHasFixedSize(true)
         }
@@ -79,12 +98,14 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             showToast(getString(resId))
         })
 
-        viewModel.stuMenuList.observe(viewLifecycleOwner) {
-            cafeteriaAdapter.submitList(it)
+        viewModel.stuMenus.observe(viewLifecycleOwner) {
+            stuKoreanMenuAdapter.submitList(it.first)
+            stuAnotherMenuAdapter.submitList(it.second)
         }
 
-        viewModel.eduMenuList.observe(viewLifecycleOwner) {
-            cafeteriaEmployeeAdapter.submitList(it)
+        viewModel.eduMenus.observe(viewLifecycleOwner) {
+            eduKoreanMenuAdapter.submitList(it.first)
+            eduAnotherMenuAdapter.submitList(it.second)
         }
     }
 
