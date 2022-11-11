@@ -12,7 +12,7 @@ object RetrofitObject {
     private const val TIME_OUT_COUNT: Long = 10
 
     fun getNetwork(): Retrofit {
-        val baseUrl = "http://ec2-13-125-202-140.ap-northeast-2.compute.amazonaws.com:8000"
+        val baseUrl = "http://3.218.107.236:8000"
 
         val baseInterceptor = Interceptor { chain ->
             val request = chain.request().newBuilder()
@@ -27,8 +27,9 @@ object RetrofitObject {
             .connectTimeout(TIME_OUT_COUNT, TimeUnit.SECONDS)
             .readTimeout(TIME_OUT_COUNT, TimeUnit.SECONDS)
             .addInterceptor(baseInterceptor)
-            .addNetworkInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC })
-            .build()
+            .addNetworkInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BASIC
+            }).build()
 
         return Retrofit.Builder()
             .baseUrl(baseUrl)
