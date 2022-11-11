@@ -81,11 +81,10 @@ class CafeteriaViewModel(
             it.date == selectedDate && it.restaurant == resourceProvider.getString(R.string.cafeteria_employee) && it.menuContent != "-"
         }?.menuContent ?: ""
 
-        val stuMenus = if (stuMenu.isEmpty()) emptyList() else eduMenu.split(" ")
+        val stuMenus = if (stuMenu.isEmpty()) emptyList() else stuMenu.split(" ")
         val eduMenus = if (eduMenu.isEmpty()) emptyList() else eduMenu.split(" ")
-
+        
         _stuMenuList.postValue(stuMenus.ifEmpty { listOf(resourceProvider.getString(R.string.cafeteria_no_menu)) })
         _eduMenuList.postValue(eduMenus.ifEmpty { listOf(resourceProvider.getString(R.string.cafeteria_no_menu)) })
     }
-
 }
