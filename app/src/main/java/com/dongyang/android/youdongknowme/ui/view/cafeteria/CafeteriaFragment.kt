@@ -6,7 +6,6 @@ import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentCafeteriaBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
 import com.dongyang.android.youdongknowme.ui.adapter.CafeteriaAdapter
-import com.dongyang.android.youdongknowme.ui.adapter.CafeteriaEmployeeAdapter
 import com.dongyang.android.youdongknowme.ui.view.util.EventObserver
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -26,13 +25,13 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     override val viewModel: CafeteriaViewModel by viewModel()
 
     private lateinit var cafeteriaAdapter: CafeteriaAdapter
-    private lateinit var cafeteriaEmployeeAdapter: CafeteriaEmployeeAdapter
+    private lateinit var cafeteriaEmployeeAdapter: CafeteriaAdapter
 
     override fun initStartView() {
         binding.vm = viewModel
 
         cafeteriaAdapter = CafeteriaAdapter()
-        cafeteriaEmployeeAdapter = CafeteriaEmployeeAdapter()
+        cafeteriaEmployeeAdapter = CafeteriaAdapter()
 
         binding.stuMenuList.apply {
             val layoutManager = FlexboxLayoutManager(context)
