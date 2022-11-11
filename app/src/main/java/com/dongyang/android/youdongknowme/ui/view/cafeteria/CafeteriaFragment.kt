@@ -37,7 +37,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         eduKoreanMenuAdapter = CafeteriaAdapter()
         eduAnotherMenuAdapter = CafeteriaAdapter()
 
-        binding.stuKoreanMenuList.apply {
+        binding.cafeteriaStuKoreanMenuList.apply {
             val layoutManager = FlexboxLayoutManager(context)
             layoutManager.flexDirection = FlexDirection.ROW
             this.adapter = this@CafeteriaFragment.stuKoreanMenuAdapter
@@ -45,7 +45,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             this.setHasFixedSize(true)
         }
 
-        binding.stuAnotherMenuList.apply {
+        binding.cafeteriaStuAnotherMenuList.apply {
             val layoutManager = FlexboxLayoutManager(context)
             layoutManager.flexDirection = FlexDirection.ROW
             this.adapter = this@CafeteriaFragment.stuAnotherMenuAdapter
@@ -53,7 +53,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             this.setHasFixedSize(true)
         }
 
-        binding.eduKoreanMenuList.apply {
+        binding.cafeteriaEduKoreanMenuList.apply {
             val layoutManager = FlexboxLayoutManager(context)
             layoutManager.flexDirection = FlexDirection.ROW
             this.adapter = this@CafeteriaFragment.eduKoreanMenuAdapter
@@ -61,7 +61,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             this.setHasFixedSize(true)
         }
 
-        binding.eduAnotherMenuList.apply {
+        binding.cafeteriaEduAnotherMenuList.apply {
             val layoutManager = FlexboxLayoutManager(context)
             layoutManager.flexDirection = FlexDirection.ROW
             this.adapter = this@CafeteriaFragment.eduAnotherMenuAdapter

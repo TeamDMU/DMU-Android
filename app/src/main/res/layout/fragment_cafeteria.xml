@@ -141,11 +141,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="12dp"
-                            android:text="한식"
+                            android:text="@string/cafeteria_korean"
                             android:textColor="@color/black" />
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/stu_korean_menu_list"
+                            android:id="@+id/cafeteria_stu_korean_menu_list"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -158,11 +158,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="12dp"
-                            android:text="일품"
+                            android:text="@string/cafeteria_another"
                             android:textColor="@color/black" />
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/stu_another_menu_list"
+                            android:id="@+id/cafeteria_stu_another_menu_list"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -209,11 +209,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="12dp"
-                            android:text="한식"
+                            android:text="@string/cafeteria_korean"
                             android:textColor="@color/black" />
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/edu_korean_menu_list"
+                            android:id="@+id/cafeteria_edu_korean_menu_list"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -226,11 +226,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="12dp"
-                            android:text="일품"
+                            android:text="@string/cafeteria_another"
                             android:textColor="@color/black" />
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/edu_another_menu_list"
+                            android:id="@+id/cafeteria_edu_another_menu_list"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
