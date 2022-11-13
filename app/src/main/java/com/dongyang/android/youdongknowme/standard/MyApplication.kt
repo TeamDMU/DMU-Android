@@ -2,6 +2,7 @@ package com.dongyang.android.youdongknowme.standard
 
 import android.app.Application
 import android.content.Context
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
@@ -33,6 +34,8 @@ class MyApplication : Application(), LifecycleEventObserver {
 
     override fun onCreate() {
         super.onCreate()
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         FirebaseApp.initializeApp(this)
 
