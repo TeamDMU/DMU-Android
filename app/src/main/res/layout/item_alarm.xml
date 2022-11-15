@@ -42,7 +42,7 @@
                     app:layout_constraintVertical_bias="0.3" />
 
                 <TextView
-                    android:id="@+id/item_alarm_deparmtent"
+                    android:id="@+id/item_alarm_department"
                     style="@style/PretendardBold12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
                     android:background="@color/line"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/item_alarm_keyword"
-                    app:layout_constraintStart_toEndOf="@id/item_alarm_deparmtent"
+                    app:layout_constraintStart_toEndOf="@id/item_alarm_department"
                     app:layout_constraintTop_toBottomOf="@id/item_alarm_title"
                     app:layout_constraintVertical_bias="0.3" />
 
@@ -74,7 +74,7 @@
                     android:text="@{alarm.keyword}"
                     android:textColor="@color/main"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/item_alarm_deparmtent"
+                    app:layout_constraintStart_toEndOf="@id/item_alarm_department"
                     app:layout_constraintTop_toBottomOf="@id/item_alarm_title"
                     app:layout_constraintVertical_bias="0.25" />
 
