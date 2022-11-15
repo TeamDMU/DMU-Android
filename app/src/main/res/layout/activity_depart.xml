@@ -15,6 +15,7 @@
             app:exitVisible="@{!vm.isFirstLaunch()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:title="@{@string/department_title}" />
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -31,10 +32,8 @@
                 android:id="@+id/depart_rcv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_dodgeInsetEdges="bottom"
                 tools:listitem="@layout/item_depart" />
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <data>
