@@ -13,8 +13,8 @@
             layout="@layout/standard_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
-            app:title="@{@string/keyword_title}"
-            app:exitVisible="@{!vm.isFirstLaunch()}"/>
+            app:exitVisible="@{!vm.isFirstLaunch()}"
+            app:title="@{@string/keyword_title}" />
 
         <ScrollView
             android:id="@+id/keyword_scroll_view"
@@ -139,15 +139,6 @@
                             android:checkable="true"
                             android:checked="false"
                             android:text="@string/keyword_money_scholarship" />
-
-
-                        <com.google.android.material.chip.Chip
-                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:checkable="true"
-                            android:checked="false"
-                            android:text="@string/keyword_money_kosaf" />
 
                         <com.google.android.material.chip.Chip
                             style="@style/Colors_Widget.MaterialComponents.Chip.Choice"

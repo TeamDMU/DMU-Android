@@ -7,7 +7,6 @@ fun mapKeywordEnglishToKorean(english: String): String {
         "lecture" -> "특강"
         "season" -> "계절학기"
         "scholarship" -> "장학"
-        "kosaf" -> "국가장학"
         "tuition" -> "등록"
         "leave" -> "휴학"
         "return" -> "복학"

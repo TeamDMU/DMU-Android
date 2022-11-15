@@ -5,7 +5,15 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.dongyang.android.youdongknowme.data.local.UserDatabase
 import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
-import com.dongyang.android.youdongknowme.data.repository.*
+import com.dongyang.android.youdongknowme.data.repository.AlarmRepository
+import com.dongyang.android.youdongknowme.data.repository.CafeteriaRepository
+import com.dongyang.android.youdongknowme.data.repository.DepartRepository
+import com.dongyang.android.youdongknowme.data.repository.DetailRepository
+import com.dongyang.android.youdongknowme.data.repository.KeywordRepository
+import com.dongyang.android.youdongknowme.data.repository.NoticeRepository
+import com.dongyang.android.youdongknowme.data.repository.ScheduleRepository
+import com.dongyang.android.youdongknowme.data.repository.SettingRepository
+import com.dongyang.android.youdongknowme.data.repository.SplashRepository
 import com.dongyang.android.youdongknowme.standard.network.ErrorResponseHandler
 import com.dongyang.android.youdongknowme.ui.view.alarm.AlarmViewModel
 import com.dongyang.android.youdongknowme.ui.view.cafeteria.CafeteriaViewModel
@@ -125,13 +133,12 @@ val utilModule = module {
     }
 }
 
-private val defaultKeywordList = arrayListOf<KeywordEntity>(
+private val defaultKeywordList = arrayListOf(
     KeywordEntity("시험", "exam", false),
     KeywordEntity("수강", "course", false),
     KeywordEntity("특강", "lecture", false),
     KeywordEntity("계절학기", "season", false),
     KeywordEntity("장학", "scholarship", false),
-    KeywordEntity("국가장학", "kosaf", false),
     KeywordEntity("등록", "tuition", false),
     KeywordEntity("휴학", "leave", false),
     KeywordEntity("복학", "return", false),
