@@ -6,6 +6,7 @@ import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentScheduleBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
 import com.dongyang.android.youdongknowme.ui.adapter.ScheduleAdapter
+import com.dongyang.android.youdongknowme.ui.view.util.EventObserver
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.LocalDate
@@ -20,6 +21,7 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
 
     override fun initStartView() {
         viewModel.setPickedDate(binding.scheduleCalendar.currentDate)
+        binding.vm = viewModel
         adapter = ScheduleAdapter()
         binding.scheduleRvList.apply {
             this.adapter = this@ScheduleFragment.adapter
@@ -30,6 +32,10 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
     }
 
     override fun initDataBinding() {
+        viewModel.errorState.observe(viewLifecycleOwner, EventObserver { resId ->
+            showToast(getString(resId))
+        })
+
         viewModel.isLoading.observe(viewLifecycleOwner) {
             if (it) showLoading()
             else dismissLoading()
@@ -41,6 +47,10 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
 
         viewModel.scheduleList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
+        }
+
+        binding.scheduleErrorContainer.refresh.setOnClickListener {
+            viewModel.getSchedules()
         }
     }
 
