@@ -7,9 +7,7 @@ import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
 import com.dongyang.android.youdongknowme.data.repository.KeywordRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.google.firebase.messaging.FirebaseMessaging
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class KeywordViewModel(
     private val keywordRepository: KeywordRepository
@@ -49,7 +47,6 @@ class KeywordViewModel(
             if (checkKeywordList.contains(localKeyword.name)) {
                 // 선택했던 데이터를 중첩해서 바꾸면 효율성이 떨어지고, 파이어베이스 구독에 문제가 생길 수 있으므로 구독 여부도 함께 체크
                 if (!localKeyword.isSubscribe) {
-                    Timber.d("contains ${localKeyword.name}")
                     viewModelScope.launch {
                         keywordRepository.updateUserKeywords(true, localKeyword.name)
                     }
@@ -57,7 +54,6 @@ class KeywordViewModel(
                 }
             } else {
                 if (localKeyword.isSubscribe) {
-                    Timber.d("not contains ${localKeyword.name}")
                     viewModelScope.launch {
                         keywordRepository.updateUserKeywords(false, localKeyword.name)
                     }
