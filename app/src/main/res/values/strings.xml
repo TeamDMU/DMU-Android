@@ -21,7 +21,7 @@
     <string name="notice_search_message">검색어를 입력해주세요.</string>
 
     <!-- detail -->
-    <string name="detail_title">공지사항</string>
+    <string name="detail_title">상세보기</string>
     <string name="detail_file_not_found_message">&#128517; 첨부 파일이 존재하지 않습니다.</string>
     <string name="detail_download_description">다운로드를 진행 중입니다.</string>
     <string name="detail_download_fail">다운로드를 실패했습니다.\n다시 시도해주세요.</string>
