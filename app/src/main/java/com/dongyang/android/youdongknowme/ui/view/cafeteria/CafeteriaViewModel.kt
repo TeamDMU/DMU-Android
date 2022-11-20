@@ -89,7 +89,7 @@ class CafeteriaViewModel(
         val menus = if (menu.isEmpty()) {
             emptyList()
         } else {
-            menu.replace("한식-", "").replace("일품-", "\n")
+            menu.replace("\n", "").replace("한식-", "").replace("일품-", "\n")
                 .split("\n")
         }
 
