@@ -63,8 +63,6 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
 
     private fun setCheckChipChange(vararg chipGroups: ChipGroup) {
 
-        Timber.d("checkList :: ${viewModel.checkKeywordList}")
-
         for (chipGroup in chipGroups) {
             for (index in 0 until chipGroup.childCount) {
                 val chip: Chip = chipGroup.getChildAt(index) as Chip

@@ -12,7 +12,8 @@ object RetrofitObject {
     private const val TIME_OUT_COUNT: Long = 10
 
     fun getNetwork(): Retrofit {
-        val baseUrl = "http://3.218.107.236:8000"
+
+        val baseUrl = "http://3.38.118.184:8000"
 
         val baseInterceptor = Interceptor { chain ->
             val request = chain.request().newBuilder()
