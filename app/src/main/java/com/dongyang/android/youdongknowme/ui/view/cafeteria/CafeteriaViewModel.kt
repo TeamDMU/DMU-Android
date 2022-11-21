@@ -27,7 +27,7 @@ class CafeteriaViewModel(
     private val _isLoading: MutableLiveData<Boolean> = MutableLiveData(true)
     val isLoading: LiveData<Boolean> = _isLoading
 
-    private val _selectedDate: MutableLiveData<LocalDate> = MutableLiveData()
+    private val _selectedDate: MutableLiveData<LocalDate> = MutableLiveData(LocalDate.now())
     val selectedDate: LiveData<LocalDate> = _selectedDate
 
     private val _cafeteriaList: MutableLiveData<List<Cafeteria>> = MutableLiveData()
@@ -41,7 +41,6 @@ class CafeteriaViewModel(
 
     init {
         fetchCafeteria()
-        updateSelectedDate(LocalDate.now())
     }
 
     fun fetchCafeteria() {
@@ -51,6 +50,7 @@ class CafeteriaViewModel(
                 is NetworkResult.Success -> {
                     val menuList = result.data
                     _cafeteriaList.value = menuList
+                    updateSelectedDate(LocalDate.now())
                     _isError.postValue(false)
                     _isLoading.postValue(false)
                 }
