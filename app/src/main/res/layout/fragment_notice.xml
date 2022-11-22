@@ -99,7 +99,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/notice_toolbar">
+            app:layout_constraintTop_toBottomOf="@id/notice_main_container">
 
             <include
                 android:id="@+id/notice_no_data_container"
