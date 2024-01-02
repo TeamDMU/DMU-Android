@@ -43,5 +43,4 @@
             name="schedule"
             type="com.dongyang.android.youdongknowme.data.remote.entity.Schedule" />
     </data>
-
 </layout>

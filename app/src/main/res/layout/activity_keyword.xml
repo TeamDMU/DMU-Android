@@ -390,6 +390,5 @@
         <variable
             name="vm"
             type="com.dongyang.android.youdongknowme.ui.view.keyword.KeywordViewModel" />
-        />
     </data>
 </layout>

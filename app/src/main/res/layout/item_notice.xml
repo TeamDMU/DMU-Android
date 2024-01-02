@@ -60,5 +60,4 @@
             type="com.dongyang.android.youdongknowme.ui.view.notice.NoticeClickListener" />
 
     </data>
-
 </layout>
