@@ -14,5 +14,5 @@ data class Cafeteria(
     @SerializedName("menu_content")
     var menuContent: String,
     @SerializedName("etc_info")
-    var etcInfo: String
+    var etcInfo: String,
 )
