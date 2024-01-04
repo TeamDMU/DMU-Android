@@ -39,6 +39,7 @@ android {
     buildFeatures {
         dataBinding true
     }
+    namespace 'com.dongyang.android.youdongknowme'
 }
 
 dependencies {
