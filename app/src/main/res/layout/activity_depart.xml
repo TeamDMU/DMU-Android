@@ -94,8 +94,9 @@
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/PretendardRegular20"
+            android:background="@drawable/bg_button_enable_selector"
             android:textColor="@color/white"
             android:id="@+id/depart_next"
             android:layout_width="match_parent"
