@@ -12,19 +12,19 @@
             android:id="@+id/depart_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
             android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="60dp"
             android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/depart_search_view">
 
             <TextView
                 style="@style/PretendardBold32"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="소속 학과를 선택하면,"
-                android:textSize="@dimen/font_size_32"
                 android:textStyle="bold" />
 
             <TextView
@@ -32,9 +32,48 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="해당 학과의 공지만 바로 알려줘요."
-                android:textSize="@dimen/font_size_24"
                 android:textStyle="bold" />
 
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/depart_search_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="36dp"
+            android:minHeight="56dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/depart_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/depart_title">
+
+            <EditText
+                android:id="@+id/depart_search_text"
+                style="@style/PretendardRegular16"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:hint="@string/notice_search_message"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp" />
+
+            <ImageButton
+                android:id="@+id/depart_search_text_clear"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="12dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:src="@drawable/ic_close_black" />
         </LinearLayout>
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -42,10 +81,10 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/depart_title">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/depart_search_view"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/depart_rcv"
@@ -54,7 +93,9 @@
                 tools:listitem="@layout/item_depart" />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <data>
 
