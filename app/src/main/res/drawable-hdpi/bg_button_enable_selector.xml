@@ -2,17 +2,18 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="?android:colorControlHighlight"
     android:exitFadeDuration="@android:integer/config_shortAnimTime">
+
     <item android:state_enabled="true">
         <shape android:shape="rectangle">
             <solid android:color="@color/blue300" />
-            <corners android:radius="8dp" />
+            <corners android:radius="10dp" />
         </shape>
     </item>
 
     <item android:state_enabled="false">
         <shape android:shape="rectangle">
             <solid android:color="@color/gray300" />
-            <corners android:radius="8dp" />
+            <corners android:radius="10dp" />
         </shape>
     </item>
 </selector>
