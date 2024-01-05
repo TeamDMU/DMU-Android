@@ -12,13 +12,13 @@
             android:id="@+id/depart_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="60dp"
-            android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/depart_search_view">
+            app:layout_constraintBottom_toTopOf="@id/onboarding_progress">
 
             <TextView
                 style="@style/PretendardBold32"
@@ -36,32 +36,87 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/onboarding_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="16dp"
+            android:paddingHorizontal="56dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/depart_title"
+            app:layout_constraintBottom_toTopOf="@id/depart_search_view">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:layout_marginHorizontal="24dp">
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_gravity="top|center_vertical"
+                    android:layout_marginTop="6dp"
+                    android:background="@color/line" />
+
+                <View
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_gravity="left|center_horizontal"
+                    android:background="@drawable/bg_circle"
+                    android:backgroundTint="@color/blue300" />
+
+                <View
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_gravity="center|center_horizontal"
+                    android:background="@drawable/bg_circle"
+                    android:backgroundTint="@color/gray300" />
+
+                <View
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_gravity="right|center_horizontal"
+                    android:background="@drawable/bg_circle"
+                    android:backgroundTint="@color/gray300" />
+
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/PretendardBold16"
+                android:text="학과 선택"
+                android:textColor="@color/main"
+                android:layout_gravity="left" />
+        </LinearLayout>-
 
         <LinearLayout
             android:id="@+id/depart_search_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="36dp"
+            android:layout_margin="16dp"
             android:minHeight="56dp"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@id/depart_container"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/depart_title">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/onboarding_progress"
+            app:layout_constraintBottom_toTopOf="@id/depart_container" >
 
             <EditText
                 android:id="@+id/depart_search_text"
-                style="@style/PretendardRegular16"
                 android:layout_width="0dp"
                 android:layout_height="56dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="8dp"
                 android:layout_weight="1"
+                style="@style/PretendardRegular16"
                 android:background="@android:color/transparent"
-                android:hint="@string/notice_search_message"
-                android:imeOptions="actionSearch"
+                android:layout_gravity="center"
                 android:inputType="text"
+                android:imeOptions="actionSearch"
+                android:hint="@string/notice_search_message"
+                android:layout_marginStart="8dp"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp" />
 
@@ -69,10 +124,9 @@
                 android:id="@+id/depart_search_text_clear"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="12dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:gravity="center"
                 android:src="@drawable/ic_close_black" />
         </LinearLayout>
 
@@ -80,7 +134,7 @@
             android:id="@+id/depart_container"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
+            android:layout_margin="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/depart_search_view"
@@ -95,15 +149,15 @@
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            style="@style/PretendardRegular20"
-            android:background="@drawable/bg_button_enable_selector"
-            android:textColor="@color/white"
             android:id="@+id/depart_next"
             android:layout_width="match_parent"
             android:layout_height="72dp"
+            style="@style/PretendardRegular20"
+            android:background="@drawable/bg_button_enable_selector"
+            android:text="다음"
+            android:textColor="@color/white"
             android:layout_marginBottom="20dp"
             android:layout_marginHorizontal="16dp"
-            android:text="다음"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/depart_container"
