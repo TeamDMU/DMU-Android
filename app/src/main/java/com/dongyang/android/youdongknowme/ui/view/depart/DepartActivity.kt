@@ -49,10 +49,6 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
             this.setHasFixedSize(true)
         }
 
-        binding.departToolbar.toolbarExit.setOnClickListener {
-            finish()
-        }
-
         // 선택 포지션을 실시간 옵저빙
         viewModel.selectDepartPosition.observe(this) {
             adapter.submitPosition(it)
