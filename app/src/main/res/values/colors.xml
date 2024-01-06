@@ -11,6 +11,18 @@
     <color name="sub_black">#CC000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00FFFFFF</color>
-
+    
     <color name="line">#9E9E9E</color>
+
+    <color name="gray600">#FF35373F</color>
+    <color name="gray500">#FF4F525F</color>
+    <color name="gray400">#FF7E8295</color>
+    <color name="gray300">#FF7E8295</color>
+    <color name="gray200">#FFEBEBF0</color>
+    <color name="gray100">#FFF5F6F8</color>
+    <color name="blue400">#FF354DAE</color>
+    <color name="blue300">#FF4967E1</color>
+    <color name="blue200">#FFD0D8F9</color>
+    <color name="blue100">#FFEFF2FF</color>
+    <color name="red100">#FFD92727</color>
 </resources>
