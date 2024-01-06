@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -12,13 +12,13 @@
             android:id="@+id/depart_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="60dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/onboarding_progress"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/onboarding_progress">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 style="@style/PretendardBold32"
@@ -40,19 +40,19 @@
             android:id="@+id/onboarding_progress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_margin="16dp"
+            android:orientation="vertical"
             android:paddingHorizontal="56dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/depart_search_view"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/depart_title"
-            app:layout_constraintBottom_toTopOf="@id/depart_search_view">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/depart_title">
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="8dp"
-                android:layout_marginHorizontal="24dp">
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginVertical="8dp">
 
                 <View
                     android:layout_width="wrap_content"
@@ -85,38 +85,47 @@
             </FrameLayout>
 
             <TextView
+                style="@style/PretendardBold16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/PretendardBold16"
+                android:layout_gravity="left"
                 android:text="학과 선택"
-                android:textColor="@color/main"
-                android:layout_gravity="left" />
-        </LinearLayout>-
+                android:textColor="@color/main" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/depart_search_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:background="@drawable/bg_search_radius"
             android:minHeight="56dp"
             android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/depart_container"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/onboarding_progress"
-            app:layout_constraintBottom_toTopOf="@id/depart_container" >
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/onboarding_progress">
+
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/ic_search"
+                android:backgroundTint="@color/gray300" />
 
             <EditText
                 android:id="@+id/depart_search_text"
+                style="@style/PretendardRegular16"
                 android:layout_width="0dp"
                 android:layout_height="56dp"
-                android:layout_weight="1"
-                style="@style/PretendardRegular16"
-                android:background="@android:color/transparent"
                 android:layout_gravity="center"
-                android:inputType="text"
-                android:imeOptions="actionSearch"
-                android:hint="@string/notice_search_message"
                 android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:hint="@string/department_search_message"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp" />
 
@@ -124,10 +133,11 @@
                 android:id="@+id/depart_search_text_clear"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
                 android:layout_gravity="center"
-                android:layout_marginHorizontal="12dp"
-                android:src="@drawable/ic_close_black" />
+                android:layout_marginHorizontal="16dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_close_black"
+                app:tint="@color/gray300" />
         </LinearLayout>
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -135,10 +145,10 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="16dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/depart_next"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/depart_search_view"
-            app:layout_constraintBottom_toBottomOf="@id/depart_next">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/depart_search_view">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/depart_rcv"
@@ -150,18 +160,18 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/depart_next"
+            style="@style/PretendardRegular20"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            style="@style/PretendardRegular20"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/bg_button_enable_selector"
             android:text="다음"
             android:textColor="@color/white"
-            android:layout_marginBottom="20dp"
-            android:layout_marginHorizontal="16dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/depart_container"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/depart_container" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

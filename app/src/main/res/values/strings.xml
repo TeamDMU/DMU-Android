@@ -13,6 +13,7 @@
     <string name="department_title">학과선택</string>
     <string name="department_snackbar_title">학과 선택을 마치셨나요?</string>
     <string name="department_snackbar_positive_button">확인</string>
+    <string name="department_search_message">소속 학과를 검색해주세요.</string>
 
     <!-- notice -->
     <string name="notice_title">공지사항</string>
@@ -110,4 +111,5 @@
 
     <!-- license -->
     <string name="license_title">오픈소스 라이센스</string>
+
 </resources>
