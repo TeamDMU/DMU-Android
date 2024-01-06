@@ -21,6 +21,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/depart_spanText"
                 style="@style/PretendardBold32"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

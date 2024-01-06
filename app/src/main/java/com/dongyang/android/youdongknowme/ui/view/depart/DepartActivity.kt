@@ -3,9 +3,13 @@ package com.dongyang.android.youdongknowme.ui.view.depart
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.set
 import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
@@ -33,6 +37,17 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
 
         viewModel.checkFirstLaunch()
 
+        // 부분 색상 지정
+        val ssb = SpannableStringBuilder(binding.departSpanText.text)
+        ssb.setSpan(
+            ForegroundColorSpan(getColor(R.color.main)),
+            0,
+            5,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        binding.departSpanText.text = ssb
+        
         // 학과 리스트
         val items =
             resources.getStringArray(R.array.dmu_department_list).toCollection(ArrayList<String>())
