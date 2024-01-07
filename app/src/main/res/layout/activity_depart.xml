@@ -103,14 +103,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/onboarding_step">
 
-            <ImageButton
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="16dp"
-                android:background="@drawable/ic_search"
-                android:backgroundTint="@color/gray300" />
-
             <EditText
                 android:id="@+id/depart_search_text"
                 style="@style/PretendardRegular16"
@@ -124,7 +116,10 @@
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:paddingStart="8dp"
-                android:paddingEnd="8dp" />
+                android:paddingEnd="8dp"
+                android:drawableLeft="@drawable/ic_search"
+                android:drawableTint="@color/gray300"
+                android:drawablePadding="16dp" />
 
             <ImageButton
                 android:id="@+id/depart_search_text_clear"
