@@ -30,13 +30,13 @@
                 android:text="해당 학과의 공지만 바로 알려줘요."
                 android:textStyle="bold"
                 android:layout_marginHorizontal="16dp"
-                app:layout_constraintBottom_toTopOf="@id/onboarding_progress"
+                app:layout_constraintBottom_toTopOf="@id/onboarding_step"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/depart_title_main"/>
 
         <LinearLayout
-            android:id="@+id/onboarding_progress"
+            android:id="@+id/onboarding_step"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -103,7 +103,7 @@
             app:layout_constraintBottom_toTopOf="@id/depart_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/onboarding_progress">
+            app:layout_constraintTop_toBottomOf="@id/onboarding_step">
 
             <ImageButton
                 android:layout_width="30dp"
