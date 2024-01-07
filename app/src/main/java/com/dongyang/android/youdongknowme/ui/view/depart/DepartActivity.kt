@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -38,15 +39,7 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
         viewModel.checkFirstLaunch()
 
         // 부분 색상 지정
-        val ssb = SpannableStringBuilder(binding.departSpanText.text)
-        ssb.setSpan(
-            ForegroundColorSpan(getColor(R.color.main)),
-            0,
-            5,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-
-        binding.departSpanText.text = ssb
+        spanText(binding.departSpanText,0, 5)
         
         // 학과 리스트
         val items =
@@ -71,6 +64,18 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
             // 포지션 선택 시 스낵바를 통해 알림 표시
             if (it != -1) getSnackBar(items).show()
         }
+    }
+
+    private fun spanText(spanTextView: TextView, startIdx: Int, endEdx: Int){
+        val ssb = SpannableStringBuilder(spanTextView.text)
+        ssb.setSpan(
+            ForegroundColorSpan(getColor(R.color.main)),
+            startIdx,
+            endEdx,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        binding.departSpanText.text = ssb
     }
 
     // 컨테이너 클릭 시 선택한 학과의 포지션 저장
