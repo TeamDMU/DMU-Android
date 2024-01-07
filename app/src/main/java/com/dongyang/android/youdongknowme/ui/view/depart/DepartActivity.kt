@@ -39,7 +39,7 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
         viewModel.checkFirstLaunch()
 
         // 부분 색상 지정
-        spanText(binding.departSpanText,0, 5)
+        spanText(binding.departTitleMain,0, 5)
         
         // 학과 리스트
         val items =
@@ -75,7 +75,7 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
 
-        binding.departSpanText.text = ssb
+        spanTextView.text = ssb
     }
 
     // 컨테이너 클릭 시 선택한 학과의 포지션 저장
