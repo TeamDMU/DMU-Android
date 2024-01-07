@@ -10,10 +10,11 @@
     <string name="menu_main_bottom_setting">설정</string>
 
     <!-- department -->
-    <string name="department_title">학과선택</string>
     <string name="department_snackbar_title">학과 선택을 마치셨나요?</string>
     <string name="department_snackbar_positive_button">확인</string>
     <string name="department_search_message">소속 학과를 검색해주세요.</string>
+    <string name="department_title_main">소속 학과를 선택하면,</string>
+    <string name="department_title_sub">해당 학과의 공지만 바로 알려줘요.</string>
 
     <!-- notice -->
     <string name="notice_title">공지사항</string>
