@@ -66,21 +66,21 @@
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:layout_gravity="left|center_horizontal"
-                    android:background="@drawable/bg_circle"
+                    android:background="@drawable/ic_circle"
                     android:backgroundTint="@color/blue300" />
 
                 <View
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:layout_gravity="center|center_horizontal"
-                    android:background="@drawable/bg_circle"
+                    android:background="@drawable/ic_circle"
                     android:backgroundTint="@color/gray300" />
 
                 <View
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:layout_gravity="right|center_horizontal"
-                    android:background="@drawable/bg_circle"
+                    android:background="@drawable/ic_circle"
                     android:backgroundTint="@color/gray300" />
 
             </FrameLayout>
@@ -99,7 +99,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:background="@drawable/bg_search_radius"
+            android:background="@drawable/bg_search_white__radius_10dp"
             android:minHeight="56dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@id/depart_container"
@@ -166,7 +166,7 @@
             android:layout_height="56dp"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/bg_button_enable_selector"
+            android:background="@drawable/btn_gray_to_blue_10dp_enabled"
             android:text="다음"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
