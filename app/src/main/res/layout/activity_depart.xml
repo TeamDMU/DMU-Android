@@ -33,96 +33,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/depart_title_main"/>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <include
             android:id="@+id/onboarding_step"
-            android:layout_width="match_parent"
+            layout="@layout/layout_onboarding_step"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:paddingHorizontal="56dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/depart_title_sub"
-            app:layout_constraintBottom_toTopOf="@id/depart_search_view" >
-
-            <View
-                android:id="@+id/onboarding_line"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:background="@color/line"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <!-- step1 : 학과 선택 -->
-
-            <View
-                android:id="@+id/onboarding_step_1"
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:background="@drawable/ic_circle"
-                android:backgroundTint="@color/blue300"
-                app:layout_constraintStart_toStartOf="@id/onboarding_line"
-                app:layout_constraintTop_toTopOf="@id/onboarding_line"
-                app:layout_constraintBottom_toBottomOf="@id/onboarding_line" />
-
-            <TextView
-                style="@style/PretendardBold16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="학과 선택"
-                android:textColor="@color/main"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/onboarding_step_1" />
-
-            <!-- step 2 : 키워드 설정 -->
-            <View
-                android:id="@+id/onboarding_step_2"
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:background="@drawable/ic_circle"
-                android:backgroundTint="@color/gray300"
-                app:layout_constraintStart_toEndOf="@id/onboarding_step_1"
-                app:layout_constraintEnd_toStartOf="@id/onboarding_step_3"
-                app:layout_constraintTop_toTopOf="@id/onboarding_line"
-                app:layout_constraintBottom_toBottomOf="@id/onboarding_line" />
-
-            <TextView
-                style="@style/PretendardBold16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="키워드 설정"
-                android:textColor="@color/gray300"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toEndOf="@id/onboarding_step_1"
-                app:layout_constraintEnd_toStartOf="@id/onboarding_step_3"
-                app:layout_constraintTop_toBottomOf="@id/onboarding_step_2" />
-
-            <!-- step 3 : 알림 설정 -->
-            <View
-                android:id="@+id/onboarding_step_3"
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:background="@drawable/ic_circle"
-                android:backgroundTint="@color/gray300"
-                app:layout_constraintEnd_toEndOf="@id/onboarding_line"
-                app:layout_constraintTop_toTopOf="@id/onboarding_line"
-                app:layout_constraintBottom_toBottomOf="@id/onboarding_line" />
-
-            <TextView
-                style="@style/PretendardBold16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="알림 설정"
-                android:textColor="@color/gray300"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@id/onboarding_step_3"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintBottom_toTopOf="@id/depart_search_view" />
 
         <LinearLayout
             android:id="@+id/depart_search_view"
@@ -200,7 +121,6 @@
             app:layout_constraintTop_toBottomOf="@id/depart_container" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     <data>
 
