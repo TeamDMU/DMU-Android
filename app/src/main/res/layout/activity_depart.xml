@@ -40,6 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:paddingHorizontal="56dp"
+            app:stepValue="@{@string/setting_department}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/depart_title_sub"
