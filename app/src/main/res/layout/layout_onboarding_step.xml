@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/onboarding_step"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -36,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="학과 선택"
+            android:text="@string/setting_department"
             android:textColor="@color/main"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/onboarding_step_1" />
@@ -58,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="키워드 설정"
+            android:text="@string/setting_keyword_choice"
             android:textColor="@color/gray300"
             app:layout_constraintEnd_toStartOf="@id/onboarding_step_3"
             app:layout_constraintStart_toEndOf="@id/onboarding_step_1"
@@ -80,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="알림 설정"
+            android:text="@string/setting_notice"
             android:textColor="@color/gray300"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/onboarding_step_3" />
