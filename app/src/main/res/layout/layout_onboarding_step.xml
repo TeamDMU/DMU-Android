@@ -25,7 +25,8 @@
             android:layout_width="12dp"
             android:layout_height="12dp"
             android:background="@drawable/ic_circle"
-            android:backgroundTint="@color/blue300"
+            android:backgroundTint="@color/{}"
+            android:visibility="@{exitVisible ? View.VISIBLE:View.GONE}"
             app:layout_constraintBottom_toBottomOf="@id/onboarding_line"
             app:layout_constraintStart_toStartOf="@id/onboarding_line"
             app:layout_constraintTop_toTopOf="@id/onboarding_line" />
@@ -36,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/setting_department"
-            android:textColor="@color/main"
+            android:textColor="@color/gray300"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/onboarding_step_1" />
 
