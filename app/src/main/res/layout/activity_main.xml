@@ -24,7 +24,6 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_gravity="bottom|center_horizontal"
-            android:background="@drawable/bg_main_navi"
             android:elevation="30dp"
             app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"
