@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.YouDongKnowMe" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/main</item>
+        <item name="colorPrimary">@color/blue300</item>
         <item name="colorPrimaryVariant">@color/sub</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -18,8 +18,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.YouDongKnowMe.Splash" parent="Theme.YouDongKnowMe">
-    </style>
+    <style name="Theme.YouDongKnowMe.Splash" parent="Theme.YouDongKnowMe"></style>
 
     <!-- 달력 연, 월 스타일 지정 -->
     <style name="CalendarHeader">
