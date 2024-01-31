@@ -5,9 +5,10 @@
     <string name="dmu">동양미래대학교</string>
 
     <!-- main menu -->
-    <string name="menu_main_bottom_home">공지사항</string>
-    <string name="menu_main_bottom_calendar">학사일정</string>
+    <string name="menu_main_bottom_home">공지</string>
+    <string name="menu_main_bottom_calendar">일정</string>
     <string name="menu_main_bottom_setting">설정</string>
+    <string name="menu_main_bottom_search">검색</string>
 
     <!-- department -->
     <string name="department_title">학과선택</string>
@@ -97,7 +98,7 @@
     <string name="alarm_title">알림함</string>
 
     <!-- cafeteria -->
-    <string name="cafeteria_main">오늘의 식단</string>
+    <string name="cafeteria_main">식단</string>
     <string name="cafeteria_student">학생식당</string>
     <string name="cafeteria_employee">교직원식당</string>
     <string name="cafeteria_menu">메뉴</string>
