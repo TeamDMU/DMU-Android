@@ -9,16 +9,15 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
 
     override val layoutResourceId: Int = R.layout.fragment_search
     override val viewModel: SearchViewModel by viewModel()
+
     override fun initStartView() {
-        TODO("Not yet implemented")
+        binding.searchViewModel = viewModel
     }
 
     override fun initDataBinding() {
-        TODO("Not yet implemented")
     }
 
     override fun initAfterBinding() {
-        TODO("Not yet implemented")
     }
 
 }

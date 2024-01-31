@@ -6,4 +6,11 @@
         android:layout_height="match_parent">
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="searchViewModel"
+            type="com.dongyang.android.youdongknowme.ui.view.search.SearchViewModel" />
+    </data>
 </layout>
