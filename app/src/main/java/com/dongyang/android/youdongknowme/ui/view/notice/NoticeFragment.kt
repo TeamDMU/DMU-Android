@@ -72,27 +72,27 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         viewModel.errorState.observe(viewLifecycleOwner, EventObserver { resId ->
             showToast(getString(resId))
         })
-
-        // 알람 카운트가 0이 아닌 경우에 뱃지 추가
-        viewModel.unVisitedAlarmCount.observe(viewLifecycleOwner) { count ->
-            if (count == 0) {
-                binding.noticeToolbar.toolbarAlarm.post {
-                    BadgeUtils.detachBadgeDrawable(
-                        badgeDrawable,
-                        binding.noticeToolbar.toolbarAlarm
-                    )
-                }
-            } else {
-                badgeDrawable.number = count
-                binding.noticeToolbar.toolbarAlarm.post {
-                    BadgeUtils.attachBadgeDrawable(
-                        badgeDrawable,
-                        binding.noticeToolbar.toolbarAlarm,
-                        binding.noticeToolbar.toolbarAlarmContainer
-                    )
-                }
-            }
-        }
+//
+//        // 알람 카운트가 0이 아닌 경우에 뱃지 추가
+//        viewModel.unVisitedAlarmCount.observe(viewLifecycleOwner) { count ->
+//            if (count == 0) {
+//                binding.noticeToolbar.toolbarAlarm.post {
+//                    BadgeUtils.detachBadgeDrawable(
+//                        badgeDrawable,
+//                        binding.noticeToolbar.toolbarAlarm
+//                    )
+//                }
+//            } else {
+//                badgeDrawable.number = count
+//                binding.noticeToolbar.toolbarAlarm.post {
+//                    BadgeUtils.attachBadgeDrawable(
+//                        badgeDrawable,
+//                        binding.noticeToolbar.toolbarAlarm,
+//                        binding.noticeToolbar.toolbarAlarmContainer
+//                    )
+//                }
+//            }
+//        }
     }
 
     override fun initAfterBinding() {
@@ -104,46 +104,36 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
             binding.noticeSwipe.isRefreshing = false
         }
 
-        // 툴바의 검색 버튼 눌렀을 때 동작
-        binding.noticeToolbar.toolbarSearch.setOnClickListener {
-            // 최초 검색 버튼 클릭 시 EditText 보여지게 설정
-            if (viewModel.isSearchMode.value == false) {
-                binding.noticeToolbar.toolbarSearchText.requestFocus()
-                binding.noticeToolbar.toolbarSearchText.showKeyboard()
-                viewModel.updateSearchMode(true)
-                YoYo.with(Techniques.FadeInUp)
-                    .duration(400)
-                    .playOn(binding.noticeToolbar.toolbarSearchView)
-            } else {
-                binding.noticeToolbar.toolbarSearchText.hideKeyboard()
-                binding.noticeToolbar.toolbarSearchText.text.clear()
-                viewModel.updateSearchMode(false)
-                YoYo.with(Techniques.FadeOutDown)
-                    .duration(400)
-                    .playOn(binding.noticeToolbar.toolbarSearchView)
-            }
-        }
+//        // 툴바의 검색 버튼 눌렀을 때 동작
+//        binding.noticeToolbar.toolbarSearch.setOnClickListener {
+//            // 최초 검색 버튼 클릭 시 EditText 보여지게 설정
+//            if (viewModel.isSearchMode.value == false) {
+//                binding.noticeToolbar.toolbarSearchText.requestFocus()
+//                binding.noticeToolbar.toolbarSearchText.showKeyboard()
+//                viewModel.updateSearchMode(true)
+//                YoYo.with(Techniques.FadeInUp)
+//                    .duration(400)
+//                    .playOn(binding.noticeToolbar.toolbarSearchView)
+//            } else {
+//                binding.noticeToolbar.toolbarSearchText.hideKeyboard()
+//                binding.noticeToolbar.toolbarSearchText.text.clear()
+//                viewModel.updateSearchMode(false)
+//                YoYo.with(Techniques.FadeOutDown)
+//                    .duration(400)
+//                    .playOn(binding.noticeToolbar.toolbarSearchView)
+//            }
+//        }
 
-        binding.noticeToolbar.toolbarSearchText.setOnEditorActionListener { textView, actionId, _ ->
-            val searchKeyword = textView.text.toString()
-            if (actionId == EditorInfo.IME_ACTION_SEARCH && searchKeyword.isNotEmpty()) {
-                textView.hideKeyboard()
-                viewModel.fetchSearchNotices(searchKeyword)
-                binding.noticeRvList.scrollToPosition(0)
-            }
-
-            false
-        }
-
-        binding.noticeToolbar.toolbarAlarm.setOnClickListener {
-            val intent = Intent(requireActivity(), AlarmActivity::class.java)
-            startActivity(intent)
-        }
-
-        // 툴바의 X버튼 눌렀을 때 동작
-        binding.noticeToolbar.toolbarSearchTextClear.setOnClickListener {
-            binding.noticeToolbar.toolbarSearchText.text.clear()
-        }
+//        binding.noticeToolbar.toolbarSearchText.setOnEditorActionListener { textView, actionId, _ ->
+//            val searchKeyword = textView.text.toString()
+//            if (actionId == EditorInfo.IME_ACTION_SEARCH && searchKeyword.isNotEmpty()) {
+//                textView.hideKeyboard()
+//                viewModel.fetchSearchNotices(searchKeyword)
+//                binding.noticeRvList.scrollToPosition(0)
+//            }
+//
+//            false
+//        }
 
         // 각각 탭 버튼 눌렀을 때 동작
         binding.noticeTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -151,7 +141,6 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
 
                 binding.noticeRvList.scrollToPosition(0)
 
-                binding.noticeToolbar.toolbarSearchText.text.clear()
                 if (tab.text == getString(R.string.notice_tab_university))
                     viewModel.updateSelectedTabType(NoticeTabType.SCHOOL)
                 else
