@@ -7,6 +7,12 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
+    <style name="PretendardMedium" parent="android:TextAppearance">
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
     <style name="PretendardBold" parent="android:TextAppearance">
         <item name="android:textStyle">normal</item>
         <item name="android:fontFamily">@font/pretendard_bold</item>
@@ -71,6 +77,10 @@
 
     <style name="PretendardBold24" parent="PretendardBold">
         <item name="android:textSize">@dimen/font_size_24</item>
+    </style>
+
+    <style name="PretendardMedium16" parent="PretendardMedium">
+        <item name="android:textSize">@dimen/font_size_16</item>
     </style>
 
 </resources>

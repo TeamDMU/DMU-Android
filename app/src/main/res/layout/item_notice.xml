@@ -7,16 +7,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
-        android:onClick="@{() -> itemClickListener.itemClick(notice.num)}"
-        android:paddingVertical="12dp">
+        android:backgroundTint="@color/white"
+        android:onClick="@{() -> itemClickListener.itemClick(notice.num)}">
 
         <TextView
             android:id="@+id/item_notice_title"
-            style="@style/PretendardRegular16"
+            style="@style/PretendardMedium16"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginHorizontal="20dp"
+            android:ellipsize="end"
+            android:hint="안녕하세요 안녕하세요 안녕하세요요요요요요요ㅛㅛㅛㅇㅇㅇㅇㅇㅇㅇㅍ안녕하엣ㄴㅇ라ㅣㅁ너리ㅏㄴㅇ러ㅏㅣㄴㅁ어ㅣㅏ;ㄴㅇ러;ㅣㅏ렁나ㅣㅁ"
+            android:maxLines="2"
+            android:paddingTop="20dp"
             android:text="@{notice.title}"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
@@ -28,12 +31,15 @@
             style="@style/PretendardRegular12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="10dp"
+            android:hint="2024.2.1"
+            android:maxLines="1"
+            android:paddingBottom="20dp"
             android:text="@{notice.date}"
+            android:textColor="@color/gray400"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/item_notice_writer"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/item_notice_title"
             app:layout_constraintTop_toBottomOf="@id/item_notice_title" />
 
         <TextView
@@ -41,12 +47,20 @@
             style="@style/PretendardRegular12"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginStart="12dp"
+            android:hint="박재선"
+            android:maxLines="1"
             android:text="@{notice.writer}"
+            android:textColor="@color/gray400"
             app:layout_constraintStart_toEndOf="@id/item_notice_date"
-            app:layout_constraintTop_toBottomOf="@id/item_notice_title" />
+            app:layout_constraintTop_toTopOf="@id/item_notice_date" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray200"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_notice_date" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <data>
@@ -60,5 +74,4 @@
             type="com.dongyang.android.youdongknowme.ui.view.notice.NoticeClickListener" />
 
     </data>
-
 </layout>
