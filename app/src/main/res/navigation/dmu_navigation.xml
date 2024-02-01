@@ -9,20 +9,25 @@
         android:id="@+id/noticeFragment"
         android:name="com.dongyang.android.youdongknowme.ui.view.notice.NoticeFragment"
         android:label="NoticeFragment"
-        tools:layout="@layout/fragment_notice"/>
+        tools:layout="@layout/fragment_notice" />
+    <keep_state_fragment
+        android:id="@+id/searchFragment"
+        android:name="com.dongyang.android.youdongknowme.ui.view.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search" />
     <keep_state_fragment
         android:id="@+id/scheduleFragment"
         android:name="com.dongyang.android.youdongknowme.ui.view.schedule.ScheduleFragment"
         android:label="ScheduleFragment"
-        tools:layout="@layout/fragment_schedule"/>
+        tools:layout="@layout/fragment_schedule" />
     <keep_state_fragment
         android:id="@+id/cafeteriaFragment"
         android:name="com.dongyang.android.youdongknowme.ui.view.cafeteria.CafeteriaFragment"
         android:label="CafeteriaFragment"
-        tools:layout="@layout/fragment_cafeteria"/>
+        tools:layout="@layout/fragment_cafeteria" />
     <keep_state_fragment
         android:id="@+id/settingFragment"
         android:name="com.dongyang.android.youdongknowme.ui.view.setting.SettingFragment"
         android:label="SettingFragment"
-        tools:layout="@layout/fragment_setting"/>
+        tools:layout="@layout/fragment_setting" />
 </navigation>
