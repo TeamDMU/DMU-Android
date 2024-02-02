@@ -21,12 +21,11 @@
 
         <TextView
             android:id="@+id/toolbar_title"
+            style="@style/PretendardSemiBold20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_semibold"
             android:text="@{title}"
             android:textColor="@color/gray500"
-            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar_exit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
