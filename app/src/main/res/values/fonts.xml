@@ -7,6 +7,18 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
+    <style name="PretendardMedium" parent="android:TextAppearance">
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="PretnedardSemiBold" parent="android:TextAppearance">
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">@font/pretendard_semibold</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
     <style name="PretendardBold" parent="android:TextAppearance">
         <item name="android:textStyle">normal</item>
         <item name="android:fontFamily">@font/pretendard_bold</item>
@@ -41,6 +53,50 @@
         <item name="android:textSize">@dimen/font_size_20</item>
     </style>
 
+    <style name="PretendardMedium12" parent="PretendardMedium">
+        <item name="android:textSize">@dimen/font_size_12</item>
+    </style>
+
+    <style name="PretendardMedium14" parent="PretendardMedium">
+        <item name="android:textSize">@dimen/font_size_14</item>
+    </style>
+
+    <style name="PretendardMedium16" parent="PretendardMedium">
+        <item name="android:textSize">@dimen/font_size_16</item>
+    </style>
+
+    <style name="PretendardMedium18" parent="PretendardMedium">
+        <item name="android:textSize">@dimen/font_size_18</item>
+    </style>
+
+    <style name="PretendardMedium20" parent="PretendardMedium">
+        <item name="android:textSize">@dimen/font_size_20</item>
+    </style>
+
+    <style name="PretendardSemiBold10" parent="PretnedardSemiBold">
+        <item name="android:textSize">@dimen/font_size_10</item>
+    </style>
+
+    <style name="PretendardSemiBold12" parent="PretnedardSemiBold">
+        <item name="android:textSize">@dimen/font_size_12</item>
+    </style>
+
+    <style name="PretendardSemiBold14" parent="PretnedardSemiBold">
+        <item name="android:textSize">@dimen/font_size_14</item>
+    </style>
+
+    <style name="PretendardSemiBold16" parent="PretnedardSemiBold">
+        <item name="android:textSize">@dimen/font_size_16</item>
+    </style>
+
+    <style name="PretendardSemiBold18" parent="PretnedardSemiBold">
+        <item name="android:textSize">@dimen/font_size_18</item>
+    </style>
+
+    <style name="PretendardSemiBold20" parent="PretnedardSemiBold">
+        <item name="android:textSize">@dimen/font_size_20</item>
+    </style>
+
     <style name="PretendardBold10" parent="PretendardBold">
         <item name="android:textSize">@dimen/font_size_10</item>
     </style>
@@ -72,5 +128,4 @@
     <style name="PretendardBold24" parent="PretendardBold">
         <item name="android:textSize">@dimen/font_size_24</item>
     </style>
-
 </resources>
