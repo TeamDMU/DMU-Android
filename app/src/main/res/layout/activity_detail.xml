@@ -76,11 +76,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:gravity="end"
+                android:maxLength="17"
                 android:text="@{vm.date}"
                 android:textColor="@color/gray400"
                 app:layout_constraintStart_toStartOf="@id/detail_title"
                 app:layout_constraintTop_toBottomOf="@id/detail_title"
-                tools:hint="손명지" />
+                tools:hint="maxlength17글자" />
 
             <View
                 android:id="@+id/detail_writer_date_divide"
@@ -102,6 +103,8 @@
                 android:text="@{vm.writer}"
                 android:textColor="@color/gray400"
                 app:layout_constraintBottom_toBottomOf="@id/detail_writer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@id/detail_writer_date_divide"
                 app:layout_constraintTop_toTopOf="@id/detail_writer"
                 tools:hint="2024.02.01" />
