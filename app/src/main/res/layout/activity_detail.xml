@@ -136,12 +136,11 @@
                         style="@style/PretendardMedium16"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@{vm.content}"
+                        android:text="@tools:sample/lorem/random"
                         android:textColor="@color/gray500"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:hint="반갑습니다반갑스비나아럼ㄴ;렁;ㄹ넘라ㅣ;멀;ㅣㅁ너라ㅓㄴ맒ㄴ반갑습니다반갑스비나아럼ㄴ;렁;ㄹ넘라ㅣ;멀;ㅣㅁ너라ㅓㄴ맒ㄴ반갑습니다반갑스비나아럼ㄴ;렁;ㄹ넘라ㅣ;멀;ㅣㅁ너라ㅓㄴ맒ㄴ반갑습니다반갑스비나아럼ㄴ;렁;ㄹ넘라ㅣ;멀;ㅣㅁ너라ㅓㄴ맒ㄴ반갑습니다반갑스비나아럼ㄴ;렁;ㄹ넘라ㅣ;멀;ㅣㅁ너라ㅓㄴ맒ㄴ반갑습니다반갑스비나아럼ㄴ;렁;ㄹ넘라ㅣ;멀;ㅣㅁ너라ㅓㄴ맒ㄴ반갑습니다반갑스비나아럼ㄴ;렁;ㄹ넘라ㅣ;멀;ㅣㅁ너라ㅓㄴ맒ㄴ반갑습니다반갑스비나아럼ㄴ;렁;ㄹ넘라ㅣ;멀;ㅣㅁ너라ㅓㄴ맒ㄴ반갑습니다반갑스비나아럼ㄴ;렁;ㄹ넘라ㅣ;멀;ㅣㅁ너라ㅓㄴ맒ㄴ반갑습니다반갑스비나아럼ㄴ;렁;ㄹ넘라ㅣ;멀;ㅣㅁ너라ㅓㄴ맒ㄴ반갑습니다반갑스비나아럼ㄴ;렁;ㄹ넘라ㅣ;멀;ㅣㅁ너라ㅓㄴ맒ㄴ반갑습니다반갑스비나아럼ㄴ;렁;ㄹ넘라ㅣ;멀;ㅣㅁ너라ㅓㄴ맒ㄴ반갑습니다반갑스비나아럼ㄴ;렁;ㄹ넘라ㅣ;멀;ㅣㅁ너라ㅓㄴ맒ㄴ반갑습니다반갑스비나아럼ㄴ;렁;ㄹ넘라ㅣ;멀;ㅣㅁ너라ㅓㄴ맒ㄴ반갑습니다반갑스비나아럼ㄴ;렁;ㄹ넘라ㅣ;멀;ㅣㅁ너라ㅓㄴ맒ㄴ반갑습니다반갑스비나아럼ㄴ;렁;ㄹ넘라ㅣ;멀;ㅣㅁ너라ㅓㄴ맒ㄴ반갑습니다반갑스비나아럼ㄴ;렁;ㄹ넘라ㅣ;멀;ㅣㅁ너라ㅓㄴ맒ㄴ반갑습니다반갑스비나아럼ㄴ;렁;ㄹ넘라ㅣ;멀;ㅣㅁ너라ㅓㄴ맒ㄴ반갑습니다반갑스비나아럼ㄴ;렁;ㄹ넘라ㅣ;멀;ㅣㅁ너라ㅓㄴ맒ㄴ반갑습니다반갑스비나아럼ㄴ;렁;ㄹ넘라ㅣ;멀;ㅣㅁ너라ㅓㄴ맒ㄴ반갑습니다반갑스비나아럼ㄴ;렁;ㄹ넘라ㅣ;멀;ㅣㅁ너라ㅓㄴ맒ㄴ" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <View
                         android:id="@+id/detail_bot_line"
