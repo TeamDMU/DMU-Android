@@ -1,5 +1,6 @@
 package com.dongyang.android.youdongknowme.ui.view.search
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
@@ -20,9 +21,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
     }
 
     override fun initDataBinding() {
-        showKeyboardOnEditTextFocus()
-        setTextClearButtonVisibility()
+        setupUI()
         setTextClearButtonClickListener()
+    }
+
+    private fun setupUI() {
+        showKeyboardOnEditTextFocus()
+        setupHideKeyboardOnOutsideTouch()
+        setTextClearButtonVisibility()
     }
 
     private fun showKeyboardOnEditTextFocus() {
@@ -36,6 +42,20 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
         val inputMethodManager =
             requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.showSoftInput(binding.etSearchBar, InputMethodManager.SHOW_IMPLICIT)
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setupHideKeyboardOnOutsideTouch() {
+        binding.root.setOnTouchListener { _, _ ->
+            hideKeyboard()
+            false
+        }
+    }
+
+    private fun hideKeyboard() {
+        val inputMethodManager =
+            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 
     private fun setTextClearButtonVisibility() {
