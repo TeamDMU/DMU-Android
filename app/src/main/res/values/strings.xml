@@ -111,4 +111,7 @@
 
     <!-- license -->
     <string name="license_title">오픈소스 라이센스</string>
+
+    <!-- search -->
+    <string name="search_hint">검색어를 입력하세요.</string>
 </resources>
