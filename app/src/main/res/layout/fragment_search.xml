@@ -46,18 +46,18 @@
                 android:textColor="@color/blue300"
                 android:textColorHint="@color/gray300"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/iv_search_cancel"
+                app:layout_constraintEnd_toEndOf="@id/iv_search_clear"
                 app:layout_constraintStart_toEndOf="@id/iv_search_icon"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/iv_search_cancel"
+                android:id="@+id/iv_search_clear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:focusable="true"
                 android:padding="12dp"
-                android:src="@drawable/ic_search_cancel"
+                android:src="@drawable/ic_search_clear"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

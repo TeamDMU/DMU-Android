@@ -67,18 +67,18 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                viewModel.validateSearchContent()
+                viewModel.validateSearchClearButtonVisibility()
             }
         })
 
-        viewModel.searchValidation.observe(viewLifecycleOwner) { isValid ->
-            binding.ivSearchCancel.visibility = if (isValid) View.VISIBLE else View.GONE
+        viewModel.searchClearVisibility.observe(viewLifecycleOwner) { isValid ->
+            binding.ivSearchClear.visibility = if (isValid) View.VISIBLE else View.GONE
         }
     }
 
     private fun setTextClearButtonClickListener() {
         with(binding) {
-            ivSearchCancel.setOnClickListener {
+            ivSearchClear.setOnClickListener {
                 etSearchBar.text.clear()
             }
         }

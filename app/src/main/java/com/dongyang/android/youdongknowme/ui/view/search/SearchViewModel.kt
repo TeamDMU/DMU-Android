@@ -8,10 +8,10 @@ class SearchViewModel : BaseViewModel() {
     private val _searchContent: MutableLiveData<String> = MutableLiveData()
     val searchContent: MutableLiveData<String> = _searchContent
 
-    private val _searchValidation: MutableLiveData<Boolean> = MutableLiveData()
-    val searchValidation: LiveData<Boolean> = _searchValidation
+    private val _searchClearVisibility: MutableLiveData<Boolean> = MutableLiveData()
+    val searchClearVisibility: LiveData<Boolean> = _searchClearVisibility
 
-    fun validateSearchContent() {
-        _searchValidation.value = !_searchContent.value.isNullOrEmpty()
+    fun validateSearchClearButtonVisibility() {
+        _searchClearVisibility.value = !_searchContent.value.isNullOrEmpty()
     }
 }
