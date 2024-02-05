@@ -11,7 +11,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_search_bar"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="12dp"
             android:background="@drawable/bg_blue100_radius_6dp"
@@ -40,7 +40,9 @@
                 android:gravity="center_vertical"
                 android:hint="@string/search_hint"
                 android:inputType="text"
+                android:maxLength="10"
                 android:maxLines="1"
+                android:text="@={searchViewModel.searchContent}"
                 android:textColor="@color/blue300"
                 android:textColorHint="@color/gray300"
                 app:layout_constraintBottom_toBottomOf="parent"
