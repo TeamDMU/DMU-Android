@@ -66,6 +66,7 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
         }
     }
 
+    // 텍스트 부분 색상 설정
     private fun setSpan(spanTextView: TextView, startIdx: Int, endIdx: Int){
         val ssb = SpannableStringBuilder(spanTextView.text)
         ssb.setSpan(
