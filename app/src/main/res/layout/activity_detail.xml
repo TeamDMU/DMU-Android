@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
@@ -75,13 +75,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:gravity="end"
-                android:maxLength="17"
                 android:text="@{vm.date}"
                 android:textColor="@color/gray400"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toStartOf="@id/detail_writer_date_divide"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="@id/detail_title"
                 app:layout_constraintTop_toBottomOf="@id/detail_title"
-                tools:hint="maxlength17글자" />
+                app:layout_constraintWidth_max="wrap"
+                app:layout_constraintWidth_percent="0.7"
+                tools:hint="손명지" />
 
             <View
                 android:id="@+id/detail_writer_date_divide"
@@ -90,23 +94,23 @@
                 android:layout_marginStart="12dp"
                 android:background="@color/gray400"
                 app:layout_constraintBottom_toBottomOf="@id/detail_writer"
+                app:layout_constraintEnd_toStartOf="@id/detail_date"
                 app:layout_constraintStart_toEndOf="@id/detail_writer"
                 app:layout_constraintTop_toTopOf="@id/detail_writer" />
 
             <TextView
                 android:id="@+id/detail_date"
                 style="@style/PretendardMedium14"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:gravity="end"
                 android:text="@{vm.writer}"
                 android:textColor="@color/gray400"
-                app:layout_constraintBottom_toBottomOf="@id/detail_writer"
+                app:layout_constrainedWidth="true"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@id/detail_writer_date_divide"
                 app:layout_constraintTop_toTopOf="@id/detail_writer"
+                app:layout_constraintWidth_max="wrap"
                 tools:hint="2024.02.01" />
 
             <View
@@ -117,7 +121,7 @@
                 android:background="@color/gray300"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/detail_writer" />
+                app:layout_constraintTop_toBottomOf="@id/detail_date" />
 
             <ScrollView
                 android:id="@+id/detail_scroll_view"
