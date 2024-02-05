@@ -12,6 +12,6 @@ class SearchViewModel : BaseViewModel() {
     val searchValidation: LiveData<Boolean> = _searchValidation
 
     fun validateSearchContent() {
-        _searchValidation.value = !_searchContent.value.isNullOrBlank()
+        _searchValidation.value = !_searchContent.value.isNullOrEmpty()
     }
 }
