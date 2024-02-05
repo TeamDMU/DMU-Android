@@ -7,15 +7,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/notice_toolbar"
-            layout="@layout/standard_toolbar"
-            android:layout_width="0dp"
-            android:layout_height="?android:attr/actionBarSize"
-            app:layout_constraintEnd_toEndOf="parent"
+        <ImageView
+            android:id="@+id/notice_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:paddingVertical="4dp"
+            android:src="@drawable/ic_logo"
             app:layout_constraintStart_toStartOf="parent"
-            app:title="@{@string/notice_title}"
-            app:vm="@{vm}" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/notice_alarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:padding="8dp"
+            android:src="@drawable/ic_alarm"
+            app:layout_constraintBottom_toBottomOf="@id/notice_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/notice_logo" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/notice_main_container"
@@ -25,7 +37,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/notice_toolbar"
+            app:layout_constraintTop_toBottomOf="@id/notice_logo"
             tools:context=".ui.view.notice.NoticeFragment">
 
             <com.google.android.material.tabs.TabLayout
@@ -36,9 +48,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tabGravity="fill"
+                app:tabIndicatorColor="@color/blue300"
+                app:tabIndicatorHeight="2dp"
                 app:tabMaxWidth="0dp"
                 app:tabMode="fixed"
-                app:tabTextAppearance="@style/PretendardRegular16">
+                app:tabSelectedTextColor="@color/blue300"
+                app:tabTextAppearance="@style/PretendardBold16"
+                app:tabTextColor="@color/gray400">
 
                 <com.google.android.material.tabs.TabItem
                     android:id="@+id/notice_tab_university"
@@ -59,9 +75,9 @@
             android:id="@+id/notice_swipe"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/notice_main_container">
 
             <androidx.recyclerview.widget.RecyclerView
@@ -69,7 +85,8 @@
                 bind_is_error="@{vm.isError()}"
                 bind_is_loading="@{vm.isLoading()}"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                tools:listitem="@layout/item_notice"/>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <ScrollView
@@ -80,7 +97,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/notice_toolbar">
+            app:layout_constraintTop_toBottomOf="@id/notice_logo">
 
             <include
                 android:id="@+id/notice_error_container"

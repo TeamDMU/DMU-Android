@@ -5,24 +5,17 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.view.inputmethod.EditorInfo
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.daimajia.androidanimations.library.Techniques
-import com.daimajia.androidanimations.library.YoYo
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentNoticeBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
 import com.dongyang.android.youdongknowme.standard.util.ACTION
-import com.dongyang.android.youdongknowme.standard.util.hideKeyboard
-import com.dongyang.android.youdongknowme.standard.util.showKeyboard
 import com.dongyang.android.youdongknowme.ui.adapter.NoticeAdapter
-import com.dongyang.android.youdongknowme.ui.view.alarm.AlarmActivity
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailActivity
 import com.dongyang.android.youdongknowme.ui.view.util.EventObserver
 import com.google.android.material.badge.BadgeDrawable
-import com.google.android.material.badge.BadgeUtils
 import com.google.android.material.tabs.TabLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -72,27 +65,6 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         viewModel.errorState.observe(viewLifecycleOwner, EventObserver { resId ->
             showToast(getString(resId))
         })
-
-        // 알람 카운트가 0이 아닌 경우에 뱃지 추가
-        viewModel.unVisitedAlarmCount.observe(viewLifecycleOwner) { count ->
-            if (count == 0) {
-                binding.noticeToolbar.toolbarAlarm.post {
-                    BadgeUtils.detachBadgeDrawable(
-                        badgeDrawable,
-                        binding.noticeToolbar.toolbarAlarm
-                    )
-                }
-            } else {
-                badgeDrawable.number = count
-                binding.noticeToolbar.toolbarAlarm.post {
-                    BadgeUtils.attachBadgeDrawable(
-                        badgeDrawable,
-                        binding.noticeToolbar.toolbarAlarm,
-                        binding.noticeToolbar.toolbarAlarmContainer
-                    )
-                }
-            }
-        }
     }
 
     override fun initAfterBinding() {
@@ -104,54 +76,12 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
             binding.noticeSwipe.isRefreshing = false
         }
 
-        // 툴바의 검색 버튼 눌렀을 때 동작
-        binding.noticeToolbar.toolbarSearch.setOnClickListener {
-            // 최초 검색 버튼 클릭 시 EditText 보여지게 설정
-            if (viewModel.isSearchMode.value == false) {
-                binding.noticeToolbar.toolbarSearchText.requestFocus()
-                binding.noticeToolbar.toolbarSearchText.showKeyboard()
-                viewModel.updateSearchMode(true)
-                YoYo.with(Techniques.FadeInUp)
-                    .duration(400)
-                    .playOn(binding.noticeToolbar.toolbarSearchView)
-            } else {
-                binding.noticeToolbar.toolbarSearchText.hideKeyboard()
-                binding.noticeToolbar.toolbarSearchText.text.clear()
-                viewModel.updateSearchMode(false)
-                YoYo.with(Techniques.FadeOutDown)
-                    .duration(400)
-                    .playOn(binding.noticeToolbar.toolbarSearchView)
-            }
-        }
-
-        binding.noticeToolbar.toolbarSearchText.setOnEditorActionListener { textView, actionId, _ ->
-            val searchKeyword = textView.text.toString()
-            if (actionId == EditorInfo.IME_ACTION_SEARCH && searchKeyword.isNotEmpty()) {
-                textView.hideKeyboard()
-                viewModel.fetchSearchNotices(searchKeyword)
-                binding.noticeRvList.scrollToPosition(0)
-            }
-
-            false
-        }
-
-        binding.noticeToolbar.toolbarAlarm.setOnClickListener {
-            val intent = Intent(requireActivity(), AlarmActivity::class.java)
-            startActivity(intent)
-        }
-
-        // 툴바의 X버튼 눌렀을 때 동작
-        binding.noticeToolbar.toolbarSearchTextClear.setOnClickListener {
-            binding.noticeToolbar.toolbarSearchText.text.clear()
-        }
-
         // 각각 탭 버튼 눌렀을 때 동작
         binding.noticeTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
 
                 binding.noticeRvList.scrollToPosition(0)
 
-                binding.noticeToolbar.toolbarSearchText.text.clear()
                 if (tab.text == getString(R.string.notice_tab_university))
                     viewModel.updateSelectedTabType(NoticeTabType.SCHOOL)
                 else

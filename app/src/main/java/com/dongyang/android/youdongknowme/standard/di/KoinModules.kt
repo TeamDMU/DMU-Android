@@ -23,6 +23,7 @@ import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordViewModel
 import com.dongyang.android.youdongknowme.ui.view.license.LicenseViewModel
 import com.dongyang.android.youdongknowme.ui.view.notice.NoticeViewModel
 import com.dongyang.android.youdongknowme.ui.view.schedule.ScheduleViewModel
+import com.dongyang.android.youdongknowme.ui.view.search.SearchViewModel
 import com.dongyang.android.youdongknowme.ui.view.setting.SettingViewModel
 import com.dongyang.android.youdongknowme.ui.view.splash.SplashViewModel
 import com.dongyang.android.youdongknowme.ui.view.util.ResourceProvider
@@ -94,6 +95,9 @@ val viewModelModule = module {
     }
     viewModel {
         LicenseViewModel()
+    }
+    viewModel {
+        SearchViewModel()
     }
 }
 
