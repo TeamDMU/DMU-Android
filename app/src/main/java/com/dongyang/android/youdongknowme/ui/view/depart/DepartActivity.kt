@@ -68,15 +68,15 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
 
     // 텍스트 부분 색상 설정
     private fun setSpan(spanTextView: TextView, startIdx: Int, endIdx: Int){
-        val ssb = SpannableStringBuilder(spanTextView.text)
-        ssb.setSpan(
-            ForegroundColorSpan(getColor(R.color.main)),
-            startIdx,
-            endIdx,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-
-        spanTextView.text = ssb
+        SpannableStringBuilder(spanTextView.text).apply {
+            setSpan(
+                ForegroundColorSpan(getColor(R.color.main)),
+                startIdx,
+                endIdx,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            spanTextView.text = this
+        }
     }
 
     // 컨테이너 클릭 시 선택한 학과의 포지션 저장
