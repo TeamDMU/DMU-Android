@@ -1,8 +1,10 @@
 package com.dongyang.android.youdongknowme.ui.view.search
 
+import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentSearchBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
@@ -18,8 +20,22 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
     }
 
     override fun initDataBinding() {
+        showKeyboardOnEditTextFocus()
         setTextClearButtonVisibility()
         setTextClearButtonClickListener()
+    }
+
+    private fun showKeyboardOnEditTextFocus() {
+        val searchKeyboard = binding.etSearchBar
+        searchKeyboard.requestFocus()
+
+        binding.etSearchBar.post {
+            binding.etSearchBar.setSelection(binding.etSearchBar.text.length)
+        }
+
+        val inputMethodManager =
+            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.showSoftInput(binding.etSearchBar, InputMethodManager.SHOW_IMPLICIT)
     }
 
     private fun setTextClearButtonVisibility() {
