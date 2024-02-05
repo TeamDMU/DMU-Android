@@ -39,7 +39,7 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
         viewModel.checkFirstLaunch()
 
         // 부분 색상 지정
-        spanText(binding.departTitleMain,0, 5)
+        spanText(binding.departTitleMain,startIdx = 0, endIdx = 5)
         
         // 학과 리스트
         val items =
@@ -65,13 +65,13 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
             if (it != -1) getSnackBar(items).show()
         }
     }
-
-    private fun spanText(spanTextView: TextView, startIdx: Int, endEdx: Int){
+    
+    private fun spanText(spanTextView: TextView, startIdx: Int, endIdx: Int){
         val ssb = SpannableStringBuilder(spanTextView.text)
         ssb.setSpan(
             ForegroundColorSpan(getColor(R.color.main)),
             startIdx,
-            endEdx,
+            endIdx,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
 
