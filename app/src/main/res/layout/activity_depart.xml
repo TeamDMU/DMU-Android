@@ -11,7 +11,7 @@
             <TextView
                 android:id="@+id/depart_title_main"
                 style="@style/PretendardBold32"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/department_title_main"
                 android:layout_marginTop="60dp"
