@@ -67,7 +67,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/detail_keyword"
-                tools:hint="안녕하세ㅛ아아아ㅣㅣㄴㅇ럼ㄴ런" />
+                tools:hint="2024학년도 1학기 수강신청 안내" />
 
             <TextView
                 android:id="@+id/detail_writer"
@@ -85,7 +85,7 @@
                 app:layout_constraintTop_toBottomOf="@id/detail_title"
                 app:layout_constraintWidth_max="wrap"
                 app:layout_constraintWidth_percent="0.7"
-                tools:hint="손명지" />
+                tools:hint="박재선" />
 
             <View
                 android:id="@+id/detail_writer_date_divide"
@@ -111,7 +111,7 @@
                 app:layout_constraintStart_toEndOf="@id/detail_writer_date_divide"
                 app:layout_constraintTop_toTopOf="@id/detail_writer"
                 app:layout_constraintWidth_max="wrap"
-                tools:hint="2024.02.01" />
+                tools:hint="2024.02.05" />
 
             <View
                 android:id="@+id/detail_top_line"
