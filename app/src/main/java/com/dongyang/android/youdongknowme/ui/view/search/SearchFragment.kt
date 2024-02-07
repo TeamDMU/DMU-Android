@@ -76,10 +76,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
     }
 
     private fun setTextClearButtonClickListener() {
-        with(binding) {
-            ivSearchClear.setOnClickListener {
-                etSearchBar.text.clear()
-            }
+        binding.ivSearchClear.setOnClickListener {
+            binding.etSearchBar.text.clear()
         }
     }
 
