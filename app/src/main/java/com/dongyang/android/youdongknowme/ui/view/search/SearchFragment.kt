@@ -32,8 +32,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
     }
 
     private fun showKeyboardOnEditTextFocus() {
-        val searchKeyboard = binding.etSearchBar
-        searchKeyboard.requestFocus()
+        binding.etSearchBar.requestFocus()
 
         binding.etSearchBar.post {
             binding.etSearchBar.setSelection(binding.etSearchBar.text.length)
