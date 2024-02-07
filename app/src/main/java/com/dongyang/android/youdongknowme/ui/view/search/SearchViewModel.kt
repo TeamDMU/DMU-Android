@@ -12,6 +12,6 @@ class SearchViewModel : BaseViewModel() {
     val searchClearVisibility: LiveData<Boolean> = _searchClearVisibility
 
     fun validateSearchClearButtonVisibility() {
-        _searchClearVisibility.value = !_searchContent.value.isNullOrEmpty()
+        _searchClearVisibility.value = _searchContent.value.isNullOrEmpty().not()
     }
 }
