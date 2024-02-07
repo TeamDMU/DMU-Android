@@ -9,6 +9,8 @@ import android.view.inputmethod.InputMethodManager
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentSearchBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
+import com.dongyang.android.youdongknowme.ui.view.util.hideKeyboard
+import com.dongyang.android.youdongknowme.ui.view.util.showKeyboard
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
@@ -36,30 +38,22 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
 
         binding.etSearchBar.post {
             binding.etSearchBar.setSelection(binding.etSearchBar.text.length)
+            requireContext().showKeyboard(binding.etSearchBar)
         }
-
-        val inputMethodManager =
-            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.showSoftInput(binding.etSearchBar, InputMethodManager.SHOW_IMPLICIT)
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setupHideKeyboardOnOutsideTouch() {
         binding.root.setOnTouchListener { _, _ ->
-            hideKeyboard()
+            requireContext().hideKeyboard(binding.root)
             false
         }
     }
 
-    private fun hideKeyboard() {
-        val inputMethodManager =
-            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
-    }
-
     private fun setTextClearButtonVisibility() {
         binding.etSearchBar.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) =
+                Unit
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = Unit
 
