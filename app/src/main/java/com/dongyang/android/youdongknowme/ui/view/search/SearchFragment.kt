@@ -18,9 +18,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
 
     override fun initStartView() {
         binding.searchViewModel = viewModel
-    }
-
-    override fun initDataBinding() {
         setupUI()
         setTextClearButtonClickListener()
     }
@@ -66,7 +63,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
         }
     }
 
-    override fun initAfterBinding() {
+    override fun initDataBinding() {
     }
 
+    override fun initAfterBinding() {
+    }
 }
