@@ -11,9 +11,7 @@
             android:id="@+id/alarm_toolbar"
             layout="@layout/standard_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
-            app:exitVisible="@{true}"
-            app:title="@{@string/alarm_title}" />
+            android:layout_height="?android:attr/actionBarSize" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_alarm"

@@ -1,7 +1,7 @@
 package com.dongyang.android.youdongknowme.ui.view.alarm
 
 import android.content.Intent
-import androidx.recyclerview.widget.LinearLayoutManager
+import android.view.View
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.local.entity.AlarmEntity
 import com.dongyang.android.youdongknowme.databinding.ActivityAlarmBinding
@@ -16,6 +16,20 @@ class AlarmActivity : BaseActivity<ActivityAlarmBinding, AlarmViewModel>(), Alar
 
     override fun initStartView() {
         binding.vm = viewModel
+        setupUI()
+    }
+
+    private fun setupUI() {
+        setupToolbar()
+    }
+
+    private fun setupToolbar() {
+        binding.alarmToolbar.apply {
+            tvToolbarTitle.text = getString(R.string.alarm_title)
+            tvToolbarExitButton.visibility = View.VISIBLE
+            tvToolbarActionButton.text = getString(R.string.alarm_action_button_text)
+            tvToolbarActionButton.visibility = View.VISIBLE
+        }
     }
 
     override fun initDataBinding() {
