@@ -48,6 +48,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = Unit
 
             override fun afterTextChanged(s: Editable?) {
+                viewModel.updateSearchContent(binding.etSearchBar.text.toString())
                 viewModel.validateSearchClearButtonVisibility()
             }
         })

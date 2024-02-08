@@ -42,7 +42,6 @@
                 android:inputType="text"
                 android:maxLength="10"
                 android:maxLines="1"
-                android:text="@={searchViewModel.searchContent}"
                 android:textColor="@color/blue300"
                 android:textColorHint="@color/gray300"
                 app:layout_constraintBottom_toBottomOf="parent"
