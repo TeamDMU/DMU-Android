@@ -49,7 +49,7 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
             this.setHasFixedSize(true)
         }
 
-        binding.departToolbar.toolbarExit.setOnClickListener {
+        binding.departToolbar.tvToolbarExitButton.setOnClickListener {
             finish()
         }
 

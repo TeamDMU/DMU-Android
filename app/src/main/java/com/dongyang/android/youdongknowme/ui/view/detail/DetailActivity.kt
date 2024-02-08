@@ -47,14 +47,14 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
         viewModel.setNoticeDetailInfo(departCode, boardNum)
 
         fileAdapter = FileAdapter().apply { setItemClickListener(this@DetailActivity) }
-        binding.detailFileRcv.apply {
+        binding.rvDetailFile.apply {
             this.adapter = fileAdapter
             this.layoutManager = LinearLayoutManager(this@DetailActivity)
             this.setHasFixedSize(true)
         }
 
         imageAdapter = ImageAdapter()
-        binding.detailImageRcv.apply {
+        binding.rvDetailImage.apply {
             this.adapter = imageAdapter
             this.layoutManager = LinearLayoutManager(this@DetailActivity)
             this.setHasFixedSize(true)
@@ -88,7 +88,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
         viewModel.fetchNoticeDetail()
 
         // 뒤로가기 버튼 클릭 시
-        binding.detailToolbar.toolbarExit.setOnClickListener {
+        binding.detailToolbar.tvToolbarExitButton.setOnClickListener {
             finish()
         }
 

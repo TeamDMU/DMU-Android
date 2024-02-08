@@ -36,7 +36,7 @@ class AlarmActivity : BaseActivity<ActivityAlarmBinding, AlarmViewModel>(), Alar
     override fun initAfterBinding() {
         viewModel.getAlarms()
 
-        binding.alarmToolbar.toolbarExit.setOnClickListener {
+        binding.alarmToolbar.tvToolbarExitButton.setOnClickListener {
             finish()
         }
     }

@@ -30,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/detail_title"
+                android:id="@+id/tv_detail_title"
                 style="@style/PretendardBold16"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/detail_date"
+                android:id="@+id/tv_detail_date"
                 style="@style/PretendardRegular12"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -52,11 +52,11 @@
                 android:gravity="end"
                 android:text="@{vm.date}"
                 android:textColor="@color/black"
-                app:layout_constraintEnd_toStartOf="@id/detail_writer"
-                app:layout_constraintTop_toBottomOf="@id/detail_title" />
+                app:layout_constraintEnd_toStartOf="@id/tv_detail_writer"
+                app:layout_constraintTop_toBottomOf="@id/tv_detail_title" />
 
             <TextView
-                android:id="@+id/detail_writer"
+                android:id="@+id/tv_detail_writer"
                 style="@style/PretendardRegular12"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -65,10 +65,10 @@
                 android:gravity="end"
                 android:text="@{vm.writer}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/detail_title" />
+                app:layout_constraintTop_toBottomOf="@id/tv_detail_title" />
 
             <View
-                android:id="@+id/detail_top_line"
+                android:id="@+id/tv_detail_top_line"
                 android:layout_width="0dp"
                 android:layout_height="0.5dp"
                 android:layout_marginHorizontal="16dp"
@@ -76,21 +76,21 @@
                 android:background="#A1333232"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detail_writer" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_detail_writer" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/detail_file_rcv"
+                android:id="@+id/rv_detail_file"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/detail_top_line"
+                app:layout_constraintTop_toBottomOf="@id/tv_detail_top_line"
                 tools:listitem="@layout/item_file" />
 
             <View
-                android:id="@+id/detail_bot_line"
+                android:id="@+id/view_detail_bot_line"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_marginHorizontal="16dp"
@@ -98,10 +98,10 @@
                 android:background="#A1333232"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detail_file_rcv" />
+                app:layout_constraintTop_toBottomOf="@+id/rv_detail_file" />
 
             <ScrollView
-                android:id="@+id/detail_scroll_view"
+                android:id="@+id/sv_detail"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginHorizontal="16dp"
@@ -110,7 +110,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detail_bot_line">
+                app:layout_constraintTop_toBottomOf="@+id/view_detail_bot_line">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -125,7 +125,7 @@
                         android:textColor="#E81C1C1C" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/detail_image_rcv"
+                        android:id="@+id/rv_detail_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="16dp"
