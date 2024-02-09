@@ -39,7 +39,7 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
         viewModel.checkFirstLaunch()
 
         // 부분 색상 지정
-        setSpan(binding.departTitleMain,startIdx = 0, endIdx = 5)
+        setSpan(binding.tvDepartTitleMain,startIdx = 0, endIdx = 5)
         
         // 학과 리스트
         val items =
@@ -51,7 +51,7 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
             setItemClickListener(this@DepartActivity)
         }
 
-        binding.departRcv.apply {
+        binding.rvDepart.apply {
             this.adapter = this@DepartActivity.adapter
             this.layoutManager = LinearLayoutManager(this@DepartActivity)
             this.setHasFixedSize(true)
@@ -87,7 +87,7 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
     // 확인 버튼을 누르면 내부 DB에 학과를 담고 메인 액티비티로 이동
     private fun getSnackBar(items: ArrayList<String>): Snackbar {
         val snackbar =
-            Snackbar.make(binding.departContainer, getString(R.string.department_snackbar_title), LENGTH_LONG)
+            Snackbar.make(binding.coordinatorDepart, getString(R.string.department_snackbar_title), LENGTH_LONG)
                 .setAction(getString(R.string.department_snackbar_positive_button)) {
                     viewModel.setDepartment(items[viewModel.selectDepartPosition.value ?: 0])
                     if(viewModel.isFirstLaunch.value == true) {
@@ -104,7 +104,7 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
                     override fun onShown(transientBottomBar: Snackbar?) {
                         super.onShown(transientBottomBar)
 
-                        binding.departRcv.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                        binding.rvDepart.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                             setMargins(0, 0, 0, transientBottomBar?.view?.height ?: 0)
                         }
                     }
@@ -112,7 +112,7 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
                     override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
                         super.onDismissed(transientBottomBar, event)
 
-                        binding.departRcv.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                        binding.rvDepart.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                             setMargins(0, 0, 0, 0)
                         }
                     }
