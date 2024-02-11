@@ -198,7 +198,6 @@
                     android:outlineSpotShadowColor="@color/blue300"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/mv_cafeteria_korean">
