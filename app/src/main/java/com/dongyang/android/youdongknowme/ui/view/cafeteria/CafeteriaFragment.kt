@@ -1,6 +1,9 @@
 package com.dongyang.android.youdongknowme.ui.view.cafeteria
 
+import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.view.menu.MenuAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.window.layout.WindowMetricsCalculator
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentCafeteriaBinding
@@ -33,7 +36,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         stuKoreanMenuAdapter = CafeteriaAdapter()
         stuAnotherMenuAdapter = CafeteriaAdapter()
 
-        binding.rvCafeteriaKoreanMenuList.apply {
+        binding.rvCafeteriaMenuList.apply {
             val layoutManager = FlexboxLayoutManager(context)
             layoutManager.flexDirection = FlexDirection.ROW
             this.adapter = this@CafeteriaFragment.stuKoreanMenuAdapter
