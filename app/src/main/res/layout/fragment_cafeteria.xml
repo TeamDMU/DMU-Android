@@ -108,11 +108,7 @@
                 </LinearLayout>
 
                 <com.google.android.material.card.MaterialCardView
-<<<<<<< Updated upstream
                     android:id="@+id/mv_cafeteria_korean"
-=======
-                    android:id="@+id/rv_cafeteria_menu"
->>>>>>> Stashed changes
                     bind_is_error="@{vm.cafeteriaList == null}"
                     bind_is_loading="@{vm.isLoading()}"
                     android:layout_width="0dp"
@@ -148,9 +144,6 @@
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
                             tools:listitem="@layout/item_cafeteria_menu" />
-<<<<<<< Updated upstream
-=======
-
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -191,7 +184,6 @@
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
                             tools:listitem="@layout/item_cafeteria_menu" />
->>>>>>> Stashed changes
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -209,11 +201,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-<<<<<<< Updated upstream
                     app:layout_constraintTop_toBottomOf="@id/mv_cafeteria_korean">
-=======
-                    app:layout_constraintTop_toBottomOf="@id/cafeteria_stu_menu_container">
->>>>>>> Stashed changes
 
                     <LinearLayout
                         android:layout_width="match_parent"
