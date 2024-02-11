@@ -7,7 +7,7 @@
         android:layout_height="wrap_content" >
 
         <View
-            android:id="@+id/onboarding_line"
+            android:id="@+id/view_onboarding_line"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginHorizontal="24dp"
@@ -20,14 +20,14 @@
         <!-- step1 : 학과 선택 -->
 
         <View
-            android:id="@+id/onboarding_step_1"
+            android:id="@+id/view_onboarding_step_1"
             android:layout_width="12dp"
             android:layout_height="12dp"
             android:background="@drawable/ic_circle"
             android:backgroundTint="@{stepValue.equals(@string/setting_department) ? @color/main : @color/gray300}"
-            app:layout_constraintBottom_toBottomOf="@id/onboarding_line"
-            app:layout_constraintStart_toStartOf="@id/onboarding_line"
-            app:layout_constraintTop_toTopOf="@id/onboarding_line" />
+            app:layout_constraintBottom_toBottomOf="@id/view_onboarding_line"
+            app:layout_constraintStart_toStartOf="@id/view_onboarding_line"
+            app:layout_constraintTop_toTopOf="@id/view_onboarding_line" />
 
         <TextView
             style="@style/PretendardBold16"
@@ -37,17 +37,17 @@
             android:text= "@string/setting_department"
             android:textColor="@{stepValue.equals(@string/setting_department) ? @color/main : @color/gray300}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/onboarding_step_1" />
+            app:layout_constraintTop_toBottomOf="@id/view_onboarding_step_1" />
 
         <!-- step 2 : 키워드 설정 -->
         <View
-            android:id="@+id/onboarding_step_2"
+            android:id="@+id/view_onboarding_step_2"
             android:layout_width="12dp"
             android:layout_height="12dp"
             android:background="@drawable/ic_circle"
             android:backgroundTint="@{stepValue.equals(@string/setting_keyword_choice) ? @color/main : @color/gray300}"
-            app:layout_constraintTop_toTopOf="@id/onboarding_line"
-            app:layout_constraintBottom_toBottomOf="@id/onboarding_line"
+            app:layout_constraintTop_toTopOf="@id/view_onboarding_line"
+            app:layout_constraintBottom_toBottomOf="@id/view_onboarding_line"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -58,20 +58,20 @@
             android:layout_marginTop="8dp"
             android:text="@string/setting_keyword_choice"
             android:textColor="@{stepValue.equals(@string/setting_keyword_choice) ? @color/main : @color/gray300}"
-            app:layout_constraintEnd_toStartOf="@id/onboarding_step_3"
-            app:layout_constraintStart_toEndOf="@id/onboarding_step_1"
-            app:layout_constraintTop_toBottomOf="@id/onboarding_step_2" />
+            app:layout_constraintEnd_toStartOf="@id/view_onboarding_step_3"
+            app:layout_constraintStart_toEndOf="@id/view_onboarding_step_1"
+            app:layout_constraintTop_toBottomOf="@id/view_onboarding_step_2" />
 
         <!-- step 3 : 알림 설정 -->
         <View
-            android:id="@+id/onboarding_step_3"
+            android:id="@+id/view_onboarding_step_3"
             android:layout_width="12dp"
             android:layout_height="12dp"
             android:background="@drawable/ic_circle"
             android:backgroundTint="@{stepValue.equals(@string/setting_notice) ? @color/main : @color/gray300}"
-            app:layout_constraintBottom_toBottomOf="@id/onboarding_line"
-            app:layout_constraintEnd_toEndOf="@id/onboarding_line"
-            app:layout_constraintTop_toTopOf="@id/onboarding_line" />
+            app:layout_constraintBottom_toBottomOf="@id/view_onboarding_line"
+            app:layout_constraintEnd_toEndOf="@id/view_onboarding_line"
+            app:layout_constraintTop_toTopOf="@id/view_onboarding_line" />
 
         <TextView
             style="@style/PretendardBold16"
@@ -81,7 +81,7 @@
             android:text="@string/setting_notice"
             android:textColor="@{stepValue.equals(@string/setting_notice) ? @color/main : @color/gray300}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/onboarding_step_3" />
+            app:layout_constraintTop_toBottomOf="@id/view_onboarding_step_3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <data>
