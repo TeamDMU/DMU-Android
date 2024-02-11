@@ -128,61 +128,8 @@
                     android:layout_height="0.5dp"
                     android:layout_marginTop="10dp"
                     android:background="@color/line"
-                    app:layout_constraintBottom_toTopOf="@id/linearLayout_keyword_money"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_class" />
-
-                <LinearLayout
-                    android:id="@+id/linearLayout_keyword_money"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_class">
-
-                    <TextView
-                        style="@style/PretendardBold16"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:text="@string/keyword_money"
-                        android:textColor="@color/black" />
-
-                    <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/chipGroup_keyword_money"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        app:chipSpacingHorizontal="20dp"
-                        app:chipSpacingVertical="16dp"
-                        app:singleSelection="false">
-
-                        <com.google.android.material.chip.Chip
-                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="65dp"
-                            android:layout_height="wrap_content"
-                            android:checkable="true"
-                            android:checked="false"
-                            android:text="@string/keyword_money_scholarship" />
-
-                        <com.google.android.material.chip.Chip
-                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="65dp"
-                            android:layout_height="wrap_content"
-                            android:checkable="true"
-                            android:checked="false"
-                            android:text="@string/keyword_money_tuition" />
-                    </com.google.android.material.chip.ChipGroup>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/line"
                     app:layout_constraintBottom_toTopOf="@id/linearLayout_keyword_academic"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_money" />
+                    app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_class" />
 
                 <LinearLayout
                     android:id="@+id/linearLayout_keyword_academic"
@@ -192,7 +139,7 @@
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_money">
+                    app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_class">
 
                     <TextView
                         style="@style/PretendardBold16"
@@ -258,8 +205,61 @@
                     android:layout_height="0.5dp"
                     android:layout_marginTop="10dp"
                     android:background="@color/line"
-                    app:layout_constraintBottom_toTopOf="@id/linearLayout_keyword_employment"
+                    app:layout_constraintBottom_toTopOf="@id/linearLayout_keyword_money"
                     app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_academic" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout_keyword_money"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_academic">
+
+                    <TextView
+                        style="@style/PretendardBold16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/keyword_money"
+                        android:textColor="@color/black" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chipGroup_keyword_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:chipSpacingHorizontal="20dp"
+                        app:chipSpacingVertical="16dp"
+                        app:singleSelection="false">
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="@string/keyword_money_scholarship" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:checkable="true"
+                            android:checked="false"
+                            android:text="@string/keyword_money_tuition" />
+                    </com.google.android.material.chip.ChipGroup>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/line"
+                    app:layout_constraintBottom_toTopOf="@id/linearLayout_keyword_employment"
+                    app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_money" />
 
                 <LinearLayout
                     android:id="@+id/linearLayout_keyword_employment"
@@ -269,7 +269,7 @@
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_academic">
+                    app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_money">
 
                     <TextView
                         style="@style/PretendardBold16"
