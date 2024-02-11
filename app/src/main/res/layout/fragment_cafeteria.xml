@@ -115,6 +115,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="12dp"
+                    android:outlineSpotShadowColor="@color/blue300"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -140,7 +141,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginVertical="8dp"
                             tools:listitem="@layout/item_cafeteria_menu" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -179,7 +180,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginVertical="8dp"
                             tools:listitem="@layout/item_cafeteria_menu" />
 
                     </LinearLayout>
