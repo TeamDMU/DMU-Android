@@ -44,7 +44,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_keyword_title_sub"
-            app:stepValue="@{@string/setting_keyword}" />
+            app:stepValue="@{@string/setting_keyword_choice}" />
 
         <ScrollView
             android:id="@+id/sv_keyword"
