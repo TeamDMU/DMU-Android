@@ -67,8 +67,9 @@
     <string name="keyword_class_course">수강</string>
     <string name="keyword_class_lecture">특강</string>
     <string name="keyword_class_season">계절학기</string>
-    <string name="keyword_money">학자금</string>
+    <string name="keyword_money">장학금</string>
     <string name="keyword_money_scholarship">장학</string>
+    <string name="keyword_money_nationalScholarship">국가장학</string>
     <string name="keyword_money_tuition">등록</string>
     <string name="keyword_academic">학적</string>
     <string name="keyword_academic_leave">휴학</string>
@@ -84,8 +85,8 @@
     <string name="keyword_employment_service">봉사</string>
     <string name="keyword_etc">기타</string>
     <string name="keyword_etc_dormitory">기숙사</string>
-    <string name="keyword_etc_corona">코로나19</string>
     <string name="keyword_etc_club">동아리</string>
+    <string name="keyword_etc_studentCouncil">학생회</string>
 
     <!-- error message -->
     <string name="error_unknown">네트워크 오류가 발생하였습니다.\n 잠시 후 다시 실행해주세요.</string>
