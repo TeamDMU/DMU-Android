@@ -126,7 +126,6 @@
                 </LinearLayout>
 
                 <View
-                    android:id="@+id/vie_keyword_first_line"
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:layout_marginTop="10dp"
