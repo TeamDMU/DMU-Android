@@ -58,7 +58,10 @@
 
     <!-- keyword -->
     <string name="keyword_title">키워드 선택</string>
+    <string name="keyword_title_main">키워드를 설정하면,</string>
+    <string name="keyword_title_sub">해당 키워드의 공지를 볼 수 있어요.</string>
     <string name="keyword_complete">완료</string>
+    <string name="keyword_next">다음</string>
     <string name="keyword_class">수업</string>
     <string name="keyword_class_exam">시험</string>
     <string name="keyword_class_course">수강</string>
