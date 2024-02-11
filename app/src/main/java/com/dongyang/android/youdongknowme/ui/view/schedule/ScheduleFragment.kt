@@ -21,6 +21,7 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
 
     override fun initStartView() {
         viewModel.setPickedDate(binding.mvScheduleCalendar.currentDate)
+
         adapter = ScheduleAdapter()
         binding.rvScheduleList.apply {
             this.adapter = this@ScheduleFragment.adapter
