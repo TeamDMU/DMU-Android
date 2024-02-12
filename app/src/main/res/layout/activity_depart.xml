@@ -43,8 +43,7 @@
             app:stepValue="@{@string/setting_department}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_depart_title_sub"
-            app:layout_constraintBottom_toTopOf="@id/linearLayout_depart_search" />
+            app:layout_constraintTop_toBottomOf="@id/tv_depart_title_sub" />
 
         <LinearLayout
             android:id="@+id/linearLayout_depart_search"
