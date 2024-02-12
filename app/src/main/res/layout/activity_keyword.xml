@@ -390,7 +390,7 @@
 
                         <com.google.android.material.chip.Chip
                             style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="wrap_content"
+                            android:layout_width="65dp"
                             android:layout_height="wrap_content"
                             android:checkable="true"
                             android:checked="false"
