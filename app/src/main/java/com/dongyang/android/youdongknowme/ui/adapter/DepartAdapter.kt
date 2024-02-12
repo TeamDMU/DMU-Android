@@ -2,9 +2,7 @@ package com.dongyang.android.youdongknowme.ui.adapter
 
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
-import android.graphics.Typeface
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -12,9 +10,10 @@ import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ItemDepartBinding
 import com.dongyang.android.youdongknowme.ui.view.depart.DepartClickListener
 
+
 class DepartAdapter : RecyclerView.Adapter<DepartAdapter.ViewHolder>() {
 
-    private val item = ArrayList<String>()
+    private var item = ArrayList<String>()
     private var itemClickListener: DepartClickListener? = null
     private var currentPosition = -1
     private var beforePosition = -1
@@ -47,6 +46,11 @@ class DepartAdapter : RecyclerView.Adapter<DepartAdapter.ViewHolder>() {
 
             }
         }
+    }
+
+    fun setItems(list: ArrayList<String>) {
+        this.item = list
+        notifyDataSetChanged()
     }
 
     @SuppressLint("NotifyDataSetChanged")

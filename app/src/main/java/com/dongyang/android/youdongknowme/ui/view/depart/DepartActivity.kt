@@ -1,6 +1,9 @@
 package com.dongyang.android.youdongknowme.ui.view.depart
 
 import android.content.Intent
+import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityDepartBinding
@@ -8,6 +11,7 @@ import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.adapter.DepartAdapter
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class DepartActivity : BaseActivity<ActivityDepartBinding, DepartViewModel>(), DepartClickListener {
 
@@ -18,11 +22,11 @@ class DepartActivity : BaseActivity<ActivityDepartBinding, DepartViewModel>(), D
     private lateinit var items: ArrayList<String>
 
     override fun initStartView() {
-        items =
+        // 학과 리스트
+        val items =
             resources.getStringArray(R.array.dmu_department_list).toCollection(ArrayList<String>())
         items.sort()
 
-        // 학과 리스트
         adapter = DepartAdapter().apply {
             submitList(items)
             setItemClickListener(this@DepartActivity)
