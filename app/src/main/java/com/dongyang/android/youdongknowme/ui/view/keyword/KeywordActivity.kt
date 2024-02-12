@@ -7,6 +7,7 @@ import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
 import com.dongyang.android.youdongknowme.databinding.ActivityKeywordBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
+import com.dongyang.android.youdongknowme.ui.view.settingAlarm.SettingAlarmActivity
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -47,7 +48,7 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
             viewModel.subscribeCheckedKeyword()
             if (viewModel.isFirstLaunch.value == true) {
                 viewModel.setFirstLaunch(false)
-                val intent = Intent(this@KeywordActivity, MainActivity::class.java)
+                val intent = Intent(this@KeywordActivity, SettingAlarmActivity::class.java)
                 startActivity(intent)
             }
             finish()

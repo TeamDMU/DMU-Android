@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.view.settingAlarm.SettingAlarmActivity">
+    <!--
+
+            <TextView
+                android:id="@+id/tv_alarm_title_main"
+                style="@style/PretendardBold32"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="60dp"
+                android:text="@string/alarm_title_main"
+                app:layout_constraintBottom_toTopOf="@id/tv_alarm_title_sub"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_alarm_title_sub"
+                style="@style/PretendardBold24"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:text="@string/alarm_title_sub"
+                app:layout_constraintBottom_toTopOf="@id/depart_onboarding_step"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_alarm_title_main" />
+
+            <include
+                android:id="@+id/depart_onboarding_step"
+                layout="@layout/layout_onboarding_step"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:paddingHorizontal="56dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_alarm_title_sub"
+                app:stepValue="@{@string/setting_notice}" />
+    -->
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_alarm_complete"
+        style="@style/PretendardRegular20"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/btn_gray_to_blue_10dp_enabled"
+        android:text="@string/alarm_complete"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
