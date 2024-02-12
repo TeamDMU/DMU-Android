@@ -12,6 +12,7 @@
         <item name="rippleColor">@color/blue300</item>
         <item name="chipMinTouchTargetSize">0dp</item>
         <item name="android:textColor">@color/bg_chip_text_select</item>
+        <item name="chipCornerRadius">10dp</item>
     </style>
 
     <style name="Colors_Widget.MaterialComponents.Chip" parent="Widget.MaterialComponents.Chip.Choice">
