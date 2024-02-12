@@ -2,6 +2,10 @@ package com.dongyang.android.youdongknowme.ui.view.settingAlarm
 
 import android.content.Intent
 import android.os.Build
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivitySettingAlarmBinding
@@ -16,6 +20,7 @@ class SettingAlarmActivity : BaseActivity<ActivitySettingAlarmBinding, SettingVi
     override val viewModel: SettingViewModel by viewModel()
 
     override fun initStartView() {
+        setSpan(binding.tvAlarmTitleMain,startIdx = 0, endIdx = 9)
     }
 
     override fun initDataBinding() {}
@@ -42,4 +47,18 @@ class SettingAlarmActivity : BaseActivity<ActivitySettingAlarmBinding, SettingVi
             }
         }
     }
+
+    // 텍스트 부분 색상 설정
+    private fun setSpan(spanTextView: TextView, startIdx: Int, endIdx: Int){
+        SpannableStringBuilder(spanTextView.text).apply {
+            setSpan(
+                ForegroundColorSpan(getColor(R.color.main)),
+                startIdx,
+                endIdx,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            spanTextView.text = this
+        }
+    }
+
 }
