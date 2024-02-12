@@ -4,7 +4,7 @@
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar"></style>
 
     <style name="Colors_Widget.MaterialComponents.Chip.Choice" parent="Widget.MaterialComponents.Chip.Choice">
-        <item name="android:textAppearance">@style/PretendardRegular14</item>
+        <item name="android:textAppearance">@style/PretendardSemiBold16</item>
         <item name="chipBackgroundColor">@color/bg_chip_select</item>
         <item name="chipStrokeColor">@color/line</item>
         <item name="chipStrokeWidth">0.4dp</item>

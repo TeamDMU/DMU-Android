@@ -71,7 +71,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        style="@style/PretendardBold16"
+                        style="@style/PretendardBold20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
@@ -141,7 +141,7 @@
                     app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_class">
 
                     <TextView
-                        style="@style/PretendardBold16"
+                        style="@style/PretendardBold20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
@@ -218,7 +218,7 @@
                     app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_academic">
 
                     <TextView
-                        style="@style/PretendardBold16"
+                        style="@style/PretendardBold20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
@@ -279,7 +279,7 @@
                     app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_money">
 
                     <TextView
-                        style="@style/PretendardBold16"
+                        style="@style/PretendardBold20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
@@ -356,7 +356,7 @@
                     app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_employment">
 
                     <TextView
-                        style="@style/PretendardBold16"
+                        style="@style/PretendardBold20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
