@@ -39,7 +39,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:paddingHorizontal="56dp"
-            app:layout_constraintBottom_toTopOf="@id/sv_keyword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_keyword_title_sub"
