@@ -39,11 +39,41 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            app:stepValue="@{@string/setting_notice}"
             android:paddingHorizontal="56dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_alarm_title_sub" />
+            app:layout_constraintTop_toBottomOf="@id/tv_alarm_title_sub"
+            app:stepValue="@{@string/setting_notice}" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mv_switch_alarm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:outlineSpotShadowColor="@color/gray300"
+            android:padding="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="26dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:strokeWidth="1dp">
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_alarm"
+                style="@style/PretendardBold16"
+                bind_is_checked="@{vm.isAccessDepartAlarm()}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableLeft="@drawable/ic_alarm"
+                android:drawableTint="@color/gray300"
+                android:padding="16dp"
+                android:layout_margin="16dp"
+                android:text="@string/setting_keyword_alarm"
+                android:textAlignment="center"
+                android:textColor="@color/gray300" />
+        </com.google.android.material.card.MaterialCardView>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_alarm_complete"
@@ -65,7 +95,7 @@
 
         <variable
             name="vm"
-            type="com.dongyang.android.youdongknowme.ui.view.settingAlarm.SettingAlarmViewModel" />
+            type="com.dongyang.android.youdongknowme.ui.view.setting.SettingViewModel" />
         />
     </data>
 </layout>
