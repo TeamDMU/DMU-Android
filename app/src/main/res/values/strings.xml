@@ -47,6 +47,7 @@
     <string name="setting_sw">컴퓨터소프트웨어공학과</string>
     <string name="setting_department">학과 설정</string>
     <string name="setting_keyword">키워드</string>
+    <string name="setting_keyword_alarm">키워드 알림 설정</string>
     <string name="setting_keyword_choice">키워드 선택</string>
     <string name="setting_app_info">앱 정보</string>
     <string name="setting_app_help">문의하기</string>
