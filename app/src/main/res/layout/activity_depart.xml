@@ -51,7 +51,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:background="@drawable/bg_search_white__radius_10dp"
+            android:background="@drawable/bg_search_white_radius_10dp"
             android:minHeight="56dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@id/coordinator_depart"
