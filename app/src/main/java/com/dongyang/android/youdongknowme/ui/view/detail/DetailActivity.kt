@@ -47,18 +47,6 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
         viewModel.setNoticeDetailInfo(departCode, boardNum)
 
         fileAdapter = FileAdapter().apply { setItemClickListener(this@DetailActivity) }
-        binding.detailFileRcv.apply {
-            this.adapter = fileAdapter
-            this.layoutManager = LinearLayoutManager(this@DetailActivity)
-            this.setHasFixedSize(true)
-        }
-
-        imageAdapter = ImageAdapter()
-        binding.detailImageRcv.apply {
-            this.adapter = imageAdapter
-            this.layoutManager = LinearLayoutManager(this@DetailActivity)
-            this.setHasFixedSize(true)
-        }
     }
 
     override fun initDataBinding() {
