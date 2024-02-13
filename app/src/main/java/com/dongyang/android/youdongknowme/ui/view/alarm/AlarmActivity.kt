@@ -16,10 +16,6 @@ class AlarmActivity : BaseActivity<ActivityAlarmBinding, AlarmViewModel>(), Alar
 
     override fun initStartView() {
         binding.vm = viewModel
-        setupUI()
-    }
-
-    private fun setupUI() {
         setupToolbar()
     }
 
