@@ -68,7 +68,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_detail_title" />
 
             <View
-                android:id="@+id/tv_detail_top_line"
+                android:id="@+id/view_detail_top_line"
                 android:layout_width="0dp"
                 android:layout_height="0.5dp"
                 android:layout_marginHorizontal="16dp"
@@ -86,7 +86,7 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_detail_top_line"
+                app:layout_constraintTop_toBottomOf="@id/view_detail_top_line"
                 tools:listitem="@layout/item_file" />
 
             <View
