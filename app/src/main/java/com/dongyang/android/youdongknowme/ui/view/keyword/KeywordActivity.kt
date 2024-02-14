@@ -1,22 +1,16 @@
 package com.dongyang.android.youdongknowme.ui.view.keyword
 
 import android.content.Intent
-import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableStringBuilder
-import android.text.style.ForegroundColorSpan
-import android.widget.TextView
 import androidx.lifecycle.Observer
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
 import com.dongyang.android.youdongknowme.databinding.ActivityKeywordBinding
+import com.dongyang.android.youdongknowme.function.setSpanText
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import com.google.firebase.FirebaseApp
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>() {
 
@@ -27,20 +21,7 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
         binding.vm = viewModel
 
         // 부분 색상 지정
-        setSpan(binding.tvKeywordTitleMain,startIdx = 0, endIdx = 3)
-    }
-
-    // 텍스트 부분 색상 설정
-    private fun setSpan(spanTextView: TextView, startIdx: Int, endIdx: Int){
-        SpannableStringBuilder(spanTextView.text).apply {
-            setSpan(
-                ForegroundColorSpan(getColor(R.color.main)),
-                startIdx,
-                endIdx,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-            spanTextView.text = this
-        }
+        setSpanText(baseContext, binding.tvKeywordTitleMain,startIdx = 0, endIdx = 3)
     }
 
     override fun initDataBinding() {
