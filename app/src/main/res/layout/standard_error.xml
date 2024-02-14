@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="12dp"
-            android:background="@drawable/bg_button_main_radius"
+            android:background="@drawable/btn_main_stroke_main_radius_8dp"
             android:drawableLeft="@drawable/ic_refresh"
             android:minHeight="0dp"
             android:text="@string/error_refresh"

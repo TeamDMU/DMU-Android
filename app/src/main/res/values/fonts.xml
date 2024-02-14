@@ -128,4 +128,9 @@
     <style name="PretendardBold24" parent="PretendardBold">
         <item name="android:textSize">@dimen/font_size_24</item>
     </style>
+  
+    <style name="PretendardBold32" parent="PretendardBold">
+        <item name="android:textSize">@dimen/font_size_32</item>
+    </style>
+  
 </resources>
