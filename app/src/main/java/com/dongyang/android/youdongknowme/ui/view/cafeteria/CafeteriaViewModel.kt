@@ -36,9 +36,6 @@ class CafeteriaViewModel(
     private val _stuMenus: MutableLiveData<Pair<List<String>, List<String>>> = MutableLiveData()
     val stuMenus: LiveData<Pair<List<String>, List<String>>> = _stuMenus
 
-    private val _eduMenus: MutableLiveData<Pair<List<String>, List<String>>> = MutableLiveData()
-    val eduMenus: LiveData<Pair<List<String>, List<String>>> = _eduMenus
-
     init {
         fetchCafeteria()
     }
@@ -77,12 +74,7 @@ class CafeteriaViewModel(
             it.date == selectedDate && it.restaurant == resourceProvider.getString(R.string.cafeteria_student) && it.menuContent != "-"
         }?.menuContent ?: ""
 
-        val eduMenu = cafeteriaList.find {
-            it.date == selectedDate && it.restaurant == resourceProvider.getString(R.string.cafeteria_employee) && it.menuContent != "-"
-        }?.menuContent ?: ""
-
         _stuMenus.value = parsingMenu(stuMenu)
-        _eduMenus.value = parsingMenu(eduMenu)
     }
 
     private fun parsingMenu(menu: String): Pair<List<String>, List<String>> {
