@@ -48,17 +48,4 @@ class OnboardingPermission : BaseActivity<ActivityOnboardingPermissionBinding, S
         }
     }
 
-    // 텍스트 부분 색상 설정
-    private fun setSpan(spanTextView: TextView, startIdx: Int, endIdx: Int){
-        SpannableStringBuilder(spanTextView.text).apply {
-            setSpan(
-                ForegroundColorSpan(getColor(R.color.main)),
-                startIdx,
-                endIdx,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-            spanTextView.text = this
-        }
-    }
-
 }
