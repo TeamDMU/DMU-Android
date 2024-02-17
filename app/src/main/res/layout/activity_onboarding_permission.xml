@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.view.settingAlarm.SettingAlarmActivity">
+        tools:context=".ui.view.permission.OnboardingPermission">
 
         <TextView
             android:id="@+id/tv_alarm_title_main"

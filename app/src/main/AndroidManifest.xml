@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YouDongKnowMe">
         <activity
-            android:name=".ui.view.settingAlarm.SettingAlarmActivity"
+            android:name=".ui.view.permission.OnboardingPermission"
             android:exported="false" />
         <activity
             android:name=".ui.view.license.LicenseActivity"
