@@ -1,6 +1,10 @@
 package com.dongyang.android.youdongknowme.standard.base
 
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -27,7 +31,17 @@ abstract class BaseActivity<T : ViewDataBinding, R : BaseViewModel> : AppCompatA
         initDataBinding()
         initAfterBinding()
     }
-
+    protected fun setSpan(spanTextView: TextView, startIdx: Int, endIdx: Int){
+        SpannableStringBuilder(spanTextView.text).apply {
+            setSpan(
+                ForegroundColorSpan(getColor(com.dongyang.android.youdongknowme.R.color.main)),
+                startIdx,
+                endIdx,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            spanTextView.text = this
+        }
+    }
     protected fun showToast(message: String) {
         applicationContext.toast(message)
     }

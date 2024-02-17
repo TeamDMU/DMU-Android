@@ -27,19 +27,6 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
         setSpan(binding.tvKeywordTitleMain,startIdx = 0, endIdx = 3)
     }
 
-    // 텍스트 부분 색상 설정
-    private fun setSpan(spanTextView: TextView, startIdx: Int, endIdx: Int){
-        SpannableStringBuilder(spanTextView.text).apply {
-            setSpan(
-                ForegroundColorSpan(getColor(R.color.main)),
-                startIdx,
-                endIdx,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-            spanTextView.text = this
-        }
-    }
-
     override fun initDataBinding() {
         // 효율을 위해 단 한번만 옵저빙하여 이미 구독중인 항목을 선택 처리
         viewModel.localKeywordList.observe(this, object : Observer<List<KeywordEntity>> {
