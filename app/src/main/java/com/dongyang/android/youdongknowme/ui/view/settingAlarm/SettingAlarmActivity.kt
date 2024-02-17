@@ -23,7 +23,7 @@ class SettingAlarmActivity : BaseActivity<ActivitySettingAlarmBinding, SettingVi
         setSpan(binding.tvAlarmTitleMain,startIdx = 0, endIdx = 9)
     }
 
-    override fun initDataBinding() {}
+    override fun initDataBinding() = Unit
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun initAfterBinding() {
