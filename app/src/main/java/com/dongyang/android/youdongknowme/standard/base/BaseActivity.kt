@@ -31,7 +31,7 @@ abstract class BaseActivity<T : ViewDataBinding, R : BaseViewModel> : AppCompatA
         initDataBinding()
         initAfterBinding()
     }
-    protected fun setSpan(spanTextView: TextView, startIdx: Int, endIdx: Int){
+    protected fun setSpanText(spanTextView: TextView, startIdx: Int, endIdx: Int){
         SpannableStringBuilder(spanTextView.text).apply {
             setSpan(
                 ForegroundColorSpan(getColor(com.dongyang.android.youdongknowme.R.color.main)),
