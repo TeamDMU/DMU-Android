@@ -15,6 +15,7 @@ import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityDepartBinding
+import com.dongyang.android.youdongknowme.function.setSpanText
 import com.dongyang.android.youdongknowme.ui.adapter.DepartAdapter
 import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordActivity
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
@@ -39,7 +40,7 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
         viewModel.checkFirstLaunch()
 
         // 부분 색상 지정
-        setSpan(binding.tvDepartTitleMain,startIdx = 0, endIdx = 5)
+        setSpanText(baseContext, binding.tvDepartTitleMain,startIdx = 0, endIdx = 5)
         
         // 학과 리스트
         val items =
@@ -63,19 +64,6 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
 
             // 포지션 선택 시 스낵바를 통해 알림 표시
             if (it != -1) getSnackBar(items).show()
-        }
-    }
-
-    // 텍스트 부분 색상 설정
-    private fun setSpan(spanTextView: TextView, startIdx: Int, endIdx: Int){
-        SpannableStringBuilder(spanTextView.text).apply {
-            setSpan(
-                ForegroundColorSpan(getColor(R.color.main)),
-                startIdx,
-                endIdx,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-            spanTextView.text = this
         }
     }
 
