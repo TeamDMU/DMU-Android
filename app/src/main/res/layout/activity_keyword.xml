@@ -89,34 +89,18 @@
 
                         <com.google.android.material.chip.Chip
                             style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="65dp"
-                            android:layout_height="wrap_content"
-                            android:checkable="true"
-                            android:checked="false"
                             android:text="@string/keyword_class_exam" />
 
                         <com.google.android.material.chip.Chip
                             style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="65dp"
-                            android:layout_height="wrap_content"
-                            android:checkable="true"
-                            android:checked="false"
                             android:text="@string/keyword_class_course" />
 
                         <com.google.android.material.chip.Chip
                             style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="65dp"
-                            android:layout_height="wrap_content"
-                            android:checkable="true"
-                            android:checked="false"
                             android:text="@string/keyword_class_lecture" />
 
                         <com.google.android.material.chip.Chip
                             style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:checkable="true"
-                            android:checked="false"
                             android:text="@string/keyword_class_season" />
 
                     </com.google.android.material.chip.ChipGroup>
@@ -159,42 +143,22 @@
 
                         <com.google.android.material.chip.Chip
                             style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="65dp"
-                            android:layout_height="wrap_content"
-                            android:checkable="true"
-                            android:checked="false"
                             android:text="@string/keyword_academic_leave" />
 
                         <com.google.android.material.chip.Chip
                             style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="65dp"
-                            android:layout_height="wrap_content"
-                            android:checkable="true"
-                            android:checked="false"
                             android:text="@string/keyword_academic_return" />
 
                         <com.google.android.material.chip.Chip
                             style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="65dp"
-                            android:layout_height="wrap_content"
-                            android:checkable="true"
-                            android:checked="false"
                             android:text="@string/keyword_academic_graduation" />
 
                         <com.google.android.material.chip.Chip
                             style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="65dp"
-                            android:layout_height="wrap_content"
-                            android:checkable="true"
-                            android:checked="false"
                             android:text="@string/keyword_academic_transfer" />
 
                         <com.google.android.material.chip.Chip
                             style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:checkable="true"
-                            android:checked="false"
                             android:text="@string/keyword_academic_drop" />
                     </com.google.android.material.chip.ChipGroup>
                 </LinearLayout>
@@ -236,26 +200,14 @@
 
                         <com.google.android.material.chip.Chip
                             style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="65dp"
-                            android:layout_height="wrap_content"
-                            android:checkable="true"
-                            android:checked="false"
                             android:text="@string/keyword_money_scholarship" />
 
                         <com.google.android.material.chip.Chip
                             style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:checkable="true"
-                            android:checked="false"
                             android:text="@string/keyword_money_nationalScholarship" />
 
                         <com.google.android.material.chip.Chip
                             style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="65dp"
-                            android:layout_height="wrap_content"
-                            android:checkable="true"
-                            android:checked="false"
                             android:text="@string/keyword_money_tuition" />
                     </com.google.android.material.chip.ChipGroup>
                 </LinearLayout>
@@ -297,42 +249,22 @@
 
                         <com.google.android.material.chip.Chip
                             style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="65dp"
-                            android:layout_height="wrap_content"
-                            android:checkable="true"
-                            android:checked="false"
                             android:text="@string/keyword_employment_recruitment" />
 
                         <com.google.android.material.chip.Chip
                             style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="65dp"
-                            android:layout_height="wrap_content"
-                            android:checkable="true"
-                            android:checked="false"
                             android:text="@string/keyword_employment_contest" />
 
                         <com.google.android.material.chip.Chip
                             style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="65dp"
-                            android:layout_height="wrap_content"
-                            android:checkable="true"
-                            android:checked="false"
                             android:text="@string/keyword_employment_competition" />
 
                         <com.google.android.material.chip.Chip
                             style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:checkable="true"
-                            android:checked="false"
                             android:text="@string/keyword_employment_field" />
 
                         <com.google.android.material.chip.Chip
                             style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="65dp"
-                            android:layout_height="wrap_content"
-                            android:checkable="true"
-                            android:checked="false"
                             android:text="@string/keyword_employment_service" />
                     </com.google.android.material.chip.ChipGroup>
                 </LinearLayout>
@@ -374,26 +306,14 @@
 
                         <com.google.android.material.chip.Chip
                             style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="65dp"
-                            android:layout_height="wrap_content"
-                            android:checkable="true"
-                            android:checked="false"
                             android:text="@string/keyword_etc_dormitory" />
 
                         <com.google.android.material.chip.Chip
                             style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="65dp"
-                            android:layout_height="wrap_content"
-                            android:checkable="true"
-                            android:checked="false"
                             android:text="@string/keyword_etc_club" />
 
                         <com.google.android.material.chip.Chip
                             style="@style/Colors_Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="65dp"
-                            android:layout_height="wrap_content"
-                            android:checkable="true"
-                            android:checked="false"
                             android:text="@string/keyword_etc_studentCouncil" />
                     </com.google.android.material.chip.ChipGroup>
                 </LinearLayout>
