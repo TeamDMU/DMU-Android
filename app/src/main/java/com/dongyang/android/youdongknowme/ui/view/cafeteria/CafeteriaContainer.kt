@@ -36,15 +36,22 @@ class CafeteriaContainer(
         bind.itemCalendarDay.text = dayFormatter.format(day.date)
         bind.itemCalendarMonth.text = monthFormatter.format(day.date)
 
-        bind.itemCalendarDate.setTextColor(
-            ContextCompat.getColor(
-                view.context,
-                if (day.date == viewModel.selectedDate.value) {
-                    R.color.main
-                } else {
-                    R.color.black
-                }
+        if (day.date == viewModel.selectedDate.value) {
+            bind.mvItemCalendarDate.setCardBackgroundColor(
+                ContextCompat.getColor(
+                    view.context,
+                    R.color.blue300
+                )
             )
-        )
+            bind.itemCalendarDate.setTextColor(ContextCompat.getColor(view.context, R.color.white))
+        } else {
+            bind.mvItemCalendarDate.setCardBackgroundColor(
+                ContextCompat.getColor(
+                    view.context,
+                    R.color.white
+                )
+            )
+            bind.itemCalendarDate.setTextColor(ContextCompat.getColor(view.context, R.color.black))
+        }
     }
 }
