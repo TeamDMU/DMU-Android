@@ -47,6 +47,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_onboarding_depart_title_sub"
             app:stepValue="@{@string/setting_department}" />
 
+
         <LinearLayout
             android:id="@+id/linearLayout_onboarding_depart_search"
             android:layout_width="0dp"
