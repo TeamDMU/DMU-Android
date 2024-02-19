@@ -8,30 +8,30 @@
         android:layout_height="match_parent"
         tools:context=".ui.view.depart.OnboardingDepartActivity">
 
-            <TextView
-                android:id="@+id/tv_onboarding_depart_title_main"
-                style="@style/PretendardBold32"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/department_title_main"
-                android:layout_marginTop="60dp"
-                android:layout_marginHorizontal="16dp"
-                app:layout_constraintBottom_toTopOf="@id/tv_onboarding_depart_title_sub"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+            android:id="@+id/tv_onboarding_depart_title_main"
+            style="@style/PretendardBold32"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="60dp"
+            android:text="@string/department_title_main"
+            app:layout_constraintBottom_toTopOf="@id/tv_onboarding_depart_title_sub"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_onboarding_depart_title_sub"
-                style="@style/PretendardBold24"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/department_title_sub"
-                android:layout_marginHorizontal="16dp"
-                app:layout_constraintBottom_toTopOf="@id/depart_onboarding_step"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_onboarding_depart_title_main"/>
+        <TextView
+            android:id="@+id/tv_onboarding_depart_title_sub"
+            style="@style/PretendardBold24"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:text="@string/department_title_sub"
+            app:layout_constraintBottom_toTopOf="@id/depart_onboarding_step"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_onboarding_depart_title_main" />
 
         <include
             android:id="@+id/depart_onboarding_step"
@@ -40,10 +40,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:paddingHorizontal="56dp"
-            app:stepValue="@{@string/setting_department}"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_onboarding_depart_title_sub" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_onboarding_depart_title_sub"
+            app:stepValue="@{@string/setting_department}" />
 
         <LinearLayout
             android:id="@+id/linearLayout_onboarding_depart_search"
@@ -53,7 +53,7 @@
             android:background="@drawable/bg_search_white_radius_10dp"
             android:minHeight="56dp"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@id/coordinator_depart"
+            app:layout_constraintBottom_toTopOf="@id/rv_depart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/depart_onboarding_step">
@@ -67,14 +67,14 @@
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/ic_search"
+                android:drawablePadding="16dp"
+                android:drawableTint="@color/gray300"
                 android:hint="@string/department_search_message"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:drawableLeft="@drawable/ic_search"
-                android:drawableTint="@color/gray300"
-                android:drawablePadding="16dp" />
+                android:paddingEnd="8dp" />
 
             <ImageButton
                 android:id="@+id/ib_onboarding_depart_search_clear"
@@ -87,23 +87,18 @@
                 app:tint="@color/gray300" />
         </LinearLayout>
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:id="@+id/coordinator_depart"
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_depart"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="16dp"
             app:layout_constraintBottom_toBottomOf="@id/btn_onboarding_depart_next"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linearLayout_onboarding_depart_search">
+            app:layout_constraintTop_toBottomOf="@id/linearLayout_onboarding_depart_search"
+            tools:listitem="@layout/item_depart" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_depart"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listitem="@layout/item_depart" />
-
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_onboarding_depart_next"
@@ -118,7 +113,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/coordinator_depart" />
+            app:layout_constraintTop_toBottomOf="@id/rv_depart" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
