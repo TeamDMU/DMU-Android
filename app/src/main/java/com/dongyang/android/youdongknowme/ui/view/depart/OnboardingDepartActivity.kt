@@ -13,7 +13,6 @@ import com.dongyang.android.youdongknowme.ui.view.keyword.OnboardingKeywordActiv
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, DepartViewModel>(),
     DepartClickListener {
 
