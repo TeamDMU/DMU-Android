@@ -17,7 +17,7 @@ object RetrofitObject {
         val baseInterceptor = Interceptor { chain ->
             val request = chain.request().newBuilder()
             val originalHttpUrl = chain.request().url
-
+            
             val url = originalHttpUrl.newBuilder().addQueryParameter("api_key", BuildConfig.API_KEY)
                 .build()
             request.url(url)
