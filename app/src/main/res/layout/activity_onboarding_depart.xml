@@ -53,7 +53,7 @@
             android:background="@drawable/bg_search_white_radius_10dp"
             android:minHeight="56dp"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@id/rv_depart"
+            app:layout_constraintBottom_toTopOf="@id/rv_onboarding_depart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/depart_onboarding_step">
@@ -89,7 +89,7 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_depart"
+            android:id="@+id/rv_onboarding_depart"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="16dp"
@@ -113,7 +113,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rv_depart" />
+            app:layout_constraintTop_toBottomOf="@id/rv_onboarding_depart" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

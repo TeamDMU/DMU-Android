@@ -47,7 +47,7 @@ class OnboardingDepartActivity : AppCompatActivity(), DepartClickListener {
             setItemClickListener(this@OnboardingDepartActivity)
         }
 
-        binding.rvDepart.apply {
+        binding.rvOnboardingDepart.apply {
             this.adapter = this@OnboardingDepartActivity.adapter
             this.layoutManager = LinearLayoutManager(this@OnboardingDepartActivity)
             this.setHasFixedSize(true)
