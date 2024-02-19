@@ -1,5 +1,6 @@
 package com.dongyang.android.youdongknowme.ui.view.cafeteria
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -33,8 +34,8 @@ class CafeteriaViewModel(
     private val _cafeteriaList: MutableLiveData<List<Cafeteria>> = MutableLiveData()
     val cafeteriaList: LiveData<List<Cafeteria>> = _cafeteriaList
 
-    private val _stuMenus: MutableLiveData<Pair<List<String>, List<String>>> = MutableLiveData()
-    val stuMenus: LiveData<Pair<List<String>, List<String>>> = _stuMenus
+    private val _menus: MutableLiveData<List<String>> = MutableLiveData()
+    val menus: LiveData<List<String>> = _menus
 
     init {
         fetchCafeteria()
@@ -62,7 +63,7 @@ class CafeteriaViewModel(
 
     fun updateSelectedDate(selectedDate: LocalDate) {
         _selectedDate.value = selectedDate
-        updateMenuList(selectedDate.toString().replace("-", "."))
+        updateMenuList(selectedDate.toString())
     }
 
     private fun updateMenuList(selectedDate: String) {
@@ -70,38 +71,19 @@ class CafeteriaViewModel(
 
         cafeteriaList.forEach { it.date = it.date.substring(0 until 10) }
 
-        val stuMenu = cafeteriaList.find {
-            it.date == selectedDate && it.restaurant == resourceProvider.getString(R.string.cafeteria_student) && it.menuContent != "-"
-        }?.menuContent ?: ""
 
-        _stuMenus.value = parsingMenu(stuMenu)
+        val menu = cafeteriaList.find {
+            it.date == selectedDate
+        }?.menu ?: listOf<String>()
+
+        _menus.value = parsingMenu(menu)
     }
 
-    private fun parsingMenu(menu: String): Pair<List<String>, List<String>> {
-        val menus = if (menu.isEmpty()) {
-            emptyList()
-        } else {
-            menu.replace("\n", "").replace("한식-", "").replace("일품-", "\n")
-                .split("\n")
-        }
-
-        val koreanMenus = if (menus.isEmpty()) {
-            listOf(resourceProvider.getString(R.string.cafeteria_no_menu))
-        } else {
-            menus[0].split(" ").filter { it != "" }
-        }
-
-        val anotherMenus = if (menus.size == 2) {
-            if (menus.isEmpty()) {
-                listOf(resourceProvider.getString(R.string.cafeteria_no_menu))
-            } else {
-                menus[1].split(" ")
-                    .filter { it != "" }
-            }
-        } else {
+    private fun parsingMenu(menu: List<String>): List<String> {
+        val menus = menu.ifEmpty {
             listOf(resourceProvider.getString(R.string.cafeteria_no_menu))
         }
 
-        return Pair(koreanMenus, anotherMenus)
+        return menus
     }
 }
