@@ -41,7 +41,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
     override fun initAfterBinding() {
         intentJob = lifecycleScope.launch {
             delay(SPLASH_TIME_MILLIS)
-            
+
             if (viewModel.isFirstLaunch.value == true) {
                 val intent = OnboardingDepartActivity.createIntent(this@SplashActivity)
 
