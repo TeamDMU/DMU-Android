@@ -19,6 +19,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:title="@{@string/department_title}" />
 
+        <include
+            android:id="@+id/license_toolbar"
+            layout="@layout/standard_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="?android:attr/actionBarSize"
+            app:exitVisible="@{true}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:title="@{@string/department_title}" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_depart"
             android:layout_width="0dp"
@@ -44,5 +54,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rv_depart" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
