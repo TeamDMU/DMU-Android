@@ -45,7 +45,6 @@ class DepartActivity : BaseActivity<ActivityDepartBinding, DepartViewModel>(), D
     override fun initAfterBinding() {
         viewModel.selectDepartPosition.observe(this) {
             adapter.submitPosition(it)
-
             if (it != -1) getDepart(items)
         }
 
