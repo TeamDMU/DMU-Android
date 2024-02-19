@@ -6,23 +6,23 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.view.depart.DepartActivity">
+        tools:context=".ui.view.depart.OnboardingDepartActivity">
 
             <TextView
-                android:id="@+id/tv_depart_title_main"
+                android:id="@+id/tv_onboarding_depart_title_main"
                 style="@style/PretendardBold32"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/department_title_main"
                 android:layout_marginTop="60dp"
                 android:layout_marginHorizontal="16dp"
-                app:layout_constraintBottom_toTopOf="@id/tv_depart_title_sub"
+                app:layout_constraintBottom_toTopOf="@id/tv_onboarding_depart_title_sub"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
-                android:id="@+id/tv_depart_title_sub"
+                android:id="@+id/tv_onboarding_depart_title_sub"
                 style="@style/PretendardBold24"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
                 app:layout_constraintBottom_toTopOf="@id/depart_onboarding_step"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_depart_title_main"/>
+                app:layout_constraintTop_toTopOf="@id/tv_onboarding_depart_title_main"/>
 
         <include
             android:id="@+id/depart_onboarding_step"
@@ -43,10 +43,10 @@
             app:stepValue="@{@string/setting_department}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_depart_title_sub" />
+            app:layout_constraintTop_toBottomOf="@id/tv_onboarding_depart_title_sub" />
 
         <LinearLayout
-            android:id="@+id/linearLayout_depart_search"
+            android:id="@+id/linearLayout_onboarding_depart_search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -59,7 +59,7 @@
             app:layout_constraintTop_toBottomOf="@id/depart_onboarding_step">
 
             <EditText
-                android:id="@+id/et_depart_search"
+                android:id="@+id/et_onboarding_depart_search"
                 style="@style/PretendardRegular16"
                 android:layout_width="0dp"
                 android:layout_height="56dp"
@@ -77,7 +77,7 @@
                 android:drawablePadding="16dp" />
 
             <ImageButton
-                android:id="@+id/ib_depart_search_clear"
+                android:id="@+id/ib_onboarding_depart_search_clear"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
@@ -92,10 +92,10 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="16dp"
-            app:layout_constraintBottom_toBottomOf="@id/btn_depart_next"
+            app:layout_constraintBottom_toBottomOf="@id/btn_onboarding_depart_next"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linearLayout_depart_search">
+            app:layout_constraintTop_toBottomOf="@id/linearLayout_onboarding_depart_search">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_depart"
@@ -106,7 +106,7 @@
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_depart_next"
+            android:id="@+id/btn_onboarding_depart_next"
             style="@style/PretendardRegular20"
             android:layout_width="0dp"
             android:layout_height="56dp"
