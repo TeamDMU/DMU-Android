@@ -9,7 +9,7 @@
         tools:context=".ui.view.depart.DepartActivity">
 
         <include
-            android:id="@+id/license_toolbar"
+            android:id="@+id/toolbar_depart"
             layout="@layout/standard_toolbar"
             android:layout_width="0dp"
             android:layout_height="?android:attr/actionBarSize"
@@ -27,7 +27,7 @@
             app:layout_constraintBottom_toTopOf="@+id/btn_depart_next"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/license_toolbar"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_depart"
             tools:listitem="@layout/item_depart" />
 
         <androidx.appcompat.widget.AppCompatButton
