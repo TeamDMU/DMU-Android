@@ -1,12 +1,8 @@
 package com.dongyang.android.youdongknowme.ui.view.depart
 
 import android.content.Intent
-import android.graphics.Typeface
 import android.os.Bundle
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityOnboardingDepartBinding
@@ -14,9 +10,6 @@ import com.dongyang.android.youdongknowme.function.setSpanText
 import com.dongyang.android.youdongknowme.ui.adapter.DepartAdapter
 import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordActivity
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
-import com.google.android.material.snackbar.BaseTransientBottomBar
-import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG
-import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OnboardingDepartActivity : AppCompatActivity(), DepartClickListener {
