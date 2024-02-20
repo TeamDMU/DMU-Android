@@ -75,7 +75,7 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
                 }
             }
         })
-
+        
         viewModel.selectDepartPosition.observe(this) {
             adapter.submitPosition(it)
 
