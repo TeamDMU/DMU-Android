@@ -19,9 +19,6 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
 
     override fun initStartView() {
         binding.vm = viewModel
-
-        // 부분 색상 지정
-        setSpanText(baseContext, binding.tvKeywordTitleMain,startIdx = 0, endIdx = 3)
     }
 
     override fun initDataBinding() {
@@ -47,7 +44,7 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
         viewModel.getLocalKeywordList()
 
         // TODO :: 안드로이드 데이터베이스에 유저별 설정한 키워드 저장 및 파이어베이스 키워드 구독 설정
-        binding.btnKeywordNext.setOnClickListener {
+        binding.btnKeywordComplete.setOnClickListener {
             viewModel.subscribeCheckedKeyword()
             if (viewModel.isFirstLaunch.value == true) {
                 viewModel.setFirstLaunch(false)
