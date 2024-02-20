@@ -28,6 +28,9 @@
             android:name=".ui.view.keyword.KeywordActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.view.keyword.OnboardingKeywordActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.view.depart.DepartActivity"
             android:exported="false" />
         <activity
