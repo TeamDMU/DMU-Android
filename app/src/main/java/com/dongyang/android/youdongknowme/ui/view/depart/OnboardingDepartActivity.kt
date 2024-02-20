@@ -1,40 +1,32 @@
 package com.dongyang.android.youdongknowme.ui.view.depart
 
 import android.content.Intent
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityOnboardingDepartBinding
-import com.dongyang.android.youdongknowme.function.setSpanText
+import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.adapter.DepartAdapter
 import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordActivity
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class OnboardingDepartActivity : AppCompatActivity(), DepartClickListener {
+class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, DepartViewModel>(),
+    DepartClickListener {
 
-    private lateinit var adapter: DepartAdapter
-    private lateinit var binding: ActivityOnboardingDepartBinding
-    private val viewModel: DepartViewModel by viewModel()
+    override val layoutResourceId: Int = R.layout.activity_onboarding_depart
+    override val viewModel: DepartViewModel by viewModel()
+    lateinit var adapter: DepartAdapter
+    private lateinit var items: ArrayList<String>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityOnboardingDepartBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
+    override fun initStartView() {
         binding.vm = viewModel
-
         viewModel.checkFirstLaunch()
 
-        // 부분 색상 지정
-        setSpanText(baseContext, binding.tvOnboardingDepartTitleMain,startIdx = 0, endIdx = 5)
-        
-        // 학과 리스트
-        val items =
+        items =
             resources.getStringArray(R.array.dmu_department_list).toCollection(ArrayList<String>())
         items.sort()
 
+        // 학과 리스트
         adapter = DepartAdapter().apply {
             submitList(items)
             setItemClickListener(this@OnboardingDepartActivity)
@@ -46,7 +38,15 @@ class OnboardingDepartActivity : AppCompatActivity(), DepartClickListener {
             this.setHasFixedSize(true)
         }
 
-        // 선택 포지션을 실시간 옵저빙
+        // 부분 색상 지정
+        setSpanText(baseContext, binding.tvOnboardingDepartTitleMain, startIdx = 0, endIdx = 5)
+    }
+
+    override fun initDataBinding() {
+
+    }
+
+    override fun initAfterBinding() {
         viewModel.selectDepartPosition.observe(this) {
             adapter.submitPosition(it)
 
