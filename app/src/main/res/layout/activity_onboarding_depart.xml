@@ -28,13 +28,13 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:text="@string/department_title_sub"
-            app:layout_constraintBottom_toTopOf="@id/depart_onboarding_step"
+            app:layout_constraintBottom_toTopOf="@id/onboarding_depart_step"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_onboarding_depart_title_main" />
 
         <include
-            android:id="@+id/depart_onboarding_step"
+            android:id="@+id/onboarding_depart_step"
             layout="@layout/layout_onboarding_step"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
             app:layout_constraintBottom_toTopOf="@id/rv_onboarding_depart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/depart_onboarding_step">
+            app:layout_constraintTop_toBottomOf="@id/onboarding_depart_step">
 
             <EditText
                 android:id="@+id/et_onboarding_depart_search"
