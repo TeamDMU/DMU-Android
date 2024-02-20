@@ -24,14 +24,14 @@
             android:layout_height="0dp"
             android:padding="16dp"
             android:background="@color/gray100"
-            app:layout_constraintBottom_toTopOf="@+id/btn_depart_next"
+            app:layout_constraintBottom_toTopOf="@+id/btn_depart_complete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar_depart"
             tools:listitem="@layout/item_depart" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_depart_next"
+            android:id="@+id/btn_depart_complete"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             style="@style/PretendardRegular20"
