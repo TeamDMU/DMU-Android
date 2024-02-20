@@ -45,6 +45,8 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
             // 포지션 선택 시 스낵바를 통해 알림 표시
             if (it != -1) getDepart(items)
         }
+
+        binding.toolbarDepart.toolbarExit.setOnClickListener { finish() }
     }
 
     // 컨테이너 클릭 시 선택한 학과의 포지션 저장
