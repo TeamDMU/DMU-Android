@@ -47,7 +47,7 @@ class DepartActivity : BaseActivity<ActivityDepartBinding, DepartViewModel>(), D
             adapter.submitPosition(it)
             if (it != -1) getDepart(items)
         }
-        
+
         binding.toolbarDepart.btnToolbarExit.setOnClickListener { finish() }
     }
 
