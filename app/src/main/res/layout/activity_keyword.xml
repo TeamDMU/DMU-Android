@@ -6,56 +6,29 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="16dp"
         tools:context=".ui.view.keyword.KeywordActivity">
 
-        <TextView
-            android:id="@+id/tv_keyword_title_main"
-            style="@style/PretendardBold32"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:text="@string/keyword_title_main"
-            app:layout_constraintBottom_toTopOf="@id/tv_keyword_title_sub"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_keyword_title_sub"
-            style="@style/PretendardBold24"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/keyword_title_sub"
-            app:layout_constraintBottom_toTopOf="@id/keyword_onboarding_step"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_keyword_title_main" />
-
         <include
-            android:id="@+id/keyword_onboarding_step"
-            layout="@layout/layout_onboarding_step"
+            android:id="@+id/toolbar_keyword"
+            layout="@layout/standard_toolbar"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:paddingHorizontal="56dp"
+            android:layout_height="?android:attr/actionBarSize"
+            app:exitVisible="@{true}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_keyword_title_sub"
-            app:stepValue="@{@string/setting_keyword_choice}" />
+            app:title="@{@string/keyword_title}" />
 
         <ScrollView
             android:id="@+id/sv_keyword"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_height="0dp"
+            android:layout_margin="16dp"
             android:fillViewport="true"
             app:layout_constrainedHeight="true"
-            app:layout_constraintBottom_toTopOf="@id/btn_keyword_next"
+            app:layout_constraintBottom_toTopOf="@id/btn_keyword_complete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/keyword_onboarding_step">
+            app:layout_constraintTop_toBottomOf="@id/toolbar_keyword">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -321,13 +294,14 @@
         </ScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_keyword_next"
+            android:id="@+id/btn_keyword_complete"
             style="@style/PretendardRegular20"
             android:layout_width="0dp"
             android:layout_height="56dp"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/btn_gray_to_blue_10dp_enabled"
-            android:text="@string/keyword_next"
+            android:text="@string/keyword_complete"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
