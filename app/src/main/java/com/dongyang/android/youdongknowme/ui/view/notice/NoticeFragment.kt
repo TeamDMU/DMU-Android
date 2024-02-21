@@ -15,7 +15,6 @@ import com.dongyang.android.youdongknowme.standard.util.ACTION
 import com.dongyang.android.youdongknowme.ui.adapter.NoticeAdapter
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailActivity
 import com.dongyang.android.youdongknowme.ui.view.util.EventObserver
-import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.tabs.TabLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -24,10 +23,6 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
 
     override val layoutResourceId: Int = R.layout.fragment_notice
     override val viewModel: NoticeViewModel by viewModel()
-
-    private val badgeDrawable: BadgeDrawable by lazy {
-        BadgeDrawable.create(requireActivity())
-    }
 
     private lateinit var adapter: NoticeAdapter
 
@@ -70,13 +65,11 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     override fun initAfterBinding() {
         viewModel.getUnVisitedAlarmCount()
 
-        // 새로고침 했을 때 동작
         binding.noticeSwipe.setOnRefreshListener {
             viewModel.refreshNotices()
             binding.noticeSwipe.isRefreshing = false
         }
 
-        // 각각 탭 버튼 눌렀을 때 동작
         binding.noticeTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
 
@@ -90,7 +83,6 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
 
-            // 다시 클릭시 스크롤되게 설정
             override fun onTabReselected(tab: TabLayout.Tab?) {
                 binding.noticeRvList.smoothScrollToPosition(-10)
             }
@@ -118,7 +110,6 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(localBroadCast)
     }
 
-    // 아이템 클릭시 자세히 보기 화면으로 이동
     override fun itemClick(num: Int) {
         val departCode = viewModel.departmentCode.value
 
