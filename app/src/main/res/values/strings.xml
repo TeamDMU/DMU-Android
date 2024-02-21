@@ -103,7 +103,8 @@
     <string name="loading_text">처리중</string>
 
     <!-- alarm -->
-    <string name="alarm_title">알림함</string>
+    <string name="alarm_title">키워드 알림함</string>
+    <string name="alarm_action_button_text">편집</string>
 
     <!-- cafeteria -->
     <string name="cafeteria_main">식단</string>
