@@ -1,5 +1,7 @@
 package com.dongyang.android.youdongknowme.data.repository
 
+import CODE
+import android.util.Log
 import com.dongyang.android.youdongknowme.data.local.SharedPreference
 import com.dongyang.android.youdongknowme.data.local.dao.AlarmDao
 import com.dongyang.android.youdongknowme.data.remote.entity.Notice
@@ -8,18 +10,20 @@ import com.dongyang.android.youdongknowme.standard.network.ErrorResponseHandler
 import com.dongyang.android.youdongknowme.standard.network.NetworkResult
 import com.dongyang.android.youdongknowme.standard.network.RetrofitObject
 import kotlinx.coroutines.flow.Flow
-import retrofit2.Response
 
 class NoticeRepository(
     private val alarmDao: AlarmDao,
     private val errorResponseHandler: ErrorResponseHandler
 ) {
-    suspend fun fetchAllNotices(): NetworkResult<Map<String,List<Notice>>> {
+    suspend fun fetchAllNotices(): NetworkResult<Map<String, List<Notice>>> {
         return try {
-            val departNotices = RetrofitObject.getNetwork().create(NoticeService::class.java).getList(SharedPreference.getCode())
-            val schoolNotices = RetrofitObject.getNetwork().create(NoticeService::class.java).getList(CODE.SCHOOL_CODE)
+            val departNotices = RetrofitObject.getNetwork().create(NoticeService::class.java)
+                .getUniversityNotice(1, 20)
+            val schoolNotices = RetrofitObject.getNetwork().create(NoticeService::class.java)
+                .getUniversityNotice(1, 20)
 
-            val result : Map<String,List<Notice>> = mapOf("school" to schoolNotices, "depart" to departNotices)
+            val result: Map<String, List<Notice>> =
+                mapOf("school" to schoolNotices, "depart" to departNotices)
 
             NetworkResult.Success(result)
         } catch (exception: Exception) {
@@ -30,9 +34,11 @@ class NoticeRepository(
 
     suspend fun fetchNotices(code: Int): NetworkResult<List<Notice>> {
         return try {
-            val response = RetrofitObject.getNetwork().create(NoticeService::class.java).getList(code)
+            val response =
+                RetrofitObject.getNetwork().create(NoticeService::class.java).getUniversityNotice(1, 10)
             NetworkResult.Success(response)
         } catch (exception: Exception) {
+            Log.d("notice", exception.toString())
             val error = errorResponseHandler.getError(exception)
             NetworkResult.Error(error)
         }
@@ -40,7 +46,8 @@ class NoticeRepository(
 
     suspend fun fetchSearchNotices(code: Int, keyword: String): NetworkResult<List<Notice>> {
         return try {
-            val response = RetrofitObject.getNetwork().create(NoticeService::class.java).getSearchList(code, keyword)
+            val response = RetrofitObject.getNetwork().create(NoticeService::class.java)
+                .getSearchList(code, keyword)
             NetworkResult.Success(response)
         } catch (exception: Exception) {
             val error = errorResponseHandler.getError(exception)
