@@ -29,7 +29,7 @@ class AlarmActivity : BaseActivity<ActivityAlarmBinding, AlarmViewModel>(), Alar
     }
 
     override fun initDataBinding() = Unit
-    
+
     override fun initAfterBinding() {
         viewModel.getAlarms()
 
