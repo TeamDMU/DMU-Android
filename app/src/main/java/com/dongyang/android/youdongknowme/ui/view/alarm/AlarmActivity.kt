@@ -22,19 +22,18 @@ class AlarmActivity : BaseActivity<ActivityAlarmBinding, AlarmViewModel>(), Alar
     private fun setupToolbar() {
         binding.alarmToolbar.apply {
             tvToolbarTitle.text = getString(R.string.alarm_title)
-            tvToolbarExitButton.visibility = View.VISIBLE
+            btnToolbarExit.visibility = View.VISIBLE
             tvToolbarActionButton.text = getString(R.string.alarm_action_button_text)
             tvToolbarActionButton.visibility = View.VISIBLE
         }
     }
 
-    override fun initDataBinding() {
-    }
-
+    override fun initDataBinding() = Unit
+    
     override fun initAfterBinding() {
         viewModel.getAlarms()
 
-        binding.alarmToolbar.tvToolbarExitButton.setOnClickListener {
+        binding.alarmToolbar.btnToolbarExit.setOnClickListener {
             finish()
         }
     }

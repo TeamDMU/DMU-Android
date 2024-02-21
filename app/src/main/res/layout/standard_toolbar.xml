@@ -8,7 +8,7 @@
         android:layout_height="wrap_content">
 
         <ImageButton
-            android:id="@+id/tv_toolbar_exit_button"
+            android:id="@+id/btn_toolbar_exit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -30,10 +30,10 @@
             android:layout_height="wrap_content"
             android:text="@{title}"
             android:textColor="@color/gray500"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_toolbar_exit_button"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_toolbar_exit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_toolbar_exit_button" />
+            app:layout_constraintTop_toTopOf="@+id/btn_toolbar_exit" />
 
         <TextView
             android:id="@+id/tv_toolbar_action_button"
