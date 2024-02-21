@@ -3,14 +3,14 @@ package com.dongyang.android.youdongknowme.data.remote.entity
 import com.google.gson.annotations.SerializedName
 
 data class Notice(
-    @SerializedName("num")
-    var num: Int,
     @SerializedName("title")
-    var title: String,
-    @SerializedName("writer")
-    var writer: String,
+    val title: String,
+    @SerializedName("author")
+    val author: String,
     @SerializedName("date")
-    var date: String,
+    val date: String,
+    @SerializedName("url")
+    val url: String,
 )
 
 data class NoticeDetail(
