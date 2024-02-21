@@ -5,13 +5,12 @@ import androidx.lifecycle.Observer
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
 import com.dongyang.android.youdongknowme.databinding.ActivityKeywordBinding
+import com.dongyang.android.youdongknowme.function.setSpanText
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import com.google.firebase.FirebaseApp
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>() {
 
@@ -20,6 +19,9 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
 
     override fun initStartView() {
         binding.vm = viewModel
+
+        // 부분 색상 지정
+        setSpanText(baseContext, binding.tvKeywordTitleMain,startIdx = 0, endIdx = 3)
     }
 
     override fun initDataBinding() {
@@ -29,11 +31,11 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
                 viewModel.setAllKeywords(t?.filter { it.isSubscribe }?.map { it.name }
                     ?: listOf(""))
                 setCheckChipChange(
-                    binding.keywordClassChipGroup,
-                    binding.keywordMoneyChipGroup,
-                    binding.keywordAcademicChipGroup,
-                    binding.keywordEmploymentChipGroup,
-                    binding.keywordEtcChipGroup
+                    binding.chipGroupKeywordClass,
+                    binding.chipGroupKeywordMoney,
+                    binding.chipGroupKeywordAcademic,
+                    binding.chipGroupKeywordEmployment,
+                    binding.chipGroupKeywordEtc
                 )
                 viewModel.localKeywordList.removeObserver(this)
             }
@@ -44,13 +46,8 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
         viewModel.checkFirstLaunch()
         viewModel.getLocalKeywordList()
 
-        // 뒤로가기 버튼 눌렀을 때
-        binding.keywordToolbar.tvToolbarExitButton.setOnClickListener {
-            finish()
-        }
-
         // TODO :: 안드로이드 데이터베이스에 유저별 설정한 키워드 저장 및 파이어베이스 키워드 구독 설정
-        binding.keywordCompleteBtn.setOnClickListener {
+        binding.btnKeywordNext.setOnClickListener {
             viewModel.subscribeCheckedKeyword()
             if (viewModel.isFirstLaunch.value == true) {
                 viewModel.setFirstLaunch(false)

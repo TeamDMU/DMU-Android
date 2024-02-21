@@ -29,15 +29,26 @@
                 android:textColor="@color/black"
                 tools:text="Jun" />
 
-            <TextView
-                android:id="@+id/item_calendar_date"
-                style="@style/PretendardRegular14"
-                android:layout_width="match_parent"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/mv_item_calendar_date"
+                android:layout_width="32dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
                 android:gravity="center"
-                android:textColor="@color/black"
-                tools:text="16" />
+                app:cardElevation="0dp"
+                app:cardCornerRadius="10dp">
+
+                <TextView
+                    android:id="@+id/item_calendar_date"
+                    style="@style/PretendardRegular16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:minHeight="32dp"
+                    android:textColor="@color/black"
+                    tools:text="16" />
+            </com.google.android.material.card.MaterialCardView>
 
             <TextView
                 android:id="@+id/item_calendar_day"
@@ -45,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:textColor="@color/black"
                 tools:text="Mon" />

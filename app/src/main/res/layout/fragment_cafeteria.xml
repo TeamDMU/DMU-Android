@@ -13,10 +13,10 @@
             layout="@layout/standard_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
-            app:title="@{@string/cafeteria_main}" />
+            app:title="@{@string/cafeteria_title}" />
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/cafeteria_content_container"
+            android:id="@+id/nsv_cafeteria_content"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:fillViewport="true"
@@ -31,7 +31,7 @@
                 android:orientation="vertical">
 
                 <com.kizitonwose.calendarview.CalendarView
-                    android:id="@+id/cafeteria_calendar"
+                    android:id="@+id/cv_cafeteria_calendar"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:cv_dayViewResource="@layout/item_calendar_day"
@@ -49,11 +49,12 @@
                     android:id="@+id/cafeteria_info_container"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:orientation="horizontal"
-                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cafeteria_calendar">
+                    app:layout_constraintTop_toBottomOf="@id/cv_cafeteria_calendar">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -61,8 +62,8 @@
                         android:src="@drawable/ic_location" />
 
                     <TextView
-                        android:id="@+id/cafeteria_info_place"
-                        style="@style/PretendardRegular12"
+                        android:id="@+id/tv_cafeteria_info_place"
+                        style="@style/PretendardRegular14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -77,8 +78,8 @@
                         android:src="@drawable/ic_timer" />
 
                     <TextView
-                        android:id="@+id/cafeteria_info_time"
-                        style="@style/PretendardRegular12"
+                        android:id="@+id/tv_cafeteria_info_time"
+                        style="@style/PretendardRegular14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -107,14 +108,14 @@
                 </LinearLayout>
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cafeteria_stu_menu_container"
+                    android:id="@+id/mv_cafeteria_menu"
                     bind_is_error="@{vm.cafeteriaList == null}"
                     bind_is_loading="@{vm.isLoading()}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="12dp"
-                    android:background="@color/main"
+                    android:outlineSpotShadowColor="@color/blue300"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -127,15 +128,6 @@
                         android:orientation="vertical">
 
                         <TextView
-                            style="@style/PretendardBold16"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="12dp"
-                            android:text="@string/cafeteria_student"
-                            android:textColor="@color/black" />
-
-                        <TextView
                             style="@style/PretendardBold14"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -145,49 +137,29 @@
                             android:textColor="@color/black" />
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/cafeteria_stu_korean_menu_list"
+                            android:id="@+id/rv_cafeteria_menu_list"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginVertical="8dp"
                             tools:listitem="@layout/item_cafeteria_menu" />
-
-                        <TextView
-                            style="@style/PretendardBold14"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="12dp"
-                            android:text="@string/cafeteria_another"
-                            android:textColor="@color/black" />
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/cafeteria_stu_another_menu_list"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
-                            tools:listitem="@layout/item_cafeteria_menu" />
-
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cafeteria_emp_menu_container"
+                    android:id="@+id/mv_cafeteria_another"
                     bind_is_error="@{vm.cafeteriaList == null}"
                     bind_is_loading="@{vm.isLoading()}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="12dp"
-                    android:background="@color/main"
+                    android:layout_marginTop="20dp"
+                    android:outlineSpotShadowColor="@color/blue300"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cafeteria_stu_menu_container"
-                    app:layout_constraintBottom_toBottomOf="parent">
+                    app:layout_constraintTop_toBottomOf="@id/mv_cafeteria_menu">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -195,32 +167,6 @@
                         android:orientation="vertical">
 
                         <TextView
-                            style="@style/PretendardBold16"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="12dp"
-                            android:text="@string/cafeteria_employee"
-                            android:textColor="@color/black" />
-
-                        <TextView
-                            style="@style/PretendardBold14"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="12dp"
-                            android:text="@string/cafeteria_korean"
-                            android:textColor="@color/black" />
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/cafeteria_edu_korean_menu_list"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
-                            tools:listitem="@layout/item_cafeteria_menu" />
-
-                        <TextView
                             style="@style/PretendardBold14"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -230,15 +176,14 @@
                             android:textColor="@color/black" />
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/cafeteria_edu_another_menu_list"
+                            android:id="@+id/rv_cafeteria_another_menu_list"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginVertical="8dp"
                             tools:listitem="@layout/item_cafeteria_menu" />
 
                     </LinearLayout>
-
                 </com.google.android.material.card.MaterialCardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>

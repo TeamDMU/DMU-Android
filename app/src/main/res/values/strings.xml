@@ -14,6 +14,10 @@
     <string name="department_title">학과선택</string>
     <string name="department_snackbar_title">학과 선택을 마치셨나요?</string>
     <string name="department_snackbar_positive_button">확인</string>
+    <string name="department_search_message">소속 학과를 검색해주세요.</string>
+    <string name="department_title_main">소속 학과를 선택하면,</string>
+    <string name="department_title_sub">해당 학과의 공지만 바로 알려줘요.</string>
+    <string name="department_next">다음</string>
 
     <!-- notice -->
     <string name="notice_title">공지사항</string>
@@ -54,14 +58,18 @@
 
     <!-- keyword -->
     <string name="keyword_title">키워드 선택</string>
+    <string name="keyword_title_main">키워드를 설정하면,</string>
+    <string name="keyword_title_sub">해당 키워드의 공지를 볼 수 있어요.</string>
     <string name="keyword_complete">완료</string>
+    <string name="keyword_next">다음</string>
     <string name="keyword_class">수업</string>
     <string name="keyword_class_exam">시험</string>
     <string name="keyword_class_course">수강</string>
     <string name="keyword_class_lecture">특강</string>
     <string name="keyword_class_season">계절학기</string>
-    <string name="keyword_money">학자금</string>
+    <string name="keyword_money">장학금</string>
     <string name="keyword_money_scholarship">장학</string>
+    <string name="keyword_money_nationalScholarship">국가장학</string>
     <string name="keyword_money_tuition">등록</string>
     <string name="keyword_academic">학적</string>
     <string name="keyword_academic_leave">휴학</string>
@@ -77,8 +85,8 @@
     <string name="keyword_employment_service">봉사</string>
     <string name="keyword_etc">기타</string>
     <string name="keyword_etc_dormitory">기숙사</string>
-    <string name="keyword_etc_corona">코로나19</string>
     <string name="keyword_etc_club">동아리</string>
+    <string name="keyword_etc_studentCouncil">학생회</string>
 
     <!-- error message -->
     <string name="error_unknown">네트워크 오류가 발생하였습니다.\n 잠시 후 다시 실행해주세요.</string>
@@ -100,16 +108,19 @@
 
     <!-- cafeteria -->
     <string name="cafeteria_main">식단</string>
+    <string name="cafeteria_title">금주의 식단</string>
     <string name="cafeteria_student">학생식당</string>
-    <string name="cafeteria_employee">교직원식당</string>
     <string name="cafeteria_menu">메뉴</string>
     <string name="cafeteria_lunch">점심</string>
-    <string name="cafeteria_time">11:30 ~ 14:00</string>
+    <string name="cafeteria_time">11:30 - 14:00, 16:30 - 18:00</string>
     <string name="cafeteria_place">8호관 3층</string>
     <string name="cafeteria_no_menu">&#128517; 등록된 메뉴가 없어요.</string>
     <string name="cafeteria_korean">🍚 한식</string>
-    <string name="cafeteria_another">😋 일품</string>
+    <string name="cafeteria_another">🍛 일품</string>
 
     <!-- license -->
     <string name="license_title">오픈소스 라이센스</string>
+
+    <!-- search -->
+    <string name="search_hint">검색어를 입력하세요.</string>
 </resources>
