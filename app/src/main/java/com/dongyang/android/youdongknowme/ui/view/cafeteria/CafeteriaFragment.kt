@@ -1,6 +1,9 @@
 package com.dongyang.android.youdongknowme.ui.view.cafeteria
 
+import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.view.menu.MenuAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.window.layout.WindowMetricsCalculator
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentCafeteriaBinding
@@ -26,18 +29,14 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
     private lateinit var stuKoreanMenuAdapter: CafeteriaAdapter
     private lateinit var stuAnotherMenuAdapter: CafeteriaAdapter
-    private lateinit var eduKoreanMenuAdapter: CafeteriaAdapter
-    private lateinit var eduAnotherMenuAdapter: CafeteriaAdapter
 
     override fun initStartView() {
         binding.vm = viewModel
 
         stuKoreanMenuAdapter = CafeteriaAdapter()
         stuAnotherMenuAdapter = CafeteriaAdapter()
-        eduKoreanMenuAdapter = CafeteriaAdapter()
-        eduAnotherMenuAdapter = CafeteriaAdapter()
 
-        binding.cafeteriaStuKoreanMenuList.apply {
+        binding.rvCafeteriaMenuList.apply {
             val layoutManager = FlexboxLayoutManager(context)
             layoutManager.flexDirection = FlexDirection.ROW
             this.adapter = this@CafeteriaFragment.stuKoreanMenuAdapter
@@ -45,7 +44,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             this.setHasFixedSize(true)
         }
 
-        binding.cafeteriaStuAnotherMenuList.apply {
+        binding.rvCafeteriaAnotherMenuList.apply {
             val layoutManager = FlexboxLayoutManager(context)
             layoutManager.flexDirection = FlexDirection.ROW
             this.adapter = this@CafeteriaFragment.stuAnotherMenuAdapter
@@ -53,35 +52,19 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             this.setHasFixedSize(true)
         }
 
-        binding.cafeteriaEduKoreanMenuList.apply {
-            val layoutManager = FlexboxLayoutManager(context)
-            layoutManager.flexDirection = FlexDirection.ROW
-            this.adapter = this@CafeteriaFragment.eduKoreanMenuAdapter
-            this.layoutManager = layoutManager
-            this.setHasFixedSize(true)
-        }
-
-        binding.cafeteriaEduAnotherMenuList.apply {
-            val layoutManager = FlexboxLayoutManager(context)
-            layoutManager.flexDirection = FlexDirection.ROW
-            this.adapter = this@CafeteriaFragment.eduAnotherMenuAdapter
-            this.layoutManager = layoutManager
-            this.setHasFixedSize(true)
-        }
-
         val wmc =
             WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(requireActivity())
 
-        binding.cafeteriaCalendar.apply {
+        binding.cvCafeteriaCalendar.apply {
             val dayWidth = wmc.bounds.width() / 5
             val dayHeight: Int = (dayWidth * 1.25).toInt()
 
             daySize = Size(dayWidth, dayHeight)
         }
 
-        binding.cafeteriaCalendar.dayBinder = object : DayBinder<CafeteriaContainer> {
+        binding.cvCafeteriaCalendar.dayBinder = object : DayBinder<CafeteriaContainer> {
             override fun create(view: View): CafeteriaContainer =
-                CafeteriaContainer(view, binding.cafeteriaCalendar, viewModel)
+                CafeteriaContainer(view, binding.cvCafeteriaCalendar, viewModel)
 
             override fun bind(container: CafeteriaContainer, day: CalendarDay) = container.bind(day)
         }
@@ -103,20 +86,16 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             stuAnotherMenuAdapter.submitList(it.second)
         }
 
-        viewModel.eduMenus.observe(viewLifecycleOwner) {
-            eduKoreanMenuAdapter.submitList(it.first)
-            eduAnotherMenuAdapter.submitList(it.second)
-        }
     }
 
     override fun initAfterBinding() {
-        binding.cafeteriaCalendar.setup(
+        binding.cvCafeteriaCalendar.setup(
             YearMonth.now().minusMonths(2),
             YearMonth.now().plusMonths(1),
             DayOfWeek.values().random()
         )
 
-        binding.cafeteriaCalendar.scrollToDate(LocalDate.now().minusDays(2))
+        binding.cvCafeteriaCalendar.scrollToDate(LocalDate.now().minusDays(2))
 
         binding.cafeteriaErrorContainer.refresh.setOnClickListener {
             viewModel.fetchCafeteria()
@@ -127,7 +106,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         super.onPause()
         notifyDateChanged(
             viewModel,
-            binding.cafeteriaCalendar,
+            binding.cvCafeteriaCalendar,
             viewModel.selectedDate.value,
             LocalDate.now()
         )

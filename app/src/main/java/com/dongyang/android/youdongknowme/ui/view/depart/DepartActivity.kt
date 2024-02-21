@@ -3,13 +3,19 @@ package com.dongyang.android.youdongknowme.ui.view.depart
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.set
 import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityDepartBinding
+import com.dongyang.android.youdongknowme.function.setSpanText
 import com.dongyang.android.youdongknowme.ui.adapter.DepartAdapter
 import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordActivity
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
@@ -33,6 +39,9 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
 
         viewModel.checkFirstLaunch()
 
+        // 부분 색상 지정
+        setSpanText(baseContext, binding.tvDepartTitleMain,startIdx = 0, endIdx = 5)
+        
         // 학과 리스트
         val items =
             resources.getStringArray(R.array.dmu_department_list).toCollection(ArrayList<String>())
@@ -43,14 +52,10 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
             setItemClickListener(this@DepartActivity)
         }
 
-        binding.departRcv.apply {
+        binding.rvDepart.apply {
             this.adapter = this@DepartActivity.adapter
             this.layoutManager = LinearLayoutManager(this@DepartActivity)
             this.setHasFixedSize(true)
-        }
-
-        binding.departToolbar.toolbarExit.setOnClickListener {
-            finish()
         }
 
         // 선택 포지션을 실시간 옵저빙
@@ -70,7 +75,7 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
     // 확인 버튼을 누르면 내부 DB에 학과를 담고 메인 액티비티로 이동
     private fun getSnackBar(items: ArrayList<String>): Snackbar {
         val snackbar =
-            Snackbar.make(binding.departContainer, getString(R.string.department_snackbar_title), LENGTH_LONG)
+            Snackbar.make(binding.coordinatorDepart, getString(R.string.department_snackbar_title), LENGTH_LONG)
                 .setAction(getString(R.string.department_snackbar_positive_button)) {
                     viewModel.setDepartment(items[viewModel.selectDepartPosition.value ?: 0])
                     if(viewModel.isFirstLaunch.value == true) {
@@ -87,7 +92,7 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
                     override fun onShown(transientBottomBar: Snackbar?) {
                         super.onShown(transientBottomBar)
 
-                        binding.departRcv.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                        binding.rvDepart.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                             setMargins(0, 0, 0, transientBottomBar?.view?.height ?: 0)
                         }
                     }
@@ -95,7 +100,7 @@ class DepartActivity : AppCompatActivity(), DepartClickListener {
                     override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
                         super.onDismissed(transientBottomBar, event)
 
-                        binding.departRcv.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                        binding.rvDepart.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                             setMargins(0, 0, 0, 0)
                         }
                     }
