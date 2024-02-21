@@ -21,7 +21,6 @@ class NoticeAdapter : RecyclerView.Adapter<NoticeAdapter.ViewHolder>() {
         : RecyclerView.ViewHolder(binding.root) {
             fun bind(item : Notice) {
                 binding.notice = item
-                binding.itemClickListener = itemClickListener
             }
     }
 

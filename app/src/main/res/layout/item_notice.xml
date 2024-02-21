@@ -7,8 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
-        android:backgroundTint="@color/white"
-        android:onClick="@{() -> itemClickListener.itemClick(notice.num)}">
+        android:backgroundTint="@color/white">
 
         <TextView
             android:id="@+id/item_notice_title"
@@ -34,18 +33,18 @@
             android:text="@{notice.date}"
             android:textColor="@color/gray400"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/item_notice_writer"
+            app:layout_constraintEnd_toStartOf="@id/item_notice_author"
             app:layout_constraintStart_toStartOf="@id/item_notice_title"
             app:layout_constraintTop_toBottomOf="@id/item_notice_title" />
 
         <TextView
-            android:id="@+id/item_notice_writer"
+            android:id="@+id/item_notice_author"
             style="@style/PretendardRegular12"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:maxLines="1"
-            android:text="@{notice.writer}"
+            android:text="@{notice.author}"
             android:textColor="@color/gray400"
             app:layout_constraintStart_toEndOf="@id/item_notice_date"
             app:layout_constraintTop_toTopOf="@id/item_notice_date" />
@@ -64,10 +63,5 @@
         <variable
             name="notice"
             type="com.dongyang.android.youdongknowme.data.remote.entity.Notice" />
-
-        <variable
-            name="itemClickListener"
-            type="com.dongyang.android.youdongknowme.ui.view.notice.NoticeClickListener" />
-
     </data>
 </layout>
