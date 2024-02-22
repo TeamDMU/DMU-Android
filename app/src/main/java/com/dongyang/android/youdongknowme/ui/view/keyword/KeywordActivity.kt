@@ -24,7 +24,7 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
         binding.vm = viewModel
 
         // 부분 색상 지정
-        setSpan(binding.tvKeywordTitleMain,startIdx = 0, endIdx = 3)
+        setSpanText(binding.tvKeywordTitleMain,startIdx = 0, endIdx = 3)
     }
 
     override fun initDataBinding() {
