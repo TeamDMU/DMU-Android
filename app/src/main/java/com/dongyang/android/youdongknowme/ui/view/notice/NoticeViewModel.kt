@@ -1,6 +1,5 @@
 package com.dongyang.android.youdongknowme.ui.view.notice
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -33,6 +32,8 @@ class NoticeViewModel(
     private val _departmentNotices: MutableLiveData<List<Notice>?> = MutableLiveData()
     val departmentNotices: LiveData<List<Notice>?> = _departmentNotices
 
+    private var _universityNoticeCurrentPage = 1
+
     init {
         updateSelectedTabType(NoticeTabType.SCHOOL)
         fetchUniversityNotices()
@@ -43,28 +44,28 @@ class NoticeViewModel(
     }
 
     fun fetchUniversityNotices() {
-        val universityNotices = _universityNotices.value ?: emptyList()
+        if (_isLoading.value == true) {
+            return
+        }
+        _isLoading.postValue(true)
 
-        if (universityNotices.isEmpty()) {
-            _isLoading.postValue(true)
+        viewModelScope.launch {
+            when (val result =
+                noticeRepository.fetchUniversityNotices(_universityNoticeCurrentPage)) {
+                is NetworkResult.Success -> {
+                    val updatedNotices = _universityNotices.value.orEmpty() + result.data
+                    _universityNotices.postValue(updatedNotices)
+                    _isError.postValue(false)
+                    _isLoading.postValue(false)
+                    _universityNoticeCurrentPage++
+                }
 
-            viewModelScope.launch {
-                when (val result = noticeRepository.fetchUniversityNotices()) {
-                    is NetworkResult.Success -> {
-                        _universityNotices.value = result.data
-                        _isError.postValue(false)
-                        _isLoading.postValue(false)
-                    }
-
-                    is NetworkResult.Error -> {
-                        handleError(result, _errorState)
-                        _isError.postValue(true)
-                        _isLoading.postValue(false)
-                    }
+                is NetworkResult.Error -> {
+                    handleError(result, _errorState)
+                    _isError.postValue(true)
+                    _isLoading.postValue(false)
                 }
             }
-        } else {
-            _universityNotices.postValue(_universityNotices.value)
         }
     }
 
@@ -100,7 +101,8 @@ class NoticeViewModel(
             when (currentTab) {
                 NoticeTabType.SCHOOL ->
                     viewModelScope.launch {
-                        when (val result = noticeRepository.fetchUniversityNotices()) {
+                        when (val result =
+                            noticeRepository.fetchUniversityNotices(DEFAULT_REFRESH_PAGE)) {
                             is NetworkResult.Success -> {
                                 _universityNotices.value = result.data
                                 _isError.postValue(false)
@@ -133,5 +135,9 @@ class NoticeViewModel(
                     }
             }
         }
+    }
+
+    companion object {
+        private const val DEFAULT_REFRESH_PAGE = 1
     }
 }

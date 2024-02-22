@@ -3,6 +3,7 @@ package com.dongyang.android.youdongknowme.ui.view.notice
 import android.content.Intent
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentNoticeBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
@@ -29,6 +30,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
             this.addItemDecoration(DividerItemDecoration(requireContext(), 1))
         }
         setupTabLayout()
+        setupInfinityScroll()
     }
 
     override fun initDataBinding() {
@@ -91,6 +93,22 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     private fun setupTabLayout() {
         if (viewModel.selectedTab.value?.peekContent() == NoticeTabType.FACULTY)
             binding.noticeTab.getTabAt(1)?.select()
+    }
+
+    private fun setupInfinityScroll() {
+        binding.noticeRvList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val lastVisibleItemPosition = layoutManager.findLastCompletelyVisibleItemPosition()
+                val totalItemCount = layoutManager.itemCount
+
+                if (!viewModel.isLoading.value!! && lastVisibleItemPosition >= totalItemCount - 1) {
+                    viewModel.fetchUniversityNotices()
+                }
+            }
+        })
     }
 
     override fun itemClick(num: Int) {

@@ -9,10 +9,10 @@ import com.dongyang.android.youdongknowme.standard.network.RetrofitObject
 class NoticeRepository(
     private val errorResponseHandler: ErrorResponseHandler
 ) {
-    suspend fun fetchUniversityNotices(): NetworkResult<List<Notice>> {
+    suspend fun fetchUniversityNotices(page: Int): NetworkResult<List<Notice>> {
         return try {
             val universityNotices = RetrofitObject.getNetwork().create(NoticeService::class.java)
-                .getUniversityNotice(1, 20)
+                .getUniversityNotice(page, DEFAULT_SIZE)
 
             NetworkResult.Success(universityNotices)
         } catch (exception: Exception) {
@@ -30,5 +30,9 @@ class NoticeRepository(
             val error = errorResponseHandler.getError(exception)
             NetworkResult.Error(error)
         }
+    }
+
+    companion object {
+        private const val DEFAULT_SIZE = 20
     }
 }
