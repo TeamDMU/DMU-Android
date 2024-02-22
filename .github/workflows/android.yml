@@ -25,5 +25,10 @@ jobs:
         API_KEY: ${{ secrets.API_KEY }}
       run:
         echo API_KEY=\"$API_KEY\" > ./local.properties
+    - name: Access baseURL
+      env:
+        API_KEY: ${{ secrets.BASE_URL }}
+      run:
+        echo BASE_URL=\"$BASE_URL\" > ./local.properties        
     - name: Build with Gradle
       run: ./gradlew build
