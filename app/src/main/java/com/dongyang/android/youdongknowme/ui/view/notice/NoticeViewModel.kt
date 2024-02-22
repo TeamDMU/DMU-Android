@@ -1,6 +1,5 @@
 package com.dongyang.android.youdongknowme.ui.view.notice
 
-import CODE
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -11,7 +10,6 @@ import com.dongyang.android.youdongknowme.standard.network.NetworkResult
 import com.dongyang.android.youdongknowme.ui.view.util.Event
 import kotlinx.coroutines.launch
 
-/* 공지사항 뷰모델 */
 class NoticeViewModel(
     private val noticeRepository: NoticeRepository
 ) : BaseViewModel() {
@@ -28,14 +26,11 @@ class NoticeViewModel(
     private val _selectedTab: MutableLiveData<Event<NoticeTabType>> = MutableLiveData()
     val selectedTab: LiveData<Event<NoticeTabType>> = _selectedTab
 
-    private val _departmentCode: MutableLiveData<Int> = MutableLiveData()
-    val departmentCode: LiveData<Int> = _departmentCode
+    private val _universityNotices: MutableLiveData<List<Notice>?> = MutableLiveData()
+    val universityNotices: LiveData<List<Notice>?> = _universityNotices
 
-    private val _universityNotices = MutableLiveData<List<Notice>?>()
-    val universityNotices : LiveData<List<Notice>?> get() = _universityNotices
-
-    private val _departmentNotices = MutableLiveData<List<Notice>?>()
-    val departmentNotices : LiveData<List<Notice>?> get() = _departmentNotices
+    private val _departmentNotices: MutableLiveData<List<Notice>?> = MutableLiveData()
+    val departmentNotices: LiveData<List<Notice>?> = _departmentNotices
 
     init {
         updateSelectedTabType(NoticeTabType.SCHOOL)

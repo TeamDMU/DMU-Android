@@ -1,6 +1,5 @@
 package com.dongyang.android.youdongknowme.data.repository
 
-import com.dongyang.android.youdongknowme.data.local.SharedPreference
 import com.dongyang.android.youdongknowme.data.remote.entity.Notice
 import com.dongyang.android.youdongknowme.data.remote.service.NoticeService
 import com.dongyang.android.youdongknowme.standard.network.ErrorResponseHandler
@@ -27,11 +26,9 @@ class NoticeRepository(
             val departmentNotices = RetrofitObject.getNetwork().create(NoticeService::class.java)
                 .getDepartmentNotice(department, 1, 20)
             NetworkResult.Success(departmentNotices)
-        }catch (exception: Exception) {
+        } catch (exception: Exception) {
             val error = errorResponseHandler.getError(exception)
             NetworkResult.Error(error)
         }
     }
-
-    fun getDepartmentCode(): Int = SharedPreference.getCode()
 }
