@@ -80,6 +80,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
         viewModel.menus.observe(viewLifecycleOwner) {
             stuKoreanMenuAdapter.submitList(it)
+            // 일품 메뉴 : 일품 메뉴는 리스트로 제작하여 등록
             stuAnotherMenuAdapter.submitList(listOf(getString(R.string.cafeteria_no_menu)))
         }
 
