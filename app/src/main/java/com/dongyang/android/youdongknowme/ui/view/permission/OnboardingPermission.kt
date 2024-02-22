@@ -20,6 +20,11 @@ class OnboardingPermission : BaseActivity<ActivityOnboardingPermissionBinding, S
     override val viewModel: SettingViewModel by viewModel()
 
     override fun initStartView() {
+        binding.vm = viewModel
+
+        viewModel.checkAccessAlarm()
+        viewModel.getUserDepartment()
+
         setSpanText(binding.tvPermissionTitleMain,startIdx = 0, endIdx = 9)
     }
 
