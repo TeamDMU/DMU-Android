@@ -9,32 +9,32 @@
         tools:context=".ui.view.permission.OnboardingPermission">
 
         <TextView
-            android:id="@+id/tv_alarm_title_main"
+            android:id="@+id/tv_permission_title_main"
             style="@style/PretendardBold32"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="60dp"
             android:text="@string/alarm_title_main"
-            app:layout_constraintBottom_toTopOf="@id/tv_alarm_title_sub"
+            app:layout_constraintBottom_toTopOf="@id/tv_permission_title_sub"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_alarm_title_sub"
+            android:id="@+id/tv_permission_title_sub"
             style="@style/PretendardBold24"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:text="@string/alarm_title_sub"
-            app:layout_constraintBottom_toTopOf="@id/alarm_onboarding_step"
+            app:layout_constraintBottom_toTopOf="@id/onboarding_permission_step"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_alarm_title_main" />
+            app:layout_constraintTop_toTopOf="@id/tv_permission_title_main" />
 
         <include
-            android:id="@+id/alarm_onboarding_step"
+            android:id="@+id/onboarding_permission_step"
             layout="@layout/layout_onboarding_step"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -42,11 +42,11 @@
             android:paddingHorizontal="56dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_alarm_title_sub"
+            app:layout_constraintTop_toBottomOf="@id/tv_permission_title_sub"
             app:stepValue="@{@string/setting_notice}" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/mv_switch_alarm"
+            android:id="@+id/mv_switch_permission"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -61,7 +61,7 @@
             app:strokeWidth="1dp">
 
             <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/switch_alarm"
+                android:id="@+id/switch_permission"
                 style="@style/PretendardBold16"
                 bind_is_checked="@{vm.isAccessDepartAlarm()}"
                 android:layout_width="match_parent"
@@ -76,7 +76,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_alarm_complete"
+            android:id="@+id/btn_permission_complete"
             style="@style/PretendardRegular20"
             android:layout_width="0dp"
             android:layout_height="56dp"

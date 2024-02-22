@@ -18,6 +18,9 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
 
     override fun initStartView() {
         binding.vm = viewModel
+
+        // 부분 색상 지정
+        setSpanText(binding.tvKeywordTitleMain,startIdx = 0, endIdx = 3)
     }
 
     override fun initDataBinding() {

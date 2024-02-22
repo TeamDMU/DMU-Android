@@ -20,30 +20,30 @@ class OnboardingPermission : BaseActivity<ActivityOnboardingPermissionBinding, S
     override val viewModel: SettingViewModel by viewModel()
 
     override fun initStartView() {
-        setSpan(binding.tvAlarmTitleMain,startIdx = 0, endIdx = 9)
+        setSpanText(binding.tvPermissionTitleMain,startIdx = 0, endIdx = 9)
     }
 
     override fun initDataBinding() = Unit
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun initAfterBinding() {
-        binding.btnAlarmComplete.setOnClickListener {
+        binding.btnPermissionComplete.setOnClickListener {
             val intent = Intent(this@OnboardingPermission, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        binding.switchAlarm.setOnCheckedChangeListener { compoundButton, _ ->
+        binding.switchPermission.setOnCheckedChangeListener { compoundButton, _ ->
             if (compoundButton.isChecked) {
                 viewModel.setIsAccessDepartAlarm(true)
-                binding.mvSwitchAlarm.outlineAmbientShadowColor = getColor(R.color.blue300)
-                binding.mvSwitchAlarm.outlineSpotShadowColor = getColor(R.color.blue300)
-                binding.switchAlarm.setTextColor(getColor(R.color.blue300))
+                binding.mvSwitchPermission.outlineAmbientShadowColor = getColor(R.color.blue300)
+                binding.mvSwitchPermission.outlineSpotShadowColor = getColor(R.color.blue300)
+                binding.switchPermission.setTextColor(getColor(R.color.blue300))
             } else {
                 viewModel.setIsAccessDepartAlarm(false)
-                binding.mvSwitchAlarm.outlineAmbientShadowColor = getColor(R.color.gray300)
-                binding.mvSwitchAlarm.outlineSpotShadowColor = getColor(R.color.gray300)
-                binding.switchAlarm.setTextColor(getColor(R.color.gray300))
+                binding.mvSwitchPermission.outlineAmbientShadowColor = getColor(R.color.gray300)
+                binding.mvSwitchPermission.outlineSpotShadowColor = getColor(R.color.gray300)
+                binding.switchPermission.setTextColor(getColor(R.color.gray300))
             }
         }
     }
