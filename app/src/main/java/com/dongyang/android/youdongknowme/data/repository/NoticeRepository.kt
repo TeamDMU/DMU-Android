@@ -21,10 +21,10 @@ class NoticeRepository(
         }
     }
 
-    suspend fun fetchDepartmentNotices(department: String): NetworkResult<List<Notice>> {
+    suspend fun fetchDepartmentNotices(department: String, page: Int): NetworkResult<List<Notice>> {
         return try {
             val departmentNotices = RetrofitObject.getNetwork().create(NoticeService::class.java)
-                .getDepartmentNotice(department, 1, 20)
+                .getDepartmentNotice(department, page, DEFAULT_SIZE)
             NetworkResult.Success(departmentNotices)
         } catch (exception: Exception) {
             val error = errorResponseHandler.getError(exception)

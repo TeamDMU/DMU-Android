@@ -32,7 +32,8 @@ class NoticeViewModel(
     private val _departmentNotices: MutableLiveData<List<Notice>?> = MutableLiveData()
     val departmentNotices: LiveData<List<Notice>?> = _departmentNotices
 
-    private var _universityNoticeCurrentPage = 1
+    private var universityNoticeCurrentPage = 1
+    private var departmentNoticeCurrentPage = 1
 
     init {
         updateSelectedTabType(NoticeTabType.SCHOOL)
@@ -51,13 +52,13 @@ class NoticeViewModel(
 
         viewModelScope.launch {
             when (val result =
-                noticeRepository.fetchUniversityNotices(_universityNoticeCurrentPage)) {
+                noticeRepository.fetchUniversityNotices(universityNoticeCurrentPage)) {
                 is NetworkResult.Success -> {
                     val updatedNotices = _universityNotices.value.orEmpty() + result.data
                     _universityNotices.postValue(updatedNotices)
                     _isError.postValue(false)
                     _isLoading.postValue(false)
-                    _universityNoticeCurrentPage++
+                    universityNoticeCurrentPage++
                 }
 
                 is NetworkResult.Error -> {
@@ -70,28 +71,28 @@ class NoticeViewModel(
     }
 
     fun fetchDepartmentNotices() {
-        val departmentNotices = _departmentNotices.value ?: emptyList()
+        if (_isLoading.value == true) {
+            return
+        }
+        _isLoading.postValue(true)
 
-        if (departmentNotices.isEmpty()) {
-            _isLoading.postValue(true)
-
-            viewModelScope.launch {
-                when (val result = noticeRepository.fetchDepartmentNotices("컴퓨터소프트웨어공학과")) {
+        viewModelScope.launch {
+            when (val result =
+                noticeRepository.fetchDepartmentNotices("컴퓨터소프트웨어공학과", departmentNoticeCurrentPage)) {
                     is NetworkResult.Success -> {
-                        _departmentNotices.value = result.data
-                        _isError.postValue(false)
-                        _isLoading.postValue(false)
-                    }
+                    val updatedNotices = _departmentNotices.value.orEmpty() + result.data
+                    _departmentNotices.postValue(updatedNotices)
+                    _isError.postValue(false)
+                    _isLoading.postValue(false)
+                    departmentNoticeCurrentPage++
+                }
 
                     is NetworkResult.Error -> {
-                        handleError(result, _errorState)
-                        _isError.postValue(true)
-                        _isLoading.postValue(false)
-                    }
+                    handleError(result, _errorState)
+                    _isError.postValue(true)
+                    _isLoading.postValue(false)
                 }
             }
-        } else {
-            _departmentNotices.postValue(_departmentNotices.value)
         }
     }
 
@@ -119,7 +120,7 @@ class NoticeViewModel(
 
                 NoticeTabType.FACULTY ->
                     viewModelScope.launch {
-                        when (val result = noticeRepository.fetchDepartmentNotices("컴퓨터소프트웨어공학과")) {
+                        when (val result = noticeRepository.fetchDepartmentNotices("컴퓨터소프트웨어공학과", DEFAULT_REFRESH_PAGE)) {
                             is NetworkResult.Success -> {
                                 _departmentNotices.value = result.data
                                 _isError.postValue(false)

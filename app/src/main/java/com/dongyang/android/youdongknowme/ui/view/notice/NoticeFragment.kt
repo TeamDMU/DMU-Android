@@ -105,7 +105,12 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
                 val totalItemCount = layoutManager.itemCount
 
                 if (!viewModel.isLoading.value!! && lastVisibleItemPosition >= totalItemCount - 1) {
-                    viewModel.fetchUniversityNotices()
+                    viewModel.selectedTab.value?.peekContent()?.let { currentTab ->
+                        when (currentTab) {
+                            NoticeTabType.FACULTY -> viewModel.fetchDepartmentNotices()
+                            NoticeTabType.SCHOOL -> viewModel.fetchUniversityNotices()
+                        }
+                    }
                 }
             }
         })
