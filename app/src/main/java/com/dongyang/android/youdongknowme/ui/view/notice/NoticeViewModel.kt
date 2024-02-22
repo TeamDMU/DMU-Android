@@ -1,7 +1,6 @@
 package com.dongyang.android.youdongknowme.ui.view.notice
 
 import CODE
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -32,33 +31,22 @@ class NoticeViewModel(
     private val _departmentCode: MutableLiveData<Int> = MutableLiveData()
     val departmentCode: LiveData<Int> = _departmentCode
 
-    private val _universityNotices = MutableLiveData<List<Notice>>()
-    val universityNotices : LiveData<List<Notice>> get() = _universityNotices
+    private val _universityNotices = MutableLiveData<List<Notice>?>()
+    val universityNotices : LiveData<List<Notice>?> get() = _universityNotices
 
-    private val _facultyNoticeList: MutableLiveData<List<Notice>> = MutableLiveData()
-
-    private val _noticeList: MutableLiveData<List<Notice>> = MutableLiveData()
-    val noticeList: LiveData<List<Notice>> = _noticeList
+    private val _departmentNotices = MutableLiveData<List<Notice>?>()
+    val departmentNotices : LiveData<List<Notice>?> get() = _departmentNotices
 
     init {
         updateSelectedTabType(NoticeTabType.SCHOOL)
-    }
-
-    fun updateSelectedTabType(tabType: NoticeTabType) {
-        _selectedTab.value = Event(tabType)
-        setDepartmentCode()
-    }
-
-    private fun setDepartmentCode() {
-        if (selectedTab.value?.peekContent() == NoticeTabType.SCHOOL) {
-            _departmentCode.value = CODE.SCHOOL_CODE
-        } else {
-            _departmentCode.value = noticeRepository.getDepartmentCode()
-        }
         fetchUniversityNotices()
     }
 
-    private fun fetchUniversityNotices() {
+    private fun updateSelectedTabType(tabType: NoticeTabType) {
+        _selectedTab.value = Event(tabType)
+    }
+
+    fun fetchUniversityNotices() {
         val universityNotices = _universityNotices.value ?: emptyList()
 
         if (universityNotices.isEmpty()) {
@@ -84,7 +72,29 @@ class NoticeViewModel(
         }
     }
 
-    companion object {
-        private const val DEFAULT_VALUE = 0
+    fun fetchDepartmentNotices() {
+        val departmentNotices = _departmentNotices.value ?: emptyList()
+
+        if (departmentNotices.isEmpty()) {
+            _isLoading.postValue(true)
+
+            viewModelScope.launch {
+                when (val result = noticeRepository.fetchDepartmentNotices("컴퓨터소프트웨어공학과")) {
+                    is NetworkResult.Success -> {
+                        _departmentNotices.value = result.data
+                        _isError.postValue(false)
+                        _isLoading.postValue(false)
+                    }
+
+                    is NetworkResult.Error -> {
+                        handleError(result, _errorState)
+                        _isError.postValue(true)
+                        _isLoading.postValue(false)
+                    }
+                }
+            }
+        } else {
+            _departmentNotices.postValue(_departmentNotices.value)
+        }
     }
 }

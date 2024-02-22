@@ -1,18 +1,11 @@
 package com.dongyang.android.youdongknowme.ui.view.notice
 
-import android.annotation.SuppressLint
-import android.content.BroadcastReceiver
-import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
-import android.util.Log
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentNoticeBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
-import com.dongyang.android.youdongknowme.standard.util.ACTION
 import com.dongyang.android.youdongknowme.ui.adapter.NoticeAdapter
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailActivity
 import com.dongyang.android.youdongknowme.ui.view.util.EventObserver
@@ -26,12 +19,6 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     override val viewModel: NoticeViewModel by viewModel()
 
     private lateinit var adapter: NoticeAdapter
-
-    private val localBroadCast = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-//            viewModel.refreshNotices()
-        }
-    }
 
     override fun initStartView() {
         adapter = NoticeAdapter().apply { setItemClickListener(this@NoticeFragment) }
@@ -52,8 +39,16 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
             else dismissLoading()
         }
 
-        viewModel.universityNotices.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+        viewModel.universityNotices.observe(viewLifecycleOwner) { response ->
+            if (response != null) {
+                adapter.submitList(response)
+            }
+        }
+
+        viewModel.departmentNotices.observe(viewLifecycleOwner) { response ->
+            if (response != null) {
+                adapter.submitList(response)
+            }
         }
 
         viewModel.errorState.observe(viewLifecycleOwner, EventObserver { resId ->
@@ -74,9 +69,9 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
                 binding.noticeRvList.scrollToPosition(0)
 
                 if (tab.text == getString(R.string.notice_tab_university))
-                    viewModel.updateSelectedTabType(NoticeTabType.SCHOOL)
+                    viewModel.fetchUniversityNotices()
                 else
-                    viewModel.updateSelectedTabType(NoticeTabType.FACULTY)
+                    viewModel.fetchDepartmentNotices()
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
@@ -96,22 +91,10 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
             binding.noticeTab.getTabAt(1)?.select()
     }
 
-    override fun onResume() {
-        super.onResume()
-        val intentFilter = IntentFilter(ACTION.FCM_ACTION_NAME)
-        LocalBroadcastManager.getInstance(requireContext())
-            .registerReceiver(localBroadCast, intentFilter)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(localBroadCast)
-    }
-
     override fun itemClick(num: Int) {
         val departCode = viewModel.departmentCode.value
 
-        val intent = Intent(requireActivity(), DetailActivity::class.java)
+        val intent = Intent(requireContext(), DetailActivity::class.java)
         intent.putExtra("departCode", departCode)
         intent.putExtra("boardNum", num)
         startActivity(intent)

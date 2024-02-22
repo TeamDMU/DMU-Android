@@ -12,23 +12,22 @@ class NoticeRepository(
 ) {
     suspend fun fetchUniversityNotices(): NetworkResult<List<Notice>> {
         return try {
-            val universityNotice = RetrofitObject.getNetwork().create(NoticeService::class.java)
+            val universityNotices = RetrofitObject.getNetwork().create(NoticeService::class.java)
                 .getUniversityNotice(1, 20)
 
-            NetworkResult.Success(universityNotice)
+            NetworkResult.Success(universityNotices)
         } catch (exception: Exception) {
             val error = errorResponseHandler.getError(exception)
             NetworkResult.Error(error)
         }
     }
 
-    suspend fun fetchNotices(code: Int): NetworkResult<List<Notice>> {
+    suspend fun fetchDepartmentNotices(department: String): NetworkResult<List<Notice>> {
         return try {
-            val response =
-                RetrofitObject.getNetwork().create(NoticeService::class.java)
-                    .getUniversityNotice(1, 10)
-            NetworkResult.Success(response)
-        } catch (exception: Exception) {
+            val departmentNotices = RetrofitObject.getNetwork().create(NoticeService::class.java)
+                .getDepartmentNotice(department, 1, 20)
+            NetworkResult.Success(departmentNotices)
+        }catch (exception: Exception) {
             val error = errorResponseHandler.getError(exception)
             NetworkResult.Error(error)
         }

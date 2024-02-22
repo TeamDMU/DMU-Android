@@ -109,7 +109,7 @@
         </ScrollView>
 
         <ScrollView
-            bind_is_error="@{!vm.noticeList.empty}"
+            bind_is_error="@{!vm.universityNotices.empty}"
             bind_is_loading="@{vm.isLoading()}"
             android:layout_width="0dp"
             android:layout_height="0dp"
