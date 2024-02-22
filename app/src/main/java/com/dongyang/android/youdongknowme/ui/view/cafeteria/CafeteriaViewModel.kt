@@ -1,6 +1,5 @@
 package com.dongyang.android.youdongknowme.ui.view.cafeteria
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
