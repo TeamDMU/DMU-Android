@@ -1,6 +1,7 @@
 package com.dongyang.android.youdongknowme.ui.view.notice
 
 import CODE
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -31,7 +32,8 @@ class NoticeViewModel(
     private val _departmentCode: MutableLiveData<Int> = MutableLiveData()
     val departmentCode: LiveData<Int> = _departmentCode
 
-    private val _universityNoticeList: MutableLiveData<List<Notice>> = MutableLiveData()
+    private val _universityNotices = MutableLiveData<List<Notice>>()
+    val universityNotices : LiveData<List<Notice>> get() = _universityNotices
 
     private val _facultyNoticeList: MutableLiveData<List<Notice>> = MutableLiveData()
 
@@ -53,34 +55,19 @@ class NoticeViewModel(
         } else {
             _departmentCode.value = noticeRepository.getDepartmentCode()
         }
-        fetchNotices()
+        fetchUniversityNotices()
     }
 
-    private fun fetchNotices() {
-        // 비어있을 때만 새로 갱신
-        val universityNoticeList = _universityNoticeList.value ?: emptyList()
-        val facultyNoticeList = _facultyNoticeList.value ?: emptyList()
+    private fun fetchUniversityNotices() {
+        val universityNotices = _universityNotices.value ?: emptyList()
 
-        if (universityNoticeList.isEmpty() or facultyNoticeList.isEmpty()) {
+        if (universityNotices.isEmpty()) {
             _isLoading.postValue(true)
 
             viewModelScope.launch {
-                when (val result =
-                    noticeRepository.fetchNotices(departmentCode.value ?: DEFAULT_VALUE)) {
+                when (val result = noticeRepository.fetchUniversityNotices()) {
                     is NetworkResult.Success -> {
-                        val noticeList = result.data
-                        // 네트워크 호출을 줄이기 위해 학교, 학과별 리스트를 따로 보관
-                        when (departmentCode.value) {
-                            CODE.SCHOOL_CODE -> {
-                                _universityNoticeList.value = noticeList
-                                _noticeList.postValue(noticeList)
-                            }
-
-                            else -> {
-                                _facultyNoticeList.value = noticeList
-                                _noticeList.postValue(noticeList)
-                            }
-                        }
+                        _universityNotices.value = result.data
                         _isError.postValue(false)
                         _isLoading.postValue(false)
                     }
@@ -92,45 +79,8 @@ class NoticeViewModel(
                     }
                 }
             }
-        }
-        // 비어있지 않을 때는 저장 데이터 바로 사용
-        else {
-            if (departmentCode.value == CODE.SCHOOL_CODE)
-                _noticeList.postValue(_universityNoticeList.value)
-            else
-                _noticeList.postValue(_facultyNoticeList.value)
-        }
-    }
-
-    fun refreshNotices() {
-        _isLoading.postValue(true)
-        viewModelScope.launch {
-            when (val result = noticeRepository.fetchAllNotices()) {
-                is NetworkResult.Success -> {
-                    val noticeMap = result.data
-
-                    _universityNoticeList.value = noticeMap["school"]
-                    _facultyNoticeList.value = noticeMap["depart"]
-
-                    when (departmentCode.value) {
-                        CODE.SCHOOL_CODE -> {
-                            _noticeList.postValue(noticeMap["school"])
-                        }
-
-                        else -> {
-                            _noticeList.postValue(noticeMap["depart"])
-                        }
-                    }
-                    _isError.postValue(false)
-                    _isLoading.postValue(false)
-                }
-
-                is NetworkResult.Error -> {
-                    handleError(result, _errorState)
-                    _isError.postValue(true)
-                    _isLoading.postValue(false)
-                }
-            }
+        } else {
+            _universityNotices.postValue(_universityNotices.value)
         }
     }
 

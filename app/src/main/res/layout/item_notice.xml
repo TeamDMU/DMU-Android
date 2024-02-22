@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/item_notice_container"
@@ -16,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:paddingTop="20dp"
-            android:text="@{notice.title}"
+            tools:hint="2024학년도 1학기 수강신청 안내"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,8 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:maxLines="1"
+            tools:hint="2024.02.22"
             android:paddingBottom="20dp"
-            android:text="@{notice.date}"
             android:textColor="@color/gray400"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/item_notice_author"
@@ -44,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:maxLines="1"
-            android:text="@{notice.author}"
+            tools:hint="박재선"
             android:textColor="@color/gray400"
             app:layout_constraintStart_toEndOf="@id/item_notice_date"
             app:layout_constraintTop_toTopOf="@id/item_notice_date" />
@@ -57,11 +58,4 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <data>
-
-        <variable
-            name="notice"
-            type="com.dongyang.android.youdongknowme.data.remote.entity.Notice" />
-    </data>
 </layout>

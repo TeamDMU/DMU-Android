@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.util.Log
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,24 +29,22 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
 
     private val localBroadCast = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            viewModel.refreshNotices()
+//            viewModel.refreshNotices()
         }
     }
 
     override fun initStartView() {
-        binding.vm = viewModel
         adapter = NoticeAdapter().apply { setItemClickListener(this@NoticeFragment) }
         binding.noticeRvList.apply {
             this.adapter = this@NoticeFragment.adapter
             this.layoutManager = LinearLayoutManager(requireActivity())
             this.itemAnimator = null
             this.setHasFixedSize(true)
-            this.addItemDecoration(DividerItemDecoration(requireActivity(), 1))
+            this.addItemDecoration(DividerItemDecoration(requireContext(), 1))
         }
         setupTabLayout()
     }
 
-    @SuppressLint("UnsafeOptInUsageError")
     override fun initDataBinding() {
 
         viewModel.isLoading.observe(viewLifecycleOwner) {
@@ -53,7 +52,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
             else dismissLoading()
         }
 
-        viewModel.noticeList.observe(viewLifecycleOwner) {
+        viewModel.universityNotices.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
 
@@ -65,7 +64,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     override fun initAfterBinding() {
 
         binding.noticeSwipe.setOnRefreshListener {
-            viewModel.refreshNotices()
+//            viewModel.refreshNotices()
             binding.noticeSwipe.isRefreshing = false
         }
 
@@ -88,7 +87,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         })
 
         binding.noticeErrorContainer.refresh.setOnClickListener {
-            viewModel.refreshNotices()
+//            viewModel.refreshNotices()
         }
     }
 
