@@ -12,7 +12,6 @@ import com.dongyang.android.youdongknowme.ui.view.util.EventObserver
 import com.google.android.material.tabs.TabLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-/* 공지 사항 화면 */
 class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), NoticeClickListener {
 
     override val layoutResourceId: Int = R.layout.fragment_notice
@@ -59,7 +58,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     override fun initAfterBinding() {
 
         binding.noticeSwipe.setOnRefreshListener {
-//            viewModel.refreshNotices()
+            viewModel.refreshNotices()
             binding.noticeSwipe.isRefreshing = false
         }
 
@@ -68,10 +67,13 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
 
                 binding.noticeRvList.scrollToPosition(0)
 
-                if (tab.text == getString(R.string.notice_tab_university))
+                if (tab.text == getString(R.string.notice_tab_university)) {
+                    viewModel.updateSelectedTabType(NoticeTabType.SCHOOL)
                     viewModel.fetchUniversityNotices()
-                else
+                } else {
+                    viewModel.updateSelectedTabType(NoticeTabType.FACULTY)
                     viewModel.fetchDepartmentNotices()
+                }
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
@@ -82,7 +84,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         })
 
         binding.noticeErrorContainer.refresh.setOnClickListener {
-//            viewModel.refreshNotices()
+            viewModel.fetchUniversityNotices()
         }
     }
 
@@ -92,10 +94,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     }
 
     override fun itemClick(num: Int) {
-        val departCode = viewModel.departmentCode.value
-
         val intent = Intent(requireContext(), DetailActivity::class.java)
-        intent.putExtra("departCode", departCode)
         intent.putExtra("boardNum", num)
         startActivity(intent)
     }

@@ -1,5 +1,6 @@
 package com.dongyang.android.youdongknowme.ui.view.notice
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -37,7 +38,7 @@ class NoticeViewModel(
         fetchUniversityNotices()
     }
 
-    private fun updateSelectedTabType(tabType: NoticeTabType) {
+    fun updateSelectedTabType(tabType: NoticeTabType) {
         _selectedTab.value = Event(tabType)
     }
 
@@ -90,6 +91,47 @@ class NoticeViewModel(
             }
         } else {
             _departmentNotices.postValue(_departmentNotices.value)
+        }
+    }
+
+    fun refreshNotices() {
+        _isLoading.postValue(true)
+        _selectedTab.value?.peekContent()?.let { currentTab ->
+            when (currentTab) {
+                NoticeTabType.SCHOOL ->
+                    viewModelScope.launch {
+                        when (val result = noticeRepository.fetchUniversityNotices()) {
+                            is NetworkResult.Success -> {
+                                _universityNotices.value = result.data
+                                _isError.postValue(false)
+                                _isLoading.postValue(false)
+                            }
+
+                            is NetworkResult.Error -> {
+                                handleError(result, _errorState)
+                                _isError.postValue(true)
+                                _isLoading.postValue(false)
+                            }
+                        }
+                    }
+
+                NoticeTabType.FACULTY ->
+                    viewModelScope.launch {
+                        when (val result = noticeRepository.fetchDepartmentNotices("컴퓨터소프트웨어공학과")) {
+                            is NetworkResult.Success -> {
+                                _departmentNotices.value = result.data
+                                _isError.postValue(false)
+                                _isLoading.postValue(false)
+                            }
+
+                            is NetworkResult.Error -> {
+                                handleError(result, _errorState)
+                                _isError.postValue(true)
+                                _isLoading.postValue(false)
+                            }
+                        }
+                    }
+            }
         }
     }
 }
