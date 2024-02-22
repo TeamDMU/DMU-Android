@@ -47,7 +47,8 @@ class CafeteriaViewModel(
                 is NetworkResult.Success -> {
                     val menuList = result.data
                     _cafeteriaList.value = menuList
-                    updateSelectedDate(LocalDate.now())
+                    _selectedDate.value = LocalDate.now()
+                    updateMenuList(selectedDate.toString())
                     _isError.postValue(false)
                     _isLoading.postValue(false)
                 }
@@ -58,11 +59,6 @@ class CafeteriaViewModel(
                 }
             }
         }
-    }
-
-    fun updateSelectedDate(selectedDate: LocalDate) {
-        _selectedDate.value = selectedDate
-        updateMenuList(selectedDate.toString())
     }
 
     private fun updateMenuList(selectedDate: String) {
