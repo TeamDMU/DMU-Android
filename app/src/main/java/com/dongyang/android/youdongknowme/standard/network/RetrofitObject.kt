@@ -1,6 +1,5 @@
 package com.dongyang.android.youdongknowme.standard.network
 
-import com.dongyang.android.youdongknowme.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -13,7 +12,7 @@ object RetrofitObject {
 
     fun getNetwork(): Retrofit {
         val baseUrl = "http://43.200.194.238:8080/"
-        
+
         val baseInterceptor = Interceptor { chain ->
             val request = chain.request().newBuilder()
             val originalHttpUrl = chain.request().url
