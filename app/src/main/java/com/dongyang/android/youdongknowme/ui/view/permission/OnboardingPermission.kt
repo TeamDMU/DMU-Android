@@ -30,7 +30,6 @@ class OnboardingPermission : BaseActivity<ActivityOnboardingPermissionBinding, S
 
     override fun initDataBinding() = Unit
 
-    @RequiresApi(Build.VERSION_CODES.P)
     override fun initAfterBinding() {
         binding.btnPermissionComplete.setOnClickListener {
             val intent = Intent(this@OnboardingPermission, MainActivity::class.java)
@@ -41,13 +40,17 @@ class OnboardingPermission : BaseActivity<ActivityOnboardingPermissionBinding, S
         binding.switchPermission.setOnCheckedChangeListener { compoundButton, _ ->
             if (compoundButton.isChecked) {
                 viewModel.setIsAccessDepartAlarm(true)
-                binding.mvSwitchPermission.outlineAmbientShadowColor = getColor(R.color.blue300)
-                binding.mvSwitchPermission.outlineSpotShadowColor = getColor(R.color.blue300)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    binding.mvSwitchPermission.outlineAmbientShadowColor = getColor(R.color.blue300)
+                    binding.mvSwitchPermission.outlineSpotShadowColor = getColor(R.color.blue300)
+                }
                 binding.switchPermission.setTextColor(getColor(R.color.blue300))
             } else {
                 viewModel.setIsAccessDepartAlarm(false)
-                binding.mvSwitchPermission.outlineAmbientShadowColor = getColor(R.color.gray300)
-                binding.mvSwitchPermission.outlineSpotShadowColor = getColor(R.color.gray300)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    binding.mvSwitchPermission.outlineAmbientShadowColor = getColor(R.color.gray300)
+                    binding.mvSwitchPermission.outlineSpotShadowColor = getColor(R.color.gray300)
+                }
                 binding.switchPermission.setTextColor(getColor(R.color.gray300))
             }
         }
