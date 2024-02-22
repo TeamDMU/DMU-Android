@@ -1,5 +1,6 @@
 package com.dongyang.android.youdongknowme.ui.view.schedule
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -13,6 +14,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import kotlinx.coroutines.launch
+import java.time.Year
 
 
 /* 학사 일정 뷰모델 */
@@ -31,6 +33,7 @@ class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : Ba
     val scheduleList: LiveData<List<Schedule>> = _scheduleList
 
     private val _pickYear = MutableLiveData<Int>()
+    private val pickYear = _pickYear
 
     private val _pickMonth = MutableLiveData<Int>()
     val pickMonth: LiveData<Int> = _pickMonth
@@ -49,7 +52,7 @@ class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : Ba
                     is NetworkResult.Success -> {
                         val scheduleList = result.data
                         // 선택한 연월 조건에 따라 리스트 출력
-                        _scheduleList.postValue(scheduleList.filter { it.month == pickMonth.value && it.year == _pickYear.value.toString() })
+                        _scheduleList.postValue(scheduleList.filter { it.month == pickMonth.value && it.year == pickYear.value })
                         scheduleRepository.setLocalSchedules(Gson().toJson(scheduleList))
                         _isError.postValue(false)
                         _isLoading.postValue(false)
@@ -70,7 +73,7 @@ class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : Ba
                     object : TypeToken<List<Schedule>>() {}.type
                 ).filter {
                     // 선택한 연월 조건에 따라 리스트 출력
-                    it.month == pickMonth.value && it.year == _pickYear.value.toString()
+                    it.month == pickMonth.value && it.year == pickYear.value
                 }
 
             _isError.postValue(false)

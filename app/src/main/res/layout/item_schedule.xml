@@ -14,7 +14,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="@{schedule.date, default = `05.01 (일) ~ 06.21(화)`}"
+            android:text="@{schedule.date[0], default = `05.01 (일) ~ 06.21(화)`}"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/item_schedule_contents"

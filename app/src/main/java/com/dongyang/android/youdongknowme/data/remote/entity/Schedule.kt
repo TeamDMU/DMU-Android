@@ -1,8 +1,14 @@
 package com.dongyang.android.youdongknowme.data.remote.entity
 
+import com.google.gson.annotations.SerializedName
+
 data class Schedule(
-    val year: String,
+    @SerializedName("year")
+    val year: Int,
+    @SerializedName("month")
     val month: Int,
-    val date: String,
+    @SerializedName("date")
+    val date: List<String>,
+    @SerializedName("content")
     val content: String
 )

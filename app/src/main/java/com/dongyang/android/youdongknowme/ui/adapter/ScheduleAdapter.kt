@@ -23,7 +23,7 @@ class ScheduleAdapter : RecyclerView.Adapter<ScheduleAdapter.ViewHolder>() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun submitList(item : List<Schedule>) {
+    fun submitList(item: List<Schedule>) {
         this.item.clear()
         this.item.addAll(item)
         notifyDataSetChanged()
