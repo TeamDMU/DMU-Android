@@ -13,7 +13,6 @@ object RetrofitObject {
 
     fun getNetwork(): Retrofit {
         val baseUrl = "http://43.200.194.238:8080/"
-
         val baseInterceptor = Interceptor { chain ->
             val request = chain.request().newBuilder()
             val originalHttpUrl = chain.request().url
