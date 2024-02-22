@@ -63,7 +63,6 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     }
 
     override fun initAfterBinding() {
-        viewModel.getUnVisitedAlarmCount()
 
         binding.noticeSwipe.setOnRefreshListener {
             viewModel.refreshNotices()

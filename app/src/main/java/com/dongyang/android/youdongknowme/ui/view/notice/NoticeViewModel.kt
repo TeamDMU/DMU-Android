@@ -31,9 +31,6 @@ class NoticeViewModel(
     private val _departmentCode: MutableLiveData<Int> = MutableLiveData()
     val departmentCode: LiveData<Int> = _departmentCode
 
-    private val _isSearchMode: MutableLiveData<Boolean> = MutableLiveData()
-    val isSearchMode: LiveData<Boolean> = _isSearchMode
-
     private val _universityNoticeList: MutableLiveData<List<Notice>> = MutableLiveData()
 
     private val _facultyNoticeList: MutableLiveData<List<Notice>> = MutableLiveData()
@@ -41,23 +38,17 @@ class NoticeViewModel(
     private val _noticeList: MutableLiveData<List<Notice>> = MutableLiveData()
     val noticeList: LiveData<List<Notice>> = _noticeList
 
-    private val _unVisitedAlarmCount: MutableLiveData<Int> = MutableLiveData()
-    val unVisitedAlarmCount: LiveData<Int> = _unVisitedAlarmCount
-
     init {
         updateSelectedTabType(NoticeTabType.SCHOOL)
-        updateSearchMode(false)
     }
 
-    // 선택한 탭에 대한 데이터 저장
     fun updateSelectedTabType(tabType: NoticeTabType) {
         _selectedTab.value = Event(tabType)
         setDepartmentCode()
     }
 
-    // 선택 학부에 따라 보여지는 공지사항이 달라지게 설정
     private fun setDepartmentCode() {
-        if (selectedTab.value?.peekContent() == NoticeTabType.SCHOOL) { // 대학 공지사항 탭 클릭시 대학 공지사항이 보이게 설정
+        if (selectedTab.value?.peekContent() == NoticeTabType.SCHOOL) {
             _departmentCode.value = CODE.SCHOOL_CODE
         } else {
             _departmentCode.value = noticeRepository.getDepartmentCode()
@@ -65,7 +56,6 @@ class NoticeViewModel(
         fetchNotices()
     }
 
-    // 공지사항 리스트 호출
     private fun fetchNotices() {
         // 비어있을 때만 새로 갱신
         val universityNoticeList = _universityNoticeList.value ?: emptyList()
@@ -85,6 +75,7 @@ class NoticeViewModel(
                                 _universityNoticeList.value = noticeList
                                 _noticeList.postValue(noticeList)
                             }
+
                             else -> {
                                 _facultyNoticeList.value = noticeList
                                 _noticeList.postValue(noticeList)
@@ -93,6 +84,7 @@ class NoticeViewModel(
                         _isError.postValue(false)
                         _isLoading.postValue(false)
                     }
+
                     is NetworkResult.Error -> {
                         handleError(result, _errorState)
                         _isError.postValue(true)
@@ -124,6 +116,7 @@ class NoticeViewModel(
                         CODE.SCHOOL_CODE -> {
                             _noticeList.postValue(noticeMap["school"])
                         }
+
                         else -> {
                             _noticeList.postValue(noticeMap["depart"])
                         }
@@ -131,48 +124,12 @@ class NoticeViewModel(
                     _isError.postValue(false)
                     _isLoading.postValue(false)
                 }
+
                 is NetworkResult.Error -> {
                     handleError(result, _errorState)
                     _isError.postValue(true)
                     _isLoading.postValue(false)
                 }
-            }
-        }
-    }
-
-    // 검색어가 포함된 공지사항 리스트 호출
-    fun fetchSearchNotices(keyword: String) {
-        _isLoading.postValue(true)
-
-        viewModelScope.launch {
-            when (val result = noticeRepository.fetchSearchNotices(
-                departmentCode.value ?: DEFAULT_VALUE,
-                keyword
-            )) {
-                is NetworkResult.Success -> {
-                    val searchList = result.data
-                    _noticeList.postValue(searchList)
-                    _isError.postValue(false)
-                    _isLoading.postValue(false)
-                }
-                is NetworkResult.Error -> {
-                    handleError(result, _errorState)
-                    _isError.postValue(true)
-                    _isLoading.postValue(false)
-                }
-            }
-        }
-    }
-
-    // 검색 모드 활성화 상태 체크
-    fun updateSearchMode(value: Boolean) {
-        _isSearchMode.postValue(value)
-    }
-
-    fun getUnVisitedAlarmCount() {
-        viewModelScope.launch {
-            noticeRepository.getUnVisitedAlarmCount().collect { count ->
-                _unVisitedAlarmCount.postValue(count)
             }
         }
     }

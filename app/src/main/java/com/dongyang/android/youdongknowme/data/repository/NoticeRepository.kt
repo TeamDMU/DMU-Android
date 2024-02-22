@@ -1,7 +1,5 @@
 package com.dongyang.android.youdongknowme.data.repository
 
-import CODE
-import android.util.Log
 import com.dongyang.android.youdongknowme.data.local.SharedPreference
 import com.dongyang.android.youdongknowme.data.local.dao.AlarmDao
 import com.dongyang.android.youdongknowme.data.remote.entity.Notice
@@ -17,13 +15,13 @@ class NoticeRepository(
 ) {
     suspend fun fetchAllNotices(): NetworkResult<Map<String, List<Notice>>> {
         return try {
+            val universityNotice = RetrofitObject.getNetwork().create(NoticeService::class.java)
+                .getUniversityNotice(1, 20)
             val departNotices = RetrofitObject.getNetwork().create(NoticeService::class.java)
-                .getUniversityNotice(1, 20)
-            val schoolNotices = RetrofitObject.getNetwork().create(NoticeService::class.java)
-                .getUniversityNotice(1, 20)
+                .getDepartmentNotice("기계공학과", 1, 20)
 
             val result: Map<String, List<Notice>> =
-                mapOf("school" to schoolNotices, "depart" to departNotices)
+                mapOf("school" to universityNotice, "depart" to departNotices)
 
             NetworkResult.Success(result)
         } catch (exception: Exception) {
@@ -35,27 +33,14 @@ class NoticeRepository(
     suspend fun fetchNotices(code: Int): NetworkResult<List<Notice>> {
         return try {
             val response =
-                RetrofitObject.getNetwork().create(NoticeService::class.java).getUniversityNotice(1, 10)
-            NetworkResult.Success(response)
-        } catch (exception: Exception) {
-            Log.d("notice", exception.toString())
-            val error = errorResponseHandler.getError(exception)
-            NetworkResult.Error(error)
-        }
-    }
-
-    suspend fun fetchSearchNotices(code: Int, keyword: String): NetworkResult<List<Notice>> {
-        return try {
-            val response = RetrofitObject.getNetwork().create(NoticeService::class.java)
-                .getSearchList(code, keyword)
+                RetrofitObject.getNetwork().create(NoticeService::class.java)
+                    .getUniversityNotice(1, 10)
             NetworkResult.Success(response)
         } catch (exception: Exception) {
             val error = errorResponseHandler.getError(exception)
             NetworkResult.Error(error)
         }
     }
-
-    fun getUnVisitedAlarmCount(): Flow<Int> = alarmDao.getUnVisitedAlarmCount()
 
     fun getDepartmentCode(): Int = SharedPreference.getCode()
 }
