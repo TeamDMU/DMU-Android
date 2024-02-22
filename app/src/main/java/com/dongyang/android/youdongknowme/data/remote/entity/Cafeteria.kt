@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Cafeteria(
     @SerializedName("date")
-    var date: String,
+    val date: String,
     @SerializedName("menus")
-    var menu: List<String>
+    val menu: List<String>
 )
