@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dongyang.android.youdongknowme.data.remote.entity.NoticeFileUrl
 import com.dongyang.android.youdongknowme.databinding.ItemFileBinding
-import com.dongyang.android.youdongknowme.ui.view.detail.DetailClickListener
 
 class FileAdapter : RecyclerView.Adapter<FileAdapter.ViewHolder>() {
 
