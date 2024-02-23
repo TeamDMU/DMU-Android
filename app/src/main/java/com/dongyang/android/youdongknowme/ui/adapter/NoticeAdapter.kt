@@ -11,10 +11,6 @@ import com.dongyang.android.youdongknowme.ui.viewholder.NoticeViewHolder
 class NoticeAdapter(private val clickListener: (url: String) -> Unit) :
     RecyclerView.Adapter<NoticeViewHolder>() {
 
-    init {
-        setHasStableIds(true)
-    }
-
     private val noticeList = arrayListOf<Notice>()
 
     @SuppressLint("NotifyDataSetChanged")
