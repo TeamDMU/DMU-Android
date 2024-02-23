@@ -2,11 +2,10 @@ package com.dongyang.android.youdongknowme.ui.view.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.dongyang.android.youdongknowme.data.repository.DetailRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.ui.view.util.Event
 
-class DetailViewModel(private val detailRepository: DetailRepository) : BaseViewModel() {
+class DetailViewModel: BaseViewModel() {
 
     private val _errorState: MutableLiveData<Event<Int>> = MutableLiveData()
     val errorState: LiveData<Event<Int>> = _errorState
