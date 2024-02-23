@@ -16,7 +16,6 @@ import android.provider.Settings
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityDetailBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
@@ -50,7 +49,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
     }
 
     override fun initDataBinding() {
-        binding.vm = viewModel
+        binding.viewModel = viewModel
 
         viewModel.isLoading.observe(this) {
             if (it) showLoading()
@@ -76,7 +75,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
         viewModel.fetchNoticeDetail()
 
         // 뒤로가기 버튼 클릭 시
-        binding.detailToolbar.toolbarExit.setOnClickListener {
+        binding.detailToolbar.btnToolbarExit.setOnClickListener {
             finish()
         }
 
@@ -99,7 +98,10 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             when {
                 // 사용자가 권한 부여를 완료한 경우
-                ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED
                 -> {
                     setDownloadManager(fileName, fileUri)
                 }
@@ -111,7 +113,11 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
                 // 사용자에게 최초로 권한을 요청하는 경우
                 else
                 -> {
-                    ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 100)
+                    ActivityCompat.requestPermissions(
+                        this,
+                        arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                        100
+                    )
                 }
             }
         }
@@ -156,7 +162,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
                         if (cursor.moveToFirst()) {
                             val columnIndex = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS)
                             val status = cursor.getInt(columnIndex)
-                            when(status) {
+                            when (status) {
                                 DownloadManager.STATUS_FAILED -> {
                                     Toast.makeText(
                                         context,
@@ -164,6 +170,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), D
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
+
                                 DownloadManager.STATUS_SUCCESSFUL -> {
                                     Toast.makeText(
                                         context,

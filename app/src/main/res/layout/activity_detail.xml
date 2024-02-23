@@ -20,8 +20,8 @@
             app:title="@{@string/detail_title}" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            bind_is_error="@{vm.title == null}"
-            bind_is_loading="@{vm.isLoading()}"
+            bind_is_error="@{viewModel.title == null}"
+            bind_is_loading="@{viewModel.isLoading()}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="68dp"
@@ -62,7 +62,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="@{vm.title}"
+                android:text="@{viewModel.title}"
                 android:textColor="@color/gray600"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -75,7 +75,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@{vm.date}"
+                android:text="@{viewModel.date}"
                 android:textColor="@color/gray400"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintEnd_toStartOf="@id/detail_writer_date_divide"
@@ -104,7 +104,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="@{vm.writer}"
+                android:text="@{viewModel.writer}"
                 android:textColor="@color/gray400"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -172,8 +172,8 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
-            bind_is_error="@{!vm.isError}"
-            bind_is_loading="@{vm.isLoading()}"
+            bind_is_error="@{!viewModel.isError}"
+            bind_is_loading="@{viewModel.isLoading()}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -193,7 +193,7 @@
     <data>
 
         <variable
-            name="vm"
+            name="viewModel"
             type="com.dongyang.android.youdongknowme.ui.view.detail.DetailViewModel" />
     </data>
 </layout>

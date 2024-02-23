@@ -25,6 +25,8 @@
             android:layout_height="60dp"
             android:layout_gravity="bottom|center_horizontal"
             android:elevation="30dp"
+            app:itemTextAppearanceActive="@style/BottomNavigationStyle"
+            app:itemTextAppearanceInactive="@style/BottomNavigationStyle"
             app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
