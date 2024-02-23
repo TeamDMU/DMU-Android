@@ -1,18 +1,33 @@
 package com.dongyang.android.youdongknowme.ui.view.detail
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
+import android.webkit.WebChromeClient
+import android.webkit.WebViewClient
 import com.dongyang.android.youdongknowme.R
-import com.dongyang.android.youdongknowme.databinding.ActivityDepartBinding
+import com.dongyang.android.youdongknowme.databinding.ActivityDetailBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.view.util.EventObserver
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-/* 공지사항 글 상세 화면 */
-class DetailActivity : BaseActivity<ActivityDepartBinding, DetailViewModel>() {
+class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
 
     override val layoutResourceId: Int = R.layout.activity_detail
     override val viewModel: DetailViewModel by viewModel()
 
-    override fun initStartView() = Unit
+    @SuppressLint("SetJavaScriptEnabled")
+    override fun initStartView() {
+        val url = intent.getStringExtra(URL_KEYWORD)
+        with(binding.detailWvNotice) {
+            settings.javaScriptEnabled = true
+
+            webViewClient = WebViewClient()
+            webChromeClient = WebChromeClient()
+
+            loadUrl(url.toString())
+        }
+    }
 
     override fun initDataBinding() {
         viewModel.isLoading.observe(this) {
@@ -26,4 +41,23 @@ class DetailActivity : BaseActivity<ActivityDepartBinding, DetailViewModel>() {
     }
 
     override fun initAfterBinding() = Unit
+
+    override fun onBackPressed() {
+        if(binding.detailWvNotice.canGoBack()){
+            binding.detailWvNotice.goBack()
+        }
+        else {
+            super.onBackPressed()
+        }
+    }
+
+    companion object {
+
+        const val URL_KEYWORD = "url"
+        fun createIntent(context: Context, url: String): Intent {
+            return Intent(context, DetailActivity::class.java).apply {
+                putExtra(URL_KEYWORD, url)
+            }
+        }
+    }
 }
