@@ -77,9 +77,10 @@ class NoticeViewModel(
         _isLoading.postValue(true)
 
         viewModelScope.launch {
-            when (val result =
-                noticeRepository.fetchDepartmentNotices("컴퓨터소프트웨어공학과", departmentNoticeCurrentPage)) {
-                    is NetworkResult.Success -> {
+            when (val result = noticeRepository.fetchDepartmentNotices(
+                "컴퓨터소프트웨어공학과", departmentNoticeCurrentPage
+            )) {
+                is NetworkResult.Success -> {
                     val updatedNotices = _departmentNotices.value.orEmpty() + result.data
                     _departmentNotices.postValue(updatedNotices)
                     _isError.postValue(false)
@@ -87,7 +88,7 @@ class NoticeViewModel(
                     departmentNoticeCurrentPage++
                 }
 
-                    is NetworkResult.Error -> {
+                is NetworkResult.Error -> {
                     handleError(result, _errorState)
                     _isError.postValue(true)
                     _isLoading.postValue(false)
@@ -100,40 +101,40 @@ class NoticeViewModel(
         _isLoading.postValue(true)
         _selectedTab.value?.peekContent()?.let { currentTab ->
             when (currentTab) {
-                NoticeTabType.SCHOOL ->
-                    viewModelScope.launch {
-                        when (val result =
-                            noticeRepository.fetchUniversityNotices(DEFAULT_REFRESH_PAGE)) {
-                            is NetworkResult.Success -> {
-                                _universityNotices.value = result.data
-                                _isError.postValue(false)
-                                _isLoading.postValue(false)
-                            }
+                NoticeTabType.SCHOOL -> viewModelScope.launch {
+                    when (val result =
+                        noticeRepository.fetchUniversityNotices(DEFAULT_REFRESH_PAGE)) {
+                        is NetworkResult.Success -> {
+                            _universityNotices.value = result.data
+                            _isError.postValue(false)
+                            _isLoading.postValue(false)
+                        }
 
-                            is NetworkResult.Error -> {
-                                handleError(result, _errorState)
-                                _isError.postValue(true)
-                                _isLoading.postValue(false)
-                            }
+                        is NetworkResult.Error -> {
+                            handleError(result, _errorState)
+                            _isError.postValue(true)
+                            _isLoading.postValue(false)
                         }
                     }
+                }
 
-                NoticeTabType.FACULTY ->
-                    viewModelScope.launch {
-                        when (val result = noticeRepository.fetchDepartmentNotices("컴퓨터소프트웨어공학과", DEFAULT_REFRESH_PAGE)) {
-                            is NetworkResult.Success -> {
-                                _departmentNotices.value = result.data
-                                _isError.postValue(false)
-                                _isLoading.postValue(false)
-                            }
+                NoticeTabType.FACULTY -> viewModelScope.launch {
+                    when (val result = noticeRepository.fetchDepartmentNotices(
+                        "컴퓨터소프트웨어공학과", DEFAULT_REFRESH_PAGE
+                    )) {
+                        is NetworkResult.Success -> {
+                            _departmentNotices.value = result.data
+                            _isError.postValue(false)
+                            _isLoading.postValue(false)
+                        }
 
-                            is NetworkResult.Error -> {
-                                handleError(result, _errorState)
-                                _isError.postValue(true)
-                                _isLoading.postValue(false)
-                            }
+                        is NetworkResult.Error -> {
+                            handleError(result, _errorState)
+                            _isError.postValue(true)
+                            _isLoading.postValue(false)
                         }
                     }
+                }
             }
         }
     }
