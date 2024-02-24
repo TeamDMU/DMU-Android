@@ -1,39 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/item_schedule_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="12dp">
+        android:padding="18dp">
 
         <TextView
-            android:id="@+id/item_schedule_date"
-            style="@style/PretendardRegular12"
+            android:id="@+id/tv_item_schedule_date"
+            style="@style/PretendardSemiBold14"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@{schedule.date[0], default = `05.01 (일) ~ 06.21(화)`}"
-            android:textColor="@color/black"
+            android:textColor="@color/gray500"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/item_schedule_contents"
-            app:layout_constraintHorizontal_weight="0.4"
+            app:layout_constraintEnd_toStartOf="@id/tv_item_schedule_contents"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:hint="01.01(월)" />
 
         <TextView
-            android:id="@+id/item_schedule_contents"
-            style="@style/PretendardRegular12"
+            android:id="@+id/tv_item_schedule_contents"
+            style="@style/PretendardSemiBold14"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@{schedule.content, default = `근로자의 날`}"
-            android:textSize="13sp"
+            android:textColor="@color/gray500"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_weight="0.6"
-            app:layout_constraintStart_toEndOf="@id/item_schedule_date"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@id/tv_item_schedule_date"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:hint="신정" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -41,7 +39,7 @@
 
         <variable
             name="schedule"
-            type="com.dongyang.android.youdongknowme.data.remote.entity.Schedule" />
+            type="com.dongyang.android.youdongknowme.data.remote.entity.ScheduleEntry" />
     </data>
 
 </layout>
