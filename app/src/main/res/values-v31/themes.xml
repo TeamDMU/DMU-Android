@@ -2,7 +2,7 @@
 <resources>
     <style name="Theme.YouDongKnowMe.Splash" parent="Theme.YouDongKnowMe">
         <item name="android:windowSplashScreenBackground">@color/white</item>
-        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_splash</item>
         <item name="android:windowSplashScreenAnimationDuration">0</item>
     </style>
 </resources>
