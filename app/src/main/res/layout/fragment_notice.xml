@@ -66,7 +66,7 @@
                     android:id="@+id/notice_tab_faculty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/notice_tab_faculty" />
+                    android:text="@string/notice_tab_department" />
 
             </com.google.android.material.tabs.TabLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
