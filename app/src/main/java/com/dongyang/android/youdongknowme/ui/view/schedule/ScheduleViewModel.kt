@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.dongyang.android.youdongknowme.data.local.SharedPreference.NO_SCHEDULE
 import com.dongyang.android.youdongknowme.data.remote.entity.Schedule
+import com.dongyang.android.youdongknowme.data.remote.entity.ScheduleEntry
 import com.dongyang.android.youdongknowme.data.repository.ScheduleRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.standard.network.NetworkResult
@@ -14,6 +15,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import kotlinx.coroutines.launch
+import okhttp3.internal.notify
 import java.time.Year
 
 
@@ -29,16 +31,17 @@ class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : Ba
     private val _isError: MutableLiveData<Boolean> = MutableLiveData()
     val isError: LiveData<Boolean> = _isError
 
-    private val _scheduleList = MutableLiveData<List<Schedule>>()
-    val scheduleList: LiveData<List<Schedule>> = _scheduleList
+    private val _scheduleList = MutableLiveData<List<ScheduleEntry>>()
+    val scheduleList: LiveData<List<ScheduleEntry>> = _scheduleList
 
     private val _pickYear = MutableLiveData<Int>()
-    private val pickYear = _pickYear
+    val pickYear: LiveData<Int> = _pickYear
 
     private val _pickMonth = MutableLiveData<Int>()
     val pickMonth: LiveData<Int> = _pickMonth
 
     fun setPickedDate(date: CalendarDay) {
+        Log.d("scheTest", "대기")
         _pickYear.value = date.year
         _pickMonth.value = date.month
     }
@@ -51,13 +54,24 @@ class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : Ba
                 when (val result = scheduleRepository.fetchSchedules()) {
                     is NetworkResult.Success -> {
                         val scheduleList = result.data
+
                         // 선택한 연월 조건에 따라 리스트 출력
-                        _scheduleList.postValue(scheduleList.filter { it.month == pickMonth.value && it.year == pickYear.value })
+                        _scheduleList.postValue(scheduleList.filter { schedule ->
+                            schedule.year == pickYear.value && schedule.yearSchedule.any { yearSchedule ->
+                                yearSchedule.month == pickMonth.value
+                            }
+                        }.flatMap { schedule ->
+                            schedule.yearSchedule.find { yearSchedule ->
+                                yearSchedule.month == pickMonth.value
+                            }?.scheduleEntries.orEmpty()
+                        })
+
                         scheduleRepository.setLocalSchedules(Gson().toJson(scheduleList))
                         _isError.postValue(false)
                         _isLoading.postValue(false)
                     }
                     is NetworkResult.Error -> {
+                        Log.d("scheTest", "실패")
                         handleError(result, _errorState)
                         _isError.postValue(true)
                         _isLoading.postValue(false)
@@ -71,9 +85,14 @@ class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : Ba
                 Gson().fromJson<List<Schedule>>(
                     localSchedules,
                     object : TypeToken<List<Schedule>>() {}.type
-                ).filter {
-                    // 선택한 연월 조건에 따라 리스트 출력
-                    it.month == pickMonth.value && it.year == pickYear.value
+                ).filter { schedule ->
+                    schedule.year == pickYear.value && schedule.yearSchedule.any { yearSchedule ->
+                        yearSchedule.month == pickMonth.value
+                    }
+                }.flatMap { schedule ->
+                    schedule.yearSchedule.find { yearSchedule ->
+                        yearSchedule.month == pickMonth.value
+                    }?.scheduleEntries.orEmpty()
                 }
 
             _isError.postValue(false)

@@ -5,10 +5,20 @@ import com.google.gson.annotations.SerializedName
 data class Schedule(
     @SerializedName("year")
     val year: Int,
+    @SerializedName("yearSchedule")
+    val yearSchedule: List<YearSchedule>,
+)
+
+data class YearSchedule(
     @SerializedName("month")
     val month: Int,
-    @SerializedName("date")
-    val date: List<String>,
+    @SerializedName("scheduleEntries")
+    val scheduleEntries: List<ScheduleEntry>
+)
+
+data class ScheduleEntry(
     @SerializedName("content")
-    val content: String
+    val content: String,
+    @SerializedName("date")
+    val date: List<String>
 )
