@@ -48,10 +48,11 @@ class NoticeAdapter : RecyclerView.Adapter<NoticeAdapter.ViewHolder>() {
 
     class ViewHolder(private val binding: ItemNoticeBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
         fun bind(item: Notice) {
-            binding.itemNoticeTitle.text = item.title
-            binding.itemNoticeDate.text = item.date
-            binding.itemNoticeAuthor.text = item.author
+            binding.tvNoticeTitle.text = item.title
+            binding.tvNoticeDate.text = item.date
+            binding.tvNoticeAuthor.text = item.author
         }
     }
 }

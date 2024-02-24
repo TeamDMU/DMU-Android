@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/item_notice_container"
+        android:id="@+id/cl_notice_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
         android:backgroundTint="@color/white">
 
         <TextView
-            android:id="@+id/item_notice_title"
+            android:id="@+id/tv_notice_title"
             style="@style/PretendardMedium16"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/item_notice_date"
+            android:id="@+id/tv_notice_date"
             style="@style/PretendardRegular12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,12 +34,12 @@
             android:paddingBottom="20dp"
             android:textColor="@color/gray400"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/item_notice_author"
-            app:layout_constraintStart_toStartOf="@id/item_notice_title"
-            app:layout_constraintTop_toBottomOf="@id/item_notice_title" />
+            app:layout_constraintEnd_toStartOf="@id/tv_notice_author"
+            app:layout_constraintStart_toStartOf="@id/tv_notice_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_notice_title" />
 
         <TextView
-            android:id="@+id/item_notice_author"
+            android:id="@+id/tv_notice_author"
             style="@style/PretendardRegular12"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -47,8 +47,8 @@
             android:maxLines="1"
             tools:hint="박재선"
             android:textColor="@color/gray400"
-            app:layout_constraintStart_toEndOf="@id/item_notice_date"
-            app:layout_constraintTop_toTopOf="@id/item_notice_date" />
+            app:layout_constraintStart_toEndOf="@id/tv_notice_date"
+            app:layout_constraintTop_toTopOf="@id/tv_notice_date" />
 
         <View
             android:layout_width="0dp"
