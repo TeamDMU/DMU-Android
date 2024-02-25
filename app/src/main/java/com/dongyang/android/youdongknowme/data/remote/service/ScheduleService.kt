@@ -5,5 +5,5 @@ import retrofit2.http.GET
 
 interface ScheduleService {
     @GET("api/v1/dmu/scheduler")
-    suspend fun getScheduleList() : ArrayList<Schedule>
+    suspend fun getScheduleList(): ArrayList<Schedule>
 }

@@ -70,6 +70,7 @@ class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : Ba
                         _isError.postValue(false)
                         _isLoading.postValue(false)
                     }
+
                     is NetworkResult.Error -> {
                         Log.d("scheTest", "실패")
                         handleError(result, _errorState)

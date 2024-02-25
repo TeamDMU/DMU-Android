@@ -51,6 +51,7 @@ class CafeteriaViewModel(
                     _isError.postValue(false)
                     _isLoading.postValue(false)
                 }
+
                 is NetworkResult.Error -> {
                     handleError(result, _errorState)
                     _isError.postValue(true)
