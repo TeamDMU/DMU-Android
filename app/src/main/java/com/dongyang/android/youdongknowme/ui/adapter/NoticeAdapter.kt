@@ -15,18 +15,10 @@ class NoticeAdapter : RecyclerView.Adapter<NoticeAdapter.ViewHolder>() {
     }
 
     private var noticeList = arrayListOf<Notice>()
-    private var itemClickListener : NoticeClickListener? = null
-
-    inner class ViewHolder(private val binding: ItemNoticeBinding)
-        : RecyclerView.ViewHolder(binding.root) {
-            fun bind(item : Notice) {
-                binding.notice = item
-                binding.itemClickListener = itemClickListener
-            }
-    }
+    private var itemClickListener: NoticeClickListener? = null
 
     @SuppressLint("NotifyDataSetChanged")
-    fun submitList(item : List<Notice>) {
+    fun submitList(item: List<Notice>) {
         noticeList.clear()
         noticeList.addAll(item)
         notifyDataSetChanged()
@@ -50,7 +42,17 @@ class NoticeAdapter : RecyclerView.Adapter<NoticeAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = noticeList.size
 
-    fun setItemClickListener(listener : NoticeClickListener) {
+    fun setItemClickListener(listener: NoticeClickListener) {
         itemClickListener = listener
+    }
+
+    class ViewHolder(private val binding: ItemNoticeBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(item: Notice) {
+            binding.tvNoticeTitle.text = item.title
+            binding.tvNoticeDate.text = item.date
+            binding.tvNoticeAuthor.text = item.author
+        }
     }
 }
