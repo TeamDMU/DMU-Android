@@ -1,6 +1,5 @@
 package com.dongyang.android.youdongknowme.ui.view.schedule
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -15,9 +14,6 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import kotlinx.coroutines.launch
-import okhttp3.internal.notify
-import java.time.Year
-
 
 /* 학사 일정 뷰모델 */
 class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : BaseViewModel() {
@@ -41,7 +37,6 @@ class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : Ba
     val pickMonth: LiveData<Int> = _pickMonth
 
     fun setPickedDate(date: CalendarDay) {
-        Log.d("scheTest", "대기")
         _pickYear.value = date.year
         _pickMonth.value = date.month
     }
@@ -72,7 +67,6 @@ class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : Ba
                     }
 
                     is NetworkResult.Error -> {
-                        Log.d("scheTest", "실패")
                         handleError(result, _errorState)
                         _isError.postValue(true)
                         _isLoading.postValue(false)
