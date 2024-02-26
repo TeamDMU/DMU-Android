@@ -34,12 +34,4 @@
             tools:hint="신정" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <data>
-
-        <variable
-            name="schedule"
-            type="com.dongyang.android.youdongknowme.data.remote.entity.ScheduleEntry" />
-    </data>
-
 </layout>
