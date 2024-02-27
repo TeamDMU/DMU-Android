@@ -1,6 +1,5 @@
 package com.dongyang.android.youdongknowme.ui.view.notice
 
-import android.content.Intent
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +12,7 @@ import com.dongyang.android.youdongknowme.ui.view.util.EventObserver
 import com.google.android.material.tabs.TabLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), NoticeClickListener {
+class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>() {
 
     override val layoutResourceId: Int = R.layout.fragment_notice
     override val viewModel: NoticeViewModel by viewModel()
@@ -21,7 +20,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     private lateinit var adapter: NoticeAdapter
 
     override fun initStartView() {
-        adapter = NoticeAdapter().apply { setItemClickListener(this@NoticeFragment) }
+        adapter = NoticeAdapter { url -> navigateToDetail(url) }
         binding.noticeRvList.apply {
             this.adapter = this@NoticeFragment.adapter
             this.layoutManager = LinearLayoutManager(requireActivity())
@@ -116,9 +115,8 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
         })
     }
 
-    override fun itemClick(num: Int) {
-        val intent = Intent(requireContext(), DetailActivity::class.java)
-        intent.putExtra("boardNum", num)
+    private fun navigateToDetail(url: String) {
+        val intent = DetailActivity.newIntent(requireContext(), url)
         startActivity(intent)
     }
 }

@@ -6,16 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dongyang.android.youdongknowme.data.remote.entity.Notice
 import com.dongyang.android.youdongknowme.databinding.ItemNoticeBinding
-import com.dongyang.android.youdongknowme.ui.view.notice.NoticeClickListener
+import com.dongyang.android.youdongknowme.ui.viewholder.NoticeViewHolder
 
-class NoticeAdapter : RecyclerView.Adapter<NoticeAdapter.ViewHolder>() {
+class NoticeAdapter(private val clickListener: (url: String) -> Unit) :
+    RecyclerView.Adapter<NoticeViewHolder>() {
 
-    init {
-        setHasStableIds(true)
-    }
-
-    private var noticeList = arrayListOf<Notice>()
-    private var itemClickListener: NoticeClickListener? = null
+    private val noticeList = arrayListOf<Notice>()
 
     @SuppressLint("NotifyDataSetChanged")
     fun submitList(item: List<Notice>) {
@@ -24,35 +20,17 @@ class NoticeAdapter : RecyclerView.Adapter<NoticeAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoticeViewHolder {
+        return NoticeViewHolder(
             ItemNoticeBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
-            )
+            ), clickListener
         )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: NoticeViewHolder, position: Int) {
         holder.bind(noticeList[position])
     }
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
-
     override fun getItemCount(): Int = noticeList.size
-
-    fun setItemClickListener(listener: NoticeClickListener) {
-        itemClickListener = listener
-    }
-
-    class ViewHolder(private val binding: ItemNoticeBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(item: Notice) {
-            binding.tvNoticeTitle.text = item.title
-            binding.tvNoticeDate.text = item.date
-            binding.tvNoticeAuthor.text = item.author
-        }
-    }
 }
