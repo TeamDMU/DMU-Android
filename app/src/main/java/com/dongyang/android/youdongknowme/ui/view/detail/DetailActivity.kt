@@ -18,7 +18,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun initStartView() {
-        val url = intent.getStringExtra(URL_KEYWORD)
+        val url = intent.getStringExtra(KEY_URL)
         with(binding.detailWvNotice) {
             settings.javaScriptEnabled = true
 
@@ -52,11 +52,11 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
     }
 
     companion object {
+        const val KEY_URL = "url"
 
-        const val URL_KEYWORD = "url"
-        fun createIntent(context: Context, url: String): Intent {
+        fun newIntent(context: Context, url: String): Intent {
             return Intent(context, DetailActivity::class.java).apply {
-                putExtra(URL_KEYWORD, url)
+                putExtra(KEY_URL, url)
             }
         }
     }

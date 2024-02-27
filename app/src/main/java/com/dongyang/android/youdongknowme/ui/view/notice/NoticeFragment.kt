@@ -116,7 +116,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>() {
     }
 
     private fun navigateToDetail(url: String) {
-        val intent = DetailActivity.createIntent(requireContext(), url)
+        val intent = DetailActivity.newIntent(requireContext(), url)
         startActivity(intent)
     }
 }
