@@ -43,10 +43,9 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
     override fun initAfterBinding() = Unit
 
     override fun onBackPressed() {
-        if(binding.detailWvNotice.canGoBack()){
+        if (binding.detailWvNotice.canGoBack()) {
             binding.detailWvNotice.goBack()
-        }
-        else {
+        } else {
             super.onBackPressed()
         }
     }
