@@ -18,6 +18,7 @@ class ScheduleAdapter : RecyclerView.Adapter<ScheduleAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ItemScheduleBinding)
         : RecyclerView.ViewHolder(binding.root) {
+            
         fun bind(item: ScheduleEntry) {
             binding.tvItemScheduleDate.text = if(item.date[0] == item.date[1]) item.date[0] else "${item.date[0]} ~ \n${item.date[1]}"
             binding.tvItemScheduleContents.text = item.content
