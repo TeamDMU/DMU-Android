@@ -6,9 +6,14 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentSearchBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
+import com.dongyang.android.youdongknowme.ui.adapter.NoticeAdapter
+import com.dongyang.android.youdongknowme.ui.view.detail.DetailActivity
+import com.dongyang.android.youdongknowme.ui.view.util.EventObserver
 import com.dongyang.android.youdongknowme.ui.view.util.hideKeyboard
 import com.dongyang.android.youdongknowme.ui.view.util.showKeyboard
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -19,12 +24,22 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
     override val layoutResourceId: Int = R.layout.fragment_search
     override val viewModel: SearchViewModel by viewModel()
 
+    private lateinit var adapter: NoticeAdapter
+
     override fun initStartView() {
         setupUI()
         setTextClearButtonClickListener()
     }
 
     private fun setupUI() {
+        adapter = NoticeAdapter { url -> navigateToDetail(url) }
+        binding.rvSearchResult.apply {
+            adapter = this@SearchFragment.adapter
+            layoutManager = LinearLayoutManager(requireActivity())
+            itemAnimator = null
+            setHasFixedSize(true)
+            addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+        }
         showKeyboardOnEditTextFocus()
         setupHideKeyboardOnOutsideTouch()
         setTextClearButtonVisibility()
@@ -83,13 +98,27 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
         }
     }
 
+    private fun navigateToDetail(url: String) {
+        val intent = DetailActivity.newIntent(requireContext(), url)
+        startActivity(intent)
+    }
+
     override fun initDataBinding() {
-        viewModel.searchNotices.observe(viewLifecycleOwner) {response ->
-            Log.d("test123", response.toString())
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            if (it) showLoading()
+            else dismissLoading()
         }
 
+        viewModel.searchNotices.observe(viewLifecycleOwner) { response ->
+            if (response != null) {
+                adapter.submitList(response)
+            }
+        }
+
+        viewModel.errorState.observe(viewLifecycleOwner, EventObserver { resId ->
+            showToast(getString(resId))
+        })
     }
 
-    override fun initAfterBinding() {
-    }
+    override fun initAfterBinding() = Unit
 }
