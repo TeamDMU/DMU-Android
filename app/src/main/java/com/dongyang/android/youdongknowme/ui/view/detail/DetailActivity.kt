@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import android.os.Environment
 import android.webkit.CookieManager
 import android.webkit.WebChromeClient
@@ -39,7 +38,8 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
             setDownloadListener { url, userAgent, contentDisposition, mimetype, contentLength ->
                 try {
                     val request = DownloadManager.Request(Uri.parse(url))
-                    val downloadManager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+                    val downloadManager =
+                        getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
 
                     val fileName = URLDecoder.decode(contentDisposition, "UTF-8")
                         .replace("attachment; filename=", "")
@@ -72,7 +72,11 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
                     )
 
                     downloadManager.enqueue(request)
-                    Toast.makeText(applicationContext, R.string.detail_download_description, Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        applicationContext,
+                        R.string.detail_download_description,
+                        Toast.LENGTH_LONG
+                    ).show()
                 } catch (e: Exception) {
                     if (ContextCompat.checkSelfPermission(
                             applicationContext,
@@ -85,7 +89,11 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
                             1004
                         )
                     } else {
-                        Toast.makeText(baseContext, R.string.detail_download_permission, Toast.LENGTH_LONG)
+                        Toast.makeText(
+                            baseContext,
+                            R.string.detail_download_permission,
+                            Toast.LENGTH_LONG
+                        )
                             .show()
                     }
                 }
