@@ -32,6 +32,17 @@ class NoticeRepository(
         }
     }
 
+    suspend fun fetchSearchNotices(keyword: String, page: Int): NetworkResult<List<Notice>> {
+        return try {
+            val searchNotices = RetrofitObject.getNetwork().create(NoticeService::class.java)
+                .getSearchNotice(keyword, page, DEFAULT_SIZE)
+            NetworkResult.Success(searchNotices)
+        } catch (exception: Exception) {
+            val error = errorResponseHandler.getError(exception)
+            NetworkResult.Error(error)
+        }
+    }
+
     companion object {
         private const val DEFAULT_SIZE = 20
     }

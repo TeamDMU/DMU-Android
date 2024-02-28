@@ -19,5 +19,12 @@ interface NoticeService {
         @Query("page") page: Int,
         @Query("size") size: Int
     ): List<Notice>
+
+    @GET("api/v1/dmu/departmentNotice/{keyword}")
+    suspend fun getSearchNotice(
+        @Path("keyword") keyword: String,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): List<Notice>
 }
 
