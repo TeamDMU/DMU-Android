@@ -116,7 +116,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
     }
 
     companion object {
-        const val KEY_URL = "url"
+        private const val KEY_URL = "url"
 
         fun newIntent(context: Context, url: String): Intent {
             return Intent(context, DetailActivity::class.java).apply {
