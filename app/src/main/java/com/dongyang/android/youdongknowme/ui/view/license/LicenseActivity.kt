@@ -33,7 +33,7 @@ class LicenseActivity : BaseActivity<ActivityLicenseBinding, LicenseViewModel>()
     override fun initAfterBinding() {
         adapter.submitList(OpenSourceEntity.openSourceList)
 
-        binding.licenseToolbar.toolbarExit.setOnClickListener { finish() }
+        binding.licenseToolbar.btnToolbarExit.setOnClickListener { finish() }
     }
 
     override fun itemClick(openSourceEntity: OpenSourceEntity) {
