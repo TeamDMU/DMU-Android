@@ -6,7 +6,7 @@ data class Schedule(
     @SerializedName("year")
     val year: Int,
     @SerializedName("yearSchedule")
-    val yearSchedule: List<YearSchedule>,
+    val yearSchedules: List<YearSchedule>,
 )
 
 data class YearSchedule(
@@ -18,7 +18,7 @@ data class YearSchedule(
 
 data class ScheduleEntry(
     @SerializedName("content")
-    val content: String,
+    val contents: String,
     @SerializedName("date")
-    val date: List<String>
+    val dates: List<String>
 )

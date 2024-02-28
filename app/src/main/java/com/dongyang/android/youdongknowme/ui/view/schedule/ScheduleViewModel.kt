@@ -52,11 +52,11 @@ class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : Ba
 
                         // 선택한 연월 조건에 따라 리스트 출력
                         _scheduleList.postValue(scheduleList.filter { schedule ->
-                            schedule.year == pickYear.value && schedule.yearSchedule.any { yearSchedule ->
+                            schedule.year == pickYear.value && schedule.yearSchedules.any { yearSchedule ->
                                 yearSchedule.month == pickMonth.value
                             }
                         }.flatMap { schedule ->
-                            schedule.yearSchedule.find { yearSchedule ->
+                            schedule.yearSchedules.find { yearSchedule ->
                                 yearSchedule.month == pickMonth.value
                             }?.scheduleEntries.orEmpty()
                         })
@@ -81,11 +81,11 @@ class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : Ba
                     localSchedules,
                     object : TypeToken<List<Schedule>>() {}.type
                 ).filter { schedule ->
-                    schedule.year == pickYear.value && schedule.yearSchedule.any { yearSchedule ->
+                    schedule.year == pickYear.value && schedule.yearSchedules.any { yearSchedule ->
                         yearSchedule.month == pickMonth.value
                     }
                 }.flatMap { schedule ->
-                    schedule.yearSchedule.find { yearSchedule ->
+                    schedule.yearSchedules.find { yearSchedule ->
                         yearSchedule.month == pickMonth.value
                     }?.scheduleEntries.orEmpty()
                 }
