@@ -91,6 +91,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
         binding.etSearchBar.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 viewModel.fetchSearchNotices()
+                requireContext().hideKeyboard(binding.root)
                 true
             } else {
                 false
