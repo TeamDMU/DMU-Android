@@ -54,7 +54,7 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
             finish()
         }
 
-        binding.toolbarKeyword.toolbarExit.setOnClickListener { finish() }
+        binding.toolbarKeyword.btnToolbarExit.setOnClickListener { finish() }
     }
 
     private fun setCheckChipChange(vararg chipGroups: ChipGroup) {
