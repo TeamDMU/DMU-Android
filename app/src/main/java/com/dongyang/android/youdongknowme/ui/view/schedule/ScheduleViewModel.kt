@@ -51,15 +51,8 @@ class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : Ba
                         val scheduleList = result.data
 
                         // 선택한 연월 조건에 따라 리스트 출력
-                        _scheduleList.postValue(scheduleList.filter { schedule ->
-                            schedule.year == pickYear.value && schedule.yearSchedules.any { yearSchedule ->
-                                yearSchedule.month == pickMonth.value
-                            }
-                        }.flatMap { schedule ->
-                            schedule.yearSchedules.find { yearSchedule ->
-                                yearSchedule.month == pickMonth.value
-                            }?.scheduleEntries.orEmpty()
-                        })
+
+                        _scheduleList.postValue(getSchedulesForPickDate(scheduleList))
 
                         scheduleRepository.setLocalSchedules(Gson().toJson(scheduleList))
                         _isError.postValue(false)
@@ -76,22 +69,26 @@ class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : Ba
         } else {
             // 저장한 데이터가 있으면 로컬에서 곧바로 데이터를 받아와 화면에 출력
             val localSchedules = scheduleRepository.getLocalSchedules()
-            val scheduleList =
-                Gson().fromJson<List<Schedule>>(
+            val scheduleList = getSchedulesForPickDate(
+                Gson().fromJson(
                     localSchedules,
                     object : TypeToken<List<Schedule>>() {}.type
-                ).filter { schedule ->
-                    schedule.year == pickYear.value && schedule.yearSchedules.any { yearSchedule ->
-                        yearSchedule.month == pickMonth.value
-                    }
-                }.flatMap { schedule ->
-                    schedule.yearSchedules.find { yearSchedule ->
-                        yearSchedule.month == pickMonth.value
-                    }?.scheduleEntries.orEmpty()
-                }
-
+                )
+            )
             _isError.postValue(false)
             _scheduleList.postValue(scheduleList)
         }
+    }
+
+    private fun getSchedulesForPickDate(list: List<Schedule>): List<ScheduleEntry> {
+        return list
+            .filter { schedule ->
+                schedule.year == pickYear.value &&
+                        schedule.yearSchedules.any { it.month == pickMonth.value }
+            }.flatMap { schedule ->
+                schedule.yearSchedules
+                    .find { it.month == pickMonth.value }
+                    ?.scheduleEntries.orEmpty()
+            }
     }
 }
