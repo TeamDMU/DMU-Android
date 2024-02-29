@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
+import com.dongyang.android.youdongknowme.databinding.ActivityDepartBinding
 import com.dongyang.android.youdongknowme.databinding.ActivityOnboardingDepartBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.adapter.OnboardingDepartAdapter
