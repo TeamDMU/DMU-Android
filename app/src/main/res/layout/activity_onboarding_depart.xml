@@ -66,7 +66,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
-                android:background="@android:color/transparent"
+                android:background="@null"
                 android:drawableLeft="@drawable/ic_search"
                 android:drawablePadding="16dp"
                 android:drawableTint="@color/gray300"
