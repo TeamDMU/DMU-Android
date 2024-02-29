@@ -18,8 +18,6 @@ class DepartActivity : BaseActivity<ActivityDepartBinding, DepartViewModel>(), D
     private lateinit var items: ArrayList<String>
 
     override fun initStartView() {
-        binding.vm = viewModel
-
         items =
             resources.getStringArray(R.array.dmu_department_list).toCollection(ArrayList<String>())
         items.sort()

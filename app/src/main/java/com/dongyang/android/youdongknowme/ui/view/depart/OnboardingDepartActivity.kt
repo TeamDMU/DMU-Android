@@ -19,7 +19,6 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
     private lateinit var items: ArrayList<String>
 
     override fun initStartView() {
-        binding.vm = viewModel
         viewModel.checkFirstLaunch()
 
         items =

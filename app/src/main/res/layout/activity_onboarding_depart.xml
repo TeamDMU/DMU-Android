@@ -116,12 +116,4 @@
             app:layout_constraintTop_toBottomOf="@id/rv_onboarding_depart" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <data>
-
-        <variable
-            name="vm"
-            type="com.dongyang.android.youdongknowme.ui.view.depart.DepartViewModel" />
-    </data>
-
 </layout>
