@@ -3,7 +3,6 @@ package com.dongyang.android.youdongknowme.ui.view.search
 import android.annotation.SuppressLint
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -18,7 +17,6 @@ import com.dongyang.android.youdongknowme.ui.view.util.hideKeyboard
 import com.dongyang.android.youdongknowme.ui.view.util.showKeyboard
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
 
     override val layoutResourceId: Int = R.layout.fragment_search
@@ -31,6 +29,25 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
         setTextClearButtonClickListener()
     }
 
+    override fun initDataBinding() {
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            if (it) showLoading()
+            else dismissLoading()
+        }
+
+        viewModel.searchNotices.observe(viewLifecycleOwner) { response ->
+            if (response != null) {
+                adapter.submitList(response)
+            }
+        }
+
+        viewModel.errorState.observe(viewLifecycleOwner, EventObserver { resId ->
+            showToast(getString(resId))
+        })
+    }
+
+    override fun initAfterBinding() = Unit
+
     private fun setupUI() {
         adapter = NoticeAdapter { url -> navigateToDetail(url) }
         binding.rvSearchResult.apply {
@@ -38,7 +55,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
             layoutManager = LinearLayoutManager(requireActivity())
             itemAnimator = null
             setHasFixedSize(true)
-            addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+            addItemDecoration(
+                DividerItemDecoration(
+                    requireContext(),
+                    DividerItemDecoration.VERTICAL
+                )
+            )
         }
         showKeyboardOnEditTextFocus()
         setupHideKeyboardOnOutsideTouch()
@@ -103,23 +125,4 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
         val intent = DetailActivity.newIntent(requireContext(), url)
         startActivity(intent)
     }
-
-    override fun initDataBinding() {
-        viewModel.isLoading.observe(viewLifecycleOwner) {
-            if (it) showLoading()
-            else dismissLoading()
-        }
-
-        viewModel.searchNotices.observe(viewLifecycleOwner) { response ->
-            if (response != null) {
-                adapter.submitList(response)
-            }
-        }
-
-        viewModel.errorState.observe(viewLifecycleOwner, EventObserver { resId ->
-            showToast(getString(resId))
-        })
-    }
-
-    override fun initAfterBinding() = Unit
 }
