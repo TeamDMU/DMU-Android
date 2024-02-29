@@ -16,7 +16,7 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
 
     override val layoutResourceId: Int = R.layout.activity_onboarding_depart
     override val viewModel: DepartViewModel by viewModel()
-    lateinit var adapter: DepartAdapter
+    private lateinit var adapter: DepartAdapter
     private lateinit var items: ArrayList<String>
 
     override fun initStartView() {
