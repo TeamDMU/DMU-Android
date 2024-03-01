@@ -20,9 +20,10 @@ interface NoticeService {
         @Query("size") size: Int
     ): List<Notice>
 
-    @GET("api/v1/dmu/notice/{keyword}")
+    @GET("api/v1/dmu/notice/{searchWord}")
     suspend fun getSearchNotice(
-        @Path("keyword") keyword: String,
+        @Path("searchWord") searchWord: String,
+        @Path("department") department: String,
         @Query("page") page: Int,
         @Query("size") size: Int
     ): List<Notice>

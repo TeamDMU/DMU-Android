@@ -1,5 +1,6 @@
 package com.dongyang.android.youdongknowme.ui.view.search
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -61,6 +62,7 @@ class SearchViewModel(
                     handleError(result, _errorState)
                     _isError.postValue(true)
                     _isLoading.postValue(false)
+                    Log.d("result", result.errorType.toString())
                 }
             }
         }
