@@ -6,7 +6,7 @@ import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityOnboardingDepartBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.adapter.DepartAdapter
-import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordActivity
+import com.dongyang.android.youdongknowme.ui.view.keyword.OnboardingKeywordActivity
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -62,7 +62,7 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
         return binding.btnOnboardingDepartNext.setOnClickListener {
             viewModel.setDepartment(items[viewModel.selectDepartPosition.value ?: 0])
             if (viewModel.isFirstLaunch.value == true) {
-                val intent = Intent(this, KeywordActivity::class.java)
+                val intent = Intent(this, OnboardingKeywordActivity::class.java)
                 startActivity(intent)
                 finish()
             } else {
