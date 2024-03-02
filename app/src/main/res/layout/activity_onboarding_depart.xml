@@ -16,6 +16,7 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="60dp"
             android:text="@string/department_title_main"
+            android:textColor="@color/gray500"
             app:layout_constraintBottom_toTopOf="@id/tv_onboarding_depart_title_sub"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:text="@string/department_title_sub"
+            android:textColor="@color/gray500"
             app:layout_constraintBottom_toTopOf="@id/onboarding_depart_step"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +76,8 @@
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:paddingStart="8dp"
-                android:paddingEnd="8dp" />
+                android:paddingEnd="8dp"
+                android:textColorHint="@color/gray300" />
 
             <ImageButton
                 android:id="@+id/ib_onboarding_depart_search_clear"
@@ -97,7 +100,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/linearLayout_onboarding_depart_search"
             tools:listitem="@layout/item_depart" />
-        
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_onboarding_depart_next"
             style="@style/PretendardRegular20"
