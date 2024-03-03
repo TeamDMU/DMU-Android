@@ -37,7 +37,7 @@ class NoticeRepository(
     ): NetworkResult<List<Notice>> {
         return try {
             val searchNotices = RetrofitObject.getNetwork().create(NoticeService::class.java)
-                .getSearchNotice(searchWord, "컴퓨터소프트웨어공학", page, DEFAULT_SIZE)
+                .getSearchNotice(searchWord, "컴퓨터소프트웨어공학과", page, DEFAULT_SIZE)
             NetworkResult.Success(searchNotices)
         } catch (exception: Exception) {
             val error = errorResponseHandler.getError(exception)
