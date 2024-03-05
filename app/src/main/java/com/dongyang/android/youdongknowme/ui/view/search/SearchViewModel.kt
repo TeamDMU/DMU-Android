@@ -29,8 +29,8 @@ class SearchViewModel(
     private val _searchClearVisibility: MutableLiveData<Boolean> = MutableLiveData()
     val searchClearVisibility: LiveData<Boolean> get() = _searchClearVisibility
 
-    private val _searchNotices: MutableLiveData<List<Notice>?> = MutableLiveData()
-    val searchNotices: LiveData<List<Notice>?> = _searchNotices
+    private val _searchNotices: MutableLiveData<List<Notice>> = MutableLiveData()
+    val searchNotices: LiveData<List<Notice>> = _searchNotices
 
     private var searchNoticeCurrentPage = 1
 

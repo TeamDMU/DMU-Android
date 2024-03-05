@@ -35,9 +35,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
             else dismissLoading()
         }
 
-        viewModel.searchNotices.observe(viewLifecycleOwner) { response ->
-            if (response != null) {
-                adapter.submitList(response)
+        viewModel.searchNotices.observe(viewLifecycleOwner) { searchNotices ->
+            if (searchNotices.isNotEmpty()) {
+                adapter.submitList(searchNotices)
             }
         }
 
