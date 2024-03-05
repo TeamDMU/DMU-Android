@@ -65,7 +65,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
         showKeyboardOnEditTextFocus()
         setupHideKeyboardOnOutsideTouch()
         setTextClearButtonVisibility()
-        onDoneBtnClickListener()
+        onSearchBtnClickListener()
     }
 
     private fun showKeyboardOnEditTextFocus() {
@@ -108,7 +108,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
         }
     }
 
-    private fun onDoneBtnClickListener() {
+    private fun onSearchBtnClickListener() {
         binding.etSearchBar.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 viewModel.fetchSearchNotices()
