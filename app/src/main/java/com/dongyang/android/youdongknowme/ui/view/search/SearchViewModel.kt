@@ -1,6 +1,5 @@
 package com.dongyang.android.youdongknowme.ui.view.search
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -25,6 +24,7 @@ class SearchViewModel(
     val isError: LiveData<Boolean> = _isError
 
     private val _searchContent: MutableLiveData<String> = MutableLiveData()
+    val searchContent: LiveData<String> = _searchContent
 
     private val _searchClearVisibility: MutableLiveData<Boolean> = MutableLiveData()
     val searchClearVisibility: LiveData<Boolean> get() = _searchClearVisibility
@@ -51,18 +51,16 @@ class SearchViewModel(
                     searchNoticeCurrentPage
                 )) {
                 is NetworkResult.Success -> {
-                    val updatedNotices = _searchNotices.value.orEmpty() + result.data
+                    val updatedNotices = result.data
                     _searchNotices.postValue(updatedNotices)
                     _isError.postValue(false)
                     _isLoading.postValue(false)
-                    searchNoticeCurrentPage++
                 }
 
                 is NetworkResult.Error -> {
                     handleError(result, _errorState)
                     _isError.postValue(true)
                     _isLoading.postValue(false)
-                    Log.d("result", result.errorType.toString())
                 }
             }
         }
