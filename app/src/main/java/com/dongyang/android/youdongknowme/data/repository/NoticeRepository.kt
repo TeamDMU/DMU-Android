@@ -21,7 +21,10 @@ class NoticeRepository(
         }
     }
 
-    suspend fun fetchDepartmentNotices(department: String, page: Int): NetworkResult<List<Notice>> {
+    suspend fun fetchDepartmentNotices(
+        department: String,
+        page: Int)
+    : NetworkResult<List<Notice>> {
         return try {
             val departmentNotices = RetrofitObject.getNetwork().create(NoticeService::class.java)
                 .getDepartmentNotice(department, page, DEFAULT_SIZE)
@@ -33,7 +36,8 @@ class NoticeRepository(
     }
 
     suspend fun fetchSearchNotices(
-        searchWord: String, page: Int
+        searchWord: String,
+        page: Int
     ): NetworkResult<List<Notice>> {
         return try {
             val searchNotices = RetrofitObject.getNetwork().create(NoticeService::class.java)
