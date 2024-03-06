@@ -5,23 +5,24 @@ import androidx.lifecycle.Observer
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
 import com.dongyang.android.youdongknowme.databinding.ActivityKeywordBinding
+import com.dongyang.android.youdongknowme.databinding.ActivityOnboardingKeywordBinding
 import com.dongyang.android.youdongknowme.function.setSpanText
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
-import com.dongyang.android.youdongknowme.ui.view.permission.OnboardingPermission
+import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>() {
+class OnboardingKeywordActivity : BaseActivity<ActivityOnboardingKeywordBinding, KeywordViewModel>() {
 
-    override val layoutResourceId: Int = R.layout.activity_keyword
+    override val layoutResourceId: Int = R.layout.activity_onboarding_keyword
     override val viewModel: KeywordViewModel by viewModel()
 
     override fun initStartView() {
         binding.vm = viewModel
 
         // 부분 색상 지정
-        setSpanText(binding.tvKeywordTitleMain,startIdx = 0, endIdx = 3)
+        setSpanText(baseContext, binding.tvOnboardingKeywordTitleMain,startIdx = 0, endIdx = 3)
     }
 
     override fun initDataBinding() {
@@ -31,11 +32,11 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
                 viewModel.setAllKeywords(t?.filter { it.isSubscribe }?.map { it.name }
                     ?: listOf(""))
                 setCheckChipChange(
-                    binding.chipGroupKeywordClass,
-                    binding.chipGroupKeywordMoney,
-                    binding.chipGroupKeywordAcademic,
-                    binding.chipGroupKeywordEmployment,
-                    binding.chipGroupKeywordEtc
+                    binding.chipGroupOnboardingKeywordClass,
+                    binding.chipGroupOnboardingKeywordMoney,
+                    binding.chipGroupOnboardingKeywordAcademic,
+                    binding.chipGroupOnboardingKeywordEmployment,
+                    binding.chipGroupOnboardingKeywordEtc
                 )
                 viewModel.localKeywordList.removeObserver(this)
             }
@@ -47,17 +48,15 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
         viewModel.getLocalKeywordList()
 
         // TODO :: 안드로이드 데이터베이스에 유저별 설정한 키워드 저장 및 파이어베이스 키워드 구독 설정
-        binding.btnKeywordComplete.setOnClickListener {
+        binding.btnOnboardingKeywordNext.setOnClickListener {
             viewModel.subscribeCheckedKeyword()
             if (viewModel.isFirstLaunch.value == true) {
                 viewModel.setFirstLaunch(false)
-                val intent = Intent(this@KeywordActivity, OnboardingPermission::class.java)
+                val intent = Intent(this@OnboardingKeywordActivity, MainActivity::class.java)
                 startActivity(intent)
             }
             finish()
         }
-
-        binding.toolbarKeyword.btnToolbarExit.setOnClickListener { finish() }
     }
 
     private fun setCheckChipChange(vararg chipGroups: ChipGroup) {

@@ -31,6 +31,9 @@
             android:name=".ui.view.keyword.KeywordActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.view.keyword.OnboardingKeywordActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.view.depart.DepartActivity"
             android:exported="false" />
         <activity
@@ -48,7 +51,9 @@
             android:exported="false" />
         <activity
             android:name=".ui.view.main.MainActivity"
-            android:exported="false" /> <!-- Firebase Cloud Messaging -->
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+        <!-- Firebase Cloud Messaging -->
         <service
             android:name=".service.FCMService"
             android:exported="false">

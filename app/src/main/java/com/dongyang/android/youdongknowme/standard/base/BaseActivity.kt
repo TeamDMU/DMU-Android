@@ -31,6 +31,7 @@ abstract class BaseActivity<T : ViewDataBinding, R : BaseViewModel> : AppCompatA
         initDataBinding()
         initAfterBinding()
     }
+
     protected fun setSpanText(spanTextView: TextView, startIdx: Int, endIdx: Int){
         SpannableStringBuilder(spanTextView.text).apply {
             setSpan(
@@ -42,6 +43,7 @@ abstract class BaseActivity<T : ViewDataBinding, R : BaseViewModel> : AppCompatA
             spanTextView.text = this
         }
     }
+
     protected fun showToast(message: String) {
         applicationContext.toast(message)
     }
