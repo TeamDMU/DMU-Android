@@ -104,7 +104,6 @@
     <string name="loading_text">처리중</string>
 
     <!-- alarm -->
-    <string name="alarm_title">알림함</string>
     <string name="alarm_title_main">키워드 알림 설정으로</string>
     <string name="alarm_title_sub">중요한 공지사항을 놓치지 마세요!</string>
     <string name="alarm_complete">알림 설정 및 시작하기</string>
