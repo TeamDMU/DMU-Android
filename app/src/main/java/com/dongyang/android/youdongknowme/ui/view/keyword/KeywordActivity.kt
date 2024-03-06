@@ -16,13 +16,8 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
     override val layoutResourceId: Int = R.layout.activity_keyword
     override val viewModel: KeywordViewModel by viewModel()
 
-    override fun initStartView() {
-        binding.vm = viewModel
-
-        // 부분 색상 지정
-        setSpanText(binding.tvKeywordTitleMain,startIdx = 0, endIdx = 3)
-    }
-
+    override fun initStartView() = Unit
+    
     override fun initDataBinding() {
         // 효율을 위해 단 한번만 옵저빙하여 이미 구독중인 항목을 선택 처리
         viewModel.localKeywordList.observe(this, object : Observer<List<KeywordEntity>> {
