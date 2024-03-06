@@ -4,9 +4,7 @@ import android.content.Intent
 import androidx.lifecycle.Observer
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
-import com.dongyang.android.youdongknowme.databinding.ActivityKeywordBinding
 import com.dongyang.android.youdongknowme.databinding.ActivityOnboardingKeywordBinding
-import com.dongyang.android.youdongknowme.function.setSpanText
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import com.google.android.material.chip.Chip
@@ -22,7 +20,7 @@ class OnboardingKeywordActivity : BaseActivity<ActivityOnboardingKeywordBinding,
         binding.vm = viewModel
 
         // 부분 색상 지정
-        setSpanText(baseContext, binding.tvOnboardingKeywordTitleMain,startIdx = 0, endIdx = 3)
+        setSpanText(binding.tvOnboardingKeywordTitleMain,startIdx = 0, endIdx = 3)
     }
 
     override fun initDataBinding() {
