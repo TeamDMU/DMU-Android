@@ -1,6 +1,7 @@
 package com.dongyang.android.youdongknowme.ui.adapter
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,7 @@ class DepartAdapter : RecyclerView.Adapter<DepartAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ItemDepartBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("UseCompatLoadingForColorStateLists")
         fun bind(item: String, position: Int) {
             binding.itemDepartName.text = item
             binding.itemClickListener = itemClickListener
@@ -27,21 +29,22 @@ class DepartAdapter : RecyclerView.Adapter<DepartAdapter.ViewHolder>() {
 
             // 선택한 포지션이 맞을 때 강조 표시
             if (currentPosition == position) {
-                binding.itemDepartCheck.visibility = View.VISIBLE
+                binding.itemDepartContainer.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(binding.root.context, R.color.blue300))
                 binding.itemDepartName.setTextColor(
                     ContextCompat.getColor(
                         binding.root.context,
-                        R.color.sub
+                        R.color.white
                     )
                 )
             } else {
-                binding.itemDepartCheck.visibility = View.INVISIBLE
+                binding.itemDepartContainer.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(binding.root.context, R.color.white))
                 binding.itemDepartName.setTextColor(
                     ContextCompat.getColor(
                         binding.root.context,
-                        R.color.black
+                        R.color.gray400
                     )
                 )
+
             }
         }
     }

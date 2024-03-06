@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.dongyang.android.youdongknowme.databinding.ActivitySplashBinding
 import com.dongyang.android.youdongknowme.ui.view.depart.DepartActivity
+import com.dongyang.android.youdongknowme.ui.view.depart.OnboardingDepartActivity
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -39,7 +40,7 @@ class SplashActivity : AppCompatActivity() {
             delay(SPLASH_TIME_MILLIS)
 
             if(viewModel.isFirstLaunch) {
-                val intent = Intent(this@SplashActivity, DepartActivity::class.java)
+                val intent = Intent(this@SplashActivity, OnboardingDepartActivity::class.java)
                 startActivity(intent)
                 finish()
             } else {
