@@ -22,7 +22,7 @@
     <!-- notice -->
     <string name="notice_title">공지사항</string>
     <string name="notice_tab_university">대학 공지</string>
-    <string name="notice_tab_faculty">학부 공지</string>
+    <string name="notice_tab_department">학과 공지</string>
     <string name="notice_search_message">검색어를 입력해주세요.</string>
 
     <!-- detail -->
@@ -107,20 +107,24 @@
     <string name="alarm_title_main">키워드 알림 설정으로</string>
     <string name="alarm_title_sub">중요한 공지사항을 놓치지 마세요!</string>
     <string name="alarm_complete">알림 설정 및 시작하기</string>
+    <string name="alarm_title">키워드 알림함</string>
+    <string name="alarm_action_button_text">편집</string>
 
     <!-- cafeteria -->
     <string name="cafeteria_main">식단</string>
+    <string name="cafeteria_title">금주의 식단</string>
     <string name="cafeteria_student">학생식당</string>
-    <string name="cafeteria_employee">교직원식당</string>
     <string name="cafeteria_menu">메뉴</string>
     <string name="cafeteria_lunch">점심</string>
-    <string name="cafeteria_time">11:30 ~ 14:00</string>
+    <string name="cafeteria_time">11:30 - 14:00, 16:30 - 18:00</string>
     <string name="cafeteria_place">8호관 3층</string>
     <string name="cafeteria_no_menu">&#128517; 등록된 메뉴가 없어요.</string>
     <string name="cafeteria_korean">🍚 한식</string>
-    <string name="cafeteria_another">😋 일품</string>
+    <string name="cafeteria_another">🍛 일품</string>
 
     <!-- license -->
     <string name="license_title">오픈소스 라이센스</string>
 
+    <!-- search -->
+    <string name="search_hint">검색어를 입력하세요.</string>
 </resources>

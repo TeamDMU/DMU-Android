@@ -43,15 +43,14 @@
             app:stepValue="@{@string/setting_department}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_depart_title_sub"
-            app:layout_constraintBottom_toTopOf="@id/linearLayout_depart_search" />
+            app:layout_constraintTop_toBottomOf="@id/tv_depart_title_sub" />
 
         <LinearLayout
             android:id="@+id/linearLayout_depart_search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:background="@drawable/bg_search_white__radius_10dp"
+            android:background="@drawable/bg_search_white_radius_10dp"
             android:minHeight="56dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@id/coordinator_depart"

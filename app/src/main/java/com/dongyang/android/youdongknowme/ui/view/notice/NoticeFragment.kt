@@ -1,56 +1,37 @@
 package com.dongyang.android.youdongknowme.ui.view.notice
 
-import android.annotation.SuppressLint
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentNoticeBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
-import com.dongyang.android.youdongknowme.standard.util.ACTION
 import com.dongyang.android.youdongknowme.ui.adapter.NoticeAdapter
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailActivity
 import com.dongyang.android.youdongknowme.ui.view.util.EventObserver
-import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.tabs.TabLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-/* 공지 사항 화면 */
-class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), NoticeClickListener {
+class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>() {
 
     override val layoutResourceId: Int = R.layout.fragment_notice
     override val viewModel: NoticeViewModel by viewModel()
 
-    private val badgeDrawable: BadgeDrawable by lazy {
-        BadgeDrawable.create(requireActivity())
-    }
-
     private lateinit var adapter: NoticeAdapter
 
-    private val localBroadCast = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            viewModel.refreshNotices()
-        }
-    }
-
     override fun initStartView() {
-        binding.vm = viewModel
-        adapter = NoticeAdapter().apply { setItemClickListener(this@NoticeFragment) }
+        adapter = NoticeAdapter { url -> navigateToDetail(url) }
         binding.noticeRvList.apply {
             this.adapter = this@NoticeFragment.adapter
             this.layoutManager = LinearLayoutManager(requireActivity())
             this.itemAnimator = null
             this.setHasFixedSize(true)
-            this.addItemDecoration(DividerItemDecoration(requireActivity(), 1))
+            this.addItemDecoration(DividerItemDecoration(requireContext(), 1))
         }
         setupTabLayout()
+        setupInfinityScroll()
     }
 
-    @SuppressLint("UnsafeOptInUsageError")
     override fun initDataBinding() {
 
         viewModel.isLoading.observe(viewLifecycleOwner) {
@@ -58,8 +39,16 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
             else dismissLoading()
         }
 
-        viewModel.noticeList.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+        viewModel.universityNotices.observe(viewLifecycleOwner) { response ->
+            if (response != null) {
+                adapter.submitList(response)
+            }
+        }
+
+        viewModel.departmentNotices.observe(viewLifecycleOwner) { response ->
+            if (response != null) {
+                adapter.submitList(response)
+            }
         }
 
         viewModel.errorState.observe(viewLifecycleOwner, EventObserver { resId ->
@@ -68,36 +57,35 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
     }
 
     override fun initAfterBinding() {
-        viewModel.getUnVisitedAlarmCount()
 
-        // 새로고침 했을 때 동작
         binding.noticeSwipe.setOnRefreshListener {
             viewModel.refreshNotices()
             binding.noticeSwipe.isRefreshing = false
         }
 
-        // 각각 탭 버튼 눌렀을 때 동작
         binding.noticeTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
 
                 binding.noticeRvList.scrollToPosition(0)
 
-                if (tab.text == getString(R.string.notice_tab_university))
+                if (tab.text == getString(R.string.notice_tab_university)) {
                     viewModel.updateSelectedTabType(NoticeTabType.SCHOOL)
-                else
+                    viewModel.fetchUniversityNotices()
+                } else {
                     viewModel.updateSelectedTabType(NoticeTabType.FACULTY)
+                    viewModel.fetchDepartmentNotices()
+                }
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
 
-            // 다시 클릭시 스크롤되게 설정
             override fun onTabReselected(tab: TabLayout.Tab?) {
                 binding.noticeRvList.smoothScrollToPosition(-10)
             }
         })
 
         binding.noticeErrorContainer.refresh.setOnClickListener {
-            viewModel.refreshNotices()
+            viewModel.fetchUniversityNotices()
         }
     }
 
@@ -106,25 +94,29 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>(), N
             binding.noticeTab.getTabAt(1)?.select()
     }
 
-    override fun onResume() {
-        super.onResume()
-        val intentFilter = IntentFilter(ACTION.FCM_ACTION_NAME)
-        LocalBroadcastManager.getInstance(requireContext())
-            .registerReceiver(localBroadCast, intentFilter)
+    private fun setupInfinityScroll() {
+        binding.noticeRvList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val lastVisibleItemPosition = layoutManager.findLastCompletelyVisibleItemPosition()
+                val totalItemCount = layoutManager.itemCount
+
+                if (!viewModel.isLoading.value!! && lastVisibleItemPosition >= totalItemCount - 1) {
+                    viewModel.selectedTab.value?.peekContent()?.let { currentTab ->
+                        when (currentTab) {
+                            NoticeTabType.FACULTY -> viewModel.fetchDepartmentNotices()
+                            NoticeTabType.SCHOOL -> viewModel.fetchUniversityNotices()
+                        }
+                    }
+                }
+            }
+        })
     }
 
-    override fun onStop() {
-        super.onStop()
-        LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(localBroadCast)
-    }
-
-    // 아이템 클릭시 자세히 보기 화면으로 이동
-    override fun itemClick(num: Int) {
-        val departCode = viewModel.departmentCode.value
-
-        val intent = Intent(requireActivity(), DetailActivity::class.java)
-        intent.putExtra("departCode", departCode)
-        intent.putExtra("boardNum", num)
+    private fun navigateToDetail(url: String) {
+        val intent = DetailActivity.newIntent(requireContext(), url)
         startActivity(intent)
     }
 }

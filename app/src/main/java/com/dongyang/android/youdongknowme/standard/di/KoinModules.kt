@@ -8,7 +8,6 @@ import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
 import com.dongyang.android.youdongknowme.data.repository.AlarmRepository
 import com.dongyang.android.youdongknowme.data.repository.CafeteriaRepository
 import com.dongyang.android.youdongknowme.data.repository.DepartRepository
-import com.dongyang.android.youdongknowme.data.repository.DetailRepository
 import com.dongyang.android.youdongknowme.data.repository.KeywordRepository
 import com.dongyang.android.youdongknowme.data.repository.NoticeRepository
 import com.dongyang.android.youdongknowme.data.repository.ScheduleRepository
@@ -32,6 +31,7 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.scope.get
 import org.koin.dsl.module
 
 val databaseModule = module {
@@ -76,7 +76,7 @@ val viewModelModule = module {
         SettingViewModel(get())
     }
     viewModel {
-        DetailViewModel(get())
+        DetailViewModel()
     }
     viewModel {
         SplashViewModel(get())
@@ -103,10 +103,7 @@ val viewModelModule = module {
 
 val repositoryModule = module {
     single {
-        NoticeRepository(get(), get())
-    }
-    single {
-        DetailRepository(get())
+        NoticeRepository(get())
     }
     single {
         SplashRepository()
