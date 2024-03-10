@@ -49,7 +49,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
     override fun initAfterBinding() = Unit
 
     private fun setupUI() {
-        adapter = NoticeAdapter { url -> navigateToDetail(url) }
+        adapter = NoticeAdapter (onItemClick = { url -> navigateToDetail(url) })
         binding.rvSearchResult.apply {
             adapter = this@SearchFragment.adapter
             layoutManager = LinearLayoutManager(requireActivity())
