@@ -13,7 +13,7 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/bg_blue100_radius_6dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +39,7 @@
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:hint="@string/search_hint"
+                android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:maxLength="10"
                 android:maxLines="1"
@@ -66,17 +67,12 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_search_result"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cl_search_bar"
             tools:listitem="@layout/item_notice" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <data>
-
-        <variable
-            name="searchViewModel"
-            type="com.dongyang.android.youdongknowme.ui.view.search.SearchViewModel" />
-    </data>
 </layout>

@@ -8,7 +8,7 @@ import com.dongyang.android.youdongknowme.data.remote.entity.Notice
 import com.dongyang.android.youdongknowme.databinding.ItemNoticeBinding
 import com.dongyang.android.youdongknowme.ui.viewholder.NoticeViewHolder
 
-class NoticeAdapter(private val clickListener: (url: String) -> Unit) :
+class NoticeAdapter(private val onItemClick: (url: String) -> Unit) :
     RecyclerView.Adapter<NoticeViewHolder>() {
 
     private val noticeList = arrayListOf<Notice>()
@@ -24,7 +24,7 @@ class NoticeAdapter(private val clickListener: (url: String) -> Unit) :
         return NoticeViewHolder(
             ItemNoticeBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
-            ), clickListener
+            ), onItemClick
         )
     }
 
