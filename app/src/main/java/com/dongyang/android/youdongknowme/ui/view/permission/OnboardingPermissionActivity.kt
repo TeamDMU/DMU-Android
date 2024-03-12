@@ -50,5 +50,4 @@ class OnboardingPermissionActivity : BaseActivity<ActivityOnboardingPermissionBi
             }
         }
     }
-
 }
