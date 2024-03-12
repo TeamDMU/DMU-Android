@@ -5,9 +5,8 @@ import androidx.lifecycle.Observer
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
 import com.dongyang.android.youdongknowme.databinding.ActivityKeywordBinding
-import com.dongyang.android.youdongknowme.function.setSpanText
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
-import com.dongyang.android.youdongknowme.ui.view.permission.OnboardingPermission
+import com.dongyang.android.youdongknowme.ui.view.permission.OnboardingPermissionActivity
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -46,7 +45,7 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
             viewModel.subscribeCheckedKeyword()
             if (viewModel.isFirstLaunch.value == true) {
                 viewModel.setFirstLaunch(false)
-                val intent = Intent(this@KeywordActivity, OnboardingPermission::class.java)
+                val intent = Intent(this@KeywordActivity, OnboardingPermissionActivity::class.java)
                 startActivity(intent)
             }
             finish()
