@@ -106,7 +106,7 @@
     <!-- alarm -->
     <string name="alarm_title_main">키워드 알림 설정으로</string>
     <string name="alarm_title_sub">중요한 공지사항을 놓치지 마세요!</string>
-    <string name="alarm_complete">알림 설정 및 시작하기</string>
+    <string name="alarm_complete">시작하기</string>
     <string name="alarm_title">키워드 알림함</string>
     <string name="alarm_action_button_text">편집</string>
 
