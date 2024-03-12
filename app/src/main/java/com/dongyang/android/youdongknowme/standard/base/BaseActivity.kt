@@ -1,5 +1,6 @@
 package com.dongyang.android.youdongknowme.standard.base
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
@@ -32,7 +33,12 @@ abstract class BaseActivity<T : ViewDataBinding, R : BaseViewModel> : AppCompatA
         initAfterBinding()
     }
 
-    protected fun setSpanText(spanTextView: TextView, startIdx: Int, endIdx: Int){
+    protected fun setSpanText(
+        baseContext: Context,
+        spanTextView: TextView,
+        startIdx: Int,
+        endIdx: Int
+    ){
         SpannableStringBuilder(spanTextView.text).apply {
             setSpan(
                 ForegroundColorSpan(getColor(com.dongyang.android.youdongknowme.R.color.main)),

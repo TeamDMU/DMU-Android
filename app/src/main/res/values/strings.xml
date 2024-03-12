@@ -18,6 +18,7 @@
     <string name="department_title_main">소속 학과를 선택하면,</string>
     <string name="department_title_sub">해당 학과의 공지만 바로 알려줘요.</string>
     <string name="department_next">다음</string>
+    <string name="department_complete">완료</string>
 
     <!-- notice -->
     <string name="notice_title">공지사항</string>
