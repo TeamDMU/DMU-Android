@@ -15,6 +15,7 @@ class OnboardingPermissionActivity : BaseActivity<ActivityOnboardingPermissionBi
     override val viewModel: SettingViewModel by viewModel()
 
     override fun initStartView() {
+        viewModel.setIsAccessSchoolAlarm(false)
         viewModel.setIsAccessDepartAlarm(false)
 
         viewModel.checkAccessAlarm()
@@ -34,6 +35,7 @@ class OnboardingPermissionActivity : BaseActivity<ActivityOnboardingPermissionBi
 
         binding.switchPermission.setOnCheckedChangeListener { compoundButton, _ ->
             if (compoundButton.isChecked) {
+                viewModel.setIsAccessSchoolAlarm(true)
                 viewModel.setIsAccessDepartAlarm(true)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                     binding.mvSwitchPermission.outlineAmbientShadowColor = getColor(R.color.blue300)
@@ -41,6 +43,7 @@ class OnboardingPermissionActivity : BaseActivity<ActivityOnboardingPermissionBi
                 }
                 binding.switchPermission.setTextColor(getColor(R.color.blue300))
             } else {
+                viewModel.setIsAccessSchoolAlarm(false)
                 viewModel.setIsAccessDepartAlarm(false)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                     binding.mvSwitchPermission.outlineAmbientShadowColor = getColor(R.color.gray300)
