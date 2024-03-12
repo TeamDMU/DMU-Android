@@ -15,7 +15,7 @@ class OnboardingPermissionActivity : BaseActivity<ActivityOnboardingPermissionBi
     override val viewModel: SettingViewModel by viewModel()
 
     override fun initStartView() {
-        binding.vm = viewModel
+        viewModel.setIsAccessDepartAlarm(false)
 
         viewModel.checkAccessAlarm()
         viewModel.getUserDepartment()
