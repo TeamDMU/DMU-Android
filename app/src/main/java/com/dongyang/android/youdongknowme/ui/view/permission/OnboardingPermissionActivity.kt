@@ -1,5 +1,6 @@
 package com.dongyang.android.youdongknowme.ui.view.permission
 
+import android.Manifest
 import android.content.Intent
 import android.content.res.ColorStateList
 import androidx.core.content.ContextCompat
@@ -10,19 +11,19 @@ import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import com.dongyang.android.youdongknowme.ui.view.setting.SettingViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class OnboardingPermissionActivity : BaseActivity<ActivityOnboardingPermissionBinding, SettingViewModel>() {
+class OnboardingPermissionActivity :
+    BaseActivity<ActivityOnboardingPermissionBinding, SettingViewModel>() {
 
     override val layoutResourceId: Int = R.layout.activity_onboarding_permission
     override val viewModel: SettingViewModel by viewModel()
 
     override fun initStartView() {
-        viewModel.setIsAccessSchoolAlarm(false)
-        viewModel.setIsAccessDepartAlarm(false)
+        setPermission(false)
 
         viewModel.checkAccessAlarm()
         viewModel.getUserDepartment()
 
-        setSpanText(this, binding.tvPermissionTitleMain,startIdx = 0, endIdx = 9)
+        setSpanText(this, binding.tvPermissionTitleMain, startIdx = 0, endIdx = 9)
     }
 
     override fun initDataBinding() = Unit
@@ -36,18 +37,21 @@ class OnboardingPermissionActivity : BaseActivity<ActivityOnboardingPermissionBi
 
         binding.switchPermission.setOnCheckedChangeListener { compoundButton, _ ->
             if (compoundButton.isChecked) {
-                viewModel.setIsAccessSchoolAlarm(true)
-                viewModel.setIsAccessDepartAlarm(true)
+                setPermission(true)
                 binding.switchPermission.compoundDrawableTintList =
                     ColorStateList.valueOf(ContextCompat.getColor(this, R.color.blue300))
-                binding.switchPermission.setTextColor(getColor(R.color.blue300))
             } else {
-                viewModel.setIsAccessSchoolAlarm(false)
-                viewModel.setIsAccessDepartAlarm(false)
+                setPermission(false)
                 binding.switchPermission.compoundDrawableTintList =
                     ColorStateList.valueOf(ContextCompat.getColor(this, R.color.gray300))
                 binding.switchPermission.setTextColor(getColor(R.color.gray300))
             }
         }
+    }
+
+    private fun setPermission(boolean: Boolean) {
+        binding.switchPermission.isChecked = boolean
+        viewModel.setIsAccessSchoolAlarm(boolean)
+        viewModel.setIsAccessDepartAlarm(boolean)
     }
 }
