@@ -1,7 +1,8 @@
 package com.dongyang.android.youdongknowme.ui.view.permission
 
 import android.content.Intent
-import android.os.Build
+import android.content.res.ColorStateList
+import androidx.core.content.ContextCompat
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityOnboardingPermissionBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
@@ -37,10 +38,14 @@ class OnboardingPermissionActivity : BaseActivity<ActivityOnboardingPermissionBi
             if (compoundButton.isChecked) {
                 viewModel.setIsAccessSchoolAlarm(true)
                 viewModel.setIsAccessDepartAlarm(true)
+                binding.switchPermission.compoundDrawableTintList =
+                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.blue300))
                 binding.switchPermission.setTextColor(getColor(R.color.blue300))
             } else {
                 viewModel.setIsAccessSchoolAlarm(false)
                 viewModel.setIsAccessDepartAlarm(false)
+                binding.switchPermission.compoundDrawableTintList =
+                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.gray300))
                 binding.switchPermission.setTextColor(getColor(R.color.gray300))
             }
         }

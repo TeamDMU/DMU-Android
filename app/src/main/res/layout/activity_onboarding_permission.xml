@@ -63,13 +63,14 @@
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/switch_permission"
-                style="@style/PretendardBold16"
+                style="@style/PretendardSemiBold20"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="16dp"
-                android:drawableStart="@drawable/ic_alarm"
+                android:drawableStart="@drawable/ic_alarm_fill"
                 android:drawableTint="@color/gray300"
-                android:padding="16dp"
+                android:paddingVertical="16dp"
+                android:paddingHorizontal="32dp"
                 android:text="@string/setting_keyword_alarm"
                 android:textAlignment="center"
                 android:textColor="@color/gray300" />
