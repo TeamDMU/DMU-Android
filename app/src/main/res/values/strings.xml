@@ -48,6 +48,7 @@
     <string name="setting_sw">컴퓨터소프트웨어공학과</string>
     <string name="setting_department">학과 설정</string>
     <string name="setting_keyword">키워드</string>
+    <string name="setting_keyword_alarm">키워드 알림 설정</string>
     <string name="setting_keyword_choice">키워드 선택</string>
     <string name="setting_app_info">앱 정보</string>
     <string name="setting_app_help">문의하기</string>
@@ -105,6 +106,9 @@
     <string name="loading_text">처리중</string>
 
     <!-- alarm -->
+    <string name="alarm_title_main">키워드 알림 설정으로</string>
+    <string name="alarm_title_sub">중요한 공지사항을 놓치지 마세요!</string>
+    <string name="alarm_complete">시작하기</string>
     <string name="alarm_title">키워드 알림함</string>
     <string name="alarm_action_button_text">편집</string>
 
