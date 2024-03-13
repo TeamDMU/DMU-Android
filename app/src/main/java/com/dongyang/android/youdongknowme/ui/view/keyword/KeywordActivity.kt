@@ -6,7 +6,7 @@ import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
 import com.dongyang.android.youdongknowme.databinding.ActivityKeywordBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
-import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
+import com.dongyang.android.youdongknowme.ui.view.permission.OnboardingPermissionActivity
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -16,10 +16,8 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
     override val layoutResourceId: Int = R.layout.activity_keyword
     override val viewModel: KeywordViewModel by viewModel()
 
-    override fun initStartView() {
-        binding.vm = viewModel
-    }
-
+    override fun initStartView() = Unit
+    
     override fun initDataBinding() {
         // 효율을 위해 단 한번만 옵저빙하여 이미 구독중인 항목을 선택 처리
         viewModel.localKeywordList.observe(this, object : Observer<List<KeywordEntity>> {
@@ -47,7 +45,7 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
             viewModel.subscribeCheckedKeyword()
             if (viewModel.isFirstLaunch.value == true) {
                 viewModel.setFirstLaunch(false)
-                val intent = Intent(this@KeywordActivity, MainActivity::class.java)
+                val intent = Intent(this@KeywordActivity, OnboardingPermissionActivity::class.java)
                 startActivity(intent)
             }
             finish()
