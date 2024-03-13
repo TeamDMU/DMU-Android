@@ -37,18 +37,10 @@ class OnboardingPermissionActivity : BaseActivity<ActivityOnboardingPermissionBi
             if (compoundButton.isChecked) {
                 viewModel.setIsAccessSchoolAlarm(true)
                 viewModel.setIsAccessDepartAlarm(true)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                    binding.mvSwitchPermission.outlineAmbientShadowColor = getColor(R.color.blue300)
-                    binding.mvSwitchPermission.outlineSpotShadowColor = getColor(R.color.blue300)
-                }
                 binding.switchPermission.setTextColor(getColor(R.color.blue300))
             } else {
                 viewModel.setIsAccessSchoolAlarm(false)
                 viewModel.setIsAccessDepartAlarm(false)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                    binding.mvSwitchPermission.outlineAmbientShadowColor = getColor(R.color.gray300)
-                    binding.mvSwitchPermission.outlineSpotShadowColor = getColor(R.color.gray300)
-                }
                 binding.switchPermission.setTextColor(getColor(R.color.gray300))
             }
         }
