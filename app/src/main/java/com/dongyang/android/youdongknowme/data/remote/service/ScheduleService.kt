@@ -4,6 +4,6 @@ import com.dongyang.android.youdongknowme.data.remote.entity.Schedule
 import retrofit2.http.GET
 
 interface ScheduleService {
-    @GET("api/v1/dmu/scheduler")
+    @GET("api/v1/dmu/schedule")
     suspend fun getScheduleList(): ArrayList<Schedule>
 }
