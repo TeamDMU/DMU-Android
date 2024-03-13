@@ -6,7 +6,7 @@ import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
 import com.dongyang.android.youdongknowme.databinding.ActivityOnboardingKeywordBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
-import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
+import com.dongyang.android.youdongknowme.ui.view.permission.OnboardingPermissionActivity
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -20,7 +20,7 @@ class OnboardingKeywordActivity : BaseActivity<ActivityOnboardingKeywordBinding,
         binding.vm = viewModel
 
         // 부분 색상 지정
-        setSpanText(baseContext, binding.tvOnboardingKeywordTitleMain,startIdx = 0, endIdx = 3)
+        setSpanText(this, binding.tvOnboardingKeywordTitleMain,startIdx = 0, endIdx = 3)
     }
 
     override fun initDataBinding() {
@@ -50,7 +50,7 @@ class OnboardingKeywordActivity : BaseActivity<ActivityOnboardingKeywordBinding,
             viewModel.subscribeCheckedKeyword()
             if (viewModel.isFirstLaunch.value == true) {
                 viewModel.setFirstLaunch(false)
-                val intent = Intent(this@OnboardingKeywordActivity, MainActivity::class.java)
+                val intent = Intent(this@OnboardingKeywordActivity, OnboardingPermissionActivity::class.java)
                 startActivity(intent)
             }
             finish()
