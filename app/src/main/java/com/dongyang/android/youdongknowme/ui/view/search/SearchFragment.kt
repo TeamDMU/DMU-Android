@@ -3,7 +3,6 @@ package com.dongyang.android.youdongknowme.ui.view.search
 import android.annotation.SuppressLint
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -14,12 +13,10 @@ import com.dongyang.android.youdongknowme.databinding.FragmentSearchBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
 import com.dongyang.android.youdongknowme.ui.adapter.NoticeAdapter
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailActivity
-import com.dongyang.android.youdongknowme.ui.view.notice.NoticeTabType
 import com.dongyang.android.youdongknowme.ui.view.util.EventObserver
 import com.dongyang.android.youdongknowme.ui.view.util.hideKeyboard
 import com.dongyang.android.youdongknowme.ui.view.util.showKeyboard
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
 
