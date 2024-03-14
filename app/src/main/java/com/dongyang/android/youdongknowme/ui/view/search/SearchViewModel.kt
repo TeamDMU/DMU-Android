@@ -46,6 +46,11 @@ class SearchViewModel(
     }
 
     fun fetchSearchNotices() {
+        if (_isLoading.value == true) {
+            return
+        }
+        _isLoading.postValue(true)
+
         viewModelScope.launch {
             when (val result =
                 noticeRepository.fetchSearchNotices(
