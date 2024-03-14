@@ -30,6 +30,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import timber.log.Timber
 
 class FCMService : FirebaseMessagingService() {
 
@@ -40,6 +41,12 @@ class FCMService : FirebaseMessagingService() {
 
     private val job = SupervisorJob()
     private val scope = CoroutineScope(Dispatchers.IO + job)
+
+    override fun onNewToken(token: String) {
+        super.onNewToken(token)
+        // FCM 토큰이 갱신 될 경우 서버에 해당 토큰을 갱신됐다고 알려주는 콜백함수
+        Timber.d("FCM 토큰 갱신 : $token")
+    }
 
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
