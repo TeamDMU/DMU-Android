@@ -36,6 +36,8 @@ class SearchViewModel(
 
     fun updateSearchContent(newContent: String) {
         _searchContent.value = newContent
+        _searchNotices.postValue(emptyList())
+        searchNoticeCurrentPage = 1
         validateSearchClearButtonVisibility()
     }
 
@@ -51,10 +53,11 @@ class SearchViewModel(
                     searchNoticeCurrentPage
                 )) {
                 is NetworkResult.Success -> {
-                    val updatedNotices = result.data
-                    _searchNotices.postValue(updatedNotices)
+                    val updatedResult = _searchNotices.value.orEmpty() + result.data
+                    _searchNotices.postValue(updatedResult)
                     _isError.postValue(false)
                     _isLoading.postValue(false)
+                    searchNoticeCurrentPage++
                 }
 
                 is NetworkResult.Error -> {
