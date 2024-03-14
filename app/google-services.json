@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "216931333525",
+    "project_id": "dm-for-u",
+    "storage_bucket": "dm-for-u.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:216931333525:android:76b43009912139a0fef29c",
+        "android_client_info": {
+          "package_name": "com.dmu.android"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAnvMxwnN_XBoZJPv8Ob3oB4qTz_ILtnA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:216931333525:android:be451c8a539f9428fef29c",
+        "android_client_info": {
+          "package_name": "com.dongyang.android.youdongknowme"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAnvMxwnN_XBoZJPv8Ob3oB4qTz_ILtnA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
