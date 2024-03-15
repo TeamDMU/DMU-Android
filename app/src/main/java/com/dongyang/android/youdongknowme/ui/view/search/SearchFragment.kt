@@ -26,18 +26,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
     private lateinit var adapter: NoticeAdapter
 
     override fun initStartView() {
-        adapter = NoticeAdapter(onItemClick = { url -> navigateToDetail(url) })
-        binding.rvSearchResult.apply {
-            this.adapter = this@SearchFragment.adapter
-            layoutManager = LinearLayoutManager(requireActivity())
-            itemAnimator = null
-            setHasFixedSize(true)
-            addItemDecoration(
-                DividerItemDecoration(
-                    requireContext(), DividerItemDecoration.VERTICAL
-                )
-            )
-        }
+        setupRecyclerview()
         showKeyboardOnEditTextFocus()
         setupHideKeyboardOnOutsideTouch()
         setTextClearButtonVisibility()
@@ -64,6 +53,21 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
     }
 
     override fun initAfterBinding() = Unit
+
+    private fun setupRecyclerview() {
+        adapter = NoticeAdapter(onItemClick = { url -> navigateToDetail(url) })
+        binding.rvSearchResult.apply {
+            this.adapter = this@SearchFragment.adapter
+            layoutManager = LinearLayoutManager(requireActivity())
+            itemAnimator = null
+            setHasFixedSize(true)
+            addItemDecoration(
+                DividerItemDecoration(
+                    requireContext(), DividerItemDecoration.VERTICAL
+                )
+            )
+        }
+    }
 
     private fun showKeyboardOnEditTextFocus() {
         binding.etSearchBar.requestFocus()

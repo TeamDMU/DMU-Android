@@ -58,8 +58,8 @@ class SearchViewModel(
                     searchNoticeCurrentPage
                 )) {
                 is NetworkResult.Success -> {
-                    val updatedResult = _searchNotices.value.orEmpty() + result.data
-                    _searchNotices.postValue(updatedResult)
+                    val updatedSearchResult = _searchNotices.value.orEmpty() + result.data
+                    _searchNotices.postValue(updatedSearchResult)
                     _isError.postValue(false)
                     _isLoading.postValue(false)
                     searchNoticeCurrentPage++
