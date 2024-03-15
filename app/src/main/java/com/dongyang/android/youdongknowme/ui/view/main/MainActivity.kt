@@ -25,7 +25,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         val navController = navHostFragment.navController
 
         val navigator =
-            KeepStateNavigator(this, navHostFragment.childFragmentManager, binding.mainNavContainer.id)
+            KeepStateNavigator(
+                this,
+                navHostFragment.childFragmentManager,
+                binding.mainNavContainer.id
+            )
         navController.navigatorProvider += navigator
         navController.setGraph(R.navigation.dmu_navigation)
         binding.mainNvBottom.setupWithNavController(navController)
@@ -45,7 +49,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
             val token = task.result
             Timber.d(token)
-
             //TODO: prefs 선언 중복 제거될 경우 주석 제거
             //prefs.edit().putString("fcm_token", token).commit()
         })
