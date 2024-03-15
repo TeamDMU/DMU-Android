@@ -20,10 +20,9 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
     private lateinit var adapter: ScheduleAdapter
 
     override fun initStartView() {
-        viewModel.setPickedDate(binding.scheduleCalendar.currentDate)
-        binding.vm = viewModel
+        viewModel.setPickedDate(binding.mvScheduleCalendar.currentDate)
         adapter = ScheduleAdapter()
-        binding.scheduleRvList.apply {
+        binding.rvScheduleList.apply {
             this.adapter = this@ScheduleFragment.adapter
             this.layoutManager = LinearLayoutManager(requireActivity())
             this.setHasFixedSize(true)
@@ -56,19 +55,19 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
 
     override fun initAfterBinding() {
 
-        binding.scheduleCalendar.setOnMonthChangedListener { _, date ->
+        binding.mvScheduleCalendar.setOnMonthChangedListener { _, date ->
             viewModel.setPickedDate(date)
         }
 
         // 최소 날짜, 최대 날짜 지정
-        binding.scheduleCalendar.apply {
-            this.state().edit().setMinimumDate(CalendarDay.from(2022, 1, 1))
-                .setMaximumDate(CalendarDay.from(2023, 2, 28))
+        binding.mvScheduleCalendar.apply {
+            this.state().edit().setMinimumDate(CalendarDay.from(2023, 1, 1))
+                .setMaximumDate(CalendarDay.from(2025, 2, 28))
                 .commit()
         }
 
         // 연/월 방식으로 타이틀 처리
-        binding.scheduleCalendar.setTitleFormatter { day ->
+        binding.mvScheduleCalendar.setTitleFormatter { day ->
             val inputText: LocalDate = day.date
             val calendarHeaderElements = inputText.toString().split("-").toTypedArray()
 
