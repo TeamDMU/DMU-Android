@@ -100,6 +100,10 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
             }
             loadUrl(url.toString())
         }
+
+        binding.btnDetailWebClose.setOnClickListener {
+            finish()
+        }
     }
 
     override fun initDataBinding() {
