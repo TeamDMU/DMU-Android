@@ -9,7 +9,7 @@
         tools:context=".ui.view.main.MainActivity">
 
         <include
-            android:id="@+id/schedule_toolbar"
+            android:id="@+id/toolbar_schedule"
             layout="@layout/standard_toolbar"
             android:layout_width="0dp"
             android:layout_height="?android:attr/actionBarSize"
@@ -18,28 +18,28 @@
             app:title="@{@string/schedule_title}" />
 
         <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-            android:id="@+id/schedule_calendar"
+            android:id="@+id/mv_schedule_calendar"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/schedule_toolbar"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_schedule"
             app:mcv_headerTextAppearance="@style/CalendarHeader"
             app:mcv_tileHeight="50dp"
             app:mcv_tileWidth="0dp" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/schedule_rv_list"
+            android:id="@+id/rv_schedule_list"
             bind_is_error="@{vm.isError()}"
             bind_is_loading="@{vm.isLoading()}"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/schedule_calendar"
+            app:layout_constraintTop_toBottomOf="@id/mv_schedule_calendar"
             tools:listitem="@layout/item_schedule" />
 
         <ScrollView
@@ -50,7 +50,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/schedule_calendar">
+            app:layout_constraintTop_toBottomOf="@id/mv_schedule_calendar">
 
             <include
                 android:id="@+id/schedule_error_container"
