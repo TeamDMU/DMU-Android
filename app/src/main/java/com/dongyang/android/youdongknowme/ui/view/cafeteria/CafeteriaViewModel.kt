@@ -1,6 +1,5 @@
 package com.dongyang.android.youdongknowme.ui.view.cafeteria
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -37,6 +36,8 @@ class CafeteriaViewModel(
     private val _menus: MutableLiveData<List<String>> = MutableLiveData()
     val menus: LiveData<List<String>> = _menus
 
+    private val emptyMenu = listOf(resourceProvider.getString(R.string.cafeteria_no_menu))
+
     init {
         fetchCafeteria()
     }
@@ -48,7 +49,8 @@ class CafeteriaViewModel(
                 is NetworkResult.Success -> {
                     val menuList = result.data
                     _cafeteriaList.value = menuList
-                    updateSelectedDate(LocalDate.now())
+                    _selectedDate.value = LocalDate.now()
+                    updateMenuList(selectedDate.toString())
                     _isError.postValue(false)
                     _isLoading.postValue(false)
                 }
@@ -62,29 +64,8 @@ class CafeteriaViewModel(
         }
     }
 
-    fun updateSelectedDate(selectedDate: LocalDate) {
-        _selectedDate.value = selectedDate
-        updateMenuList(selectedDate.toString())
-    }
-
-    private fun updateMenuList(selectedDate: String) {
+    fun updateMenuList(selectedDate: String) {
         val cafeteriaList = _cafeteriaList.value ?: emptyList()
-
-        cafeteriaList.forEach { it.date = it.date.substring(0 until 10) }
-
-
-        val menu = cafeteriaList.find {
-            it.date == selectedDate
-        }?.menu ?: listOf<String>()
-
-        _menus.value = parsingMenu(menu)
-    }
-
-    private fun parsingMenu(menu: List<String>): List<String> {
-        val menus = menu.ifEmpty {
-            listOf(resourceProvider.getString(R.string.cafeteria_no_menu))
-        }
-
-        return menus
+        _menus.postValue(cafeteriaList.find { it.date == selectedDate }?.menus ?: emptyMenu)
     }
 }
