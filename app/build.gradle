@@ -18,7 +18,6 @@ android {
         versionCode 5
         versionName "1.0.3"
 
-        buildConfigField "String", "BASE_URL", properties['BASE_URL']
         buildConfigField "String", "API_KEY", properties['API_KEY']
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
