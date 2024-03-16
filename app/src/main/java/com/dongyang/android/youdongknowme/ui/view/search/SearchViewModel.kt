@@ -36,6 +36,8 @@ class SearchViewModel(
 
     fun updateSearchContent(newContent: String) {
         _searchContent.value = newContent
+        _searchNotices.postValue(emptyList())
+        searchNoticeCurrentPage = 1
         validateSearchClearButtonVisibility()
     }
 
@@ -44,6 +46,11 @@ class SearchViewModel(
     }
 
     fun fetchSearchNotices() {
+        if (_isLoading.value == true) {
+            return
+        }
+        _isLoading.postValue(true)
+
         viewModelScope.launch {
             when (val result =
                 noticeRepository.fetchSearchNotices(
@@ -51,10 +58,11 @@ class SearchViewModel(
                     searchNoticeCurrentPage
                 )) {
                 is NetworkResult.Success -> {
-                    val updatedNotices = result.data
-                    _searchNotices.postValue(updatedNotices)
+                    val updatedSearchResult = _searchNotices.value.orEmpty() + result.data
+                    _searchNotices.postValue(updatedSearchResult)
                     _isError.postValue(false)
                     _isLoading.postValue(false)
+                    searchNoticeCurrentPage++
                 }
 
                 is NetworkResult.Error -> {
