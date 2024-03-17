@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dongyang.android.youdongknowme.data.repository.SettingRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 
 /* 설정 뷰모델 */
 class SettingViewModel(private val settingRepository: SettingRepository) : BaseViewModel() {
@@ -18,9 +16,6 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
 
     private val _myDepartment: MutableLiveData<String> = MutableLiveData()
     val myDepartment: LiveData<String> get() = _myDepartment
-
-    private val _permissionState = MutableStateFlow(false)
-    val permissionState: StateFlow<Boolean> = _permissionState
 
     fun checkAccessAlarm() {
         val isAccessSchoolAlarm = settingRepository.getIsAccessSchoolAlarm()
@@ -41,9 +36,5 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
     fun getUserDepartment() {
         val myDepartment = settingRepository.getUserDepartment()
         _myDepartment.postValue(myDepartment)
-    }
-
-    fun updatePermissionState(isAllowed: Boolean) {
-        _permissionState.value = isAllowed
     }
 }
