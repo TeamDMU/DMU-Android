@@ -3,12 +3,11 @@ package com.dongyang.android.youdongknowme.ui.view.splash
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
-import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivitySplashBinding
-import com.dongyang.android.youdongknowme.ui.view.depart.DepartActivity
+import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.view.depart.OnboardingDepartActivity
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import kotlinx.coroutines.Job
@@ -17,25 +16,26 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @SuppressLint("CustomSplashScreen")
-class SplashActivity : AppCompatActivity() {
+class SplashActivity () :
+    BaseActivity<ActivitySplashBinding, SplashViewModel>()  {
 
-    private var intentJob: Job? = null
-    private lateinit var binding: ActivitySplashBinding
-    private val viewModel: SplashViewModel by viewModel()
+    override val layoutResourceId: Int = R.layout.activity_splash
+    override val viewModel: SplashViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+     private var intentJob: Job? = null
 
-        binding = ActivitySplashBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
+    override fun initStartView() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             val content: View = findViewById(android.R.id.content)
             content.viewTreeObserver.addOnPreDrawListener { false }
         }
 
         viewModel.checkFirstLaunch()
+    }
 
+    override fun initDataBinding() = Unit
+
+    override fun initAfterBinding() {
         intentJob = lifecycleScope.launch {
             delay(SPLASH_TIME_MILLIS)
 
