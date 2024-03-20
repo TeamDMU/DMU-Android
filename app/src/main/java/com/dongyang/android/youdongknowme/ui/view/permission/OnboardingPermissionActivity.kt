@@ -4,6 +4,9 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
+import android.net.Uri
+import android.provider.Settings
+import android.provider.Settings.ACTION_SETTINGS
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.dongyang.android.youdongknowme.R
@@ -38,15 +41,15 @@ class OnboardingPermissionActivity() :
 
         binding.switchPermission.setOnCheckedChangeListener { compoundButton, _ ->
             if (compoundButton.isChecked) {
+                setPermissionSwitch(false)
                 if (PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(
                         this, Manifest.permission.POST_NOTIFICATIONS
                     )
                 ) {
                     setPermissionSwitch(true)
                 } else {
-                    ActivityCompat.requestPermissions(
-                        this, arrayOf(Manifest.permission.POST_NOTIFICATIONS), 100
-                    )
+                    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).setData(Uri.parse("package:" + this.packageName))
+                    startActivity(intent)
                 }
             } else {
                 setPermissionSwitch(false)
