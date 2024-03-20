@@ -14,7 +14,7 @@ import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import com.dongyang.android.youdongknowme.ui.view.setting.SettingViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class OnboardingPermissionActivity() :
+class OnboardingPermissionActivity :
     BaseActivity<ActivityOnboardingPermissionBinding, SettingViewModel>() {
 
     override val layoutResourceId: Int = R.layout.activity_onboarding_permission

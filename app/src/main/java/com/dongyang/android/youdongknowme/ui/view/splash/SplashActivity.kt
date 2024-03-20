@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @SuppressLint("CustomSplashScreen")
-class SplashActivity() : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
+class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
 
     override val layoutResourceId: Int = R.layout.activity_splash
     override val viewModel: SplashViewModel by viewModel()
