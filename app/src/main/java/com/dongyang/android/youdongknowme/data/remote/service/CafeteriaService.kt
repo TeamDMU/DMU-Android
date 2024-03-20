@@ -4,6 +4,6 @@ import com.dongyang.android.youdongknowme.data.remote.entity.Cafeteria
 import retrofit2.http.GET
 
 interface CafeteriaService {
-    @GET("api/v1/dmu/diet")
+    @GET("api/v1/dmu/cafeteria")
     suspend fun getMenuList(): List<Cafeteria>
 }
