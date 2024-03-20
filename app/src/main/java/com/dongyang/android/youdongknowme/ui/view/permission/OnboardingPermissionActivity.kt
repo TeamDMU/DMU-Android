@@ -6,8 +6,6 @@ import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.net.Uri
 import android.provider.Settings
-import android.provider.Settings.ACTION_SETTINGS
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityOnboardingPermissionBinding
@@ -48,7 +46,8 @@ class OnboardingPermissionActivity() :
                 ) {
                     setPermissionSwitch(true)
                 } else {
-                    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).setData(Uri.parse("package:" + this.packageName))
+                    val intent =
+                        Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).setData(Uri.parse("package:" + this.packageName))
                     startActivity(intent)
                 }
             } else {

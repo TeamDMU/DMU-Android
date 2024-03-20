@@ -46,15 +46,12 @@ class SplashActivity() : BaseActivity<ActivitySplashBinding, SplashViewModel>() 
                 val intent = Intent(this@SplashActivity, OnboardingDepartActivity::class.java)
 
                 if (PackageManager.PERMISSION_DENIED == ContextCompat.checkSelfPermission(
-                        this@SplashActivity,
-                        Manifest.permission.POST_NOTIFICATIONS
+                        this@SplashActivity, Manifest.permission.POST_NOTIFICATIONS
                     )
                 ) {
                     // 권한 설정이 안되어 있는 경우
                     ActivityCompat.requestPermissions(
-                        this@SplashActivity,
-                        arrayOf(Manifest.permission.POST_NOTIFICATIONS),
-                        100
+                        this@SplashActivity, arrayOf(Manifest.permission.POST_NOTIFICATIONS), 100
                     )
                 } else {
                     // 권한 설정이 이미 되어 있는 경우
@@ -70,9 +67,7 @@ class SplashActivity() : BaseActivity<ActivitySplashBinding, SplashViewModel>() 
     }
 
     override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
+        requestCode: Int, permissions: Array<String>, grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 100) {
