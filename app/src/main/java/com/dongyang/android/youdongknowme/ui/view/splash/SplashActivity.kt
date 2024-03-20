@@ -49,12 +49,12 @@ class SplashActivity() : BaseActivity<ActivitySplashBinding, SplashViewModel>() 
                         this@SplashActivity, Manifest.permission.POST_NOTIFICATIONS
                     )
                 ) {
-                    // 권한 설정이 안되어 있는 경우
+                    // 알림 권한 설정 허용
                     ActivityCompat.requestPermissions(
                         this@SplashActivity, arrayOf(Manifest.permission.POST_NOTIFICATIONS), 100
                     )
                 } else {
-                    // 권한 설정이 이미 되어 있는 경우
+                    // 알림 권한 설정 미허용
                     startActivity(intent)
                     finish()
                 }

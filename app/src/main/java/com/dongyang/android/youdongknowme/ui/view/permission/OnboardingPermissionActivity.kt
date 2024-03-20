@@ -39,18 +39,22 @@ class OnboardingPermissionActivity() :
 
         binding.switchPermission.setOnCheckedChangeListener { compoundButton, _ ->
             if (compoundButton.isChecked) {
+                // 온보딩 알림 스위치를  활성화
                 setPermissionSwitch(false)
                 if (PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(
                         this, Manifest.permission.POST_NOTIFICATIONS
                     )
                 ) {
+                    // 알림 권한이 허용 상태
                     setPermissionSwitch(true)
                 } else {
+                    // 알림 권한이 미허용 상태
                     val intent =
                         Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).setData(Uri.parse("package:" + this.packageName))
                     startActivity(intent)
                 }
             } else {
+                // 온보딩 알림 스위치 비활성화
                 setPermissionSwitch(false)
             }
         }
