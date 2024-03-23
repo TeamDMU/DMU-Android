@@ -41,7 +41,7 @@ class OnboardingPermissionActivity :
             if (compoundButton.isChecked) {
                 // 권환 확인 전 스위치 초기화
                 binding.switchPermission.isChecked = false
-                
+
                 // 온보딩 알림 스위치를  활성화
                 if (PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(
                         this, Manifest.permission.POST_NOTIFICATIONS
