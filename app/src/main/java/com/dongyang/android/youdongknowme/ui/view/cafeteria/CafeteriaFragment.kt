@@ -24,19 +24,19 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     override val layoutResourceId: Int = R.layout.fragment_cafeteria
     override val viewModel: CafeteriaViewModel by viewModel()
 
-    private lateinit var stuKoreanMenuAdapter: CafeteriaAdapter
-    private lateinit var stuAnotherMenuAdapter: CafeteriaAdapter
+    private lateinit var koreanMenuAdapter: CafeteriaAdapter
+    private lateinit var anotherMenuAdapter: CafeteriaAdapter
 
     override fun initStartView() {
         binding.vm = viewModel
 
-        stuKoreanMenuAdapter = CafeteriaAdapter()
-        stuAnotherMenuAdapter = CafeteriaAdapter()
+        koreanMenuAdapter = CafeteriaAdapter()
+        anotherMenuAdapter = CafeteriaAdapter()
 
         binding.rvCafeteriaMenuList.apply {
             val layoutManager = FlexboxLayoutManager(context)
             layoutManager.flexDirection = FlexDirection.ROW
-            this.adapter = this@CafeteriaFragment.stuKoreanMenuAdapter
+            this.adapter = this@CafeteriaFragment.koreanMenuAdapter
             this.layoutManager = layoutManager
             this.setHasFixedSize(true)
         }
@@ -44,7 +44,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         binding.rvCafeteriaAnotherMenuList.apply {
             val layoutManager = FlexboxLayoutManager(context)
             layoutManager.flexDirection = FlexDirection.ROW
-            this.adapter = this@CafeteriaFragment.stuAnotherMenuAdapter
+            this.adapter = this@CafeteriaFragment.anotherMenuAdapter
             this.layoutManager = layoutManager
             this.setHasFixedSize(true)
         }
@@ -79,9 +79,9 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         })
 
         viewModel.menus.observe(viewLifecycleOwner) {
-            stuKoreanMenuAdapter.submitList(it)
+            koreanMenuAdapter.submitList(it)
             // 일품 메뉴 : 일품 메뉴는 리스트로 제작하여 등록
-            stuAnotherMenuAdapter.submitList(listOf(getString(R.string.cafeteria_no_menu)))
+            anotherMenuAdapter.submitList(listOf(getString(R.string.cafeteria_no_menu)))
         }
 
     }
