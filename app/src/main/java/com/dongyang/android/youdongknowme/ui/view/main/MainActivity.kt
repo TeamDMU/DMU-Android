@@ -1,5 +1,7 @@
 package com.dongyang.android.youdongknowme.ui.view.main
 
+import android.content.Context
+import android.content.Intent
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.plusAssign
 import androidx.navigation.ui.setupWithNavController
@@ -31,4 +33,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override fun initDataBinding() {}
 
     override fun initAfterBinding() {}
+
+    companion object {
+        fun createIntent(context: Context): Intent {
+            return Intent(context, MainActivity::class.java)
+        }
+    }
 }

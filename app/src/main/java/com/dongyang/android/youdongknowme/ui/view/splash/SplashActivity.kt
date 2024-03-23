@@ -43,7 +43,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
             delay(SPLASH_TIME_MILLIS)
 
             if (viewModel.isFirstLaunch.value == true) {
-                val intent = Intent(this@SplashActivity, OnboardingDepartActivity::class.java)
+                val intent = OnboardingDepartActivity.createIntent(this@SplashActivity)
 
                 if (PackageManager.PERMISSION_DENIED == ContextCompat.checkSelfPermission(
                         this@SplashActivity, Manifest.permission.POST_NOTIFICATIONS
@@ -59,7 +59,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
                     finish()
                 }
             } else {
-                val intent = Intent(this@SplashActivity, MainActivity::class.java)
+                intent = MainActivity.createIntent(this@SplashActivity)
                 startActivity(intent)
                 finish()
             }
@@ -74,10 +74,10 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_PERMISSION_CODE) {
             // 권한 설정 결과 처리
-            val intent = if (viewModel.isFirstLaunch.value == true) {
-                Intent(this@SplashActivity, OnboardingDepartActivity::class.java)
+            intent = if (viewModel.isFirstLaunch.value == true) {
+                OnboardingDepartActivity.createIntent(this@SplashActivity)
             } else {
-                Intent(this@SplashActivity, MainActivity::class.java)
+                MainActivity.createIntent(this@SplashActivity)
             }
             startActivity(intent)
             finish()

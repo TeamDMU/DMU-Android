@@ -32,7 +32,7 @@ class OnboardingPermissionActivity :
 
     override fun initAfterBinding() {
         binding.btnPermissionComplete.setOnClickListener {
-            val intent = Intent(this@OnboardingPermissionActivity, MainActivity::class.java)
+            val intent = MainActivity.createIntent(this@OnboardingPermissionActivity)
             startActivity(intent)
             finish()
         }
