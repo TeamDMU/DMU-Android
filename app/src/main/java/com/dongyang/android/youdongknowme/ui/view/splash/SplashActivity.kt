@@ -51,7 +51,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
                 ) {
                     // 알림 권한 설정 허용
                     ActivityCompat.requestPermissions(
-                        this@SplashActivity, arrayOf(Manifest.permission.POST_NOTIFICATIONS), 100
+                        this@SplashActivity, arrayOf(Manifest.permission.POST_NOTIFICATIONS), REQUEST_PERMISSION_CODE
                     )
                 } else {
                     // 알림 권한 설정 미허용
@@ -72,7 +72,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 100) {
+        if (requestCode == REQUEST_PERMISSION_CODE) {
             // 권한 설정 결과 처리
             val intent = if (viewModel.isFirstLaunch.value == true) {
                 Intent(this@SplashActivity, OnboardingDepartActivity::class.java)
@@ -97,5 +97,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
 
     companion object {
         private const val SPLASH_TIME_MILLIS = 1_500L
+        private const val REQUEST_PERMISSION_CODE = 100
     }
 }
