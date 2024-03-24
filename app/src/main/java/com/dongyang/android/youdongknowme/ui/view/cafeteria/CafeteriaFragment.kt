@@ -87,17 +87,32 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     }
 
     override fun initAfterBinding() {
-        binding.cvCafeteriaCalendar.setup(
-            YearMonth.now().minusMonths(2),
-            YearMonth.now().plusMonths(1),
-            DayOfWeek.values().random()
-        )
+        val nearestMonday = findNearestMonday(LocalDate.now())
 
-        binding.cvCafeteriaCalendar.scrollToDate(LocalDate.now().minusDays(2))
+        binding.cvCafeteriaCalendar.setup(
+            YearMonth.from(nearestMonday),
+            YearMonth.from(nearestMonday.plusDays(4)),
+            DayOfWeek.MONDAY
+        )
+        binding.cvCafeteriaCalendar.scrollToDate(nearestMonday)
 
         binding.cafeteriaErrorContainer.refresh.setOnClickListener {
             viewModel.fetchCafeteria()
         }
+    }
+
+    private fun findNearestMonday(currentDate: LocalDate): LocalDate {
+        var date = currentDate
+
+        if (date.dayOfWeek == DayOfWeek.SATURDAY || date.dayOfWeek == DayOfWeek.SUNDAY) {
+            date = date.plusDays((8 - date.dayOfWeek.value).toLong())
+        }
+
+        while (date.dayOfWeek != DayOfWeek.MONDAY) {
+            date = date.minusDays(1)
+        }
+
+        return date
     }
 
     override fun onPause() {
