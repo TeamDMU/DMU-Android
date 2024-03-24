@@ -37,6 +37,7 @@
                     app:cv_dayViewResource="@layout/item_calendar_day"
                     app:cv_hasBoundaries="false"
                     app:cv_inDateStyle="none"
+                    android:scrollbars="none"
                     app:cv_maxRowCount="1"
                     app:cv_orientation="horizontal"
                     app:cv_outDateStyle="none"

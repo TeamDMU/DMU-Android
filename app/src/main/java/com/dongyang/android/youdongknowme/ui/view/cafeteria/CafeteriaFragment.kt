@@ -1,6 +1,8 @@
 package com.dongyang.android.youdongknowme.ui.view.cafeteria
 
+import android.view.MotionEvent
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import androidx.window.layout.WindowMetricsCalculator
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentCafeteriaBinding
@@ -98,6 +100,20 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
         binding.cafeteriaErrorContainer.refresh.setOnClickListener {
             viewModel.fetchCafeteria()
+        }
+
+        binding.cvCafeteriaCalendar.setOnTouchListener { _, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    // ACTION_DOWN 이벤트를 처리합니다.
+                    true // 터치 이벤트를 소비하여 스크롤을 차단합니다.
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    // ACTION_MOVE 이벤트를 처리합니다.
+                    true // 터치 이벤트를 소비하여 스크롤을 차단합니다.
+                }
+                else -> false // 다른 이벤트는 기본 동작을 따릅니다.
+            }
         }
     }
 
