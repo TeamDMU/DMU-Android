@@ -131,12 +131,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="12dp"
-                    android:outlineSpotShadowColor="@color/blue300"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cafeteria_info_container">
+                    app:layout_constraintTop_toBottomOf="@id/cafeteria_info_container"
+                    app:strokeColor="@color/blue300"
+                    app:strokeWidth="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -170,12 +170,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="20dp"
-                    android:outlineSpotShadowColor="@color/blue300"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/mv_cafeteria_menu">
+                    app:layout_constraintTop_toBottomOf="@id/mv_cafeteria_menu"
+                    app:strokeColor="@color/blue300"
+                    app:strokeWidth="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
