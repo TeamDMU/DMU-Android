@@ -64,27 +64,27 @@
 
                     <TextView
                         android:id="@+id/tv_cafeteria_info_place"
-                        style="@style/PretendardRegular14"
+                        style="@style/PretendardMedium14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginStart="4dp"
+                        android:layout_marginStart="12dp"
                         android:text="@string/cafeteria_place"
                         android:textColor="@color/line" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="16dp"
                         android:src="@drawable/ic_timer" />
 
                     <TextView
                         android:id="@+id/tv_cafeteria_info_time"
-                        style="@style/PretendardRegular14"
+                        style="@style/PretendardMedium14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginStart="4dp"
+                        android:layout_marginStart="12dp"
                         android:text="@string/cafeteria_time"
                         android:textColor="@color/line"
                         app:layout_constraintEnd_toEndOf="parent" />
