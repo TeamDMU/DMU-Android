@@ -19,7 +19,7 @@
     </style>
 
     <style name="Colors_Widget.MaterialComponents.Chip" parent="Widget.MaterialComponents.Chip.Choice">
-        <item name="android:textAppearance">@style/PretendardRegular14</item>
+        <item name="android:textAppearance">@style/PretendardMedium16</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textColor">@color/black</item>
     </style>
