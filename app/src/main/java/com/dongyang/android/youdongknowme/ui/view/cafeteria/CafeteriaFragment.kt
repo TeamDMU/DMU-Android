@@ -1,5 +1,6 @@
 package com.dongyang.android.youdongknowme.ui.view.cafeteria
 
+import android.annotation.SuppressLint
 import android.view.MotionEvent
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
+import java.time.temporal.TemporalAdjusters
 
 
 class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewModel>(),
@@ -88,6 +90,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun initAfterBinding() {
         val nearestMonday = findNearestMonday(LocalDate.now())
 
@@ -96,6 +99,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             YearMonth.from(nearestMonday.plusDays(4)),
             DayOfWeek.MONDAY
         )
+
         binding.cvCafeteriaCalendar.scrollToDate(nearestMonday)
 
         binding.cafeteriaErrorContainer.refresh.setOnClickListener {
@@ -103,32 +107,30 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         }
 
         binding.cvCafeteriaCalendar.setOnTouchListener { _, event ->
-            when (event.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    // ACTION_DOWN 이벤트를 처리합니다.
-                    true // 터치 이벤트를 소비하여 스크롤을 차단합니다.
+            when (event.actionMasked) {
+                MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE -> {
+                    true
                 }
-                MotionEvent.ACTION_MOVE -> {
-                    // ACTION_MOVE 이벤트를 처리합니다.
-                    true // 터치 이벤트를 소비하여 스크롤을 차단합니다.
-                }
-                else -> false // 다른 이벤트는 기본 동작을 따릅니다.
+
+                else -> false
             }
         }
     }
 
     private fun findNearestMonday(currentDate: LocalDate): LocalDate {
-        var date = currentDate
+        return when (currentDate.dayOfWeek) {
+            DayOfWeek.SATURDAY, DayOfWeek.SUNDAY -> {
+                currentDate.with(TemporalAdjusters.next(DayOfWeek.MONDAY))
+            }
 
-        if (date.dayOfWeek == DayOfWeek.SATURDAY || date.dayOfWeek == DayOfWeek.SUNDAY) {
-            date = date.plusDays((8 - date.dayOfWeek.value).toLong())
+            DayOfWeek.MONDAY -> {
+                currentDate
+            }
+
+            else -> {
+                currentDate.with(TemporalAdjusters.previous(DayOfWeek.MONDAY))
+            }
         }
-
-        while (date.dayOfWeek != DayOfWeek.MONDAY) {
-            date = date.minusDays(1)
-        }
-
-        return date
     }
 
     override fun onPause() {
