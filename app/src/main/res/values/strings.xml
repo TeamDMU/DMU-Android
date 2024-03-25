@@ -44,17 +44,20 @@
 
     <!-- setting -->
     <string name="setting_title">설정</string>
-    <string name="setting_dmu">동양미래대학교</string>
+    <string name="setting_university">대학 공지</string>
     <string name="setting_notice">알림 설정</string>
     <string name="setting_sw">컴퓨터소프트웨어공학과</string>
-    <string name="setting_department">학과 설정</string>
+    <string name="setting_department">학과 공지</string>
+    <string name="setting_edit_department">학과 설정</string>
     <string name="setting_keyword">키워드</string>
-    <string name="setting_keyword_alarm">키워드 알림 설정</string>
+    <string name="setting_keyword_alarm">키워드 설정</string>
     <string name="setting_keyword_choice">키워드 선택</string>
     <string name="setting_app_info">앱 정보</string>
     <string name="setting_app_help">문의하기</string>
+    <string name="setting_app_personal_policy">개인정보 처리방침</string>
     <string name="setting_app_version">앱 버전</string>
-    <string name="setting_app_license">오픈소스 라이센스</string>
+    <string name="setting_app_version_release">1.0.0</string>
+    <string name="setting_app_license">오픈소스 라이선스</string>
 
     <!-- calendar -->
     <string name="calendar_year">년</string>
