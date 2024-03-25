@@ -58,7 +58,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/onboarding_permission_step"
-            app:strokeColor="@color/blue300"
+            app:strokeColor="@color/gray300"
             app:strokeWidth="3dp">
 
             <androidx.appcompat.widget.SwitchCompat

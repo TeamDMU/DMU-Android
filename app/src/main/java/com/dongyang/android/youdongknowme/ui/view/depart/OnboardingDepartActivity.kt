@@ -1,5 +1,6 @@
 package com.dongyang.android.youdongknowme.ui.view.depart
 
+import android.content.Context
 import android.content.Intent
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
@@ -71,6 +72,12 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
                 startActivity(intent)
                 finish()
             }
+        }
+    }
+
+    companion object {
+        fun createIntent(context: Context): Intent {
+            return Intent(context, OnboardingDepartActivity::class.java)
         }
     }
 }
