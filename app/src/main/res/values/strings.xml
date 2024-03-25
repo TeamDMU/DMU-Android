@@ -56,7 +56,6 @@
     <string name="setting_app_help">문의하기</string>
     <string name="setting_app_personal_policy">개인정보 처리방침</string>
     <string name="setting_app_version">앱 버전</string>
-    <string name="setting_app_version_release">1.0.0</string>
     <string name="setting_app_license">오픈소스 라이선스</string>
 
     <!-- calendar -->

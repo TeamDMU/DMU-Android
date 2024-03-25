@@ -16,18 +16,16 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
     override val viewModel: SettingViewModel by viewModel()
 
     override fun initStartView() {
-        binding.settingVersion.text = getAppVersion()
+        binding.tvSettingAppVersion.text = getAppVersion()
     }
 
-    override fun initDataBinding() { }
+    override fun initDataBinding() = Unit
 
     override fun initAfterBinding() {
-        binding.vm = viewModel
-
         viewModel.checkAccessAlarm()
         viewModel.getUserDepartment()
 
-        binding.settingSchoolAlarmSwitch.setOnCheckedChangeListener { compoundButton, _ ->
+        binding.switchSettingUniversityAlarm.setOnCheckedChangeListener { compoundButton, _ ->
             if (compoundButton.isChecked) {
                 viewModel.setIsAccessSchoolAlarm(true)
             } else {
@@ -35,7 +33,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
             }
         }
 
-        binding.settingDepartmentAlarmSwitch.setOnCheckedChangeListener { compoundButton, _ ->
+        binding.switchSettingDepartmentAlarm.setOnCheckedChangeListener { compoundButton, _ ->
             if (compoundButton.isChecked) {
                 viewModel.setIsAccessDepartAlarm(true)
             } else {
@@ -44,25 +42,25 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
         }
 
         // 이메일 연동
-        binding.settingAsk.setOnClickListener {
+        binding.btnSettingAppHelp.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = "plain/text"
-            val address = arrayOf("jiwon0705@m365.dongyang.ac.kr")
+            val address = arrayOf("https://forms.gle/8ZKfV96qyisLu1pcA")
             intent.putExtra(Intent.EXTRA_EMAIL, address)
             startActivity(intent)
         }
 
-        binding.settingDepartmentChoice.setOnClickListener {
+        binding.btnSettingEditDepartment.setOnClickListener {
             val intent = Intent(requireActivity(), DepartActivity::class.java)
             startActivity(intent)
         }
 
-        binding.settingKeyword.setOnClickListener {
+        binding.btnSettingEditKeyword.setOnClickListener {
             val intent = Intent(requireActivity(), KeywordActivity::class.java)
             startActivity(intent)
         }
 
-        binding.settingAppLicense.setOnClickListener {
+        binding.btnSettingAppOpensource.setOnClickListener {
             val intent = Intent(requireActivity(), LicenseActivity::class.java)
             startActivity(intent)
         }
@@ -73,5 +71,4 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
             requireContext().packageManager.getPackageInfo(requireContext().packageName, 0)
         return packageManager.versionName
     }
-
 }

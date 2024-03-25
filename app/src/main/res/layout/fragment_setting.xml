@@ -228,12 +228,12 @@
                     style="@style/PretendardMedium14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/setting_app_version_release"
-                    android:textColor="@color/gray400"
                     android:layout_marginEnd="20dp"
+                    android:textColor="@color/gray400"
+                    app:layout_constraintBottom_toBottomOf="@id/btn_setting_app_version"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/btn_setting_app_version"
-                    app:layout_constraintBottom_toBottomOf="@id/btn_setting_app_version"/>
+                    tools:text="1.0.0" />
 
                 <View
                     android:id="@+id/view_setting_divider_app_info"
