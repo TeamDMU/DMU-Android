@@ -46,9 +46,8 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
             }
         }
 
-        binding.btnSettingAppHelp.setOnClickListener {
-            val intent =
-                Intent(Intent.ACTION_VIEW, Uri.parse("https://forms.gle/8ZKfV96qyisLu1pcA"))
+        binding.btnSettingEditKeyword.setOnClickListener {
+            val intent = Intent(requireActivity(), KeywordActivity::class.java)
             startActivity(intent)
         }
 
@@ -57,9 +56,14 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
             startActivity(intent)
         }
 
-        binding.btnSettingEditKeyword.setOnClickListener {
-            val intent = Intent(requireActivity(), KeywordActivity::class.java)
+        binding.btnSettingAppHelp.setOnClickListener {
+            val intent =
+                Intent(Intent.ACTION_VIEW, Uri.parse("https://forms.gle/8ZKfV96qyisLu1pcA"))
             startActivity(intent)
+        }
+
+        binding.btnSettingAppPersonalPolicy.setOnClickListener {
+            // TODO : 개인정보 처리방침으로 연결
         }
 
         binding.btnSettingAppOpensource.setOnClickListener {
