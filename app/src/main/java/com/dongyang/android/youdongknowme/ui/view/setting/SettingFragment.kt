@@ -1,6 +1,7 @@
 package com.dongyang.android.youdongknowme.ui.view.setting
 
 import android.content.Intent
+import android.net.Uri
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentSettingBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
@@ -41,12 +42,9 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
             }
         }
 
-        // 이메일 연동
         binding.btnSettingAppHelp.setOnClickListener {
-            val intent = Intent(Intent.ACTION_SEND)
-            intent.type = "plain/text"
-            val address = arrayOf("https://forms.gle/8ZKfV96qyisLu1pcA")
-            intent.putExtra(Intent.EXTRA_EMAIL, address)
+            val intent =
+                Intent(Intent.ACTION_VIEW, Uri.parse("https://forms.gle/8ZKfV96qyisLu1pcA"))
             startActivity(intent)
         }
 
