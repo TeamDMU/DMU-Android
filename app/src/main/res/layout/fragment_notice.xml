@@ -20,8 +20,6 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/notice_main_container"
-            bind_is_error="@{vm.isError()}"
-            bind_is_loading="@{vm.isLoading()}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -123,5 +121,4 @@
             name="vm"
             type="com.dongyang.android.youdongknowme.ui.view.notice.NoticeViewModel" />
     </data>
-
 </layout>
