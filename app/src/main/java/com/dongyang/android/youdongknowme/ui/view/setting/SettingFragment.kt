@@ -20,7 +20,11 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
         binding.tvSettingAppVersion.text = getAppVersion()
     }
 
-    override fun initDataBinding() = Unit
+    override fun initDataBinding() {
+        viewModel.myDepartment.observe(viewLifecycleOwner) {department ->
+            binding.tvSettingDepartment.text = department
+        }
+    }
 
     override fun initAfterBinding() {
         viewModel.checkAccessAlarm()
