@@ -1,5 +1,7 @@
 package com.dongyang.android.youdongknowme.ui.view.main
 
+import android.content.Context
+import android.content.Intent
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.plusAssign
 import androidx.navigation.ui.setupWithNavController
@@ -52,5 +54,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             //TODO: prefs 선언 중복 제거될 경우 주석 제거
             //prefs.edit().putString("fcm_token", token).commit()
         })
+        
+    companion object {
+        fun createIntent(context: Context): Intent {
+            return Intent(context, MainActivity::class.java)
+        }
     }
 }

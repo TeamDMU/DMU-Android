@@ -33,8 +33,10 @@ class CafeteriaViewModel(
     private val _cafeteriaList: MutableLiveData<List<Cafeteria>> = MutableLiveData()
     val cafeteriaList: LiveData<List<Cafeteria>> = _cafeteriaList
 
-    private val _stuMenus: MutableLiveData<Pair<List<String>, List<String>>> = MutableLiveData()
-    val stuMenus: LiveData<Pair<List<String>, List<String>>> = _stuMenus
+    private val _menus: MutableLiveData<List<String>> = MutableLiveData()
+    val menus: LiveData<List<String>> = _menus
+
+    private val emptyMenu = listOf(resourceProvider.getString(R.string.cafeteria_no_menu))
 
     init {
         fetchCafeteria()
@@ -47,10 +49,12 @@ class CafeteriaViewModel(
                 is NetworkResult.Success -> {
                     val menuList = result.data
                     _cafeteriaList.value = menuList
-                    updateSelectedDate(LocalDate.now())
+                    _selectedDate.value = LocalDate.now()
+                    updateMenuList(selectedDate.toString())
                     _isError.postValue(false)
                     _isLoading.postValue(false)
                 }
+
                 is NetworkResult.Error -> {
                     handleError(result, _errorState)
                     _isError.postValue(true)
@@ -60,48 +64,8 @@ class CafeteriaViewModel(
         }
     }
 
-    fun updateSelectedDate(selectedDate: LocalDate) {
-        _selectedDate.value = selectedDate
-        updateMenuList(selectedDate.toString().replace("-", "."))
-    }
-
-    private fun updateMenuList(selectedDate: String) {
+    fun updateMenuList(selectedDate: String) {
         val cafeteriaList = _cafeteriaList.value ?: emptyList()
-
-        cafeteriaList.forEach { it.date = it.date.substring(0 until 10) }
-
-        val stuMenu = cafeteriaList.find {
-            it.date == selectedDate && it.restaurant == resourceProvider.getString(R.string.cafeteria_student) && it.menuContent != "-"
-        }?.menuContent ?: ""
-
-        _stuMenus.value = parsingMenu(stuMenu)
-    }
-
-    private fun parsingMenu(menu: String): Pair<List<String>, List<String>> {
-        val menus = if (menu.isEmpty()) {
-            emptyList()
-        } else {
-            menu.replace("\n", "").replace("한식-", "").replace("일품-", "\n")
-                .split("\n")
-        }
-
-        val koreanMenus = if (menus.isEmpty()) {
-            listOf(resourceProvider.getString(R.string.cafeteria_no_menu))
-        } else {
-            menus[0].split(" ").filter { it != "" }
-        }
-
-        val anotherMenus = if (menus.size == 2) {
-            if (menus.isEmpty()) {
-                listOf(resourceProvider.getString(R.string.cafeteria_no_menu))
-            } else {
-                menus[1].split(" ")
-                    .filter { it != "" }
-            }
-        } else {
-            listOf(resourceProvider.getString(R.string.cafeteria_no_menu))
-        }
-
-        return Pair(koreanMenus, anotherMenus)
+        _menus.postValue(cafeteriaList.find { it.date == selectedDate }?.menus ?: emptyMenu)
     }
 }

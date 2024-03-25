@@ -1,9 +1,6 @@
 package com.dongyang.android.youdongknowme.ui.view.cafeteria
 
-import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.view.menu.MenuAdapter
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.window.layout.WindowMetricsCalculator
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentCafeteriaBinding
@@ -81,9 +78,10 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             showToast(getString(resId))
         })
 
-        viewModel.stuMenus.observe(viewLifecycleOwner) {
-            stuKoreanMenuAdapter.submitList(it.first)
-            stuAnotherMenuAdapter.submitList(it.second)
+        viewModel.menus.observe(viewLifecycleOwner) {
+            stuKoreanMenuAdapter.submitList(it)
+            // 일품 메뉴 : 일품 메뉴는 리스트로 제작하여 등록
+            stuAnotherMenuAdapter.submitList(listOf(getString(R.string.cafeteria_no_menu)))
         }
 
     }
