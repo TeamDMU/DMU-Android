@@ -10,7 +10,7 @@ interface CalendarInterface {
         oldDate: LocalDate?,
         selectedDate: LocalDate
     ) {
-        viewModel.updateMenuList(selectedDate.toString())
+        viewModel.updateMenuList(selectedDate)
         calendarView.notifyDateChanged(selectedDate)
         oldDate?.let { calendarView.notifyDateChanged(it) }
     }
