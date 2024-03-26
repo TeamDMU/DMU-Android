@@ -8,7 +8,6 @@ import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
 import com.dongyang.android.youdongknowme.data.repository.AlarmRepository
 import com.dongyang.android.youdongknowme.data.repository.CafeteriaRepository
 import com.dongyang.android.youdongknowme.data.repository.DepartRepository
-import com.dongyang.android.youdongknowme.data.repository.DetailRepository
 import com.dongyang.android.youdongknowme.data.repository.KeywordRepository
 import com.dongyang.android.youdongknowme.data.repository.NoticeRepository
 import com.dongyang.android.youdongknowme.data.repository.ScheduleRepository
@@ -76,7 +75,7 @@ val viewModelModule = module {
         SettingViewModel(get())
     }
     viewModel {
-        DetailViewModel(get())
+        DetailViewModel()
     }
     viewModel {
         SplashViewModel(get())
@@ -97,16 +96,13 @@ val viewModelModule = module {
         LicenseViewModel()
     }
     viewModel {
-        SearchViewModel()
+        SearchViewModel(get())
     }
 }
 
 val repositoryModule = module {
     single {
-        NoticeRepository(get(), get())
-    }
-    single {
-        DetailRepository(get())
+        NoticeRepository(get())
     }
     single {
         SplashRepository()
@@ -142,19 +138,20 @@ private val defaultKeywordList = arrayListOf(
     KeywordEntity("수강", "course", false),
     KeywordEntity("특강", "lecture", false),
     KeywordEntity("계절학기", "season", false),
-    KeywordEntity("장학", "scholarship", false),
-    KeywordEntity("등록", "tuition", false),
     KeywordEntity("휴학", "leave", false),
     KeywordEntity("복학", "return", false),
     KeywordEntity("졸업", "graduation", false),
     KeywordEntity("전과", "transfer", false),
     KeywordEntity("학기포기", "drop", false),
+    KeywordEntity("장학", "scholarship", false),
+    KeywordEntity("국가장학", "nationalScholarship", false),
+    KeywordEntity("등록", "tuition", false),
     KeywordEntity("채용", "recruitment", false),
     KeywordEntity("공모전", "contest", false),
-    KeywordEntity("현장실습", "field", false),
     KeywordEntity("대회", "competition", false),
+    KeywordEntity("현장실습", "field", false),
     KeywordEntity("봉사", "service", false),
     KeywordEntity("기숙사", "dormitory", false),
-    KeywordEntity("코로나19", "corona", false),
     KeywordEntity("동아리", "club", false),
+    KeywordEntity("학생회", "studentCouncil", false),
 )

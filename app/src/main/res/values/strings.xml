@@ -3,6 +3,7 @@
     <string name="shared_pref_key">YDKM_DB</string>
     <string name="school">학교</string>
     <string name="dmu">동양미래대학교</string>
+    <string name="dmu_url">www.dongyang.ac.kr</string>
 
     <!-- main menu -->
     <string name="menu_main_bottom_home">공지</string>
@@ -14,11 +15,16 @@
     <string name="department_title">학과선택</string>
     <string name="department_snackbar_title">학과 선택을 마치셨나요?</string>
     <string name="department_snackbar_positive_button">확인</string>
+    <string name="department_search_message">소속 학과를 검색해주세요.</string>
+    <string name="department_title_main">소속 학과를 선택하면,</string>
+    <string name="department_title_sub">해당 학과의 공지만 바로 알려줘요.</string>
+    <string name="department_next">다음</string>
+    <string name="department_complete">완료</string>
 
     <!-- notice -->
     <string name="notice_title">공지사항</string>
     <string name="notice_tab_university">대학 공지</string>
-    <string name="notice_tab_faculty">학부 공지</string>
+    <string name="notice_tab_department">학과 공지</string>
     <string name="notice_search_message">검색어를 입력해주세요.</string>
 
     <!-- detail -->
@@ -27,6 +33,7 @@
     <string name="detail_download_description">다운로드를 진행 중입니다.</string>
     <string name="detail_download_fail">다운로드를 실패했습니다.\n다시 시도해주세요.</string>
     <string name="detail_download_success">파일 다운로드가 완료되었습니다.</string>
+    <string name="detail_download_permission">파일 다운로드 권한을 허용해주십시오.</string>
     <string name="detail_write_permission_dialog_title">파일 접근 권한 허용을 거부하였습니다.</string>
     <string name="detail_write_permission_dialog_message">파일을 다운로드 하기 위해서는 접근 권한이 필요합니다. 권한을 허용하시겠습니까?</string>
     <string name="detail_write_permission_dialog_ok">설정</string>
@@ -42,6 +49,7 @@
     <string name="setting_sw">컴퓨터소프트웨어공학과</string>
     <string name="setting_department">학과 설정</string>
     <string name="setting_keyword">키워드</string>
+    <string name="setting_keyword_alarm">키워드 알림 설정</string>
     <string name="setting_keyword_choice">키워드 선택</string>
     <string name="setting_app_info">앱 정보</string>
     <string name="setting_app_help">문의하기</string>
@@ -54,14 +62,18 @@
 
     <!-- keyword -->
     <string name="keyword_title">키워드 선택</string>
+    <string name="keyword_title_main">키워드를 설정하면,</string>
+    <string name="keyword_title_sub">해당 키워드의 공지를 볼 수 있어요.</string>
     <string name="keyword_complete">완료</string>
+    <string name="keyword_next">다음</string>
     <string name="keyword_class">수업</string>
     <string name="keyword_class_exam">시험</string>
     <string name="keyword_class_course">수강</string>
     <string name="keyword_class_lecture">특강</string>
     <string name="keyword_class_season">계절학기</string>
-    <string name="keyword_money">학자금</string>
+    <string name="keyword_money">장학금</string>
     <string name="keyword_money_scholarship">장학</string>
+    <string name="keyword_money_nationalScholarship">국가장학</string>
     <string name="keyword_money_tuition">등록</string>
     <string name="keyword_academic">학적</string>
     <string name="keyword_academic_leave">휴학</string>
@@ -77,8 +89,8 @@
     <string name="keyword_employment_service">봉사</string>
     <string name="keyword_etc">기타</string>
     <string name="keyword_etc_dormitory">기숙사</string>
-    <string name="keyword_etc_corona">코로나19</string>
     <string name="keyword_etc_club">동아리</string>
+    <string name="keyword_etc_studentCouncil">학생회</string>
 
     <!-- error message -->
     <string name="error_unknown">네트워크 오류가 발생하였습니다.\n 잠시 후 다시 실행해주세요.</string>
@@ -95,20 +107,27 @@
     <string name="loading_text">처리중</string>
 
     <!-- alarm -->
-    <string name="alarm_title">알림함</string>
+    <string name="alarm_title_main">키워드 알림 설정으로</string>
+    <string name="alarm_title_sub">중요한 공지사항을 놓치지 마세요!</string>
+    <string name="alarm_complete">시작하기</string>
+    <string name="alarm_title">키워드 알림함</string>
+    <string name="alarm_action_button_text">편집</string>
 
     <!-- cafeteria -->
     <string name="cafeteria_main">식단</string>
+    <string name="cafeteria_title">금주의 식단</string>
     <string name="cafeteria_student">학생식당</string>
-    <string name="cafeteria_employee">교직원식당</string>
     <string name="cafeteria_menu">메뉴</string>
     <string name="cafeteria_lunch">점심</string>
-    <string name="cafeteria_time">11:30 ~ 14:00</string>
+    <string name="cafeteria_time">11:30 - 14:00, 16:30 - 18:00</string>
     <string name="cafeteria_place">8호관 3층</string>
     <string name="cafeteria_no_menu">&#128517; 등록된 메뉴가 없어요.</string>
     <string name="cafeteria_korean">🍚 한식</string>
-    <string name="cafeteria_another">😋 일품</string>
+    <string name="cafeteria_another">🍛 일품</string>
 
     <!-- license -->
     <string name="license_title">오픈소스 라이센스</string>
+
+    <!-- search -->
+    <string name="search_hint">검색어를 입력하세요.</string>
 </resources>

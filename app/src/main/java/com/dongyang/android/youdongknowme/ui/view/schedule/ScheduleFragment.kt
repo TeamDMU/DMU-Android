@@ -21,7 +21,7 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
 
     override fun initStartView() {
         viewModel.setPickedDate(binding.mvScheduleCalendar.currentDate)
-        binding.vm = viewModel
+
         adapter = ScheduleAdapter()
         binding.rvScheduleList.apply {
             this.adapter = this@ScheduleFragment.adapter
@@ -62,7 +62,7 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
 
         // 최소 날짜, 최대 날짜 지정
         binding.mvScheduleCalendar.apply {
-            this.state().edit().setMinimumDate(CalendarDay.from(2024, 1, 1))
+            this.state().edit().setMinimumDate(CalendarDay.from(2023, 1, 1))
                 .setMaximumDate(CalendarDay.from(2025, 2, 28))
                 .commit()
         }

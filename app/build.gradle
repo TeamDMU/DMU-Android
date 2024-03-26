@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     Properties properties = new Properties()
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
@@ -14,11 +14,12 @@ android {
     defaultConfig {
         applicationId "com.dongyang.android.youdongknowme"
         minSdk 24
-        targetSdk 32
+        targetSdk 33
         versionCode 5
         versionName "1.0.3"
 
         buildConfigField "String", "API_KEY", properties['API_KEY']
+        buildConfigField "String", "BASE_URL", properties['BASE_URL']
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -38,6 +39,7 @@ android {
     }
     buildFeatures {
         dataBinding true
+        viewBinding true
     }
     namespace 'com.dongyang.android.youdongknowme'
 }
@@ -99,7 +101,7 @@ dependencies {
     // Firebase
     implementation platform('com.google.firebase:firebase-bom:30.0.0')
     implementation 'com.google.firebase:firebase-analytics'
-    implementation 'com.google.firebase:firebase-messaging:23.1.0'
+    implementation 'com.google.firebase:firebase-messaging:23.4.1'
 
     // Timber
     implementation 'com.jakewharton.timber:timber:5.0.1'

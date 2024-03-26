@@ -1,46 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.view.depart.DepartActivity">
 
         <include
-            android:id="@+id/depart_toolbar"
+            android:id="@+id/toolbar_depart"
             layout="@layout/standard_toolbar"
             android:layout_width="0dp"
             android:layout_height="?android:attr/actionBarSize"
-            app:exitVisible="@{!vm.isFirstLaunch()}"
+            app:exitVisible="@{true}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:title="@{@string/department_title}" />
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:id="@+id/depart_container"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_depart"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
+            android:background="@color/gray100"
+            android:padding="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_depart_complete"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_depart"
+            tools:listitem="@layout/item_depart" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_depart_complete"
+            style="@style/PretendardRegular20"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/btn_gray_to_blue_10dp_enabled"
+            android:text="@string/department_complete"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/depart_toolbar">
+            app:layout_constraintTop_toBottomOf="@id/rv_depart" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/depart_rcv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listitem="@layout/item_depart" />
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <data>
-
-        <variable
-            name="vm"
-            type="com.dongyang.android.youdongknowme.ui.view.depart.DepartViewModel" />
-    </data>
-
 </layout>

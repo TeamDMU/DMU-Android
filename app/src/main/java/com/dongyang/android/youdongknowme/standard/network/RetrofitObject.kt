@@ -12,14 +12,12 @@ object RetrofitObject {
     private const val TIME_OUT_COUNT: Long = 10
 
     fun getNetwork(): Retrofit {
-
-        val baseUrl = "http://3.38.118.184:8000"
-
         val baseInterceptor = Interceptor { chain ->
             val request = chain.request().newBuilder()
             val originalHttpUrl = chain.request().url
 
-            val url = originalHttpUrl.newBuilder().addQueryParameter("api_key", BuildConfig.API_KEY).build()
+            val url = originalHttpUrl.newBuilder().addQueryParameter("api_key", BuildConfig.API_KEY)
+                .build()
             request.url(url)
             chain.proceed(request.build())
         }
@@ -33,7 +31,7 @@ object RetrofitObject {
             }).build()
 
         return Retrofit.Builder()
-            .baseUrl(baseUrl)
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

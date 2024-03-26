@@ -1,22 +1,30 @@
 package com.dongyang.android.youdongknowme.data.remote.service
 
 import com.dongyang.android.youdongknowme.data.remote.entity.Notice
-import com.dongyang.android.youdongknowme.data.remote.entity.NoticeDetail
-import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface NoticeService {
-    @GET("/notice/{code}")
-    suspend fun getList(
-        @Path("code") code : Int
-    ) : List<Notice>
 
-    @GET("/notice/{code}/search")
-    suspend fun getSearchList(
-        @Path("code") code : Int,
-        @Query("keyword") keyword : String
-    ) : List<Notice>
+    @GET("api/v1/dmu/universityNotice")
+    suspend fun getUniversityNotice(
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): List<Notice>
+
+    @GET("api/v1/dmu/departmentNotice/{department}")
+    suspend fun getDepartmentNotice(
+        @Path("department") department: String,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): List<Notice>
+
+    @GET("api/v1/dmu/notice/{searchWord}")
+    suspend fun getSearchNotice(
+        @Path("searchWord") searchWord: String,
+        @Query("department") department: String,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): List<Notice>
 }
-

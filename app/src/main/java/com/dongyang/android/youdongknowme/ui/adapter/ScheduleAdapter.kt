@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dongyang.android.youdongknowme.data.remote.entity.Schedule
+import com.dongyang.android.youdongknowme.data.remote.entity.ScheduleEntry
 import com.dongyang.android.youdongknowme.databinding.ItemScheduleBinding
 
 class ScheduleAdapter : RecyclerView.Adapter<ScheduleAdapter.ViewHolder>() {
@@ -13,17 +14,19 @@ class ScheduleAdapter : RecyclerView.Adapter<ScheduleAdapter.ViewHolder>() {
         setHasStableIds(true)
     }
 
-    private var item = arrayListOf<Schedule>()
+    private var item = arrayListOf<ScheduleEntry>()
 
     inner class ViewHolder(private val binding: ItemScheduleBinding)
         : RecyclerView.ViewHolder(binding.root) {
-            fun bind(item : Schedule) {
-                binding.schedule = item
-            }
+
+        fun bind(item: ScheduleEntry) {
+            binding.tvItemScheduleDate.text = if(item.dates[0] == item.dates[1]) item.dates[0] else "${item.dates[0]} ~ \n${item.dates[1]}"
+            binding.tvItemScheduleContents.text = item.contents
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun submitList(item : List<Schedule>) {
+    fun submitList(item: List<ScheduleEntry>) {
         this.item.clear()
         this.item.addAll(item)
         notifyDataSetChanged()
