@@ -1,5 +1,14 @@
 package com.dongyang.android.youdongknowme.ui.view.schedule
 
+import android.content.res.ColorStateList
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.PorterDuff
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
@@ -21,6 +30,9 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
 
     override fun initStartView() {
         viewModel.setPickedDate(binding.mvScheduleCalendar.currentDate)
+
+        binding.mvScheduleCalendar.leftArrow.setTintList(ColorStateList.valueOf(ContextCompat.getColor(this.requireContext(), R.color.blue300)))
+        binding.mvScheduleCalendar.rightArrow.setTintList(ColorStateList.valueOf(ContextCompat.getColor(this.requireContext(), R.color.blue300)))
 
         adapter = ScheduleAdapter()
         binding.rvScheduleList.apply {
