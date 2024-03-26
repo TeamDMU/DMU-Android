@@ -1,6 +1,7 @@
 package com.dongyang.android.youdongknowme.ui.view.setting
 
 import android.content.Intent
+import android.net.Uri
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentSettingBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
@@ -16,18 +17,28 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
     override val viewModel: SettingViewModel by viewModel()
 
     override fun initStartView() {
-        binding.settingVersion.text = getAppVersion()
+        binding.tvSettingAppVersion.text = getAppVersion()
     }
 
-    override fun initDataBinding() { }
+    override fun initDataBinding() {
+        viewModel.myDepartment.observe(viewLifecycleOwner) { department ->
+            binding.tvSettingDepartment.text = department
+        }
+
+        viewModel.isAccessUniversityAlarm.observe(viewLifecycleOwner) { isChecked ->
+            binding.switchSettingUniversityAlarm.isChecked = isChecked
+        }
+
+        viewModel.isAccessDepartAlarm.observe(viewLifecycleOwner) { isChecked ->
+            binding.switchSettingDepartmentAlarm.isChecked = isChecked
+        }
+    }
 
     override fun initAfterBinding() {
-        binding.vm = viewModel
-
         viewModel.checkAccessAlarm()
         viewModel.getUserDepartment()
 
-        binding.settingSchoolAlarmSwitch.setOnCheckedChangeListener { compoundButton, _ ->
+        binding.switchSettingUniversityAlarm.setOnCheckedChangeListener { compoundButton, _ ->
             if (compoundButton.isChecked) {
                 viewModel.setIsAccessSchoolAlarm(true)
             } else {
@@ -35,7 +46,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
             }
         }
 
-        binding.settingDepartmentAlarmSwitch.setOnCheckedChangeListener { compoundButton, _ ->
+        binding.switchSettingDepartmentAlarm.setOnCheckedChangeListener { compoundButton, _ ->
             if (compoundButton.isChecked) {
                 viewModel.setIsAccessDepartAlarm(true)
             } else {
@@ -43,26 +54,34 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
             }
         }
 
-        // 이메일 연동
-        binding.settingAsk.setOnClickListener {
-            val intent = Intent(Intent.ACTION_SEND)
-            intent.type = "plain/text"
-            val address = arrayOf("jiwon0705@m365.dongyang.ac.kr")
-            intent.putExtra(Intent.EXTRA_EMAIL, address)
-            startActivity(intent)
-        }
-
-        binding.settingDepartmentChoice.setOnClickListener {
-            val intent = Intent(requireActivity(), DepartActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.settingKeyword.setOnClickListener {
+        binding.btnSettingEditKeyword.setOnClickListener {
             val intent = Intent(requireActivity(), KeywordActivity::class.java)
             startActivity(intent)
         }
 
-        binding.settingAppLicense.setOnClickListener {
+        binding.btnSettingEditDepartment.setOnClickListener {
+            val intent = Intent(requireActivity(), DepartActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnSettingAppHelp.setOnClickListener {
+            val intent =
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://docs.google.com/forms/d/e/1FAIpQLSeRTKalenelmffTbCZeK4mqmQg0palobghkXSoie1FlmV22ZQ/viewform")
+                )
+            startActivity(intent)
+        }
+
+        binding.btnSettingAppPersonalPolicy.setOnClickListener {
+            val intent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://sites.google.com/view/dmforu-privacy-policy/%ED%99%88")
+            )
+            startActivity(intent)
+        }
+
+        binding.btnSettingAppOpensource.setOnClickListener {
             val intent = Intent(requireActivity(), LicenseActivity::class.java)
             startActivity(intent)
         }
@@ -73,5 +92,4 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
             requireContext().packageManager.getPackageInfo(requireContext().packageName, 0)
         return packageManager.versionName
     }
-
 }
