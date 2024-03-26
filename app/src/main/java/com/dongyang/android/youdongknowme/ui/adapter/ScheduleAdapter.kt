@@ -20,7 +20,7 @@ class ScheduleAdapter : RecyclerView.Adapter<ScheduleAdapter.ViewHolder>() {
         : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: ScheduleEntry) {
-            binding.tvItemScheduleDate.text = if(item.dates[0] == item.dates[1]) item.dates[0] else "${item.dates[0]} ~ \n${item.dates[1]}"
+            binding.tvItemScheduleDate.text = if(item.dates[0] == item.dates[1]) item.dates[0] else "${item.dates[0]}\n~ ${item.dates[1]}"
             binding.tvItemScheduleContents.text = item.contents
         }
     }

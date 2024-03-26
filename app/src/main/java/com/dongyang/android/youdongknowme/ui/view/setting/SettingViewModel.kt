@@ -8,8 +8,8 @@ import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 /* 설정 뷰모델 */
 class SettingViewModel(private val settingRepository: SettingRepository) : BaseViewModel() {
 
-    private val _isAccessSchoolAlarm: MutableLiveData<Boolean> = MutableLiveData(false)
-    val isAccessSchoolAlarm: LiveData<Boolean> get() = _isAccessSchoolAlarm
+    private val _isAccessUniversityAlarm: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isAccessUniversityAlarm: LiveData<Boolean> get() = _isAccessUniversityAlarm
 
     private val _isAccessDepartAlarm: MutableLiveData<Boolean> = MutableLiveData(false)
     val isAccessDepartAlarm: LiveData<Boolean> get() = _isAccessDepartAlarm
@@ -19,7 +19,7 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
 
     fun checkAccessAlarm() {
         val isAccessSchoolAlarm = settingRepository.getIsAccessSchoolAlarm()
-        _isAccessSchoolAlarm.postValue(isAccessSchoolAlarm)
+        _isAccessUniversityAlarm.postValue(isAccessSchoolAlarm)
 
         val isAccessDepartAlarm = settingRepository.getIsAccessDepartAlarm()
         _isAccessDepartAlarm.postValue(isAccessDepartAlarm)

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -11,208 +12,243 @@
             layout="@layout/standard_toolbar"
             android:layout_width="0dp"
             android:layout_height="?android:attr/actionBarSize"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:title="@{@string/setting_title}" />
 
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="20dp"
             android:fillViewport="true"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/setting_toolbar">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
                 <TextView
-                    style="@style/PretendardBold16"
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_setting_university_title"
+                    style="@style/PretendardSemiBold15"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:padding="4dp"
-                    android:paddingStart="16dp"
-                    android:text="@string/setting_dmu"
-                    android:textColor="@color/main" />
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:paddingBottom="4dp"
+                    android:text="@string/setting_university"
+                    android:textColor="@color/blue300"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/setting_school_alarm_switch"
-                    style="@style/PretendardRegular16"
-                    bind_is_checked="@{vm.isAccessSchoolAlarm()}"
-                    android:layout_width="match_parent"
+                    android:id="@+id/switch_setting_university_alarm"
+                    style="@style/PretendardMedium18"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:foreground="?attr/selectableItemBackground"
                     android:minHeight="0dp"
-                    android:padding="12dp"
-                    android:paddingStart="16dp"
-                    android:text="@string/setting_notice" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="12dp"
-                    android:background="@color/line" />
+                    android:padding="20dp"
+                    android:text="@string/setting_notice"
+                    android:textColor="@color/gray500"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_setting_university_title"
+                    tools:ignore="RtlSymmetry" />
 
                 <TextView
-                    android:id="@+id/setting_department"
-                    style="@style/PretendardBold16"
-                    android:layout_width="match_parent"
+                    android:id="@+id/btn_setting_edit_keyword"
+                    style="@style/PretendardMedium18"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:padding="4dp"
-                    android:paddingStart="16dp"
-                    android:text="@{vm.myDepartment, default = 컴퓨터소프트웨어공학과}"
-                    android:textColor="@color/main" />
+                    android:foreground="?attr/selectableItemBackground"
+                    android:padding="20dp"
+                    android:text="@string/setting_keyword_alarm"
+                    android:textColor="@color/gray500"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/switch_setting_university_alarm"
+                    tools:ignore="RtlSymmetry" />
+
+                <View
+                    android:id="@+id/view_setting_divider_university"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/gray200"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_setting_edit_keyword" />
+
+                <TextView
+                    android:id="@+id/tv_setting_department_title"
+                    style="@style/PretendardSemiBold15"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:paddingBottom="4dp"
+                    android:text="@string/setting_department"
+                    android:textColor="@color/blue300"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view_setting_divider_university" />
 
                 <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/setting_department_alarm_switch"
-                    style="@style/PretendardRegular16"
-                    bind_is_checked="@{vm.isAccessDepartAlarm()}"
-                    android:layout_width="match_parent"
+                    android:id="@+id/switch_setting_department_alarm"
+                    style="@style/PretendardMedium18"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:foreground="?attr/selectableItemBackground"
                     android:minHeight="0dp"
-                    android:padding="12dp"
-                    android:paddingStart="16dp"
-                    android:text="@string/setting_notice" />
+                    android:padding="20dp"
+                    android:text="@string/setting_notice"
+                    android:textColor="@color/gray500"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_setting_department_title"
+                    tools:ignore="RtlSymmetry" />
 
-                <TextView
-                    android:id="@+id/setting_department_choice"
-                    style="@style/PretendardRegular16"
-                    android:layout_width="match_parent"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/btn_setting_edit_department"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/department_title"
-                    android:textColor="@color/black"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:padding="12dp"
-                    android:paddingStart="16dp"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="12dp"
-                    android:background="@color/line" />
-
-                <TextView
-                    style="@style/PretendardBold16"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="4dp"
-                    android:paddingStart="16dp"
-                    android:text="@string/setting_keyword"
-                    android:textColor="@color/main" />
-
-                <LinearLayout
-                    android:id="@+id/setting_keyword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:padding="12dp"
-                    android:paddingStart="16dp">
+                    android:foreground="?attr/selectableItemBackground"
+                    android:padding="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/switch_setting_department_alarm">
 
                     <TextView
-                        style="@style/PretendardRegular16"
-                        android:layout_width="match_parent"
+                        android:id="@+id/tv_setting_edit_department"
+                        style="@style/PretendardMedium18"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/setting_keyword_choice"
-                        android:textColor="@color/black" />
-                </LinearLayout>
+                        android:text="@string/setting_edit_department"
+                        android:textColor="@color/gray500"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:id="@+id/tv_setting_department"
+                        style="@style/PretendardMedium14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:textColor="@color/gray400"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/iv_setting_department"
+                        app:layout_constraintHorizontal_bias="1"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintStart_toEndOf="@id/tv_setting_edit_department"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="자동화공학과" />
+
+                    <ImageView
+                        android:id="@+id/iv_setting_department"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_setting_right"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <View
-                    android:layout_width="match_parent"
+                    android:id="@+id/view_setting_divider_department"
+                    android:layout_width="0dp"
                     android:layout_height="1dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="12dp"
-                    android:background="@color/line" />
+                    android:background="@color/gray200"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_setting_edit_department" />
 
                 <TextView
-                    style="@style/PretendardBold16"
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_setting_info_title"
+                    style="@style/PretendardSemiBold15"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="4dp"
-                    android:paddingStart="16dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:paddingBottom="4dp"
                     android:text="@string/setting_app_info"
-                    android:textColor="@color/main" />
+                    android:textColor="@color/blue300"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view_setting_divider_department" />
 
-                <LinearLayout
-                    android:id="@+id/setting_ask"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/btn_setting_app_help"
+                    style="@style/PretendardMedium18"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:padding="12dp"
-                    android:paddingStart="16dp">
+                    android:foreground="?attr/selectableItemBackground"
+                    android:padding="20dp"
+                    android:text="@string/setting_app_help"
+                    android:textColor="@color/gray500"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_setting_info_title" />
 
-                    <TextView
-                        style="@style/PretendardRegular16"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_app_help"
-                        android:textColor="@color/black" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/btn_setting_app_personal_policy"
+                    style="@style/PretendardMedium18"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="12dp"
-                    android:paddingStart="16dp">
+                    android:foreground="?attr/selectableItemBackground"
+                    android:padding="20dp"
+                    android:text="@string/setting_app_personal_policy"
+                    android:textColor="@color/gray500"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_setting_app_help" />
 
-                    <TextView
-                        style="@style/PretendardRegular16"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_app_version"
-                        android:textColor="@color/black" />
-
-                    <TextView
-                        android:id="@+id/setting_version"
-                        style="@style/PretendardRegular16"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="1"
-                        android:textAlignment="textEnd"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/setting_app_license"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/btn_setting_app_opensource"
+                    style="@style/PretendardMedium18"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:padding="12dp"
-                    android:paddingStart="16dp">
+                    android:foreground="?attr/selectableItemBackground"
+                    android:padding="20dp"
+                    android:text="@string/setting_app_license"
+                    android:textColor="@color/gray500"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_setting_app_personal_policy" />
 
-                    <TextView
-                        style="@style/PretendardRegular16"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_app_license"
-                        android:textColor="@color/black" />
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/btn_setting_app_version"
+                    style="@style/PretendardMedium18"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp"
+                    android:text="@string/setting_app_version"
+                    android:textColor="@color/gray500"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_setting_app_opensource" />
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_setting_app_version"
+                    style="@style/PretendardMedium14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:textColor="@color/gray400"
+                    app:layout_constraintBottom_toBottomOf="@id/btn_setting_app_version"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/btn_setting_app_version"
+                    tools:text="1.0.0" />
+
+                <View
+                    android:id="@+id/view_setting_divider_app_info"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/gray200"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_setting_app_version" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <data>
-
-        <variable
-            name="vm"
-            type="com.dongyang.android.youdongknowme.ui.view.setting.SettingViewModel" />
-    </data>
 </layout>
