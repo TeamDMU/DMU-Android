@@ -124,7 +124,6 @@
     <string name="cafeteria_no_menu">&#128517; 등록된 메뉴가 없어요.</string>
     <string name="cafeteria_korean">🍚 한식</string>
     <string name="cafeteria_another">🍛 일품</string>
-    <string name="cafetria_weekend">주말에는 식당을 운영하지 않아요.</string>
 
     <!-- license -->
     <string name="license_title">오픈소스 라이센스</string>
