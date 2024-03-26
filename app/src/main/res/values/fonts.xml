@@ -85,6 +85,10 @@
         <item name="android:textSize">@dimen/font_size_14</item>
     </style>
 
+    <style name="PretendardSemiBold15" parent="PretnedardSemiBold">
+        <item name="android:textSize">15dp</item>
+    </style>
+
     <style name="PretendardSemiBold16" parent="PretnedardSemiBold">
         <item name="android:textSize">@dimen/font_size_16</item>
     </style>
