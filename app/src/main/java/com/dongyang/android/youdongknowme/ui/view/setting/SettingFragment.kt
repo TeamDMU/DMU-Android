@@ -74,7 +74,11 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
         }
 
         binding.btnSettingAppPersonalPolicy.setOnClickListener {
-            // TODO : 개인정보 처리방침으로 연결
+            val intent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://sites.google.com/view/dmforu-privacy-policy/%ED%99%88")
+            )
+            startActivity(intent)
         }
 
         binding.btnSettingAppOpensource.setOnClickListener {
