@@ -29,6 +29,8 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
     private lateinit var adapter: ScheduleAdapter
 
     override fun initStartView() {
+        binding.vm = viewModel
+
         viewModel.setPickedDate(binding.mvScheduleCalendar.currentDate)
 
         binding.mvScheduleCalendar.leftArrow.setTintList(ColorStateList.valueOf(ContextCompat.getColor(this.requireContext(), R.color.blue300)))

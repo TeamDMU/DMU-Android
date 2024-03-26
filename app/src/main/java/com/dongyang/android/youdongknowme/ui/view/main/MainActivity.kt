@@ -14,7 +14,6 @@ import com.google.firebase.messaging.FirebaseMessaging
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-
 /* 메인 액티비티 */
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 

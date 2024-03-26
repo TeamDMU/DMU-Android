@@ -62,9 +62,5 @@
         <variable
             name="title"
             type="String" />
-
-        <variable
-            name="vm"
-            type="com.dongyang.android.youdongknowme.ui.view.notice.NoticeViewModel" />
     </data>
 </layout>

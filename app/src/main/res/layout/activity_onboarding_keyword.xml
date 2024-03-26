@@ -333,12 +333,4 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <data>
-
-        <variable
-            name="vm"
-            type="com.dongyang.android.youdongknowme.ui.view.keyword.KeywordViewModel" />
-        />
-    </data>
 </layout>

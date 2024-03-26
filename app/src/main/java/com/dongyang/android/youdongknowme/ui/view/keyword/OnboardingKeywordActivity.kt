@@ -17,8 +17,6 @@ class OnboardingKeywordActivity : BaseActivity<ActivityOnboardingKeywordBinding,
     override val viewModel: KeywordViewModel by viewModel()
 
     override fun initStartView() {
-        binding.vm = viewModel
-
         // 부분 색상 지정
         setSpanText(this, binding.tvOnboardingKeywordTitleMain,startIdx = 0, endIdx = 3)
     }
