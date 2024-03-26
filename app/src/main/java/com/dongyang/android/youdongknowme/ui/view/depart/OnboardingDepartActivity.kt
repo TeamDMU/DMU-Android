@@ -7,6 +7,7 @@ import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityOnboardingDepartBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.adapter.DepartAdapter
+import com.dongyang.android.youdongknowme.ui.adapter.OnboardingDepartAdapter
 import com.dongyang.android.youdongknowme.ui.view.keyword.OnboardingKeywordActivity
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -16,7 +17,7 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
 
     override val layoutResourceId: Int = R.layout.activity_onboarding_depart
     override val viewModel: DepartViewModel by viewModel()
-    private lateinit var adapter: DepartAdapter
+    private lateinit var adapter: OnboardingDepartAdapter
     private lateinit var items: ArrayList<String>
 
     override fun initStartView() {
@@ -27,7 +28,7 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
         items.sort()
 
         // 학과 리스트
-        adapter = DepartAdapter().apply {
+        adapter = OnboardingDepartAdapter().apply {
             submitList(items)
             setItemClickListener(this@OnboardingDepartActivity)
         }
@@ -48,7 +49,12 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
         viewModel.selectDepartPosition.observe(this) {
             adapter.submitPosition(it)
 
-            if (it != -1) getDepart(items)
+            if (it != -1) {
+                getDepart(items)
+                binding.etOnboardingDepartSearch.setText(
+                    items[viewModel.selectDepartPosition.value ?: 0]
+                )
+            }
         }
     }
 
