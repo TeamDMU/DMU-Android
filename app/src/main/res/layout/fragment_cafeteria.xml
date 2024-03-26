@@ -34,6 +34,7 @@
                     android:id="@+id/cv_cafeteria_calendar"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:scrollbars="none"
                     app:cv_dayViewResource="@layout/item_calendar_day"
                     app:cv_hasBoundaries="false"
                     app:cv_inDateStyle="none"
@@ -51,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:paddingVertical="16dp"
+                    android:paddingVertical="12dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cv_cafeteria_calendar">
@@ -63,27 +64,27 @@
 
                     <TextView
                         android:id="@+id/tv_cafeteria_info_place"
-                        style="@style/PretendardRegular14"
+                        style="@style/PretendardMedium14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginStart="4dp"
+                        android:layout_marginStart="12dp"
                         android:text="@string/cafeteria_place"
                         android:textColor="@color/line" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="16dp"
                         android:src="@drawable/ic_timer" />
 
                     <TextView
                         android:id="@+id/tv_cafeteria_info_time"
-                        style="@style/PretendardRegular14"
+                        style="@style/PretendardMedium14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginStart="4dp"
+                        android:layout_marginStart="12dp"
                         android:text="@string/cafeteria_time"
                         android:textColor="@color/line"
                         app:layout_constraintEnd_toEndOf="parent" />
@@ -107,6 +108,21 @@
                         android:layout_gravity="center" />
                 </LinearLayout>
 
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_weekend_cafeteria"
+                    style="@style/Colors_Widget.MaterialComponents.Chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:backgroundTint="@color/blue100"
+                    android:clickable="false"
+                    android:text="@string/cafetria_weekend"
+                    android:textAlignment="center"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cafeteria_info_container" />
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/mv_cafeteria_menu"
                     bind_is_error="@{vm.cafeteriaList == null}"
@@ -115,20 +131,21 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="12dp"
-                    android:outlineSpotShadowColor="@color/blue300"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cafeteria_info_container">
+                    app:layout_constraintTop_toBottomOf="@id/cafeteria_info_container"
+                    app:strokeColor="@color/blue300"
+                    app:strokeWidth="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:padding="8dp" >
 
                         <TextView
-                            style="@style/PretendardBold14"
+                            style="@style/PretendardBold20"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
@@ -140,8 +157,8 @@
                             android:id="@+id/rv_cafeteria_menu_list"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
                             android:layout_marginVertical="8dp"
+                            android:layout_marginStart="8dp"
                             tools:listitem="@layout/item_cafeteria_menu" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -154,20 +171,21 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="20dp"
-                    android:outlineSpotShadowColor="@color/blue300"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/mv_cafeteria_menu">
+                    app:layout_constraintTop_toBottomOf="@id/mv_cafeteria_menu"
+                    app:strokeColor="@color/blue300"
+                    app:strokeWidth="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:padding="8dp" >
 
                         <TextView
-                            style="@style/PretendardBold14"
+                            style="@style/PretendardBold20"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
@@ -179,8 +197,8 @@
                             android:id="@+id/rv_cafeteria_another_menu_list"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
                             android:layout_marginVertical="8dp"
+                            android:layout_marginStart="8dp"
                             tools:listitem="@layout/item_cafeteria_menu" />
 
                     </LinearLayout>

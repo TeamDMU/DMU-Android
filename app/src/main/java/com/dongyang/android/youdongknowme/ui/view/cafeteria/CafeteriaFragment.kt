@@ -1,6 +1,9 @@
 package com.dongyang.android.youdongknowme.ui.view.cafeteria
 
+import android.annotation.SuppressLint
+import android.view.MotionEvent
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import androidx.window.layout.WindowMetricsCalculator
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentCafeteriaBinding
@@ -16,6 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
+import java.time.temporal.TemporalAdjusters
 
 
 class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewModel>(),
@@ -24,19 +28,19 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     override val layoutResourceId: Int = R.layout.fragment_cafeteria
     override val viewModel: CafeteriaViewModel by viewModel()
 
-    private lateinit var stuKoreanMenuAdapter: CafeteriaAdapter
-    private lateinit var stuAnotherMenuAdapter: CafeteriaAdapter
+    private lateinit var koreanMenuAdapter: CafeteriaAdapter
+    private lateinit var anotherMenuAdapter: CafeteriaAdapter
 
     override fun initStartView() {
         binding.vm = viewModel
 
-        stuKoreanMenuAdapter = CafeteriaAdapter()
-        stuAnotherMenuAdapter = CafeteriaAdapter()
+        koreanMenuAdapter = CafeteriaAdapter()
+        anotherMenuAdapter = CafeteriaAdapter()
 
         binding.rvCafeteriaMenuList.apply {
             val layoutManager = FlexboxLayoutManager(context)
             layoutManager.flexDirection = FlexDirection.ROW
-            this.adapter = this@CafeteriaFragment.stuKoreanMenuAdapter
+            this.adapter = this@CafeteriaFragment.koreanMenuAdapter
             this.layoutManager = layoutManager
             this.setHasFixedSize(true)
         }
@@ -44,7 +48,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         binding.rvCafeteriaAnotherMenuList.apply {
             val layoutManager = FlexboxLayoutManager(context)
             layoutManager.flexDirection = FlexDirection.ROW
-            this.adapter = this@CafeteriaFragment.stuAnotherMenuAdapter
+            this.adapter = this@CafeteriaFragment.anotherMenuAdapter
             this.layoutManager = layoutManager
             this.setHasFixedSize(true)
         }
@@ -79,24 +83,53 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         })
 
         viewModel.menus.observe(viewLifecycleOwner) {
-            stuKoreanMenuAdapter.submitList(it)
+            koreanMenuAdapter.submitList(it)
             // 일품 메뉴 : 일품 메뉴는 리스트로 제작하여 등록
-            stuAnotherMenuAdapter.submitList(listOf(getString(R.string.cafeteria_no_menu)))
+            anotherMenuAdapter.submitList(listOf(getString(R.string.cafeteria_no_menu)))
         }
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun initAfterBinding() {
+        val nearestMonday = findNearestMonday(LocalDate.now())
+
         binding.cvCafeteriaCalendar.setup(
-            YearMonth.now().minusMonths(2),
-            YearMonth.now().plusMonths(1),
-            DayOfWeek.values().random()
+            YearMonth.from(nearestMonday),
+            YearMonth.from(nearestMonday.plusDays(4)),
+            DayOfWeek.MONDAY
         )
 
-        binding.cvCafeteriaCalendar.scrollToDate(LocalDate.now().minusDays(2))
+        binding.cvCafeteriaCalendar.scrollToDate(nearestMonday)
 
         binding.cafeteriaErrorContainer.refresh.setOnClickListener {
             viewModel.fetchCafeteria()
+        }
+
+        binding.cvCafeteriaCalendar.setOnTouchListener { _, event ->
+            when (event.actionMasked) {
+                MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE -> {
+                    true
+                }
+
+                else -> false
+            }
+        }
+    }
+
+    private fun findNearestMonday(currentDate: LocalDate): LocalDate {
+        return when (currentDate.dayOfWeek) {
+            DayOfWeek.SATURDAY, DayOfWeek.SUNDAY -> {
+                currentDate.with(TemporalAdjusters.next(DayOfWeek.MONDAY))
+            }
+
+            DayOfWeek.MONDAY -> {
+                currentDate
+            }
+
+            else -> {
+                currentDate.with(TemporalAdjusters.previous(DayOfWeek.MONDAY))
+            }
         }
     }
 
