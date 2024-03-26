@@ -50,7 +50,6 @@ class DepartActivity : BaseActivity<ActivityDepartBinding, DepartViewModel>(), D
         viewModel.selectDepartPosition.observe(this) {
             adapter.submitPosition(it)
 
-            // 포지션 선택 시 스낵바를 통해 알림 표시
             if (it != -1) getDepart(items)
         }
 
