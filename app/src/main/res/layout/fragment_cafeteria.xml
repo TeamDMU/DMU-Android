@@ -108,21 +108,6 @@
                         android:layout_gravity="center" />
                 </LinearLayout>
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_weekend_cafeteria"
-                    style="@style/Colors_Widget.MaterialComponents.Chip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:backgroundTint="@color/blue100"
-                    android:clickable="false"
-                    android:text="@string/cafetria_weekend"
-                    android:textAlignment="center"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cafeteria_info_container" />
-
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/mv_cafeteria_menu"
                     bind_is_error="@{vm.cafeteriaList == null}"
