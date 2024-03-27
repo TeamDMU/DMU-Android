@@ -84,9 +84,9 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
             adapter.submitPosition(it)
 
             if (it != -1) {
-                getDepart(items)
+                getDepart(searchList)
                 binding.etOnboardingDepartSearch.setText(
-                    items[viewModel.selectDepartPosition.value ?: 0]
+                    searchList[viewModel.selectDepartPosition.value ?: 0]
                 )
             }
         }
