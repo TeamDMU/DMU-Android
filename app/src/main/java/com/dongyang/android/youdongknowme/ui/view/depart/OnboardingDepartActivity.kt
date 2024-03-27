@@ -32,7 +32,7 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
 
         // 학과 리스트
         adapter = OnboardingDepartAdapter().apply {
-            submitList(items)
+            submitList(emptyList)
             setItemClickListener(this@OnboardingDepartActivity)
         }
 
