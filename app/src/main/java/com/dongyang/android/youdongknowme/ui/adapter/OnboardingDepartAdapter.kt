@@ -1,10 +1,8 @@
 package com.dongyang.android.youdongknowme.ui.adapter
 
 import android.annotation.SuppressLint
-import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.dongyang.android.youdongknowme.databinding.ItemOnboardingDepartBinding
 import com.dongyang.android.youdongknowme.ui.view.depart.DepartClickListener
