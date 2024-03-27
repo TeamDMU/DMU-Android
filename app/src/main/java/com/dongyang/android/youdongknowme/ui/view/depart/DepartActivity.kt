@@ -37,9 +37,15 @@ class DepartActivity : BaseActivity<ActivityDepartBinding, DepartViewModel>(), D
 
     }
 
-    override fun initDataBinding() = Unit
+    override fun initDataBinding() {
+        viewModel.myDepartment.observe(this) { department ->
+            viewModel.setSelectPosition(items.indexOf(department))
+        }
+    }
 
     override fun initAfterBinding() {
+        viewModel.getUserDepartment()
+
         viewModel.selectDepartPosition.observe(this) {
             adapter.submitPosition(it)
             if (it != -1) getDepart(items)
