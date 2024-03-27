@@ -28,7 +28,7 @@ class NoticeViewModel(
     val selectedTab: LiveData<Event<NoticeTabType>> = _selectedTab
 
     private val _myDepartment: MutableLiveData<String> = MutableLiveData()
-    val myDepartment: LiveData<String> = _myDepartment
+    private val myDepartment: LiveData<String> = _myDepartment
 
     private val _universityNotices: MutableLiveData<List<Notice>?> = MutableLiveData()
     val universityNotices: LiveData<List<Notice>?> = _universityNotices
