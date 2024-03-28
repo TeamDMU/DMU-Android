@@ -22,8 +22,10 @@ class DepartAdapter : RecyclerView.Adapter<DepartAdapter.ViewHolder>() {
         @SuppressLint("UseCompatLoadingForColorStateLists")
         fun bind(item: String, position: Int) {
             binding.itemDepartName.text = item
-            binding.itemClickListener = itemClickListener
-            binding.currentPosition = position
+
+            binding.itemDepartContainer.setOnClickListener {
+                itemClickListener?.containerClick(position)
+            }
 
             // 선택한 포지션이 맞을 때 강조 표시
             if (currentPosition == position) {
