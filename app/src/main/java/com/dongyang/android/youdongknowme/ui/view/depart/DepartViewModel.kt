@@ -19,7 +19,7 @@ class DepartViewModel(private val departRepository: DepartRepository) : BaseView
         getUserDepartment()
     }
 
-    fun getUserDepartment() {
+    private fun getUserDepartment() {
         val myDepartment = departRepository.getUserDepartment()
         _myDepartment.postValue(myDepartment)
     }
