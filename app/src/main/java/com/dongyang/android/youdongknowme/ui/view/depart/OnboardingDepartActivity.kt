@@ -65,7 +65,7 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
             override fun afterTextChanged(editable: Editable?) {
                 val searchText = binding.etOnboardingDepartSearch.text.toString()
                 searchList = ArrayList<String>()
-                
+
                 if (searchText.isEmpty()) {
                     adapter.setItems(emptyList)
                 } else {
