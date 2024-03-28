@@ -63,7 +63,7 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
         val myDepartment = settingRepository.getUserDepartment()
         _myDepartment.postValue(myDepartment)
     }
-
+    
     fun getUserTopic() {
         viewModelScope.launch {
             val keyword = settingRepository.getUserTopic()

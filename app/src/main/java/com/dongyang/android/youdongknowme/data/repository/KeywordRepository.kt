@@ -15,10 +15,4 @@ class KeywordRepository(
     suspend fun updateUserKeywords(isSubscribe: Boolean, name: String) {
         keywordDao.updateKeyword(isSubscribe, name)
     }
-
-    fun getIsFirstLaunch(): Boolean = SharedPreference.getIsFirstLaunch()
-
-    fun setIsFirstLaunch(isFirstLaunch: Boolean) {
-        SharedPreference.setIsFirstLaunch(isFirstLaunch)
-    }
 }

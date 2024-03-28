@@ -18,7 +18,7 @@ class OnboardingKeywordActivity : BaseActivity<ActivityOnboardingKeywordBinding,
 
     override fun initStartView() {
         // 부분 색상 지정
-        setSpanText(this, binding.tvOnboardingKeywordTitleMain,startIdx = 0, endIdx = 3)
+        setSpanText(this, binding.tvOnboardingKeywordTitleMain, startIdx = 0, endIdx = 3)
     }
 
     override fun initDataBinding() {
@@ -40,17 +40,14 @@ class OnboardingKeywordActivity : BaseActivity<ActivityOnboardingKeywordBinding,
     }
 
     override fun initAfterBinding() {
-        viewModel.checkFirstLaunch()
         viewModel.getLocalKeywordList()
 
         // TODO :: 안드로이드 데이터베이스에 유저별 설정한 키워드 저장 및 파이어베이스 키워드 구독 설정
         binding.btnOnboardingKeywordNext.setOnClickListener {
             viewModel.subscribeCheckedKeyword()
-            if (viewModel.isFirstLaunch.value == true) {
-                viewModel.setFirstLaunch(false)
-                val intent = Intent(this@OnboardingKeywordActivity, OnboardingPermissionActivity::class.java)
-                startActivity(intent)
-            }
+            val intent =
+                Intent(this@OnboardingKeywordActivity, OnboardingPermissionActivity::class.java)
+            startActivity(intent)
             finish()
         }
     }

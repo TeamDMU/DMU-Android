@@ -35,11 +35,9 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
     }
 
     override fun initAfterBinding() {
-        viewModel.checkFirstLaunch()
         viewModel.getLocalKeywordList()
 
         binding.btnKeywordComplete.setOnClickListener {
-            viewModel.subscribeCheckedKeyword()
             setResult(RESULT_OK)
             finish()
         }
