@@ -14,7 +14,7 @@ import com.dongyang.android.youdongknowme.ui.view.depart.DepartClickListener
 
 class DepartAdapter : RecyclerView.Adapter<DepartAdapter.ViewHolder>() {
 
-    private var item = ArrayList<String>()
+    private val item = ArrayList<String>()
     private var itemClickListener: DepartClickListener? = null
     private var currentPosition = -1
     private var beforePosition = -1
@@ -47,11 +47,6 @@ class DepartAdapter : RecyclerView.Adapter<DepartAdapter.ViewHolder>() {
 
             }
         }
-    }
-
-    fun setItems(list: ArrayList<String>) {
-        this.item = list
-        notifyDataSetChanged()
     }
 
     @SuppressLint("NotifyDataSetChanged")
