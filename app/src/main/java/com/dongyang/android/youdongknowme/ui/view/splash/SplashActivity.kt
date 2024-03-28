@@ -26,6 +26,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
     override val viewModel: SplashViewModel by viewModel()
 
     private var intentJob: Job? = null
+    var intent = MainActivity.createIntent(this@SplashActivity)
 
     override fun initStartView() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -43,21 +44,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
             delay(SPLASH_TIME_MILLIS)
 
             if (viewModel.isFirstLaunch.value == true) {
-                val intent = OnboardingDepartActivity.createIntent(this@SplashActivity)
-
-                if (PackageManager.PERMISSION_DENIED == ContextCompat.checkSelfPermission(
-                        this@SplashActivity, Manifest.permission.POST_NOTIFICATIONS
-                    )
-                ) {
-                    // 알림 권한 설정 허용
-                    ActivityCompat.requestPermissions(
-                        this@SplashActivity, arrayOf(Manifest.permission.POST_NOTIFICATIONS), REQUEST_PERMISSION_CODE
-                    )
-                } else {
-                    // 알림 권한 설정 미허용
-                    startActivity(intent)
-                    finish()
-                }
+                permissionCheck()
             } else {
                 intent = MainActivity.createIntent(this@SplashActivity)
                 startActivity(intent)
@@ -72,6 +59,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
         if (requestCode == REQUEST_PERMISSION_CODE) {
             // 권한 설정 결과 처리
             intent = if (viewModel.isFirstLaunch.value == true) {
@@ -84,6 +72,25 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
         }
     }
 
+    private fun permissionCheck() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (PackageManager.PERMISSION_DENIED == ContextCompat.checkSelfPermission(
+                    this@SplashActivity, Manifest.permission.POST_NOTIFICATIONS
+                )
+            ) {
+                // 알림 권한 설정 허용
+                ActivityCompat.requestPermissions(
+                    this@SplashActivity,
+                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                    REQUEST_PERMISSION_CODE
+                )
+            } else {
+                // 알림 권한 설정 미허용
+                startActivity(intent)
+                finish()
+            }
+        }
+    }
 
     override fun onBackPressed() {
         intentJob?.cancel()
