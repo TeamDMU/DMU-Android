@@ -26,6 +26,9 @@ class NoticeViewModel(
     private val _selectedTab: MutableLiveData<Event<NoticeTabType>> = MutableLiveData()
     val selectedTab: LiveData<Event<NoticeTabType>> = _selectedTab
 
+    private val _myDepartment: MutableLiveData<String> = MutableLiveData()
+    private val myDepartment: LiveData<String> = _myDepartment
+
     private val _universityNotices: MutableLiveData<List<Notice>?> = MutableLiveData()
     val universityNotices: LiveData<List<Notice>?> = _universityNotices
 
@@ -38,6 +41,12 @@ class NoticeViewModel(
     init {
         updateSelectedTabType(NoticeTabType.SCHOOL)
         fetchUniversityNotices()
+        getUserDepartment()
+    }
+
+    private fun getUserDepartment() {
+        val myDepartment = noticeRepository.getUserDepartment()
+        _myDepartment.postValue(myDepartment)
     }
 
     fun updateSelectedTabType(tabType: NoticeTabType) {
@@ -77,9 +86,11 @@ class NoticeViewModel(
         _isLoading.postValue(true)
 
         viewModelScope.launch {
-            when (val result = noticeRepository.fetchDepartmentNotices(
-                "컴퓨터소프트웨어공학과", departmentNoticeCurrentPage
-            )) {
+            when (val result =
+                noticeRepository.fetchDepartmentNotices(
+                    myDepartment.value.toString(),
+                    departmentNoticeCurrentPage
+                )) {
                 is NetworkResult.Success -> {
                     val updatedNotices = _departmentNotices.value.orEmpty() + result.data
                     _departmentNotices.postValue(updatedNotices)
@@ -119,9 +130,11 @@ class NoticeViewModel(
                 }
 
                 NoticeTabType.FACULTY -> viewModelScope.launch {
-                    when (val result = noticeRepository.fetchDepartmentNotices(
-                        "컴퓨터소프트웨어공학과", DEFAULT_REFRESH_PAGE
-                    )) {
+                    when (val result =
+                        noticeRepository.fetchDepartmentNotices(
+                            myDepartment.value.toString(),
+                            DEFAULT_REFRESH_PAGE
+                        )) {
                         is NetworkResult.Success -> {
                             _departmentNotices.value = result.data
                             _isError.postValue(false)
