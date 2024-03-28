@@ -48,7 +48,7 @@ class FCMService : FirebaseMessagingService() {
 
         // 알림 생성
         val builder = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(com.dongyang.android.youdongknowme.R.mipmap.ic_launcher) // 알림 아이콘 설정
+            .setSmallIcon(com.dongyang.android.youdongknowme.R.mipmap.ic_logo) // 알림 아이콘 설정
             .setContentTitle(title) // 알림 제목
             .setContentText(message) // 알림 내용
             .setAutoCancel(true) // 터치 시 자동으로 삭제되도록 설정
