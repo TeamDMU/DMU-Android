@@ -6,7 +6,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.view.depart.DepartActivity">
+        tools:context=".ui.view.depart.DepartActivity"
+        android:paddingHorizontal="16dp">
 
         <include
             android:id="@+id/toolbar_depart"
@@ -35,7 +36,6 @@
             style="@style/PretendardRegular20"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/btn_gray_to_blue_10dp_enabled"
             android:text="@string/department_complete"

@@ -3,10 +3,9 @@
 
     <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/item_depart_container"
+        android:id="@+id/item_onboarding_depart_container"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_margin="8dp"
+        android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
         android:outlineProvider="none"
@@ -16,13 +15,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/item_depart_name"
-            style="@style/PretendardRegular18"
+            android:id="@+id/item_onboarding_depart_name"
+            style="@style/PretendardMedium16"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
+            android:gravity="left"
             android:padding="16dp"
-            android:textColor="@color/gray400"
+            android:textColor="@color/gray300"
             app:layout_constraintTop_toTopOf="parent" />
 
     </com.google.android.material.card.MaterialCardView>
