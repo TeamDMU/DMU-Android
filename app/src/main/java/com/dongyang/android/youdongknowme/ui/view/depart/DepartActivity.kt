@@ -23,7 +23,7 @@ class DepartActivity : BaseActivity<ActivityDepartBinding, DepartViewModel>(), D
 
     override fun initStartView() {
         // 학과 리스트
-        val items =
+        items =
             resources.getStringArray(R.array.dmu_department_list).toCollection(ArrayList<String>())
         items.sort()
 
