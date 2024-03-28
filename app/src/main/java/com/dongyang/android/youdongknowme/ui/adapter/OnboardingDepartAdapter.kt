@@ -20,8 +20,10 @@ class OnboardingDepartAdapter : RecyclerView.Adapter<OnboardingDepartAdapter.Vie
         @SuppressLint("UseCompatLoadingForColorStateLists")
         fun bind(item: String, position: Int) {
             binding.itemOnboardingDepartName.text = item
-            binding.itemClickListener = itemClickListener
-            binding.currentPosition = position
+
+            binding.itemOnboardingDepartContainer.setOnClickListener {
+                itemClickListener?.containerClick(position)
+            }
         }
     }
 
