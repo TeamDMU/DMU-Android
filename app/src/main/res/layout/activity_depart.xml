@@ -6,18 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.view.depart.DepartActivity"
-        android:paddingHorizontal="16dp">
-
-        <include
-            android:id="@+id/toolbar_depart"
-            layout="@layout/standard_toolbar"
-            android:layout_width="0dp"
-            android:layout_height="?android:attr/actionBarSize"
-            app:exitVisible="@{true}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:title="@{@string/department_title}" />
+        tools:context=".ui.view.depart.DepartActivity">
 
         <include
             android:id="@+id/toolbar_depart"
