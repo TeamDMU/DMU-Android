@@ -10,7 +10,7 @@ import com.dongyang.android.youdongknowme.ui.view.depart.DepartClickListener
 
 class OnboardingDepartAdapter : RecyclerView.Adapter<OnboardingDepartAdapter.ViewHolder>() {
 
-    private var item = ArrayList<String>()
+    private val item = ArrayList<String>()
     private var itemClickListener: DepartClickListener? = null
     private var currentPosition = -1
     private var beforePosition = -1
@@ -25,13 +25,9 @@ class OnboardingDepartAdapter : RecyclerView.Adapter<OnboardingDepartAdapter.Vie
         }
     }
 
-    fun setItems(list: ArrayList<String>) {
-        this.item = list
-        notifyDataSetChanged()
-    }
-
     @SuppressLint("NotifyDataSetChanged")
     fun submitList(item: ArrayList<String>) {
+        this.item.clear()
         this.item.addAll(item)
         notifyDataSetChanged()
     }

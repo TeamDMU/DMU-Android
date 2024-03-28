@@ -64,7 +64,7 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
                 searchList = ArrayList<String>()
 
                 if (searchText.isEmpty()) {
-                    adapter.setItems(emptyList)
+                    adapter.submitList(emptyList)
                 } else {
                     // 검색 단어를 포함하는지 확인
                     for (item in items) {
@@ -72,7 +72,7 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
                             searchList.add(item)
                         }
                     }
-                    adapter.setItems(searchList)
+                    adapter.submitList(searchList)
                 }
             }
         })
