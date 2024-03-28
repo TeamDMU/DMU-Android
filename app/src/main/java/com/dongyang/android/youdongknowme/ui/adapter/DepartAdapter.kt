@@ -10,7 +10,6 @@ import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ItemDepartBinding
 import com.dongyang.android.youdongknowme.ui.view.depart.DepartClickListener
 
-
 class DepartAdapter : RecyclerView.Adapter<DepartAdapter.ViewHolder>() {
 
     private var item = ArrayList<String>()
@@ -28,7 +27,12 @@ class DepartAdapter : RecyclerView.Adapter<DepartAdapter.ViewHolder>() {
 
             // 선택한 포지션이 맞을 때 강조 표시
             if (currentPosition == position) {
-                binding.itemDepartContainer.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(binding.root.context, R.color.blue300))
+                binding.itemDepartContainer.backgroundTintList = ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                        binding.root.context,
+                        R.color.blue300
+                    )
+                )
                 binding.itemDepartName.setTextColor(
                     ContextCompat.getColor(
                         binding.root.context,
@@ -36,7 +40,12 @@ class DepartAdapter : RecyclerView.Adapter<DepartAdapter.ViewHolder>() {
                     )
                 )
             } else {
-                binding.itemDepartContainer.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(binding.root.context, R.color.white))
+                binding.itemDepartContainer.backgroundTintList = ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                        binding.root.context,
+                        R.color.white
+                    )
+                )
                 binding.itemDepartName.setTextColor(
                     ContextCompat.getColor(
                         binding.root.context,

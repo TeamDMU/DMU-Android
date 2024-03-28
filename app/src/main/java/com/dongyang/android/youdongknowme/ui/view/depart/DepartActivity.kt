@@ -37,7 +37,6 @@ class DepartActivity : BaseActivity<ActivityDepartBinding, DepartViewModel>(), D
             this.layoutManager = LinearLayoutManager(this@DepartActivity)
             this.setHasFixedSize(true)
         }
-
     }
 
     override fun initDataBinding() {
