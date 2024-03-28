@@ -1,4 +1,4 @@
-package com.dongyang.android.youdongknowme.ui.view.permission
+package com.dongyang.android.youdongknowme.ui.view.setting
 
 import android.Manifest
 import android.content.Intent
