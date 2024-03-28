@@ -6,9 +6,9 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
-import android.net.Uri
 import android.os.Build
 import androidx.core.app.NotificationCompat
+import com.dongyang.android.youdongknowme.ui.view.detail.DetailActivity
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -41,8 +41,9 @@ class FCMService : FirebaseMessagingService() {
 
         // Intent 및 PendingIntent 생성
         val intent = if (url.isNullOrEmpty().not()) {
-            val uri = Uri.parse(url)
-            Intent(Intent.ACTION_VIEW, uri)
+            DetailActivity.newIntent(this, url).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
         } else {
             Intent(this, MainActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
