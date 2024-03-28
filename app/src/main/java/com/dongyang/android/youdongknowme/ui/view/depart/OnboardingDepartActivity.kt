@@ -51,7 +51,7 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
 
     override fun initAfterBinding() {
         binding.ibOnboardingDepartSearchClear.setOnClickListener {
-            binding.etOnboardingDepartSearch.setText("")
+            binding.etOnboardingDepartSearch.text.clear()
         }
 
         binding.etOnboardingDepartSearch.addTextChangedListener(object : TextWatcher {
