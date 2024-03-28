@@ -9,7 +9,6 @@ import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.standard.network.NetworkResult
 import com.dongyang.android.youdongknowme.ui.view.util.Event
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class NoticeViewModel(
     private val noticeRepository: NoticeRepository
@@ -87,7 +86,6 @@ class NoticeViewModel(
         _isLoading.postValue(true)
 
         viewModelScope.launch {
-            Timber.d(myDepartment.value.toString())
             when (val result =
                 noticeRepository.fetchDepartmentNotices(
                     myDepartment.value.toString(),
