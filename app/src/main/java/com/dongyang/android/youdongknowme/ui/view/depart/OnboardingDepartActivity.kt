@@ -85,6 +85,7 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
                 binding.etOnboardingDepartSearch.setText(
                     searchList[viewModel.selectDepartPosition.value ?: 0]
                 )
+                binding.etOnboardingDepartSearch.setSelection(binding.etOnboardingDepartSearch.text.length)
             }
         }
     }
