@@ -27,10 +27,11 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
     override fun initStartView() {
         viewModel.checkFirstLaunch()
 
-        items = resources.getStringArray(R.array.dmu_department_list).toList().sorted()
-            .toCollection(ArrayList())
-
         // 학과 리스트
+        items =
+            resources.getStringArray(R.array.dmu_department_list).toCollection(ArrayList<String>())
+        items.sort()
+
         adapter = OnboardingDepartAdapter().apply {
             submitList(emptyList)
             setItemClickListener(this@OnboardingDepartActivity)
