@@ -66,8 +66,8 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
                 val searchText = binding.etOnboardingDepartSearch.text.toString()
                 searchList = ArrayList<String>()
 
-                if (searchText.isBlank()) {
-                    adapter.setItems(items)
+                if (searchText.isEmpty()) {
+                    adapter.setItems(emptyList)
                 } else {
                     // 검색 단어를 포함하는지 확인
                     for (item in items) {
