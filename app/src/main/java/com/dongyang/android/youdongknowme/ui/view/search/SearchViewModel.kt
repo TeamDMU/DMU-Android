@@ -24,15 +24,27 @@ class SearchViewModel(
     val isError: LiveData<Boolean> = _isError
 
     private val _searchContent: MutableLiveData<String> = MutableLiveData()
-    val searchContent: LiveData<String> = _searchContent
+    private val searchContent: LiveData<String> = _searchContent
 
     private val _searchClearVisibility: MutableLiveData<Boolean> = MutableLiveData()
     val searchClearVisibility: LiveData<Boolean> get() = _searchClearVisibility
+
+    private val _myDepartment: MutableLiveData<String> = MutableLiveData()
+    val myDepartment: LiveData<String> = _myDepartment
 
     private val _searchNotices: MutableLiveData<List<Notice>> = MutableLiveData()
     val searchNotices: LiveData<List<Notice>> = _searchNotices
 
     private var searchNoticeCurrentPage = 1
+
+    init {
+        getUserDepartment()
+    }
+
+    private fun getUserDepartment() {
+        val myDepartment = noticeRepository.getUserDepartment()
+        _myDepartment.postValue(myDepartment)
+    }
 
     fun updateSearchContent(newContent: String) {
         _searchContent.value = newContent
@@ -54,7 +66,8 @@ class SearchViewModel(
         viewModelScope.launch {
             when (val result =
                 noticeRepository.fetchSearchNotices(
-                    _searchContent.value.toString(),
+                    searchContent.value.toString(),
+                    myDepartment.value.toString(),
                     searchNoticeCurrentPage
                 )) {
                 is NetworkResult.Success -> {
