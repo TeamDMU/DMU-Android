@@ -3,6 +3,7 @@ package com.dongyang.android.youdongknowme.service
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
@@ -39,23 +40,33 @@ class FCMService : FirebaseMessagingService() {
             notificationManager.createNotificationChannel(channel)
         }
 
-        // Intent 및 PendingIntent 생성
-        val intent = if (url.isNullOrEmpty().not()) {
-            DetailActivity.newIntent(this, url).apply {
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            }
-        } else {
-            Intent(this, MainActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-            }
+        // MainActivity를 시작하는 Intent 생성
+        val mainIntent = Intent(this, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
         }
 
-        val pendingIntent = PendingIntent.getActivity(
-            this,
-            0,
-            intent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-        )
+        // DetailActivity를 열기 위한 Intent 생성
+        val detailIntent = if (!url.isNullOrEmpty()) {
+            DetailActivity.newIntent(this, url)
+        } else {
+            null // URL이 없는 경우에는 null 할당
+        }
+
+        // PendingIntent 생성
+        val pendingIntent = if (detailIntent != null) {
+            TaskStackBuilder.create(this).run {
+                addNextIntent(mainIntent)
+                addNextIntentWithParentStack(detailIntent) // DetailActivity를 부모 스택으로 추가
+                getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+            }
+        } else {
+            PendingIntent.getActivity(
+                this,
+                0,
+                mainIntent,
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            )
+        }
 
         // 알림 생성
         val builder = NotificationCompat.Builder(this, channelId)
