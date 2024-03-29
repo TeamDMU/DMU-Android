@@ -2,11 +2,26 @@ package com.dongyang.android.youdongknowme.ui.view.setting
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.dongyang.android.youdongknowme.data.remote.entity.RemoveDepartment
+import com.dongyang.android.youdongknowme.data.remote.entity.UpdateDepartment
 import com.dongyang.android.youdongknowme.data.repository.SettingRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
+import com.dongyang.android.youdongknowme.standard.network.NetworkResult
+import com.dongyang.android.youdongknowme.ui.view.util.Event
+import kotlinx.coroutines.launch
 
 /* 설정 뷰모델 */
 class SettingViewModel(private val settingRepository: SettingRepository) : BaseViewModel() {
+
+    private val _errorState: MutableLiveData<Event<Int>> = MutableLiveData()
+    val errorState: LiveData<Event<Int>> = _errorState
+
+    private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val isLoading: LiveData<Boolean> = _isLoading
+
+    private val _isError: MutableLiveData<Boolean> = MutableLiveData()
+    val isError: LiveData<Boolean> = _isError
 
     private val _isAccessUniversityAlarm: MutableLiveData<Boolean> = MutableLiveData(false)
     val isAccessUniversityAlarm: LiveData<Boolean> get() = _isAccessUniversityAlarm
@@ -16,6 +31,13 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
 
     private val _myDepartment: MutableLiveData<String> = MutableLiveData()
     val myDepartment: LiveData<String> get() = _myDepartment
+
+    private val _FCMToken: MutableLiveData<String> = MutableLiveData()
+    val FCMToken: LiveData<String> get() = _FCMToken
+
+    init {
+        getUserFCMToken()
+    }
 
     fun checkAccessAlarm() {
         val isAccessSchoolAlarm = settingRepository.getIsAccessSchoolAlarm()
@@ -36,5 +58,53 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
     fun getUserDepartment() {
         val myDepartment = settingRepository.getUserDepartment()
         _myDepartment.postValue(myDepartment)
+    }
+
+    private fun getUserFCMToken() {
+        val token = settingRepository.getUserFCMToken()
+        _FCMToken.postValue(token)
+    }
+
+    fun updateUserDepartment() {
+        _isLoading.postValue(true)
+        viewModelScope.launch {
+            when (val result = settingRepository.updateUserDepartment(
+                UpdateDepartment(
+                    token = FCMToken.value.toString(), department = myDepartment.value.toString()
+                )
+            )) {
+                is NetworkResult.Success -> {
+                    settingRepository.setIsAccessDepartAlarm(true)
+                    _isLoading.postValue(false)
+                    _isError.postValue(false)
+                }
+
+                is NetworkResult.Error -> {
+                    handleError(result, _errorState)
+                    _isLoading.postValue(false)
+                    _isError.postValue(true)
+                }
+            }
+        }
+    }
+
+    fun removeUserDepartment() {
+        _isLoading.postValue(true)
+        viewModelScope.launch {
+            when (val result =
+                settingRepository.removeUserDepartment(RemoveDepartment(FCMToken.value.toString()))) {
+                is NetworkResult.Success -> {
+                    settingRepository.setIsAccessDepartAlarm(false)
+                    _isLoading.postValue(false)
+                    _isError.postValue(false)
+                }
+
+                is NetworkResult.Error -> {
+                    handleError(result, _errorState)
+                    _isLoading.postValue(false)
+                    _isError.postValue(true)
+                }
+            }
+        }
     }
 }
