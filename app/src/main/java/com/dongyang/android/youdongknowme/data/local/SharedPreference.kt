@@ -49,4 +49,13 @@ object SharedPreference {
     fun getIsAccessDepartAlarm(): Boolean = pref?.getBoolean(ACCESS_DEPART_ALARM, true) ?: true
     fun setIsAccessDepartAlarm(isAccessDepartAlarm: Boolean) = pref?.edit()?.putBoolean(ACCESS_DEPART_ALARM, isAccessDepartAlarm)?.apply()
 
+    // FCM 토큰
+    private const val FCM_TOKEN = "FCM_TOKEN"
+    fun saveFcmToken(context: Context, token: String) {
+        getInstance(context).setFcmToken(token)
+    }
+
+    private fun setFcmToken(token: String) {
+        pref?.edit()?.putString(FCM_TOKEN, token)?.apply()
+    }
 }

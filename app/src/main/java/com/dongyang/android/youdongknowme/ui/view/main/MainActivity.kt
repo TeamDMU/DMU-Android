@@ -6,6 +6,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.plusAssign
 import androidx.navigation.ui.setupWithNavController
 import com.dongyang.android.youdongknowme.R
+import com.dongyang.android.youdongknowme.data.local.SharedPreference
 import com.dongyang.android.youdongknowme.databinding.ActivityMainBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.view.util.KeepStateNavigator
@@ -38,9 +39,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         getFcmToken()
     }
 
-    override fun initDataBinding() {}
+    override fun initDataBinding() = Unit
 
-    override fun initAfterBinding() {}
+    override fun initAfterBinding() = Unit
 
     private fun getFcmToken() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
@@ -49,9 +50,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             }
 
             val token = task.result
-            Timber.d(token)
-            //TODO: prefs 선언 중복 제거될 경우 주석 제거
-            //prefs.edit().putString("fcm_token", token).commit()
+            Timber.d("fcm_token: $token")
+            SharedPreference.saveFcmToken(this, token)
         })
     }
 
