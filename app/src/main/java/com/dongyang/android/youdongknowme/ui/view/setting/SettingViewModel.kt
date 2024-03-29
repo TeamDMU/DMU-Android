@@ -3,6 +3,7 @@ package com.dongyang.android.youdongknowme.ui.view.setting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
 import com.dongyang.android.youdongknowme.data.remote.entity.RemoveToken
 import com.dongyang.android.youdongknowme.data.remote.entity.UpdateDepartment
 import com.dongyang.android.youdongknowme.data.remote.entity.UpdateTopic
@@ -34,8 +35,8 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
     private val _myDepartment: MutableLiveData<String> = MutableLiveData()
     val myDepartment: LiveData<String> get() = _myDepartment
 
-    private val _myTopic: MutableLiveData<List<String>> = MutableLiveData()
-    val myTopic: LiveData<List<String>> get() = _myTopic
+    private val _myTopics: MutableLiveData<List<String>> = MutableLiveData()
+    val myTopics: LiveData<List<String>> get() = _myTopics
 
     private val _FCMToken: MutableLiveData<String> = MutableLiveData()
     val FCMToken: LiveData<String> get() = _FCMToken
@@ -68,7 +69,7 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
     fun getUserTopic() {
         viewModelScope.launch {
             val keyword = settingRepository.getUserTopic()
-            _myTopic.value = keyword
+            _myTopics.value = keyword
         }
     }
 
@@ -124,13 +125,13 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
         }
     }
 
-    fun updateUserTopic() {
+    fun updateUserTopic(topic: List<String>) {
         _isLoading.postValue(true)
         viewModelScope.launch {
             when (val result = settingRepository.updateUserTopic(
                 UpdateTopic(
                     token = FCMToken.value.toString(),
-                    topics = myTopic.value ?: emptyList()
+                    topics = topic
                 )
             )) {
                 is NetworkResult.Success -> {
@@ -143,7 +144,6 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
                     handleError(result, _errorState)
                     _isLoading.postValue(false)
                     _isError.postValue(true)
-                    Timber.d("topic: ${UpdateTopic(FCMToken.value.toString(), myTopic.value?: emptyList())}")
                 }
             }
         }
