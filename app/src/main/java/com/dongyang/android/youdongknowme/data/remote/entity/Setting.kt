@@ -5,6 +5,11 @@ data class UpdateDepartment(
     val department: String,
 )
 
-data class RemoveDepartment(
+data class RemoveToken(
     val token: String,
+)
+
+data class UpdateTopic(
+    val token: String,
+    val topics: List<String>,
 )

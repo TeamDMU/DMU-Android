@@ -16,8 +16,6 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
     override val layoutResourceId: Int = R.layout.fragment_setting
     override val viewModel: SettingViewModel by viewModel()
 
-    private lateinit var FCMToken: String
-
     override fun initStartView() {
         binding.tvSettingAppVersion.text = getAppVersion()
     }
@@ -35,22 +33,19 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
         viewModel.isAccessDepartAlarm.observe(viewLifecycleOwner) { isChecked ->
             binding.switchSettingDepartmentAlarm.isChecked = isChecked
         }
-
-        viewModel.FCMToken.observe(viewLifecycleOwner) { token ->
-            FCMToken = token
-        }
     }
 
     override fun initAfterBinding() {
 
         viewModel.checkAccessAlarm()
         viewModel.getUserDepartment()
+        viewModel.getUserTopic()
 
         binding.switchSettingUniversityAlarm.setOnCheckedChangeListener { compoundButton, _ ->
             if (compoundButton.isChecked) {
-                viewModel.setIsAccessSchoolAlarm(true)
+                viewModel.updateUserTopic()
             } else {
-                viewModel.setIsAccessSchoolAlarm(false)
+                viewModel.removeUserTopic()
             }
         }
 

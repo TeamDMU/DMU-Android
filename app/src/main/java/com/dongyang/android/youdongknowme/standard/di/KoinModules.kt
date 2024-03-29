@@ -117,7 +117,7 @@ val repositoryModule = module {
         KeywordRepository(get())
     }
     single {
-        SettingRepository(get())
+        SettingRepository(get(), get())
     }
     single {
         AlarmRepository(get())
