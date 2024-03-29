@@ -51,7 +51,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
             val token = task.result
             Timber.d("fcm_token: $token")
-            SharedPreference.saveFcmToken(this, token)
+            SharedPreference.setFcmToken(token)
         })
     }
 

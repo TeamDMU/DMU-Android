@@ -37,25 +37,24 @@ object SharedPreference {
     // 최초 접속 여부
     private const val FIRST_LAUNCH = "FIRST_LAUNCH"
     fun getIsFirstLaunch(): Boolean = pref?.getBoolean(FIRST_LAUNCH, true) ?: true
-    fun setIsFirstLaunch(isFirstLaunch: Boolean) = pref?.edit()?.putBoolean(FIRST_LAUNCH, isFirstLaunch)?.apply()
+    fun setIsFirstLaunch(isFirstLaunch: Boolean) =
+        pref?.edit()?.putBoolean(FIRST_LAUNCH, isFirstLaunch)?.apply()
 
     // 학교 알림 설정 여부
     private const val ACCESS_SCHOOL_ALARM = "ACCESS_SCHOOL_ALARM"
     fun getIsAccessSchoolAlarm(): Boolean = pref?.getBoolean(ACCESS_SCHOOL_ALARM, true) ?: true
-    fun setIsAccessSchoolAlarm(isAccessSchoolAlarm: Boolean) = pref?.edit()?.putBoolean(ACCESS_SCHOOL_ALARM, isAccessSchoolAlarm)?.apply()
+    fun setIsAccessSchoolAlarm(isAccessSchoolAlarm: Boolean) =
+        pref?.edit()?.putBoolean(ACCESS_SCHOOL_ALARM, isAccessSchoolAlarm)?.apply()
 
     // 학과 알림 설정 여부
     private const val ACCESS_DEPART_ALARM = "ACCESS_DEPART_ALARM"
     fun getIsAccessDepartAlarm(): Boolean = pref?.getBoolean(ACCESS_DEPART_ALARM, true) ?: true
-    fun setIsAccessDepartAlarm(isAccessDepartAlarm: Boolean) = pref?.edit()?.putBoolean(ACCESS_DEPART_ALARM, isAccessDepartAlarm)?.apply()
+    fun setIsAccessDepartAlarm(isAccessDepartAlarm: Boolean) =
+        pref?.edit()?.putBoolean(ACCESS_DEPART_ALARM, isAccessDepartAlarm)?.apply()
 
     // FCM 토큰
-    private const val FCM_TOKEN = "FCM_TOKEN"
-    fun saveFcmToken(context: Context, token: String) {
-        getInstance(context).setFcmToken(token)
-    }
+    private const val FCM_TOKEN = "NO_TOKEN"
+    fun getFCMToken(): String = pref?.getString(FCM_TOKEN, "0") ?: "0"
+    fun setFcmToken(token: String) = pref?.edit()?.putString(FCM_TOKEN, token)?.apply()
 
-    private fun setFcmToken(token: String) {
-        pref?.edit()?.putString(FCM_TOKEN, token)?.apply()
-    }
 }

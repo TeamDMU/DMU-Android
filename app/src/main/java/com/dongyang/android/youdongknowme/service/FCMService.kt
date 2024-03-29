@@ -65,6 +65,6 @@ class FCMService : FirebaseMessagingService() {
     override fun onNewToken(token: String) {
         super.onNewToken(token)
         Timber.d("fcm_token_new: $token")
-        SharedPreference.saveFcmToken(this, token)
+        SharedPreference.setFcmToken(token)
     }
 }
