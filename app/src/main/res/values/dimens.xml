@@ -12,5 +12,5 @@
     <dimen name="font_size_24">24dp</dimen>
     <dimen name="font_size_32">32dp</dimen>
 
-    <dimen name="onboarding_step_size">248dp</dimen>
+    <dimen name="onboarding_step_size">280dp</dimen>
 </resources>
