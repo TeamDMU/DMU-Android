@@ -34,12 +34,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         navController.navigatorProvider += navigator
         navController.setGraph(R.navigation.dmu_navigation)
         binding.mainNvBottom.setupWithNavController(navController)
-
-        getFcmToken()
     }
 
     override fun initDataBinding() = Unit
-
+    
     override fun initAfterBinding() = Unit
 
     private fun getFcmToken() {
