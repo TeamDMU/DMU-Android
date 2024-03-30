@@ -138,4 +138,5 @@
 
     <!-- toast message -->
     <string name="toast_msg_keyword">하나 이상의 키워드를 선택해주세요.</string>
+    <string name="toast_msg_department">정확한 학과명을 기입해주세요.</string>
 </resources>
