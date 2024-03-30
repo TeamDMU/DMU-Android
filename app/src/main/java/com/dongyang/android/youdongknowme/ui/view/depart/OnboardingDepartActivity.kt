@@ -42,7 +42,7 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
         }
 
         // 부분 색상 지정
-        setSpanText(baseContext, binding.tvOnboardingDepartTitleMain, startIdx = 0, endIdx = 5)
+        setSpanText(binding.tvOnboardingDepartTitleMain, startIdx = 0, endIdx = 5)
     }
 
     override fun initDataBinding() = Unit

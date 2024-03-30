@@ -25,7 +25,7 @@ class OnboardingPermissionActivity :
         viewModel.getUserDepartment()
         setPermissionSwitch(false)
 
-        setSpanText(this, binding.tvPermissionTitleMain, startIdx = 0, endIdx = 9)
+        setSpanText(binding.tvPermissionTitleMain, startIdx = 0, endIdx = 9)
     }
 
     override fun initDataBinding() = Unit

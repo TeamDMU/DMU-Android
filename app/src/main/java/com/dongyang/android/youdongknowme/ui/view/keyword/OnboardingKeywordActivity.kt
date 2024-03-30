@@ -19,7 +19,7 @@ class OnboardingKeywordActivity :
 
     override fun initStartView() {
         // 부분 색상 지정
-        setSpanText(this, binding.tvOnboardingKeywordTitleMain, startIdx = 0, endIdx = 3)
+        setSpanText(binding.tvOnboardingKeywordTitleMain,startIdx = 0, endIdx = 3)
     }
 
     override fun initDataBinding() {

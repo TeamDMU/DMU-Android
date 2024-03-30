@@ -34,7 +34,6 @@ abstract class BaseActivity<T : ViewDataBinding, R : BaseViewModel> : AppCompatA
     }
 
     protected fun setSpanText(
-        baseContext: Context,
         spanTextView: TextView,
         startIdx: Int,
         endIdx: Int
