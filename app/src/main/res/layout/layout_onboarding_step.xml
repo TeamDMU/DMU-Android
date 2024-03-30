@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text= "@string/setting_department"
-            android:textColor="@{stepValue.equals(@string/setting_department) ? @color/main : @color/gray300}"
+            android:textColor="@{stepValue.equals(@string/setting_department) ? @color/main : @color/transparent}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_onboarding_step_1" />
 
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/setting_keyword_choice"
-            android:textColor="@{stepValue.equals(@string/setting_keyword_choice) ? @color/main : @color/gray300}"
+            android:textColor="@{stepValue.equals(@string/setting_keyword_choice) ? @color/main : @color/transparent}"
             app:layout_constraintEnd_toStartOf="@id/view_onboarding_step_3"
             app:layout_constraintStart_toEndOf="@id/view_onboarding_step_1"
             app:layout_constraintTop_toBottomOf="@id/view_onboarding_step_2" />
@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/setting_notice"
-            android:textColor="@{stepValue.equals(@string/setting_notice) ? @color/main : @color/gray300}"
+            android:textColor="@{stepValue.equals(@string/setting_notice) ? @color/main : @color/transparent}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_onboarding_step_3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
