@@ -45,47 +45,35 @@ class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel(
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 _FCMToken.value = task.result
-                getUserDepartment()
-                getUserTopic()
                 setInitToken()
-                mainRepository.setIsFirstLaunch(false)
             } else {
                 _isError.value = true
             }
         }
     }
 
-    private fun getUserDepartment() {
-        val myDepartment = mainRepository.getUserDepartment()
-        _myDepartment.postValue(myDepartment)
-    }
-
-    private fun getUserTopic() {
-        viewModelScope.launch {
-            val keyword = mainRepository.getUserTopic()
-            _myTopics.value = keyword
-        }
-    }
-
     fun setInitToken() {
         _isLoading.postValue(true)
-        Timber.tag("initToken").d(FCMToken.value.toString())
-        Timber.tag("initToken").d(_myDepartment.value)
-        Timber.tag("initToken").d(_myTopics.value.toString())
+
+        val department = mainRepository.getUserDepartment()
+        _myDepartment.postValue(department)
 
         viewModelScope.launch {
-            when (val result = myTopics.value?.let {
-                Token(
-                    token = FCMToken.value.toString(),
-                    department = myDepartment.value.toString(),
-                    topics = it
-                )
-            }?.let {
-                mainRepository.setUserToken(
-                    it
-                )
-            }) {
+
+            val keyword = mainRepository.getUserTopic()
+            _myTopics.value = keyword
+
+            val token = Token(
+                token = FCMToken.value.toString(),
+                department = myDepartment.value ?: "",
+                topics = myTopics.value ?: emptyList()
+            )
+
+            Timber.tag("initToken").d("$token")
+
+            when (val result = mainRepository.setUserToken(token)) {
                 is NetworkResult.Success -> {
+                    mainRepository.setIsFirstLaunch(false)
                     _isLoading.postValue(false)
                     _isError.postValue(false)
                 }
