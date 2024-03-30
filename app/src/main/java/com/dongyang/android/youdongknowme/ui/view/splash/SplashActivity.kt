@@ -26,7 +26,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
     override val viewModel: SplashViewModel by viewModel()
 
     private var intentJob: Job? = null
-    var intent = MainActivity.createIntent(this@SplashActivity)
 
     override fun initStartView() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
