@@ -1,10 +1,13 @@
 package com.dongyang.android.youdongknowme.ui.view.keyword
 
+import android.content.Intent
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
 import com.dongyang.android.youdongknowme.databinding.ActivityKeywordBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
+import com.dongyang.android.youdongknowme.ui.view.setting.OnboardingPermissionActivity
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -40,7 +43,18 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
         binding.btnKeywordComplete.setOnClickListener {
             viewModel.subscribeCheckedKeyword()
             setResult(RESULT_OK)
-            finish()
+
+            if (viewModel.checkKeywordList.isNotEmpty()) {
+                viewModel.subscribeCheckedKeyword()
+                val intent = Intent(
+                    this@KeywordActivity,
+                    OnboardingPermissionActivity::class.java
+                )
+                startActivity(intent)
+                finish()
+            } else {
+                Toast.makeText(this, R.string.toast_msg_keyword, Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.toolbarKeyword.btnToolbarExit.setOnClickListener { finish() }
