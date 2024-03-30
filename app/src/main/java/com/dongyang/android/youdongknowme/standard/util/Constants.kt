@@ -31,6 +31,4 @@ object CODE {
     const val HOTEL_TOURISM_CODE = 604
     const val MANAGEMENT_INFORMATION_CODE = 605
     const val BIG_DATA_MANAGEMENT_CODE = 606
-
-
 }
