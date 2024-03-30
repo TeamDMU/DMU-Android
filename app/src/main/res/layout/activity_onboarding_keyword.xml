@@ -35,7 +35,7 @@
         <include
             android:id="@+id/onboarding_keyword_step"
             layout="@layout/layout_onboarding_step"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/onboarding_step_size"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:paddingHorizontal="56dp"
