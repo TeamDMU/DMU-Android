@@ -3,14 +3,14 @@
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar" />
   
     <style name="Colors_Widget.MaterialComponents.Chip.Choice" parent="Widget.MaterialComponents.Chip.Choice">
-        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_width">100dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:checkable">true</item>
         <item name="android:checked">false</item>
         <item name="android:textAppearance">@style/PretendardSemiBold16</item>
         <item name="chipBackgroundColor">@color/bg_chip_select</item>
-        <item name="chipStrokeColor">@color/line</item>
-        <item name="chipStrokeWidth">0.4dp</item>
+        <item name="chipStrokeColor">@color/gray400</item>
+        <item name="chipStrokeWidth">1dp</item>
         <item name="android:textAlignment">center</item>
         <item name="rippleColor">@color/blue300</item>
         <item name="chipMinTouchTargetSize">0dp</item>
