@@ -12,6 +12,7 @@ import com.dongyang.android.youdongknowme.standard.network.NetworkResult
 import com.dongyang.android.youdongknowme.ui.view.util.Event
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.launch
+
 import timber.log.Timber
 
 class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel() {
@@ -32,6 +33,13 @@ class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel(
 
     private val _FCMToken: MutableLiveData<String> = MutableLiveData()
     val FCMToken: LiveData<String> get() = _FCMToken
+    private val _isFirstLaunch: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isFirstLaunch: LiveData<Boolean> get() = _isFirstLaunch
+    fun checkFirstLaunch() {
+        if (mainRepository.getIsFirstLaunch()) {
+            _isFirstLaunch.value = true
+        }
+    }
 
     fun issuedToken() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
@@ -40,6 +48,7 @@ class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel(
                 getUserDepartment()
                 getUserTopic()
                 setInitToken()
+                mainRepository.setIsFirstLaunch(false)
             } else {
                 _isError.value = true
             }
@@ -60,6 +69,10 @@ class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel(
 
     fun setInitToken() {
         _isLoading.postValue(true)
+        Timber.tag("initToken").d(FCMToken.value.toString())
+        Timber.tag("initToken").d(_myDepartment.value)
+        Timber.tag("initToken").d(_myTopics.value.toString())
+
         viewModelScope.launch {
             when (val result = myTopics.value?.let {
                 Token(
@@ -76,7 +89,6 @@ class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel(
                     _isLoading.postValue(false)
                     _isError.postValue(false)
                 }
-
                 is NetworkResult.Error -> {
                     handleError(result, _errorState)
                     _isLoading.postValue(false)
@@ -84,9 +96,5 @@ class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel(
                 }
             }
         }
-
-        Log.d("initToken", FCMToken.value.toString())
-        Log.d("initToken", myDepartment.value.toString())
-        Log.d("initToken", myTopics.value.toString())
     }
 }

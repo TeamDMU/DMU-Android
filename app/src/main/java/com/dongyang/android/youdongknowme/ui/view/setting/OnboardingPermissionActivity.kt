@@ -32,7 +32,6 @@ class OnboardingPermissionActivity :
 
     override fun initAfterBinding() {
         binding.btnPermissionComplete.setOnClickListener {
-            viewModel.setFirstLaunch(false)
             val intent = MainActivity.createIntent(this@OnboardingPermissionActivity)
             startActivity(intent)
             finish()

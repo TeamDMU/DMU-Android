@@ -12,6 +12,11 @@ class MainRepository(
     private val keywordDao: KeywordDao,
     private val errorResponseHandler: ErrorResponseHandler
 ) {
+    fun getIsFirstLaunch(): Boolean = SharedPreference.getIsFirstLaunch()
+
+    fun setIsFirstLaunch(isFirstLaunch: Boolean) {
+        SharedPreference.setIsFirstLaunch(isFirstLaunch)
+    }
     fun getUserDepartment(): String {
         return SharedPreference.getDepartment()
     }

@@ -35,12 +35,16 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         navController.setGraph(R.navigation.dmu_navigation)
         binding.mainNvBottom.setupWithNavController(navController)
 
-        viewModel.issuedToken()
+        viewModel.checkFirstLaunch()
     }
 
     override fun initDataBinding() = Unit
-    
-    override fun initAfterBinding() = Unit
+
+    override fun initAfterBinding() {
+        if(viewModel.isFirstLaunch.value==true){
+            viewModel.issuedToken()
+        }
+    }
 
     private fun getFcmToken() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
