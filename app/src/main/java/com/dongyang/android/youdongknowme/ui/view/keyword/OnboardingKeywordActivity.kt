@@ -1,6 +1,7 @@
 package com.dongyang.android.youdongknowme.ui.view.keyword
 
 import android.content.Intent
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
@@ -45,11 +46,17 @@ class OnboardingKeywordActivity :
 
         // TODO :: 안드로이드 데이터베이스에 유저별 설정한 키워드 저장 및 파이어베이스 키워드 구독 설정
         binding.btnOnboardingKeywordNext.setOnClickListener {
-            viewModel.subscribeCheckedKeyword()
-            val intent =
-                Intent(this@OnboardingKeywordActivity, OnboardingPermissionActivity::class.java)
-            startActivity(intent)
-            finish()
+            if (viewModel.checkKeywordList.isNotEmpty()) {
+                viewModel.subscribeCheckedKeyword()
+                if (viewModel.isFirstLaunch.value == true) {
+                    viewModel.setFirstLaunch(false)
+                    val intent = Intent(this@OnboardingKeywordActivity, OnboardingPermissionActivity::class.java)
+                    startActivity(intent)
+                }
+                finish()
+            }else {
+                Toast.makeText(this, R.string.toast_msg_keyword, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
