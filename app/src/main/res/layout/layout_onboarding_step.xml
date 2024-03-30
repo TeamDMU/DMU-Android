@@ -56,8 +56,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/setting_keyword_choice"
             android:textColor="@{stepValue.equals(@string/setting_keyword_choice) ? @color/main : @color/transparent}"
+            android:text="@string/setting_keyword_alarm"
             app:layout_constraintEnd_toStartOf="@id/view_onboarding_step_3"
             app:layout_constraintStart_toEndOf="@id/view_onboarding_step_1"
             app:layout_constraintTop_toBottomOf="@id/view_onboarding_step_2" />
