@@ -2,8 +2,10 @@ package com.dongyang.android.youdongknowme.ui.view.depart
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.text.Editable
 import android.text.TextWatcher
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityOnboardingDepartBinding
@@ -50,6 +52,7 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
     override fun initAfterBinding() {
         binding.ibOnboardingDepartSearchClear.setOnClickListener {
             binding.etOnboardingDepartSearch.text.clear()
+            setSearchColor(false)
         }
 
         binding.etOnboardingDepartSearch.addTextChangedListener(object : TextWatcher {
@@ -69,6 +72,12 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
                     for (item in items) {
                         if (item.contains(searchText)) {
                             searchList.add(item)
+
+                            if (item == searchText) {
+                                setSearchColor(true)
+                            } else {
+                                setSearchColor(false)
+                            }
                         }
                     }
                     adapter.submitList(searchList)
@@ -86,6 +95,31 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
                 )
                 binding.etOnboardingDepartSearch.setSelection(binding.etOnboardingDepartSearch.text.length)
             }
+        }
+    }
+
+    private fun setSearchColor(isContains: Boolean) {
+        binding.btnOnboardingDepartNext.isClickable = isContains
+
+        if (isContains) {
+            binding.linearLayoutOnboardingDepartSearch.setBackgroundResource(R.drawable.bg_search_blue_radius_10dp)
+            binding.etOnboardingDepartSearch.compoundDrawableTintList =
+                ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                        this@OnboardingDepartActivity,
+                        R.color.blue300
+                    )
+                )
+        } else {
+            binding.linearLayoutOnboardingDepartSearch.setBackgroundResource(R.drawable.bg_search_white_radius_10dp)
+            binding.etOnboardingDepartSearch.compoundDrawableTintList =
+                ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                        this@OnboardingDepartActivity,
+                        R.color.gray300
+                    )
+                )
+
         }
     }
 
