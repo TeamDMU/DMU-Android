@@ -128,6 +128,9 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
 
     // 컨테이너 클릭 시 선택한 학과의 포지션 저장
     override fun containerClick(position: Int) {
+        if (searchList.isEmpty()) {
+            return
+        }
         viewModel.setSelectPosition(position)
     }
 
