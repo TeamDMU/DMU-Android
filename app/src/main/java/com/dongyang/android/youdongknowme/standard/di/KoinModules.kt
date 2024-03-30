@@ -9,6 +9,7 @@ import com.dongyang.android.youdongknowme.data.repository.AlarmRepository
 import com.dongyang.android.youdongknowme.data.repository.CafeteriaRepository
 import com.dongyang.android.youdongknowme.data.repository.DepartRepository
 import com.dongyang.android.youdongknowme.data.repository.KeywordRepository
+import com.dongyang.android.youdongknowme.data.repository.MainRepository
 import com.dongyang.android.youdongknowme.data.repository.NoticeRepository
 import com.dongyang.android.youdongknowme.data.repository.ScheduleRepository
 import com.dongyang.android.youdongknowme.data.repository.SettingRepository
@@ -20,6 +21,7 @@ import com.dongyang.android.youdongknowme.ui.view.depart.DepartViewModel
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailViewModel
 import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordViewModel
 import com.dongyang.android.youdongknowme.ui.view.license.LicenseViewModel
+import com.dongyang.android.youdongknowme.ui.view.main.MainViewModel
 import com.dongyang.android.youdongknowme.ui.view.notice.NoticeViewModel
 import com.dongyang.android.youdongknowme.ui.view.schedule.ScheduleViewModel
 import com.dongyang.android.youdongknowme.ui.view.search.SearchViewModel
@@ -98,6 +100,9 @@ val viewModelModule = module {
     viewModel {
         SearchViewModel(get())
     }
+    viewModel{
+        MainViewModel(get())
+    }
 }
 
 val repositoryModule = module {
@@ -124,6 +129,9 @@ val repositoryModule = module {
     }
     single {
         CafeteriaRepository(get())
+    }
+    single{
+        MainRepository(get(), get())
     }
 }
 
