@@ -2,6 +2,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <dimen name="bottom_navigation_icon_size" tools:override="true">36dp</dimen>
 
+    <dimen name="onboarding_step_size">280dp</dimen>
+
     <dimen name="font_size_10">10dp</dimen>
     <dimen name="font_size_11">11dp</dimen>
     <dimen name="font_size_12">12dp</dimen>
@@ -11,6 +13,4 @@
     <dimen name="font_size_20">20dp</dimen>
     <dimen name="font_size_24">24dp</dimen>
     <dimen name="font_size_32">32dp</dimen>
-
-    <dimen name="onboarding_step_size">280dp</dimen>
 </resources>

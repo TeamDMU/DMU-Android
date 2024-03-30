@@ -69,8 +69,8 @@
                 android:layout_margin="16dp"
                 android:drawableStart="@drawable/ic_alarm_fill"
                 android:drawableTint="@color/gray300"
-                android:paddingVertical="16dp"
                 android:paddingHorizontal="32dp"
+                android:paddingVertical="16dp"
                 android:text="@string/setting_keyword_alarm"
                 android:textAlignment="center"
                 android:textColor="@color/gray300" />
