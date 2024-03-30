@@ -33,14 +33,14 @@
             app:layout_constraintBottom_toTopOf="@id/onboarding_permission_step"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_permission_title_main" />
+            app:layout_constraintTop_toBottomOf="@id/tv_permission_title_main" />
 
         <include
             android:id="@+id/onboarding_permission_step"
             layout="@layout/layout_onboarding_step"
             android:layout_width="@dimen/onboarding_step_size"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginVertical="40dp"
             android:paddingHorizontal="56dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +57,7 @@
             app:layout_constraintBottom_toTopOf="@id/btn_permission_complete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/onboarding_permission_step"
+            app:layout_constraintTop_toTopOf="@id/tv_permission_title_sub"
             app:strokeColor="@color/gray300"
             app:strokeWidth="3dp">
 

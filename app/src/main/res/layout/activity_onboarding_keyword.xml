@@ -37,8 +37,7 @@
             layout="@layout/layout_onboarding_step"
             android:layout_width="@dimen/onboarding_step_size"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:paddingHorizontal="56dp"
+            android:layout_marginVertical="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_onboarding_keyword_title_sub"
@@ -48,14 +47,12 @@
             android:id="@+id/sv_onboarding_keyword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginVertical="40dp"
             android:fillViewport="true"
             app:layout_constrainedHeight="true"
-            app:layout_constraintBottom_toTopOf="@id/btn_onboarding_keyword_next"
+            app:layout_constraintTop_toBottomOf="@id/onboarding_keyword_step"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/onboarding_keyword_step">
+            app:layout_constraintStart_toStartOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

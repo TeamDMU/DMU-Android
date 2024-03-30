@@ -33,15 +33,14 @@
             app:layout_constraintBottom_toTopOf="@id/onboarding_depart_step"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_onboarding_depart_title_main" />
+            app:layout_constraintTop_toBottomOf="@id/tv_onboarding_depart_title_main" />
 
         <include
             android:id="@+id/onboarding_depart_step"
             layout="@layout/layout_onboarding_step"
             android:layout_width="@dimen/onboarding_step_size"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:paddingHorizontal="56dp"
+            android:layout_marginVertical="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_onboarding_depart_title_sub"
@@ -51,11 +50,11 @@
             android:id="@+id/linearLayout_onboarding_depart_search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="40dp"
             android:background="@drawable/bg_search_white_radius_10dp"
             android:minHeight="56dp"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@id/rv_onboarding_depart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/onboarding_depart_step">
@@ -96,7 +95,8 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginHorizontal="16dp"
-            app:layout_constraintBottom_toBottomOf="@id/btn_onboarding_depart_next"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@id/btn_onboarding_depart_next"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/linearLayout_onboarding_depart_search"
