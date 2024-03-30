@@ -1,19 +1,15 @@
 package com.dongyang.android.youdongknowme.ui.view.main
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.dongyang.android.youdongknowme.data.remote.entity.Token
-import com.dongyang.android.youdongknowme.data.repository.KeywordRepository
 import com.dongyang.android.youdongknowme.data.repository.MainRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.standard.network.NetworkResult
 import com.dongyang.android.youdongknowme.ui.view.util.Event
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.launch
-
-import timber.log.Timber
 
 class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel() {
     private val _errorState: MutableLiveData<Event<Int>> = MutableLiveData()
@@ -33,8 +29,10 @@ class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel(
 
     private val _FCMToken: MutableLiveData<String> = MutableLiveData()
     val FCMToken: LiveData<String> get() = _FCMToken
+
     private val _isFirstLaunch: MutableLiveData<Boolean> = MutableLiveData(false)
     val isFirstLaunch: LiveData<Boolean> get() = _isFirstLaunch
+
     fun checkFirstLaunch() {
         if (mainRepository.getIsFirstLaunch()) {
             _isFirstLaunch.value = true
@@ -59,7 +57,6 @@ class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel(
         _myDepartment.postValue(department)
 
         viewModelScope.launch {
-
             val keyword = mainRepository.getUserTopic()
             _myTopics.value = keyword
 
@@ -69,14 +66,13 @@ class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel(
                 topics = myTopics.value ?: emptyList()
             )
 
-            Timber.tag("initToken").d("$token")
-
             when (val result = mainRepository.setUserToken(token)) {
                 is NetworkResult.Success -> {
                     mainRepository.setIsFirstLaunch(false)
                     _isLoading.postValue(false)
                     _isError.postValue(false)
                 }
+
                 is NetworkResult.Error -> {
                     handleError(result, _errorState)
                     _isLoading.postValue(false)

@@ -17,6 +17,7 @@ class MainRepository(
     fun setIsFirstLaunch(isFirstLaunch: Boolean) {
         SharedPreference.setIsFirstLaunch(isFirstLaunch)
     }
+
     fun getUserDepartment(): String {
         return SharedPreference.getDepartment()
     }

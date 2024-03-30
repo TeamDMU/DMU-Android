@@ -11,7 +11,8 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class OnboardingKeywordActivity : BaseActivity<ActivityOnboardingKeywordBinding, KeywordViewModel>() {
+class OnboardingKeywordActivity :
+    BaseActivity<ActivityOnboardingKeywordBinding, KeywordViewModel>() {
 
     override val layoutResourceId: Int = R.layout.activity_onboarding_keyword
     override val viewModel: KeywordViewModel by viewModel()

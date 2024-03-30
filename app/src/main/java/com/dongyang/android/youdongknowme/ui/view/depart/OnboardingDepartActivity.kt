@@ -53,12 +53,14 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
         }
 
         binding.etOnboardingDepartSearch.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(charSequence: CharSequence?, i: Int, i1: Int, i2: Int) = Unit
+            override fun beforeTextChanged(charSequence: CharSequence?, i: Int, i1: Int, i2: Int) =
+                Unit
 
             override fun onTextChanged(charSequence: CharSequence?, i: Int, i1: Int, i2: Int) = Unit
 
             override fun afterTextChanged(editable: Editable?) {
-                val searchText = binding.etOnboardingDepartSearch.text.toString().replace("\\s".toRegex(), "")
+                val searchText =
+                    binding.etOnboardingDepartSearch.text.toString().replace("\\s".toRegex(), "")
                 searchList = ArrayList<String>()
 
                 if (searchText.isEmpty()) {

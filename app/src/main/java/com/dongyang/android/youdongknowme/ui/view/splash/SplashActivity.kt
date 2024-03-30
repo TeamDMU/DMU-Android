@@ -54,12 +54,13 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
     }
 
     override fun onRequestPermissionsResult(
-        requestCode: Int, permissions: Array<String>, grantResults: IntArray
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         if (requestCode == REQUEST_PERMISSION_CODE) {
-            // 알림 권한 설정 결과 상관 없이 OnboardingDepartActivity로 이동
             intent = OnboardingDepartActivity.createIntent(this@SplashActivity)
             startActivity(intent)
             finish()
@@ -72,14 +73,12 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
                     this@SplashActivity, Manifest.permission.POST_NOTIFICATIONS
                 )
             ) {
-                // 알림 권한 설정 허용
                 ActivityCompat.requestPermissions(
                     this@SplashActivity,
                     arrayOf(Manifest.permission.POST_NOTIFICATIONS),
                     REQUEST_PERMISSION_CODE
                 )
             } else {
-                // 이미 알림 권한이 허용된 경우
                 intent = OnboardingDepartActivity.createIntent(this@SplashActivity)
                 startActivity(intent)
                 finish()

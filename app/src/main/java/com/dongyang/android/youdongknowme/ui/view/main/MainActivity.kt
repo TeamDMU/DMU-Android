@@ -10,8 +10,6 @@ import com.dongyang.android.youdongknowme.data.local.SharedPreference
 import com.dongyang.android.youdongknowme.databinding.ActivityMainBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.view.util.KeepStateNavigator
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.messaging.FirebaseMessaging
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /* 메인 액티비티 */
@@ -37,8 +35,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
         viewModel.checkFirstLaunch()
 
-
-        if(viewModel.isFirstLaunch.value==true){
+        if (viewModel.isFirstLaunch.value == true) {
             viewModel.issuedToken()
         }
     }
