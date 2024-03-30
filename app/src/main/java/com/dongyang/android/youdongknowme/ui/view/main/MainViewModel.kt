@@ -33,12 +33,13 @@ class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel(
     private val _FCMToken: MutableLiveData<String> = MutableLiveData()
     val FCMToken: LiveData<String> get() = _FCMToken
 
-    fun initFirebaseMessaging() {
+    fun issuedToken() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 _FCMToken.value = task.result
                 getUserDepartment()
                 getUserTopic()
+                setInitToken()
             } else {
                 _isError.value = true
             }

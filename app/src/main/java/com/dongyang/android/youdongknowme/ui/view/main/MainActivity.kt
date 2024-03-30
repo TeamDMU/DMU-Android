@@ -34,6 +34,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         navController.navigatorProvider += navigator
         navController.setGraph(R.navigation.dmu_navigation)
         binding.mainNvBottom.setupWithNavController(navController)
+
+        viewModel.issuedToken()
     }
 
     override fun initDataBinding() = Unit
