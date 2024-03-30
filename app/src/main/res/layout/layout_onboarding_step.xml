@@ -24,7 +24,7 @@
             android:layout_width="12dp"
             android:layout_height="12dp"
             android:background="@drawable/ic_circle"
-            android:backgroundTint="@{stepValue.equals(@string/setting_department) ? @color/main : @color/gray300}"
+            android:backgroundTint="@{stepValue.equals(@string/setting_department) ? @color/blue300 : @color/gray300}"
             app:layout_constraintBottom_toBottomOf="@id/view_onboarding_line"
             app:layout_constraintStart_toStartOf="@id/view_onboarding_line"
             app:layout_constraintTop_toTopOf="@id/view_onboarding_line" />
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text= "@string/setting_department"
-            android:textColor="@{stepValue.equals(@string/setting_department) ? @color/main : @color/transparent}"
+            android:textColor="@{stepValue.equals(@string/setting_department) ? @color/blue300 : @color/transparent}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_onboarding_step_1" />
 
@@ -45,7 +45,7 @@
             android:layout_width="12dp"
             android:layout_height="12dp"
             android:background="@drawable/ic_circle"
-            android:backgroundTint="@{stepValue.equals(@string/setting_keyword_choice) ? @color/main : @color/gray300}"
+            android:backgroundTint="@{stepValue.equals(@string/setting_keyword_choice) ? @color/blue300 : @color/gray300}"
             app:layout_constraintTop_toTopOf="@id/view_onboarding_line"
             app:layout_constraintBottom_toBottomOf="@id/view_onboarding_line"
             app:layout_constraintStart_toStartOf="parent"
@@ -56,8 +56,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textColor="@{stepValue.equals(@string/setting_keyword_choice) ? @color/main : @color/transparent}"
             android:text="@string/setting_keyword_alarm"
+            android:textColor="@{stepValue.equals(@string/setting_keyword_choice) ? @color/blue300 : @color/transparent}"
             app:layout_constraintEnd_toStartOf="@id/view_onboarding_step_3"
             app:layout_constraintStart_toEndOf="@id/view_onboarding_step_1"
             app:layout_constraintTop_toBottomOf="@id/view_onboarding_step_2" />
@@ -68,7 +68,7 @@
             android:layout_width="12dp"
             android:layout_height="12dp"
             android:background="@drawable/ic_circle"
-            android:backgroundTint="@{stepValue.equals(@string/setting_notice) ? @color/main : @color/gray300}"
+            android:backgroundTint="@{stepValue.equals(@string/setting_notice) ? @color/blue300 : @color/gray300}"
             app:layout_constraintBottom_toBottomOf="@id/view_onboarding_line"
             app:layout_constraintEnd_toEndOf="@id/view_onboarding_line"
             app:layout_constraintTop_toTopOf="@id/view_onboarding_line" />
@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/setting_notice"
-            android:textColor="@{stepValue.equals(@string/setting_notice) ? @color/main : @color/transparent}"
+            android:textColor="@{stepValue.equals(@string/setting_notice) ? @color/blue300 : @color/transparent}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_onboarding_step_3" />
     </androidx.constraintlayout.widget.ConstraintLayout>

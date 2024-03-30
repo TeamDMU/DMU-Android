@@ -40,7 +40,7 @@ abstract class BaseActivity<T : ViewDataBinding, R : BaseViewModel> : AppCompatA
     ) {
         SpannableStringBuilder(spanTextView.text).apply {
             setSpan(
-                ForegroundColorSpan(getColor(com.dongyang.android.youdongknowme.R.color.main)),
+                ForegroundColorSpan(getColor(com.dongyang.android.youdongknowme.R.color.blue300)),
                 startIdx,
                 endIdx,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
