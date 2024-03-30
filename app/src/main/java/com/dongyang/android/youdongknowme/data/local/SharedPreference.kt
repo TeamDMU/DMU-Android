@@ -57,4 +57,8 @@ object SharedPreference {
     fun getFCMToken(): String = pref?.getString(FCM_TOKEN, "0") ?: "0"
     fun setFcmToken(token: String) = pref?.edit()?.putString(FCM_TOKEN, token)?.apply()
 
+    // FCM 토큰
+    private const val FCM_TOKEN = "NO_TOKEN"
+    fun getFCMToken(): String = pref?.getString(FCM_TOKEN, "0") ?: "0"
+    fun setFcmToken(token: String) = pref?.edit()?.putString(FCM_TOKEN, token)?.apply()
 }
