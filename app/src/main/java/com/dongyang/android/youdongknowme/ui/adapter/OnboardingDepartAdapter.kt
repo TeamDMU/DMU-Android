@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dongyang.android.youdongknowme.databinding.ItemOnboardingDepartBinding
 import com.dongyang.android.youdongknowme.ui.view.depart.DepartClickListener
 
-
 class OnboardingDepartAdapter : RecyclerView.Adapter<OnboardingDepartAdapter.ViewHolder>() {
 
     private val item = ArrayList<String>()

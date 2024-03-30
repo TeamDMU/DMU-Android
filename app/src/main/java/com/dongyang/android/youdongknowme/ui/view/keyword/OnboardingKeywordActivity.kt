@@ -20,7 +20,7 @@ class OnboardingKeywordActivity :
 
     override fun initStartView() {
         // 부분 색상 지정
-        setSpanText(binding.tvOnboardingKeywordTitleMain,startIdx = 0, endIdx = 3)
+        setSpanText(binding.tvOnboardingKeywordTitleMain, startIdx = 0, endIdx = 3)
     }
 
     override fun initDataBinding() {
@@ -50,11 +50,14 @@ class OnboardingKeywordActivity :
                 viewModel.subscribeCheckedKeyword()
                 if (viewModel.isFirstLaunch.value == true) {
                     viewModel.setFirstLaunch(false)
-                    val intent = Intent(this@OnboardingKeywordActivity, OnboardingPermissionActivity::class.java)
+                    val intent = Intent(
+                        this@OnboardingKeywordActivity,
+                        OnboardingPermissionActivity::class.java
+                    )
                     startActivity(intent)
                 }
                 finish()
-            }else {
+            } else {
                 Toast.makeText(this, R.string.toast_msg_keyword, Toast.LENGTH_SHORT).show()
             }
         }

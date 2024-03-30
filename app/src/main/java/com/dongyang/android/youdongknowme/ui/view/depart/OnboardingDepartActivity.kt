@@ -15,7 +15,6 @@ import com.dongyang.android.youdongknowme.ui.adapter.OnboardingDepartAdapter
 import com.dongyang.android.youdongknowme.ui.view.keyword.OnboardingKeywordActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, DepartViewModel>(),
     DepartClickListener {
 
@@ -141,7 +140,7 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
             val intent = Intent(this, OnboardingKeywordActivity::class.java)
             startActivity(intent)
             finish()
-        }else{
+        } else {
             Toast.makeText(this, R.string.toast_msg_department, Toast.LENGTH_SHORT).show()
         }
     }
