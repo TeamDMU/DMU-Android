@@ -60,13 +60,12 @@ class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel(
             val keyword = mainRepository.getUserTopic()
             _myTopics.value = keyword
 
-            val token = Token(
+            when (val result = mainRepository.setUserToken(Token(
                 token = FCMToken.value.toString(),
                 department = myDepartment.value ?: "",
                 topics = myTopics.value ?: emptyList()
             )
-
-            when (val result = mainRepository.setUserToken(token)) {
+            )) {
                 is NetworkResult.Success -> {
                     mainRepository.setIsFirstLaunch(false)
                     _isLoading.postValue(false)
