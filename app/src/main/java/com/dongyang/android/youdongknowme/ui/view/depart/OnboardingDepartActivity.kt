@@ -53,8 +53,7 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
         }
 
         binding.etOnboardingDepartSearch.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(charSequence: CharSequence?, i: Int, i1: Int, i2: Int) =
-                Unit
+            override fun beforeTextChanged(charSequence: CharSequence?, i: Int, i1: Int, i2: Int) = Unit
 
             override fun onTextChanged(charSequence: CharSequence?, i: Int, i1: Int, i2: Int) = Unit
 

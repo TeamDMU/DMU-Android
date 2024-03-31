@@ -3,7 +3,6 @@ package com.dongyang.android.youdongknowme.ui.view.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.dongyang.android.youdongknowme.data.local.SharedPreference
 import com.dongyang.android.youdongknowme.data.remote.entity.Token
 import com.dongyang.android.youdongknowme.data.repository.MainRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
