@@ -29,12 +29,12 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
 
     override fun initDataBinding() {
 
-        viewModel.myDepartment.observe(viewLifecycleOwner) { department ->
-            binding.tvSettingDepartment.text = department
+        viewModel.myDepartment.observe(viewLifecycleOwner) { myDepartment ->
+            binding.tvSettingDepartment.text = myDepartment
         }
 
         viewModel.myTopics.observe(viewLifecycleOwner) { myTopics ->
-            topics = myTopics
+            topics = topics
         }
 
         viewModel.isAccessUniversityAlarm.observe(viewLifecycleOwner) { isChecked ->

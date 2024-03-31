@@ -3,7 +3,6 @@ package com.dongyang.android.youdongknowme.ui.view.setting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
 import com.dongyang.android.youdongknowme.data.remote.entity.RemoveToken
 import com.dongyang.android.youdongknowme.data.remote.entity.UpdateDepartment
 import com.dongyang.android.youdongknowme.data.remote.entity.UpdateTopic
@@ -12,7 +11,6 @@ import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.standard.network.NetworkResult
 import com.dongyang.android.youdongknowme.ui.view.util.Event
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 /* 설정 뷰모델 */
 class SettingViewModel(private val settingRepository: SettingRepository) : BaseViewModel() {
@@ -80,6 +78,7 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
 
     fun updateUserDepartment() {
         _isLoading.postValue(true)
+
         viewModelScope.launch {
             when (val result = settingRepository.updateUserDepartment(
                 UpdateDepartment(
@@ -104,6 +103,7 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
 
     fun removeUserDepartment() {
         _isLoading.postValue(true)
+
         viewModelScope.launch {
             when (val result =
                 settingRepository.removeUserDepartment(
@@ -127,6 +127,7 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
 
     fun updateUserTopic(topic: List<String>) {
         _isLoading.postValue(true)
+
         viewModelScope.launch {
             when (val result = settingRepository.updateUserTopic(
                 UpdateTopic(
@@ -151,6 +152,7 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
 
     fun removeUserTopic() {
         _isLoading.postValue(true)
+        
         viewModelScope.launch {
             when (val result =
                 settingRepository.removeUserTopic(

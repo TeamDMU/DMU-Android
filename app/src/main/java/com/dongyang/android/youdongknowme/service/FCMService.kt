@@ -12,7 +12,6 @@ import com.dongyang.android.youdongknowme.data.local.SharedPreference
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import timber.log.Timber
 
 class FCMService : FirebaseMessagingService() {
 
@@ -64,7 +63,6 @@ class FCMService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
-        Timber.d("fcm_token_new: $token")
         SharedPreference.setFcmToken(token)
     }
 }
