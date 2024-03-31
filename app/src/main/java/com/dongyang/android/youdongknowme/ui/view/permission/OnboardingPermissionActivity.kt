@@ -75,7 +75,7 @@ class OnboardingPermissionActivity :
         binding.mvSwitchPermission.strokeColor = getColor(resources)
 
         binding.switchPermission.isChecked = isChecked
-        viewModel.setIsAccessSchoolAlarm(isChecked)
+        viewModel.setIsAccessUniversityAlarm(isChecked)
         viewModel.setIsAccessDepartAlarm(isChecked)
     }
 }

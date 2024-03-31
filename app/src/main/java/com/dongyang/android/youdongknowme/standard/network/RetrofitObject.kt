@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object RetrofitObject {
-    private const val TIME_OUT_COUNT: Long = 10
+    private const val TIME_OUT_COUNT: Long = 30
 
     fun getNetwork(): Retrofit {
         val baseInterceptor = Interceptor { chain ->

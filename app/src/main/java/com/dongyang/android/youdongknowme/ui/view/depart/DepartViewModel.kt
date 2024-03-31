@@ -10,8 +10,19 @@ class DepartViewModel(private val departRepository: DepartRepository) : BaseView
     private val _isFirstLaunch: MutableLiveData<Boolean> = MutableLiveData(false)
     val isFirstLaunch: LiveData<Boolean> get() = _isFirstLaunch
 
+    private val _myDepartment: MutableLiveData<String> = MutableLiveData()
+    val myDepartment: LiveData<String> get() = _myDepartment
+
     private val _selectDepartPosition = MutableLiveData(-1)
     val selectDepartPosition: LiveData<Int> get() = _selectDepartPosition
+    init {
+        getUserDepartment()
+    }
+
+    private fun getUserDepartment() {
+        val myDepartment = departRepository.getUserDepartment()
+        _myDepartment.postValue(myDepartment)
+    }
 
     fun setDepartment(department: String) {
         departRepository.setDepartment(department)

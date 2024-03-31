@@ -2,33 +2,38 @@ package com.dongyang.android.youdongknowme.ui.view.depart
 
 import android.content.Context
 import android.content.Intent
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityOnboardingDepartBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
-import com.dongyang.android.youdongknowme.ui.adapter.DepartAdapter
+import com.dongyang.android.youdongknowme.ui.adapter.OnboardingDepartAdapter
 import com.dongyang.android.youdongknowme.ui.view.keyword.OnboardingKeywordActivity
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, DepartViewModel>(),
     DepartClickListener {
 
     override val layoutResourceId: Int = R.layout.activity_onboarding_depart
     override val viewModel: DepartViewModel by viewModel()
-    private lateinit var adapter: DepartAdapter
+    private lateinit var adapter: OnboardingDepartAdapter
     private lateinit var items: ArrayList<String>
+    private var searchList = ArrayList<String>()
+    private var emptyList = arrayListOf<String>("")
 
     override fun initStartView() {
         viewModel.checkFirstLaunch()
 
+        // 학과 리스트
         items =
             resources.getStringArray(R.array.dmu_department_list).toCollection(ArrayList<String>())
         items.sort()
 
-        // 학과 리스트
-        adapter = DepartAdapter().apply {
-            submitList(items)
+        adapter = OnboardingDepartAdapter().apply {
+            submitList(emptyList)
             setItemClickListener(this@OnboardingDepartActivity)
         }
 
@@ -45,11 +50,43 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
     override fun initDataBinding() = Unit
 
     override fun initAfterBinding() {
+        binding.ibOnboardingDepartSearchClear.setOnClickListener {
+            binding.etOnboardingDepartSearch.text.clear()
+        }
+
+        binding.etOnboardingDepartSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence?, i: Int, i1: Int, i2: Int) = Unit
+
+            override fun onTextChanged(charSequence: CharSequence?, i: Int, i1: Int, i2: Int) = Unit
+
+            override fun afterTextChanged(editable: Editable?) {
+                val searchText = binding.etOnboardingDepartSearch.text.toString().replace("\\s".toRegex(), "")
+                searchList = ArrayList<String>()
+
+                if (searchText.isEmpty()) {
+                    adapter.submitList(emptyList)
+                } else {
+                    // 검색 단어를 포함하는지 확인
+                    for (item in items) {
+                        if (item.contains(searchText)) {
+                            searchList.add(item)
+                        }
+                    }
+                    adapter.submitList(searchList)
+                }
+            }
+        })
+
         viewModel.selectDepartPosition.observe(this) {
             adapter.submitPosition(it)
 
-            // 포지션 선택 시 스낵바를 통해 알림 표시
-            if (it != -1) getDepart(items)
+            if (it != -1) {
+                getDepart(searchList)
+                binding.etOnboardingDepartSearch.setText(
+                    searchList[viewModel.selectDepartPosition.value ?: 0]
+                )
+                binding.etOnboardingDepartSearch.setSelection(binding.etOnboardingDepartSearch.text.length)
+            }
         }
     }
 

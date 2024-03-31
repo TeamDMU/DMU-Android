@@ -1,6 +1,9 @@
 package com.dongyang.android.youdongknowme.ui.view.depart
 
 import android.content.Intent
+import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityDepartBinding
@@ -8,6 +11,7 @@ import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.adapter.DepartAdapter
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class DepartActivity : BaseActivity<ActivityDepartBinding, DepartViewModel>(), DepartClickListener {
 
@@ -18,11 +22,11 @@ class DepartActivity : BaseActivity<ActivityDepartBinding, DepartViewModel>(), D
     private lateinit var items: ArrayList<String>
 
     override fun initStartView() {
+        // 학과 리스트
         items =
             resources.getStringArray(R.array.dmu_department_list).toCollection(ArrayList<String>())
         items.sort()
 
-        // 학과 리스트
         adapter = DepartAdapter().apply {
             submitList(items)
             setItemClickListener(this@DepartActivity)
@@ -33,19 +37,21 @@ class DepartActivity : BaseActivity<ActivityDepartBinding, DepartViewModel>(), D
             this.layoutManager = LinearLayoutManager(this@DepartActivity)
             this.setHasFixedSize(true)
         }
-
     }
 
-    override fun initDataBinding() = Unit
+    override fun initDataBinding() {
+        viewModel.myDepartment.observe(this) { department ->
+            viewModel.setSelectPosition(items.indexOf(department))
+        }
+    }
 
     override fun initAfterBinding() {
         viewModel.selectDepartPosition.observe(this) {
             adapter.submitPosition(it)
 
-            // 포지션 선택 시 스낵바를 통해 알림 표시
             if (it != -1) getDepart(items)
         }
-        
+
         binding.toolbarDepart.btnToolbarExit.setOnClickListener { finish() }
     }
 
@@ -58,9 +64,6 @@ class DepartActivity : BaseActivity<ActivityDepartBinding, DepartViewModel>(), D
     private fun getDepart(items: ArrayList<String>) {
         return binding.btnDepartComplete.setOnClickListener {
             viewModel.setDepartment(items[viewModel.selectDepartPosition.value ?: 0])
-            val intent = Intent(this, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            startActivity(intent)
             finish()
         }
     }

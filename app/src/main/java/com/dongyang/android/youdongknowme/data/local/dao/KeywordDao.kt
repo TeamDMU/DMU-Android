@@ -23,4 +23,7 @@ interface KeywordDao {
 
     @Query("DELETE FROM keyword WHERE name = :name")
     suspend fun deleteKeyword(name: String)
+
+    @Query("SELECT * FROM keyword WHERE isSubscribe = 1")
+    suspend fun getSubscribedKeywords(): List<KeywordEntity>
 }

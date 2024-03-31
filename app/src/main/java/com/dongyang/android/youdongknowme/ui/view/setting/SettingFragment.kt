@@ -1,7 +1,10 @@
 package com.dongyang.android.youdongknowme.ui.view.setting
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentSettingBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
@@ -16,13 +19,22 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
     override val layoutResourceId: Int = R.layout.fragment_setting
     override val viewModel: SettingViewModel by viewModel()
 
+    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+    private var topics: List<String> = emptyList()
+
     override fun initStartView() {
         binding.tvSettingAppVersion.text = getAppVersion()
+        setResultKeyword()
     }
 
     override fun initDataBinding() {
-        viewModel.myDepartment.observe(viewLifecycleOwner) { department ->
-            binding.tvSettingDepartment.text = department
+
+        viewModel.myDepartment.observe(viewLifecycleOwner) { myDepartment ->
+            binding.tvSettingDepartment.text = myDepartment
+        }
+
+        viewModel.myTopics.observe(viewLifecycleOwner) { myTopics ->
+            topics = topics
         }
 
         viewModel.isAccessUniversityAlarm.observe(viewLifecycleOwner) { isChecked ->
@@ -35,28 +47,30 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
     }
 
     override fun initAfterBinding() {
+
         viewModel.checkAccessAlarm()
         viewModel.getUserDepartment()
+        viewModel.getUserTopic()
 
         binding.switchSettingUniversityAlarm.setOnCheckedChangeListener { compoundButton, _ ->
             if (compoundButton.isChecked) {
-                viewModel.setIsAccessSchoolAlarm(true)
+                viewModel.updateUserTopic(topics)
             } else {
-                viewModel.setIsAccessSchoolAlarm(false)
+                viewModel.removeUserTopic()
             }
         }
 
         binding.switchSettingDepartmentAlarm.setOnCheckedChangeListener { compoundButton, _ ->
             if (compoundButton.isChecked) {
-                viewModel.setIsAccessDepartAlarm(true)
+                viewModel.updateUserDepartment()
             } else {
-                viewModel.setIsAccessDepartAlarm(false)
+                viewModel.removeUserDepartment()
             }
         }
 
         binding.btnSettingEditKeyword.setOnClickListener {
             val intent = Intent(requireActivity(), KeywordActivity::class.java)
-            startActivity(intent)
+            resultLauncher.launch(intent)
         }
 
         binding.btnSettingEditDepartment.setOnClickListener {
@@ -91,5 +105,15 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
         val packageManager =
             requireContext().packageManager.getPackageInfo(requireContext().packageName, 0)
         return packageManager.versionName
+    }
+
+    private fun setResultKeyword() {
+        resultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    viewModel.getUserTopic()
+                    viewModel.updateUserTopic(topics)
+                }
+            }
     }
 }
