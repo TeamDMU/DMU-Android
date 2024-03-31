@@ -9,7 +9,6 @@ import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.standard.network.NetworkResult
 import com.dongyang.android.youdongknowme.ui.view.util.Event
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel() {
     private val _errorState: MutableLiveData<Event<Int>> = MutableLiveData()
@@ -74,12 +73,6 @@ class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel(
                     _isFirstLaunch.postValue(false)
                     _isLoading.postValue(false)
                     _isError.postValue(false)
-
-                    Timber.tag("initToken").d(Token(
-                        token = FCMToken.value.toString(),
-                        department = myDepartment.value ?: "",
-                        topics = myTopics.value ?: emptyList()
-                    ).toString())
                 }
 
                 is NetworkResult.Error -> {
