@@ -10,7 +10,9 @@ import com.dongyang.android.youdongknowme.data.local.SharedPreference
 import com.dongyang.android.youdongknowme.databinding.ActivityMainBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.view.util.KeepStateNavigator
+import com.google.firebase.messaging.FirebaseMessaging
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 /* 메인 액티비티 */
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
@@ -36,7 +38,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         viewModel.checkFirstLaunch()
 
         if (viewModel.isFirstLaunch.value == true) {
-            viewModel.issuedToken()
+            getFcmToken()
         }
     }
     
@@ -49,6 +51,17 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             val token = task.result
             SharedPreference.setFcmToken(token)
         })
+    }
+
+    private fun getFcmToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                viewModel.setFCMToken(task.result)
+                viewModel.setInitToken()
+            } else {
+                return@addOnCompleteListener
+            }
+        }
     }
 
     companion object {

@@ -3,13 +3,14 @@ package com.dongyang.android.youdongknowme.ui.view.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.dongyang.android.youdongknowme.data.local.SharedPreference
 import com.dongyang.android.youdongknowme.data.remote.entity.Token
 import com.dongyang.android.youdongknowme.data.repository.MainRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.standard.network.NetworkResult
 import com.dongyang.android.youdongknowme.ui.view.util.Event
-import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel() {
     private val _errorState: MutableLiveData<Event<Int>> = MutableLiveData()
@@ -33,33 +34,36 @@ class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel(
     private val _isFirstLaunch: MutableLiveData<Boolean> = MutableLiveData(false)
     val isFirstLaunch: LiveData<Boolean> get() = _isFirstLaunch
 
+    init{
+        getUserDepart()
+        getUserTopic()
+    }
+
     fun checkFirstLaunch() {
         if (mainRepository.getIsFirstLaunch()) {
             _isFirstLaunch.value = true
         }
     }
 
-    fun issuedToken() {
-        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                _FCMToken.value = task.result
-                setInitToken()
-            } else {
-                _isError.value = true
-            }
+    fun setFCMToken(token: String){
+        mainRepository.setFCMToken(token)
+        _FCMToken.postValue(token)
+    }
+
+    fun getUserDepart(){
+        _myDepartment.value = mainRepository.getUserDepartment()
+    }
+
+    fun getUserTopic(){
+        viewModelScope.launch {
+            _myTopics.value = mainRepository.getUserTopic()
         }
     }
 
     fun setInitToken() {
         _isLoading.postValue(true)
 
-        val department = mainRepository.getUserDepartment()
-        _myDepartment.postValue(department)
-
         viewModelScope.launch {
-            val keyword = mainRepository.getUserTopic()
-            _myTopics.value = keyword
-
             when (val result = mainRepository.setUserToken(Token(
                 token = FCMToken.value.toString(),
                 department = myDepartment.value ?: "",
@@ -68,8 +72,15 @@ class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel(
             )) {
                 is NetworkResult.Success -> {
                     mainRepository.setIsFirstLaunch(false)
+                    _isFirstLaunch.postValue(false)
                     _isLoading.postValue(false)
                     _isError.postValue(false)
+
+                    Timber.tag("initToken").d(Token(
+                        token = FCMToken.value.toString(),
+                        department = myDepartment.value ?: "",
+                        topics = myTopics.value ?: emptyList()
+                    ).toString())
                 }
 
                 is NetworkResult.Error -> {

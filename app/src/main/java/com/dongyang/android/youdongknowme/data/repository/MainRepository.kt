@@ -2,7 +2,6 @@ package com.dongyang.android.youdongknowme.data.repository
 
 import com.dongyang.android.youdongknowme.data.local.SharedPreference
 import com.dongyang.android.youdongknowme.data.local.dao.KeywordDao
-import com.dongyang.android.youdongknowme.data.remote.entity.Token
 import com.dongyang.android.youdongknowme.data.remote.service.TokenService
 import com.dongyang.android.youdongknowme.standard.network.ErrorResponseHandler
 import com.dongyang.android.youdongknowme.standard.network.NetworkResult
@@ -27,8 +26,16 @@ class MainRepository(
         return subscribedTopic.map { it.englishName }
     }
 
+    fun getFCMToken(): String {
+        return SharedPreference.getFCMToken()
+    }
+
+    fun setFCMToken(token: String) {
+        SharedPreference.setFcmToken(token)
+    }
+
     suspend fun setUserToken(
-        data: Token
+        data: com.dongyang.android.youdongknowme.data.remote.entity.Token
     ): NetworkResult<Unit> {
         return try {
             val response = RetrofitObject.getNetwork().create(TokenService::class.java)
