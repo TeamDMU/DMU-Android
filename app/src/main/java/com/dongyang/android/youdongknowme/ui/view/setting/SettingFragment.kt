@@ -1,10 +1,16 @@
 package com.dongyang.android.youdongknowme.ui.view.setting
 
 import android.app.Activity
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import android.os.Build
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import com.dongyang.android.youdongknowme.DialogPermission
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentSettingBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
@@ -60,6 +66,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
         viewModel.getUserTopic()
 
         binding.switchSettingUniversityAlarm.setOnCheckedChangeListener { compoundButton, _ ->
+            checkPermission()
             if (compoundButton.isChecked) {
                 if (topics.isNotEmpty()) {
                     viewModel.updateUserTopic(topics)
@@ -70,6 +77,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
         }
 
         binding.switchSettingDepartmentAlarm.setOnCheckedChangeListener { compoundButton, _ ->
+            checkPermission()
             if (compoundButton.isChecked) {
                 if (department.isNotEmpty()) {
                     viewModel.updateUserDepartment(department)
@@ -108,6 +116,24 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
         binding.btnSettingAppOpensource.setOnClickListener {
             val intent = Intent(requireActivity(), LicenseActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    fun checkPermission(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (PackageManager.PERMISSION_DENIED == ContextCompat.checkSelfPermission(
+                    requireContext(), Manifest.permission.POST_NOTIFICATIONS
+                )
+            ) {
+                // 알림 권한 설정 미허용
+                viewModel.setIsAccessDepartAlarm(false)
+                viewModel.setIsAccessUniversityAlarm(false)
+                binding.switchSettingUniversityAlarm.isChecked = false
+                binding.switchSettingDepartmentAlarm.isChecked = false
+
+                val dialog = DialogPermission(getString(R.string.dialog_permission_title), getString(R.string.dialog_permission_content), requireContext().packageName)
+                dialog.show(parentFragmentManager, "CustomDialog")
+            }
         }
     }
 
