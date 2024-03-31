@@ -140,4 +140,8 @@
     <!-- toast message -->
     <string name="toast_msg_keyword">하나 이상의 키워드를 선택해주세요.</string>
     <string name="toast_msg_department">정확한 학과명을 기입해주세요.</string>
+
+    <!-- permission dialog -->
+    <string name="dialog_permission_title">기기 알림이 꺼져있습니다.</string>
+    <string name="dialog_permission_content"><![CDATA[알림 설정(DMforU 설정 > 개인정보 보호 > 알림)을 활성화해야 공지 사항에 대한 키워드를 받을 수 있습니다.]]></string>
 </resources>
