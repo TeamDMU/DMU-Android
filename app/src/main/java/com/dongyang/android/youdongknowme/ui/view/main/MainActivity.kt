@@ -13,6 +13,7 @@ import com.dongyang.android.youdongknowme.ui.view.util.KeepStateNavigator
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 /* 메인 액티비티 */
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
@@ -50,6 +51,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
             val token = task.result
             SharedPreference.setFcmToken(token)
+
+            Timber.d("token : ${token}")
         })
     }
 

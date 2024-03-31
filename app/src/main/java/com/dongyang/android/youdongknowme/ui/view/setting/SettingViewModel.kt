@@ -11,6 +11,7 @@ import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.standard.network.NetworkResult
 import com.dongyang.android.youdongknowme.ui.view.util.Event
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 /* 설정 뷰모델 */
 class SettingViewModel(private val settingRepository: SettingRepository) : BaseViewModel() {
@@ -41,6 +42,7 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
 
     init {
         getUserFCMToken()
+        getUserDepartment()
     }
 
     fun checkAccessAlarm() {
@@ -60,14 +62,17 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
     }
 
     fun getUserDepartment() {
-        val myDepartment = settingRepository.getUserDepartment()
-        _myDepartment.postValue(myDepartment)
+        viewModelScope.launch {
+            val department = settingRepository.getUserDepartment()
+            _myDepartment.postValue(department)
+            Timber.d("update viewmodel $department")
+        }
     }
 
     fun getUserTopic() {
         viewModelScope.launch {
             val keyword = settingRepository.getUserTopic()
-            _myTopics.value = keyword
+            _myTopics.postValue(keyword)
         }
     }
 
@@ -76,17 +81,18 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
         _FCMToken.postValue(token)
     }
 
-    fun updateUserDepartment() {
+    fun updateUserDepartment(department: String) {
         _isLoading.postValue(true)
 
         viewModelScope.launch {
             when (val result = settingRepository.updateUserDepartment(
                 UpdateDepartment(
                     token = FCMToken.value.toString(),
-                    department = myDepartment.value.toString()
+                    department = department
                 )
             )) {
                 is NetworkResult.Success -> {
+                    Timber.d("update network $department")
                     settingRepository.setIsAccessDepartAlarm(true)
                     _isLoading.postValue(false)
                     _isError.postValue(false)

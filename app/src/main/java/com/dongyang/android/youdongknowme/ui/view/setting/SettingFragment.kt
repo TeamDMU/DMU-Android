@@ -12,6 +12,7 @@ import com.dongyang.android.youdongknowme.ui.view.depart.DepartActivity
 import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordActivity
 import com.dongyang.android.youdongknowme.ui.view.license.LicenseActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 /* 설정 화면 */
 class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>() {
@@ -19,22 +20,28 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
     override val layoutResourceId: Int = R.layout.fragment_setting
     override val viewModel: SettingViewModel by viewModel()
 
-    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+    private lateinit var resultLauncherKeyword: ActivityResultLauncher<Intent>
+    private lateinit var resultResultDepartment: ActivityResultLauncher<Intent>
+
     private var topics: List<String> = emptyList()
+    private var department: String = ""
 
     override fun initStartView() {
         binding.tvSettingAppVersion.text = getAppVersion()
         setResultKeyword()
+        setResultDepartment()
     }
 
     override fun initDataBinding() {
 
         viewModel.myDepartment.observe(viewLifecycleOwner) { myDepartment ->
             binding.tvSettingDepartment.text = myDepartment
+            department = myDepartment
+            viewModel.updateUserDepartment(department)
         }
 
         viewModel.myTopics.observe(viewLifecycleOwner) { myTopics ->
-            topics = topics
+            topics = myTopics
         }
 
         viewModel.isAccessUniversityAlarm.observe(viewLifecycleOwner) { isChecked ->
@@ -54,7 +61,9 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
 
         binding.switchSettingUniversityAlarm.setOnCheckedChangeListener { compoundButton, _ ->
             if (compoundButton.isChecked) {
-                viewModel.updateUserTopic(topics)
+                if (topics.isNotEmpty()) {
+                    viewModel.updateUserTopic(topics)
+                }
             } else {
                 viewModel.removeUserTopic()
             }
@@ -62,7 +71,9 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
 
         binding.switchSettingDepartmentAlarm.setOnCheckedChangeListener { compoundButton, _ ->
             if (compoundButton.isChecked) {
-                viewModel.updateUserDepartment()
+                if (department.isNotEmpty()) {
+                    viewModel.updateUserDepartment(department)
+                }
             } else {
                 viewModel.removeUserDepartment()
             }
@@ -70,20 +81,19 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
 
         binding.btnSettingEditKeyword.setOnClickListener {
             val intent = Intent(requireActivity(), KeywordActivity::class.java)
-            resultLauncher.launch(intent)
+            resultLauncherKeyword.launch(intent)
         }
 
         binding.btnSettingEditDepartment.setOnClickListener {
             val intent = Intent(requireActivity(), DepartActivity::class.java)
-            startActivity(intent)
+            resultResultDepartment.launch(intent)
         }
 
         binding.btnSettingAppHelp.setOnClickListener {
-            val intent =
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("https://docs.google.com/forms/d/e/1FAIpQLSeRTKalenelmffTbCZeK4mqmQg0palobghkXSoie1FlmV22ZQ/viewform")
-                )
+            val intent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://docs.google.com/forms/d/e/1FAIpQLSeRTKalenelmffTbCZeK4mqmQg0palobghkXSoie1FlmV22ZQ/viewform")
+            )
             startActivity(intent)
         }
 
@@ -108,11 +118,19 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
     }
 
     private fun setResultKeyword() {
-        resultLauncher =
+        resultLauncherKeyword =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
-                    viewModel.getUserTopic()
-                    viewModel.updateUserTopic(topics)
+                    viewModel.getUserTopic().run { viewModel.updateUserTopic(topics) }
+                }
+            }
+    }
+
+    private fun setResultDepartment() {
+        resultResultDepartment =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    viewModel.getUserDepartment()
                 }
             }
     }
