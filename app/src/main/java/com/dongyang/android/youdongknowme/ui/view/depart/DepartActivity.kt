@@ -64,9 +64,6 @@ class DepartActivity : BaseActivity<ActivityDepartBinding, DepartViewModel>(), D
     private fun getDepart(items: ArrayList<String>) {
         return binding.btnDepartComplete.setOnClickListener {
             viewModel.setDepartment(items[viewModel.selectDepartPosition.value ?: 0])
-            val intent = Intent(this, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            startActivity(intent)
             finish()
         }
     }

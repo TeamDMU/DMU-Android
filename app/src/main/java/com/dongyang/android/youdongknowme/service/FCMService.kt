@@ -8,6 +8,7 @@ import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
 import androidx.core.app.NotificationCompat
+import com.dongyang.android.youdongknowme.data.local.SharedPreference
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -58,5 +59,10 @@ class FCMService : FirebaseMessagingService() {
 
         // 알림 표시
         notificationManager.notify(System.currentTimeMillis().toInt(), builder.build())
+    }
+
+    override fun onNewToken(token: String) {
+        super.onNewToken(token)
+        SharedPreference.setFcmToken(token)
     }
 }
