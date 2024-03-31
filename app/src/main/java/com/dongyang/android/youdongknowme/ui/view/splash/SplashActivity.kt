@@ -26,7 +26,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
     override val viewModel: SplashViewModel by viewModel()
 
     private var intentJob: Job? = null
-    private lateinit var intent: Intent
+    private var intent = OnboardingDepartActivity.createIntent(this@SplashActivity)
 
     override fun initStartView() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -47,7 +47,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
         if (viewModel.isFirstLaunch.value == true) {
             permissionCheck()
         } else {
-            val intent = MainActivity.createIntent(this@SplashActivity)
+            intent = MainActivity.createIntent(this@SplashActivity)
             startActivity(intent)
             finish()
         }
