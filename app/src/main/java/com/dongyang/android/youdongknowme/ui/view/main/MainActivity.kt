@@ -36,20 +36,21 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         binding.mainNvBottom.setupWithNavController(navController)
 
         viewModel.checkFirstLaunch()
+    }
 
-        if (viewModel.isFirstLaunch.value == true) {
-            getFcmToken()
+    override fun initDataBinding() {
+        viewModel.isFirstLaunch.observe(this) { boolean ->
+            if (boolean) getFcmToken()
         }
     }
 
-    override fun initDataBinding() = Unit
     override fun initAfterBinding() = Unit
 
     private fun getFcmToken() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                viewModel.setFCMToken(task.result)
-                viewModel.setInitToken()
+                viewModel.setFCMToken(task.result).run { viewModel.setInitToken() }
+                Timber.d("first ${task.result}")
             } else {
                 return@addOnCompleteListener
             }
