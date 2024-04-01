@@ -10,6 +10,7 @@ import com.dongyang.android.youdongknowme.data.local.SharedPreference
 import com.dongyang.android.youdongknowme.databinding.ActivityMainBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.view.util.KeepStateNavigator
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -40,17 +41,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             getFcmToken()
         }
     }
-    
-    private fun getFcmToken() {
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                return@OnCompleteListener
-            }
 
-            val token = task.result
-            SharedPreference.setFcmToken(token)
-        })
-    }
+    override fun initDataBinding() = Unit
+    override fun initAfterBinding() = Unit
 
     private fun getFcmToken() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
