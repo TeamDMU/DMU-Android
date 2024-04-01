@@ -19,12 +19,14 @@
             app:title="@{@string/keyword_title}" />
 
         <ScrollView
-            android:id="@+id/sv_keyword"
+            android:id="@+id/sv_onboarding_keyword"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="16dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="16dp"
             android:fillViewport="true"
             app:layout_constrainedHeight="true"
+            app:layout_constraintVertical_bias="0"
             app:layout_constraintBottom_toTopOf="@id/btn_keyword_complete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -35,16 +37,16 @@
                 android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:id="@+id/linearLayout_keyword_class"
+                    android:id="@+id/linearLayout_onboarding_keyword_class"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/view_onboarding_stroke_1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        style="@style/PretendardBold20"
+                        style="@style/PretendardMedium20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
@@ -52,12 +54,12 @@
                         android:textColor="@color/black" />
 
                     <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/chipGroup_keyword_class"
+                        android:id="@+id/chipGroup_onboarding_keyword_class"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         app:chipSpacingHorizontal="20dp"
-                        app:chipSpacingVertical="16dp"
+                        app:chipSpacingVertical="12dp"
                         app:singleSelection="false">
 
                         <com.google.android.material.chip.Chip
@@ -80,25 +82,25 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/view_onboarding_stroke_1"
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginVertical="20dp"
                     android:background="@color/line"
-                    app:layout_constraintBottom_toTopOf="@id/linearLayout_keyword_academic"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_class" />
+                    app:layout_constraintBottom_toTopOf="@id/linearLayout_onboarding_keyword_academic"
+                    app:layout_constraintTop_toBottomOf="@id/linearLayout_onboarding_keyword_class" />
 
                 <LinearLayout
-                    android:id="@+id/linearLayout_keyword_academic"
+                    android:id="@+id/linearLayout_onboarding_keyword_academic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginVertical="20dp"
                     android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_class">
+                    app:layout_constraintTop_toBottomOf="@id/view_onboarding_stroke_1">
 
                     <TextView
-                        style="@style/PretendardBold20"
+                        style="@style/PretendardMedium20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
@@ -106,12 +108,12 @@
                         android:textColor="@color/black" />
 
                     <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/chipGroup_keyword_academic"
+                        android:id="@+id/chipGroup_onboarding_keyword_academic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         app:chipSpacingHorizontal="20dp"
-                        app:chipSpacingVertical="16dp"
+                        app:chipSpacingVertical="12dp"
                         app:singleSelection="false">
 
                         <com.google.android.material.chip.Chip
@@ -137,25 +139,25 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/view_onboarding_stroke_2"
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:background="@color/line"
-                    app:layout_constraintBottom_toTopOf="@id/linearLayout_keyword_money"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_academic" />
+                    app:layout_constraintBottom_toTopOf="@id/linearLayout_onboarding_keyword_money"
+                    app:layout_constraintTop_toBottomOf="@id/linearLayout_onboarding_keyword_academic" />
 
                 <LinearLayout
-                    android:id="@+id/linearLayout_keyword_money"
+                    android:id="@+id/linearLayout_onboarding_keyword_money"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="20dp"
                     android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_academic">
+                    app:layout_constraintTop_toBottomOf="@id/view_onboarding_stroke_2">
 
                     <TextView
-                        style="@style/PretendardBold20"
+                        style="@style/PretendardMedium20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
@@ -163,12 +165,12 @@
                         android:textColor="@color/black" />
 
                     <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/chipGroup_keyword_money"
+                        android:id="@+id/chipGroup_onboarding_keyword_money"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         app:chipSpacingHorizontal="20dp"
-                        app:chipSpacingVertical="16dp"
+                        app:chipSpacingVertical="12dp"
                         app:singleSelection="false">
 
                         <com.google.android.material.chip.Chip
@@ -186,25 +188,25 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/view_onboarding_stroke_3"
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:background="@color/line"
-                    app:layout_constraintBottom_toTopOf="@id/linearLayout_keyword_employment"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_money" />
+                    app:layout_constraintBottom_toTopOf="@id/linearLayout_onboarding_keyword_employment"
+                    app:layout_constraintTop_toBottomOf="@id/linearLayout_onboarding_keyword_money" />
 
                 <LinearLayout
-                    android:id="@+id/linearLayout_keyword_employment"
+                    android:id="@+id/linearLayout_onboarding_keyword_employment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="20dp"
                     android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_money">
+                    app:layout_constraintTop_toBottomOf="@id/view_onboarding_stroke_3">
 
                     <TextView
-                        style="@style/PretendardBold20"
+                        style="@style/PretendardMedium20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
@@ -212,12 +214,12 @@
                         android:textColor="@color/black" />
 
                     <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/chipGroup_keyword_employment"
+                        android:id="@+id/chipGroup_onboarding_keyword_employment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         app:chipSpacingHorizontal="20dp"
-                        app:chipSpacingVertical="16dp"
+                        app:chipSpacingVertical="12dp"
                         app:singleSelection="false">
 
                         <com.google.android.material.chip.Chip
@@ -243,25 +245,25 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/view_onboarding_stroke_4"
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:background="@color/line"
-                    app:layout_constraintBottom_toTopOf="@id/linearLayout_keyword_etc"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_employment" />
+                    app:layout_constraintBottom_toTopOf="@id/linearLayout_onboarding_keyword_etc"
+                    app:layout_constraintTop_toBottomOf="@id/linearLayout_onboarding_keyword_employment" />
 
                 <LinearLayout
-                    android:id="@+id/linearLayout_keyword_etc"
+                    android:id="@+id/linearLayout_onboarding_keyword_etc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="20dp"
                     android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_employment">
+                    app:layout_constraintTop_toBottomOf="@id/view_onboarding_stroke_4">
 
                     <TextView
-                        style="@style/PretendardBold20"
+                        style="@style/PretendardMedium20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
@@ -269,12 +271,12 @@
                         android:textColor="@color/black" />
 
                     <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/chipGroup_keyword_etc"
+                        android:id="@+id/chipGroup_onboarding_keyword_etc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         app:chipSpacingHorizontal="20dp"
-                        app:chipSpacingVertical="16dp"
+                        app:chipSpacingVertical="12dp"
                         app:singleSelection="false">
 
                         <com.google.android.material.chip.Chip
