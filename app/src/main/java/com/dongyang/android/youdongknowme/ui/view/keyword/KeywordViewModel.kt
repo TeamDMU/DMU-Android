@@ -15,9 +15,6 @@ class KeywordViewModel(
 
     private val firebaseMessaging = FirebaseMessaging.getInstance()
 
-    private val _isFirstLaunch: MutableLiveData<Boolean> = MutableLiveData(false)
-    val isFirstLaunch: LiveData<Boolean> get() = _isFirstLaunch
-
     private val _localKeywordList: MutableLiveData<List<KeywordEntity>> = MutableLiveData()
     val localKeywordList: LiveData<List<KeywordEntity>> get() = _localKeywordList
 
@@ -30,16 +27,6 @@ class KeywordViewModel(
                 _localKeywordList.postValue(keywordList)
             }
         }
-    }
-
-    fun checkFirstLaunch() {
-        if (keywordRepository.getIsFirstLaunch()) {
-            _isFirstLaunch.value = true
-        }
-    }
-
-    fun setFirstLaunch(isFirstLaunch: Boolean) {
-        keywordRepository.setIsFirstLaunch(isFirstLaunch)
     }
 
     fun subscribeCheckedKeyword() {

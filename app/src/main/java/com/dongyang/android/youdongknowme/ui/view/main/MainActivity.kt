@@ -10,7 +10,6 @@ import com.dongyang.android.youdongknowme.data.local.SharedPreference
 import com.dongyang.android.youdongknowme.databinding.ActivityMainBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.view.util.KeepStateNavigator
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -36,24 +35,29 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         navController.setGraph(R.navigation.dmu_navigation)
         binding.mainNvBottom.setupWithNavController(navController)
 
-        getFcmToken()
+        viewModel.checkFirstLaunch()
+
+        if (viewModel.isFirstLaunch.value == true) {
+            getFcmToken()
+        }
     }
 
     override fun initDataBinding() = Unit
-
     override fun initAfterBinding() = Unit
 
     private fun getFcmToken() {
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                return@OnCompleteListener
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                viewModel.setFCMToken(task.result)
+                viewModel.setInitToken()
+            } else {
+                return@addOnCompleteListener
             }
-
             val token = task.result
             SharedPreference.setFcmToken(token)
 
             Timber.d("token : ${token}")
-        })
+        }
     }
 
     companion object {

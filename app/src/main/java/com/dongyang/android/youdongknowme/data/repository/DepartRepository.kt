@@ -10,8 +10,6 @@ class DepartRepository {
         SharedPreference.setCode(department.code)
     }
 
-    fun getIsFirstLaunch(): Boolean = SharedPreference.getIsFirstLaunch()
-
     fun getUserDepartment(): String {
         return SharedPreference.getDepartment()
     }

@@ -9,6 +9,7 @@ import com.dongyang.android.youdongknowme.data.repository.AlarmRepository
 import com.dongyang.android.youdongknowme.data.repository.CafeteriaRepository
 import com.dongyang.android.youdongknowme.data.repository.DepartRepository
 import com.dongyang.android.youdongknowme.data.repository.KeywordRepository
+import com.dongyang.android.youdongknowme.data.repository.MainRepository
 import com.dongyang.android.youdongknowme.data.repository.NoticeRepository
 import com.dongyang.android.youdongknowme.data.repository.ScheduleRepository
 import com.dongyang.android.youdongknowme.data.repository.SettingRepository
@@ -20,6 +21,7 @@ import com.dongyang.android.youdongknowme.ui.view.depart.DepartViewModel
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailViewModel
 import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordViewModel
 import com.dongyang.android.youdongknowme.ui.view.license.LicenseViewModel
+import com.dongyang.android.youdongknowme.ui.view.main.MainViewModel
 import com.dongyang.android.youdongknowme.ui.view.notice.NoticeViewModel
 import com.dongyang.android.youdongknowme.ui.view.schedule.ScheduleViewModel
 import com.dongyang.android.youdongknowme.ui.view.search.SearchViewModel
@@ -98,6 +100,9 @@ val viewModelModule = module {
     viewModel {
         SearchViewModel(get())
     }
+    viewModel{
+        MainViewModel(get())
+    }
 }
 
 val repositoryModule = module {
@@ -125,6 +130,9 @@ val repositoryModule = module {
     single {
         CafeteriaRepository(get())
     }
+    single{
+        MainRepository(get(), get())
+    }
 }
 
 val utilModule = module {
@@ -135,23 +143,23 @@ val utilModule = module {
 
 private val defaultKeywordList = arrayListOf(
     KeywordEntity("시험", "exam", false),
-    KeywordEntity("수강", "course", false),
-    KeywordEntity("특강", "lecture", false),
-    KeywordEntity("계절학기", "season", false),
-    KeywordEntity("휴학", "leave", false),
-    KeywordEntity("복학", "return", false),
-    KeywordEntity("졸업", "graduation", false),
-    KeywordEntity("전과", "transfer", false),
-    KeywordEntity("학기포기", "drop", false),
+    KeywordEntity("수강", "signup", false),
+    KeywordEntity("특강", "speciallecture", false),
+    KeywordEntity("계절학기", "seasonalsemester", false),
+    KeywordEntity("휴학", "leaveofabsence", false),
+    KeywordEntity("복학", "returntoschool", false),
+    KeywordEntity("졸업", "graduate", false),
+    KeywordEntity("전과", "switchmajors", false),
+    KeywordEntity("학기포기", "givingupthesemester", false),
     KeywordEntity("장학", "scholarship", false),
-    KeywordEntity("국가장학", "nationalScholarship", false),
-    KeywordEntity("등록", "tuition", false),
-    KeywordEntity("채용", "recruitment", false),
+    KeywordEntity("국가장학", "nationalscholarship", false),
+    KeywordEntity("등록", "registration", false),
+    KeywordEntity("채용", "employment", false),
     KeywordEntity("공모전", "contest", false),
     KeywordEntity("대회", "competition", false),
-    KeywordEntity("현장실습", "field", false),
-    KeywordEntity("봉사", "service", false),
+    KeywordEntity("현장실습", "fieldtraining", false),
+    KeywordEntity("봉사", "volunteer", false),
     KeywordEntity("기숙사", "dormitory", false),
-    KeywordEntity("동아리", "club", false),
-    KeywordEntity("학생회", "studentCouncil", false),
+    KeywordEntity("동아리", "group", false),
+    KeywordEntity("학생회", "studentcouncil", false),
 )
