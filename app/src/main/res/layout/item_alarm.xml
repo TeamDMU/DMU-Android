@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="@drawable/bg_stroke_gray300_radius_10dp"
+        android:background="@drawable/bg_stroke_gray300_radius_2dp"
         android:paddingVertical="20dp">
 
         <TextView

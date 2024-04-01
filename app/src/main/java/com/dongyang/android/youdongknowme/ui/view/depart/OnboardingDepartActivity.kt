@@ -103,7 +103,8 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
 
     private fun setSearchColor(isContains: Boolean) {
         if (isContains) {
-            binding.linearLayoutOnboardingDepartSearch.setBackgroundResource(R.drawable.bg_search_blue_radius_10dp)
+            binding.linearLayoutOnboardingDepartSearch.setBackgroundResource(R.drawable.bg_stroke_blue300_radius_2dp)
+
             binding.etOnboardingDepartSearch.compoundDrawableTintList =
                 ColorStateList.valueOf(
                     ContextCompat.getColor(
@@ -114,7 +115,7 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
         } else {
             viewModel.setSelectPosition(-1)
 
-            binding.linearLayoutOnboardingDepartSearch.setBackgroundResource(R.drawable.bg_search_white_radius_10dp)
+            binding.linearLayoutOnboardingDepartSearch.setBackgroundResource(R.drawable.bg_stroke_gray300_radius_2dp)
             binding.etOnboardingDepartSearch.compoundDrawableTintList =
                 ColorStateList.valueOf(
                     ContextCompat.getColor(

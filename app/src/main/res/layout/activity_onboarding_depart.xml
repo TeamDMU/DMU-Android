@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginVertical="40dp"
-            android:background="@drawable/bg_search_white_radius_10dp"
+            android:background="@drawable/bg_stroke_gray300_radius_2dp"
             android:minHeight="56dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
