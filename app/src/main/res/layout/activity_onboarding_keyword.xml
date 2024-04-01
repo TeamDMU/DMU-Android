@@ -321,7 +321,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_onboarding_keyword_next"
-            style="@style/PretendardRegular20"
+            style="@style/PretendardMedium24"
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_marginBottom="20dp"
