@@ -12,7 +12,6 @@ import com.dongyang.android.youdongknowme.ui.view.depart.DepartActivity
 import com.dongyang.android.youdongknowme.ui.view.keyword.KeywordActivity
 import com.dongyang.android.youdongknowme.ui.view.license.LicenseActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 /* 설정 화면 */
 class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>() {
@@ -42,6 +41,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
 
         viewModel.myTopics.observe(viewLifecycleOwner) { myTopics ->
             topics = myTopics
+            viewModel.updateUserTopic(topics)
         }
 
         viewModel.isAccessUniversityAlarm.observe(viewLifecycleOwner) { isChecked ->

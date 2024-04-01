@@ -11,7 +11,6 @@ import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.standard.network.NetworkResult
 import com.dongyang.android.youdongknowme.ui.view.util.Event
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 /* 설정 뷰모델 */
 class SettingViewModel(private val settingRepository: SettingRepository) : BaseViewModel() {
@@ -62,23 +61,17 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
     }
 
     fun getUserDepartment() {
-        viewModelScope.launch {
-            val department = settingRepository.getUserDepartment()
-            _myDepartment.postValue(department)
-            Timber.d("update viewmodel $department")
-        }
+        _myDepartment.value = settingRepository.getUserDepartment()
     }
 
     fun getUserTopic() {
         viewModelScope.launch {
-            val keyword = settingRepository.getUserTopic()
-            _myTopics.postValue(keyword)
+            _myTopics.postValue(settingRepository.getUserTopic())
         }
     }
 
     private fun getUserFCMToken() {
-        val token = settingRepository.getUserFCMToken()
-        _FCMToken.postValue(token)
+        _FCMToken.value = settingRepository.getUserFCMToken()
     }
 
     fun updateUserDepartment(department: String) {
@@ -92,7 +85,6 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
                 )
             )) {
                 is NetworkResult.Success -> {
-                    Timber.d("update network $department")
                     settingRepository.setIsAccessDepartAlarm(true)
                     _isLoading.postValue(false)
                     _isError.postValue(false)
@@ -158,7 +150,7 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
 
     fun removeUserTopic() {
         _isLoading.postValue(true)
-        
+
         viewModelScope.launch {
             when (val result =
                 settingRepository.removeUserTopic(

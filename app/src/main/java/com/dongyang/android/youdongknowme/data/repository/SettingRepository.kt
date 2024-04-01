@@ -9,7 +9,6 @@ import com.dongyang.android.youdongknowme.data.remote.service.SettingService
 import com.dongyang.android.youdongknowme.standard.network.ErrorResponseHandler
 import com.dongyang.android.youdongknowme.standard.network.NetworkResult
 import com.dongyang.android.youdongknowme.standard.network.RetrofitObject
-import timber.log.Timber
 
 class SettingRepository(
     private val keywordDao: KeywordDao,
@@ -29,7 +28,6 @@ class SettingRepository(
     }
 
     fun getUserDepartment(): String {
-        Timber.d("update settingRepo ${SharedPreference.getDepartment()}")
         return SharedPreference.getDepartment()
     }
 
