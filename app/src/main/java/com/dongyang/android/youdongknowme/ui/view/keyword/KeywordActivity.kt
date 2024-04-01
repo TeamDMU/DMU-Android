@@ -28,11 +28,11 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
                 viewModel.setAllKeywords(t?.filter { it.isSubscribe }?.map { it.name }
                     ?: listOf(""))
                 setCheckChipChange(
-                    binding.chipGroupOnboardingKeywordClass,
-                    binding.chipGroupOnboardingKeywordMoney,
-                    binding.chipGroupOnboardingKeywordAcademic,
-                    binding.chipGroupOnboardingKeywordEmployment,
-                    binding.chipGroupOnboardingKeywordEtc
+                    binding.chipGroupKeywordClass,
+                    binding.chipGroupKeywordMoney,
+                    binding.chipGroupKeywordAcademic,
+                    binding.chipGroupKeywordEmployment,
+                    binding.chipGroupKeywordEtc
                 )
                 viewModel.localKeywordList.removeObserver(this)
             }

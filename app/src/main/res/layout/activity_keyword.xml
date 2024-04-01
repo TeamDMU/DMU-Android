@@ -19,7 +19,7 @@
             app:title="@{@string/keyword_title}" />
 
         <ScrollView
-            android:id="@+id/sv_onboarding_keyword"
+            android:id="@+id/sv_keyword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -37,11 +37,11 @@
                 android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:id="@+id/linearLayout_onboarding_keyword_class"
+                    android:id="@+id/linearLayout_keyword_class"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintBottom_toTopOf="@id/view_onboarding_stroke_1"
+                    app:layout_constraintBottom_toTopOf="@id/view_stroke_1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -54,7 +54,7 @@
                         android:textColor="@color/black" />
 
                     <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/chipGroup_onboarding_keyword_class"
+                        android:id="@+id/chipGroup_keyword_class"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -82,22 +82,22 @@
                 </LinearLayout>
 
                 <View
-                    android:id="@+id/view_onboarding_stroke_1"
+                    android:id="@+id/view_stroke_1"
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:layout_marginVertical="20dp"
                     android:background="@color/line"
-                    app:layout_constraintBottom_toTopOf="@id/linearLayout_onboarding_keyword_academic"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout_onboarding_keyword_class" />
+                    app:layout_constraintBottom_toTopOf="@id/linearLayout_keyword_academic"
+                    app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_class" />
 
                 <LinearLayout
-                    android:id="@+id/linearLayout_onboarding_keyword_academic"
+                    android:id="@+id/linearLayout_keyword_academic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="20dp"
                     android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/view_onboarding_stroke_1">
+                    app:layout_constraintTop_toBottomOf="@id/view_stroke_1">
 
                     <TextView
                         style="@style/PretendardMedium20"
@@ -108,7 +108,7 @@
                         android:textColor="@color/black" />
 
                     <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/chipGroup_onboarding_keyword_academic"
+                        android:id="@+id/chipGroup_keyword_academic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -139,22 +139,22 @@
                 </LinearLayout>
 
                 <View
-                    android:id="@+id/view_onboarding_stroke_2"
+                    android:id="@+id/view_stroke_2"
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:layout_marginTop="20dp"
                     android:background="@color/line"
-                    app:layout_constraintBottom_toTopOf="@id/linearLayout_onboarding_keyword_money"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout_onboarding_keyword_academic" />
+                    app:layout_constraintBottom_toTopOf="@id/linearLayout_keyword_money"
+                    app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_academic" />
 
                 <LinearLayout
-                    android:id="@+id/linearLayout_onboarding_keyword_money"
+                    android:id="@+id/linearLayout_keyword_money"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/view_onboarding_stroke_2">
+                    app:layout_constraintTop_toBottomOf="@id/view_stroke_2">
 
                     <TextView
                         style="@style/PretendardMedium20"
@@ -165,7 +165,7 @@
                         android:textColor="@color/black" />
 
                     <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/chipGroup_onboarding_keyword_money"
+                        android:id="@+id/chipGroup_keyword_money"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -188,22 +188,22 @@
                 </LinearLayout>
 
                 <View
-                    android:id="@+id/view_onboarding_stroke_3"
+                    android:id="@+id/view_stroke_3"
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:layout_marginTop="20dp"
                     android:background="@color/line"
-                    app:layout_constraintBottom_toTopOf="@id/linearLayout_onboarding_keyword_employment"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout_onboarding_keyword_money" />
+                    app:layout_constraintBottom_toTopOf="@id/linearLayout_keyword_employment"
+                    app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_money" />
 
                 <LinearLayout
-                    android:id="@+id/linearLayout_onboarding_keyword_employment"
+                    android:id="@+id/linearLayout_keyword_employment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/view_onboarding_stroke_3">
+                    app:layout_constraintTop_toBottomOf="@id/view_stroke_3">
 
                     <TextView
                         style="@style/PretendardMedium20"
@@ -214,7 +214,7 @@
                         android:textColor="@color/black" />
 
                     <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/chipGroup_onboarding_keyword_employment"
+                        android:id="@+id/chipGroup_keyword_employment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -245,22 +245,22 @@
                 </LinearLayout>
 
                 <View
-                    android:id="@+id/view_onboarding_stroke_4"
+                    android:id="@+id/view_stroke_4"
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:layout_marginTop="20dp"
                     android:background="@color/line"
-                    app:layout_constraintBottom_toTopOf="@id/linearLayout_onboarding_keyword_etc"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout_onboarding_keyword_employment" />
+                    app:layout_constraintBottom_toTopOf="@id/linearLayout_keyword_etc"
+                    app:layout_constraintTop_toBottomOf="@id/linearLayout_keyword_employment" />
 
                 <LinearLayout
-                    android:id="@+id/linearLayout_onboarding_keyword_etc"
+                    android:id="@+id/linearLayout_keyword_etc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/view_onboarding_stroke_4">
+                    app:layout_constraintTop_toBottomOf="@id/view_stroke_4">
 
                     <TextView
                         style="@style/PretendardMedium20"
@@ -271,7 +271,7 @@
                         android:textColor="@color/black" />
 
                     <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/chipGroup_onboarding_keyword_etc"
+                        android:id="@+id/chipGroup_keyword_etc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
