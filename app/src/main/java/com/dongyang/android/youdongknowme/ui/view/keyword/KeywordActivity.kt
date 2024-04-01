@@ -39,7 +39,7 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
         })
 
         viewModel.checkKeywordList.observe(this) { checkedKeywords ->
-            if(checkedKeywords.isEmpty()){
+            if (checkedKeywords.isEmpty()) {
                 binding.btnKeywordComplete.backgroundTintList =
                     ColorStateList.valueOf(
                         ContextCompat.getColor(
@@ -47,7 +47,7 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
                             R.color.gray300
                         )
                     )
-            }else{
+            } else {
                 binding.btnKeywordComplete.backgroundTintList =
                     ColorStateList.valueOf(
                         ContextCompat.getColor(
@@ -68,6 +68,7 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
 
             if (viewModel.checkKeywordList.value?.isNotEmpty() == true) {
                 viewModel.subscribeCheckedKeyword()
+
                 val intent = Intent(
                     this@KeywordActivity,
                     OnboardingPermissionActivity::class.java

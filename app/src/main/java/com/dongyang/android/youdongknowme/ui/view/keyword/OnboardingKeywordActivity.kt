@@ -70,14 +70,11 @@ class OnboardingKeywordActivity :
         binding.btnOnboardingKeywordNext.setOnClickListener {
             if (viewModel.checkKeywordList.value?.isNotEmpty() == true) {
                 viewModel.subscribeCheckedKeyword()
-                if (viewModel.isFirstLaunch.value == true) {
-                    viewModel.setFirstLaunch(false)
-                    val intent = Intent(
-                        this@OnboardingKeywordActivity,
-                        OnboardingPermissionActivity::class.java
-                    )
-                    startActivity(intent)
-                }
+                val intent = Intent(
+                    this@OnboardingKeywordActivity,
+                    OnboardingPermissionActivity::class.java
+                )
+                startActivity(intent)
                 finish()
             } else {
                 Toast.makeText(this, R.string.toast_msg_keyword, Toast.LENGTH_SHORT).show()
