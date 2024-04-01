@@ -48,11 +48,11 @@ class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel(
         _FCMToken.postValue(token)
     }
 
-    fun getUserDepart(){
+    private fun getUserDepart(){
         _myDepartment.value = mainRepository.getUserDepartment()
     }
 
-    fun getUserTopic(){
+    private fun getUserTopic(){
         viewModelScope.launch {
             _myTopics.value = mainRepository.getUserTopic()
         }
