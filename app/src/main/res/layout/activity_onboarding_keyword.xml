@@ -325,7 +325,7 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/btn_gray_to_blue_10dp_enabled"
+            android:background="@drawable/btn_gray300_radius_10dp"
             android:text="@string/keyword_next"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
