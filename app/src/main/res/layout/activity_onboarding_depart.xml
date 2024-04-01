@@ -28,6 +28,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
             android:text="@string/department_title_sub"
             android:textColor="@color/gray500"
             app:layout_constraintBottom_toTopOf="@id/onboarding_depart_step"

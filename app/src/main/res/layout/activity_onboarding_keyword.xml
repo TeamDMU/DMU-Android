@@ -26,6 +26,7 @@
             style="@style/PretendardBold24"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="@string/keyword_title_sub"
             app:layout_constraintBottom_toTopOf="@id/onboarding_keyword_step"
             app:layout_constraintEnd_toEndOf="parent"
