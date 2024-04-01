@@ -52,7 +52,7 @@
             android:id="@+id/mv_switch_permission"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="32dp"
             android:padding="16dp"
             app:cardCornerRadius="16dp"
             app:layout_constraintBottom_toTopOf="@id/btn_permission_complete"
@@ -72,7 +72,7 @@
                 android:drawableTint="@color/gray300"
                 android:paddingHorizontal="32dp"
                 android:paddingVertical="16dp"
-                android:text="@string/setting_keyword_alarm"
+                android:text="@string/setting_keyword_switch"
                 android:textAlignment="center"
                 android:textColor="@color/gray300" />
         </com.google.android.material.card.MaterialCardView>
