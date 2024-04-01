@@ -62,7 +62,7 @@
 
             <EditText
                 android:id="@+id/et_onboarding_depart_search"
-                style="@style/PretendardRegular16"
+                style="@style/PretendardMedium16"
                 android:layout_width="0dp"
                 android:layout_height="56dp"
                 android:layout_gravity="center"
