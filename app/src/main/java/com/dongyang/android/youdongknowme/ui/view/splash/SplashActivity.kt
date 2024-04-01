@@ -26,7 +26,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
     override val viewModel: SplashViewModel by viewModel()
 
     private var intentJob: Job? = null
-    private var intent = OnboardingDepartActivity.createIntent(this@SplashActivity)
 
     override fun initStartView() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -47,7 +46,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
         if (viewModel.isFirstLaunch.value == true) {
             permissionCheck()
         } else {
-            intent = MainActivity.createIntent(this@SplashActivity)
+            val intent = MainActivity.createIntent(this@SplashActivity)
             startActivity(intent)
             finish()
         }
@@ -61,7 +60,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         if (requestCode == REQUEST_PERMISSION_CODE) {
-            intent = OnboardingDepartActivity.createIntent(this@SplashActivity)
+            val intent = OnboardingDepartActivity.createIntent(this@SplashActivity)
             startActivity(intent)
             finish()
         }
@@ -79,7 +78,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
                     REQUEST_PERMISSION_CODE
                 )
             } else {
-                intent = OnboardingDepartActivity.createIntent(this@SplashActivity)
+                val intent = OnboardingDepartActivity.createIntent(this@SplashActivity)
                 startActivity(intent)
                 finish()
             }
