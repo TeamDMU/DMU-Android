@@ -35,22 +35,25 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         navController.setGraph(R.navigation.dmu_navigation)
         binding.mainNvBottom.setupWithNavController(navController)
 
-        getFcmToken()
+        viewModel.checkFirstLaunch()
+
+        if (viewModel.isFirstLaunch.value == true) {
+            getFcmToken()
+        }
     }
 
     override fun initDataBinding() = Unit
-
     override fun initAfterBinding() = Unit
 
     private fun getFcmToken() {
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                return@OnCompleteListener
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                viewModel.setFCMToken(task.result)
+                viewModel.setInitToken()
+            } else {
+                return@addOnCompleteListener
             }
-
-            val token = task.result
-            SharedPreference.setFcmToken(token)
-        })
+        }
     }
 
     companion object {

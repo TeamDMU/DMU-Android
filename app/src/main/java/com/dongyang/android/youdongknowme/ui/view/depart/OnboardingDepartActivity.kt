@@ -25,8 +25,6 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
     private var emptyList = arrayListOf<String>("")
 
     override fun initStartView() {
-        viewModel.checkFirstLaunch()
-
         // 학과 리스트
         items =
             resources.getStringArray(R.array.dmu_department_list).toCollection(ArrayList<String>())
@@ -60,7 +58,8 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
             override fun onTextChanged(charSequence: CharSequence?, i: Int, i1: Int, i2: Int) = Unit
 
             override fun afterTextChanged(editable: Editable?) {
-                val searchText = binding.etOnboardingDepartSearch.text.toString().replace("\\s".toRegex(), "")
+                val searchText =
+                    binding.etOnboardingDepartSearch.text.toString().replace("\\s".toRegex(), "")
                 searchList = ArrayList<String>()
 
                 if (searchText.isEmpty()) {
@@ -99,16 +98,9 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
     private fun getDepart(items: ArrayList<String>) {
         return binding.btnOnboardingDepartNext.setOnClickListener {
             viewModel.setDepartment(items[viewModel.selectDepartPosition.value ?: 0])
-            if (viewModel.isFirstLaunch.value == true) {
-                val intent = Intent(this, OnboardingKeywordActivity::class.java)
-                startActivity(intent)
-                finish()
-            } else {
-                val intent = Intent(this, MainActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                startActivity(intent)
-                finish()
-            }
+            val intent = Intent(this, OnboardingKeywordActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
