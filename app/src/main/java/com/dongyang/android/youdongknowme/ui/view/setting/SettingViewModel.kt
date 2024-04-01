@@ -66,7 +66,8 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
 
     fun getUserTopic() {
         viewModelScope.launch {
-            _myTopics.postValue(settingRepository.getUserTopic())
+            val keyword = settingRepository.getUserTopic()
+            _myTopics.value = keyword
         }
     }
 
