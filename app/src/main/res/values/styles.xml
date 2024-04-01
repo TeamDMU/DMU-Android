@@ -10,7 +10,7 @@
         <item name="android:checked">false</item>
         <item name="android:textAppearance">@style/PretendardSemiBold16</item>
         <item name="chipBackgroundColor">@color/bg_chip_select</item>
-        <item name="chipStrokeColor">@color/gray400</item>
+        <item name="chipStrokeColor">@color/bg_chip_stroke_select</item>
         <item name="chipStrokeWidth">1dp</item>
         <item name="android:textAlignment">center</item>
         <item name="rippleColor">@color/blue300</item>
