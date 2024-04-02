@@ -26,7 +26,6 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>() {
             this.layoutManager = LinearLayoutManager(requireActivity())
             this.itemAnimator = null
             this.setHasFixedSize(true)
-            this.addItemDecoration(DividerItemDecoration(requireContext(), 1))
         }
         setupTabLayout()
         setupInfinityScroll()

@@ -98,11 +98,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
             layoutManager = LinearLayoutManager(requireActivity())
             itemAnimator = null
             setHasFixedSize(true)
-            addItemDecoration(
-                DividerItemDecoration(
-                    requireContext(), DividerItemDecoration.VERTICAL
-                )
-            )
         }
     }
 
