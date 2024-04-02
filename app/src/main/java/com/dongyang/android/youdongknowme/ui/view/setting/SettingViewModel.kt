@@ -86,7 +86,7 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
                 )
             )) {
                 is NetworkResult.Success -> {
-                    settingRepository.setIsAccessDepartAlarm(true)
+                    setIsAccessDepartAlarm(true)
                     _isLoading.postValue(false)
                     _isError.postValue(false)
                 }
@@ -110,7 +110,7 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
                 )
             ) {
                 is NetworkResult.Success -> {
-                    settingRepository.setIsAccessDepartAlarm(false)
+                    setIsAccessDepartAlarm(false)
                     _isLoading.postValue(false)
                     _isError.postValue(false)
                 }
@@ -135,7 +135,7 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
                 )
             )) {
                 is NetworkResult.Success -> {
-                    settingRepository.setIsAccessSchoolAlarm(true)
+                    setIsAccessUniversityAlarm(true)
                     _isLoading.postValue(false)
                     _isError.postValue(false)
                 }
@@ -158,7 +158,7 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
                     RemoveToken(token = FCMToken.value.toString())
                 )) {
                 is NetworkResult.Success -> {
-                    settingRepository.setIsAccessSchoolAlarm(false)
+                    setIsAccessUniversityAlarm(false)
                     _isLoading.postValue(false)
                     _isError.postValue(false)
                 }

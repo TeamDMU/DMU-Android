@@ -122,6 +122,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
                     viewModel.getUserTopic().run { viewModel.updateUserTopic(topics) }
+                    binding.switchSettingUniversityAlarm.isChecked = true
                 }
             }
     }
@@ -131,6 +132,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
                     viewModel.getUserDepartment()
+                    binding.switchSettingDepartmentAlarm.isChecked = true
                 }
             }
     }
