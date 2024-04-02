@@ -138,7 +138,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
     }
 
     private fun validateSearchContentLength(): Boolean {
-        return searchContent.length >= 2
+        return searchContent.length >= SEARCH_CONTENT_MINIMUM_LENGTH
     }
 
     private fun navigateToDetail(url: String) {
@@ -160,5 +160,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
                 }
             }
         })
+    }
+
+    companion object {
+        private const val SEARCH_CONTENT_MINIMUM_LENGTH = 2
     }
 }
