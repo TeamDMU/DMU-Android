@@ -4,12 +4,10 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import androidx.core.content.ContextCompat
-import com.dongyang.android.youdongknowme.DialogPermission
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityOnboardingPermissionBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
-import com.dongyang.android.youdongknowme.ui.view.setting.SettingViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 

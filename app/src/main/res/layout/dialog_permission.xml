@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="20dp"
-    android:background="@drawable/bg_search_white_radius_10dp">
+    android:backgroundTint="@color/white"
+    android:background="@drawable/bg_stroke_gray300_radius_2dp">
 
     <TextView
         android:id="@+id/customTvTitle"
