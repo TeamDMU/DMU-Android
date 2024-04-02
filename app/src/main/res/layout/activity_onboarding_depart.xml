@@ -78,6 +78,7 @@
                 android:maxLines="1"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
+                android:textColor="@color/gray300"
                 android:textColorHint="@color/gray300" />
 
             <ImageButton
