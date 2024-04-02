@@ -10,9 +10,9 @@ import com.dongyang.android.youdongknowme.data.local.SharedPreference
 import com.dongyang.android.youdongknowme.databinding.ActivityMainBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.view.util.KeepStateNavigator
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 /* 메인 액티비티 */
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
@@ -36,23 +36,28 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         binding.mainNvBottom.setupWithNavController(navController)
 
         viewModel.checkFirstLaunch()
+    }
 
-        if (viewModel.isFirstLaunch.value == true) {
-            getFcmToken()
+    override fun initDataBinding() {
+        viewModel.isFirstLaunch.observe(this) { boolean ->
+            if (boolean) getFcmToken()
         }
     }
 
-    override fun initDataBinding() = Unit
     override fun initAfterBinding() = Unit
 
     private fun getFcmToken() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                viewModel.setFCMToken(task.result)
-                viewModel.setInitToken()
+                viewModel.setFCMToken(task.result).run { viewModel.setInitToken() }
+                Timber.d("first ${task.result}")
             } else {
                 return@addOnCompleteListener
             }
+            val token = task.result
+            SharedPreference.setFcmToken(token)
+
+            Timber.d("token : ${token}")
         }
     }
 

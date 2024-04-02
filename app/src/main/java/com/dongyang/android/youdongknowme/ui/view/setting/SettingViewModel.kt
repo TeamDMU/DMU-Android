@@ -41,6 +41,7 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
 
     init {
         getUserFCMToken()
+        getUserDepartment()
     }
 
     fun checkAccessAlarm() {
@@ -60,8 +61,7 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
     }
 
     fun getUserDepartment() {
-        val myDepartment = settingRepository.getUserDepartment()
-        _myDepartment.postValue(myDepartment)
+        _myDepartment.value = settingRepository.getUserDepartment()
     }
 
     fun getUserTopic() {
@@ -72,22 +72,21 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
     }
 
     private fun getUserFCMToken() {
-        val token = settingRepository.getUserFCMToken()
-        _FCMToken.postValue(token)
+        _FCMToken.value = settingRepository.getUserFCMToken()
     }
 
-    fun updateUserDepartment() {
+    fun updateUserDepartment(department: String) {
         _isLoading.postValue(true)
 
         viewModelScope.launch {
             when (val result = settingRepository.updateUserDepartment(
                 UpdateDepartment(
                     token = FCMToken.value.toString(),
-                    department = myDepartment.value.toString()
+                    department = department
                 )
             )) {
                 is NetworkResult.Success -> {
-                    settingRepository.setIsAccessDepartAlarm(true)
+                    setIsAccessDepartAlarm(true)
                     _isLoading.postValue(false)
                     _isError.postValue(false)
                 }
@@ -111,7 +110,7 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
                 )
             ) {
                 is NetworkResult.Success -> {
-                    settingRepository.setIsAccessDepartAlarm(false)
+                    setIsAccessDepartAlarm(false)
                     _isLoading.postValue(false)
                     _isError.postValue(false)
                 }
@@ -136,7 +135,7 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
                 )
             )) {
                 is NetworkResult.Success -> {
-                    settingRepository.setIsAccessSchoolAlarm(true)
+                    setIsAccessUniversityAlarm(true)
                     _isLoading.postValue(false)
                     _isError.postValue(false)
                 }
@@ -152,14 +151,14 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
 
     fun removeUserTopic() {
         _isLoading.postValue(true)
-        
+
         viewModelScope.launch {
             when (val result =
                 settingRepository.removeUserTopic(
                     RemoveToken(token = FCMToken.value.toString())
                 )) {
                 is NetworkResult.Success -> {
-                    settingRepository.setIsAccessSchoolAlarm(false)
+                    setIsAccessUniversityAlarm(false)
                     _isLoading.postValue(false)
                     _isError.postValue(false)
                 }

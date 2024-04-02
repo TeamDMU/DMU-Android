@@ -38,6 +38,7 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
         viewModel.getLocalKeywordList()
 
         binding.btnKeywordComplete.setOnClickListener {
+            viewModel.subscribeCheckedKeyword()
             setResult(RESULT_OK)
             finish()
         }
