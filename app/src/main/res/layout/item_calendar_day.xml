@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textColor="@color/black"
+                android:textColor="@color/gray500"
                 tools:text="Jun" />
 
             <com.google.android.material.card.MaterialCardView
@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:minHeight="32dp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/gray500"
                     tools:text="16" />
             </com.google.android.material.card.MaterialCardView>
 
@@ -57,7 +57,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="12dp"
                 android:gravity="center"
-                android:textColor="@color/black"
+                android:textColor="@color/gray500"
                 tools:text="Mon" />
         </LinearLayout>
 
