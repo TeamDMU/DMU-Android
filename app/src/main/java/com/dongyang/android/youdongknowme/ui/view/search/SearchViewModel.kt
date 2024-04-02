@@ -24,13 +24,16 @@ class SearchViewModel(
     val isError: LiveData<Boolean> = _isError
 
     private val _searchContent: MutableLiveData<String> = MutableLiveData()
-    private val searchContent: LiveData<String> = _searchContent
+    val searchContent: LiveData<String> = _searchContent
 
     private val _searchClearVisibility: MutableLiveData<Boolean> = MutableLiveData()
     val searchClearVisibility: LiveData<Boolean> get() = _searchClearVisibility
 
     private val _myDepartment: MutableLiveData<String> = MutableLiveData()
     val myDepartment: LiveData<String> = _myDepartment
+
+    private val _noSearchResult: MutableLiveData<Boolean> = MutableLiveData(false)
+    val noSearchResult: LiveData<Boolean> = _noSearchResult
 
     private val _searchNotices: MutableLiveData<List<Notice>> = MutableLiveData()
     val searchNotices: LiveData<List<Notice>> = _searchNotices
@@ -72,6 +75,7 @@ class SearchViewModel(
                 )) {
                 is NetworkResult.Success -> {
                     val updatedSearchResult = _searchNotices.value.orEmpty() + result.data
+                    _noSearchResult.value = updatedSearchResult.isEmpty()
                     _searchNotices.postValue(updatedSearchResult)
                     _isError.postValue(false)
                     _isLoading.postValue(false)

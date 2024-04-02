@@ -22,7 +22,7 @@ class NoticeViewHolder(
         noticeUrl = item.url
 
         binding.tvNoticeTitle.text = item.title
-        binding.tvNoticeDate.text = item.date
+        binding.tvNoticeDate.text = item.date.replace("-", ".")
         binding.tvNoticeAuthor.text = item.author
     }
 }
