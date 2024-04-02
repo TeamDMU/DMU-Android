@@ -69,11 +69,6 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
             if (viewModel.checkKeywordList.value?.isNotEmpty() == true) {
                 viewModel.subscribeCheckedKeyword()
 
-                val intent = Intent(
-                    this@KeywordActivity,
-                    OnboardingPermissionActivity::class.java
-                )
-                startActivity(intent)
                 finish()
             } else {
                 Toast.makeText(this, R.string.toast_msg_keyword, Toast.LENGTH_SHORT).show()
