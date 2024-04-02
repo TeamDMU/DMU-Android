@@ -50,6 +50,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
         viewModel.errorState.observe(viewLifecycleOwner, EventObserver { resId ->
             showToast(getString(resId))
         })
+
+        viewModel.noSearchResult.observe(viewLifecycleOwner) { noSearchResult ->
+            if (noSearchResult) {
+                binding.clSearchEmpty.visibility = View.VISIBLE
+            } else {
+                binding.clSearchEmpty.visibility = View.GONE
+            }
+        }
     }
 
     override fun initAfterBinding() = Unit
@@ -110,6 +118,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
         binding.etSearchBar.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 viewModel.fetchSearchNotices()
+                adapter.submitList(emptyList())
                 requireContext().hideKeyboard(binding.root)
                 true
             } else {
