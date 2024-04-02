@@ -73,6 +73,10 @@
         <item name="android:textSize">@dimen/font_size_20</item>
     </style>
 
+    <style name="PretendardMedium24" parent="PretendardMedium">
+        <item name="android:textSize">@dimen/font_size_24</item>
+    </style>
+
     <style name="PretendardSemiBold10" parent="PretnedardSemiBold">
         <item name="android:textSize">@dimen/font_size_10</item>
     </style>

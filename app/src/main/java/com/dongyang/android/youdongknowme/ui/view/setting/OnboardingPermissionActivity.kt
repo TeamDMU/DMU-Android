@@ -25,7 +25,7 @@ class OnboardingPermissionActivity :
         viewModel.getUserDepartment()
         setPermissionSwitch(false)
 
-        setSpanText(this, binding.tvPermissionTitleMain, startIdx = 0, endIdx = 9)
+        setSpanText(binding.tvPermissionTitleMain, startIdx = 0, endIdx = 9)
     }
 
     override fun initDataBinding() = Unit
@@ -66,7 +66,7 @@ class OnboardingPermissionActivity :
         val resources = if (isChecked) {
             R.color.blue300
         } else {
-            R.color.gray300
+            R.color.gray400
         }
 
         binding.switchPermission.compoundDrawableTintList =

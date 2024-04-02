@@ -51,6 +51,7 @@
     <string name="setting_edit_department">학과 설정</string>
     <string name="setting_keyword">키워드</string>
     <string name="setting_keyword_alarm">키워드 설정</string>
+    <string name="setting_keyword_switch">키워드 알림 설정</string>
     <string name="setting_keyword_choice">키워드 선택</string>
     <string name="setting_app_info">앱 정보</string>
     <string name="setting_app_help">문의하기</string>
@@ -135,4 +136,8 @@
     <string name="search_no_result">검색 결과를 찾을 수 없어요</string>
     <string name="search_another_search">다른 키워드로 검색해보세요.</string>
     <string name="search_minimum">2글자 이상 입력해야 합니다.</string>
+
+    <!-- toast message -->
+    <string name="toast_msg_keyword">하나 이상의 키워드를 선택해주세요.</string>
+    <string name="toast_msg_department">정확한 학과명을 기입해주세요.</string>
 </resources>

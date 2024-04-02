@@ -1,6 +1,9 @@
 package com.dongyang.android.youdongknowme.ui.view.keyword
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
@@ -19,7 +22,7 @@ class OnboardingKeywordActivity :
 
     override fun initStartView() {
         // 부분 색상 지정
-        setSpanText(this, binding.tvOnboardingKeywordTitleMain, startIdx = 0, endIdx = 3)
+        setSpanText(binding.tvOnboardingKeywordTitleMain, startIdx = 0, endIdx = 3)
     }
 
     override fun initDataBinding() {
@@ -38,6 +41,26 @@ class OnboardingKeywordActivity :
                 viewModel.localKeywordList.removeObserver(this)
             }
         })
+
+        viewModel.checkKeywordList.observe(this) { checkedKeywords ->
+            if (checkedKeywords.isEmpty()) {
+                binding.btnOnboardingKeywordNext.backgroundTintList =
+                    ColorStateList.valueOf(
+                        ContextCompat.getColor(
+                            this@OnboardingKeywordActivity,
+                            R.color.gray300
+                        )
+                    )
+            } else {
+                binding.btnOnboardingKeywordNext.backgroundTintList =
+                    ColorStateList.valueOf(
+                        ContextCompat.getColor(
+                            this@OnboardingKeywordActivity,
+                            R.color.blue300
+                        )
+                    )
+            }
+        }
     }
 
     override fun initAfterBinding() {
@@ -45,11 +68,18 @@ class OnboardingKeywordActivity :
 
         // TODO :: 안드로이드 데이터베이스에 유저별 설정한 키워드 저장 및 파이어베이스 키워드 구독 설정
         binding.btnOnboardingKeywordNext.setOnClickListener {
-            viewModel.subscribeCheckedKeyword()
-            val intent =
-                Intent(this@OnboardingKeywordActivity, OnboardingPermissionActivity::class.java)
-            startActivity(intent)
-            finish()
+            if (viewModel.checkKeywordList.value?.isNotEmpty() == true) {
+                viewModel.subscribeCheckedKeyword()
+                val intent = Intent(
+                    this@OnboardingKeywordActivity,
+                    OnboardingPermissionActivity::class.java
+                )
+                startActivity(intent)
+                finish()
+            } else {
+                Toast.makeText(this, R.string.toast_msg_keyword, Toast.LENGTH_SHORT).show()
+            }
+
         }
     }
 
@@ -60,7 +90,7 @@ class OnboardingKeywordActivity :
                 val chip: Chip = chipGroup.getChildAt(index) as Chip
 
                 // 유저가 선택 및 설정한 키워드인 경우 체크한 것으로 설정
-                if (chip.text in viewModel.checkKeywordList) {
+                if (viewModel.checkKeywordList.value?.contains(chip.text) == true) {
                     chip.isChecked = true
                 }
 

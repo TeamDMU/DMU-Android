@@ -28,19 +28,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
             android:text="@string/alarm_title_sub"
             android:textColor="@color/gray500"
             app:layout_constraintBottom_toTopOf="@id/onboarding_permission_step"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_permission_title_main" />
+            app:layout_constraintTop_toBottomOf="@id/tv_permission_title_main" />
 
         <include
             android:id="@+id/onboarding_permission_step"
             layout="@layout/layout_onboarding_step"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/onboarding_step_size"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginVertical="40dp"
             android:paddingHorizontal="56dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,14 +52,14 @@
             android:id="@+id/mv_switch_permission"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="32dp"
             android:padding="16dp"
             app:cardCornerRadius="16dp"
             app:layout_constraintBottom_toTopOf="@id/btn_permission_complete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/onboarding_permission_step"
-            app:strokeColor="@color/gray300"
+            app:layout_constraintTop_toTopOf="@id/tv_permission_title_sub"
+            app:strokeColor="@color/gray400"
             app:strokeWidth="3dp">
 
             <androidx.appcompat.widget.SwitchCompat
@@ -68,17 +69,17 @@
                 android:layout_height="match_parent"
                 android:layout_margin="16dp"
                 android:drawableStart="@drawable/ic_alarm_fill"
-                android:drawableTint="@color/gray300"
-                android:paddingVertical="16dp"
+                android:drawableTint="@color/gray400"
                 android:paddingHorizontal="32dp"
-                android:text="@string/setting_keyword_alarm"
+                android:paddingVertical="16dp"
+                android:text="@string/setting_keyword_switch"
                 android:textAlignment="center"
-                android:textColor="@color/gray300" />
+                android:textColor="@color/gray400" />
         </com.google.android.material.card.MaterialCardView>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_permission_complete"
-            style="@style/PretendardRegular20"
+            style="@style/PretendardMedium24"
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_marginHorizontal="16dp"

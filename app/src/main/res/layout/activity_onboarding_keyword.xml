@@ -26,6 +26,7 @@
             style="@style/PretendardBold24"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="@string/keyword_title_sub"
             app:layout_constraintBottom_toTopOf="@id/onboarding_keyword_step"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,10 +36,9 @@
         <include
             android:id="@+id/onboarding_keyword_step"
             layout="@layout/layout_onboarding_step"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/onboarding_step_size"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:paddingHorizontal="56dp"
+            android:layout_marginVertical="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_onboarding_keyword_title_sub"
@@ -48,8 +48,7 @@
             android:id="@+id/sv_onboarding_keyword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginVertical="40dp"
             android:fillViewport="true"
             app:layout_constrainedHeight="true"
             app:layout_constraintBottom_toTopOf="@id/btn_onboarding_keyword_next"
@@ -66,12 +65,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/view_onboarding_stroke_1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        style="@style/PretendardBold20"
+                        style="@style/PretendardMedium20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
@@ -84,7 +83,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         app:chipSpacingHorizontal="20dp"
-                        app:chipSpacingVertical="16dp"
+                        app:chipSpacingVertical="12dp"
                         app:singleSelection="false">
 
                         <com.google.android.material.chip.Chip
@@ -107,9 +106,10 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/view_onboarding_stroke_1"
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginVertical="20dp"
                     android:background="@color/line"
                     app:layout_constraintBottom_toTopOf="@id/linearLayout_onboarding_keyword_academic"
                     app:layout_constraintTop_toBottomOf="@id/linearLayout_onboarding_keyword_class" />
@@ -118,14 +118,13 @@
                     android:id="@+id/linearLayout_onboarding_keyword_academic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginVertical="20dp"
                     android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout_onboarding_keyword_class">
+                    app:layout_constraintTop_toBottomOf="@id/view_onboarding_stroke_1">
 
                     <TextView
-                        style="@style/PretendardBold20"
+                        style="@style/PretendardMedium20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
@@ -138,7 +137,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         app:chipSpacingHorizontal="20dp"
-                        app:chipSpacingVertical="16dp"
+                        app:chipSpacingVertical="12dp"
                         app:singleSelection="false">
 
                         <com.google.android.material.chip.Chip
@@ -164,9 +163,10 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/view_onboarding_stroke_2"
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:background="@color/line"
                     app:layout_constraintBottom_toTopOf="@id/linearLayout_onboarding_keyword_money"
                     app:layout_constraintTop_toBottomOf="@id/linearLayout_onboarding_keyword_academic" />
@@ -175,14 +175,13 @@
                     android:id="@+id/linearLayout_onboarding_keyword_money"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="20dp"
                     android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout_onboarding_keyword_academic">
+                    app:layout_constraintTop_toBottomOf="@id/view_onboarding_stroke_2">
 
                     <TextView
-                        style="@style/PretendardBold20"
+                        style="@style/PretendardMedium20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
@@ -195,7 +194,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         app:chipSpacingHorizontal="20dp"
-                        app:chipSpacingVertical="16dp"
+                        app:chipSpacingVertical="12dp"
                         app:singleSelection="false">
 
                         <com.google.android.material.chip.Chip
@@ -213,9 +212,10 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/view_onboarding_stroke_3"
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:background="@color/line"
                     app:layout_constraintBottom_toTopOf="@id/linearLayout_onboarding_keyword_employment"
                     app:layout_constraintTop_toBottomOf="@id/linearLayout_onboarding_keyword_money" />
@@ -224,14 +224,13 @@
                     android:id="@+id/linearLayout_onboarding_keyword_employment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="20dp"
                     android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout_onboarding_keyword_money">
+                    app:layout_constraintTop_toBottomOf="@id/view_onboarding_stroke_3">
 
                     <TextView
-                        style="@style/PretendardBold20"
+                        style="@style/PretendardMedium20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
@@ -244,7 +243,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         app:chipSpacingHorizontal="20dp"
-                        app:chipSpacingVertical="16dp"
+                        app:chipSpacingVertical="12dp"
                         app:singleSelection="false">
 
                         <com.google.android.material.chip.Chip
@@ -270,9 +269,10 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/view_onboarding_stroke_4"
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:background="@color/line"
                     app:layout_constraintBottom_toTopOf="@id/linearLayout_onboarding_keyword_etc"
                     app:layout_constraintTop_toBottomOf="@id/linearLayout_onboarding_keyword_employment" />
@@ -281,14 +281,13 @@
                     android:id="@+id/linearLayout_onboarding_keyword_etc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="20dp"
                     android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout_onboarding_keyword_employment">
+                    app:layout_constraintTop_toBottomOf="@id/view_onboarding_stroke_4">
 
                     <TextView
-                        style="@style/PretendardBold20"
+                        style="@style/PretendardMedium20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
@@ -301,7 +300,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         app:chipSpacingHorizontal="20dp"
-                        app:chipSpacingVertical="16dp"
+                        app:chipSpacingVertical="12dp"
                         app:singleSelection="false">
 
                         <com.google.android.material.chip.Chip
@@ -322,11 +321,11 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_onboarding_keyword_next"
-            style="@style/PretendardRegular20"
+            style="@style/PretendardMedium24"
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/btn_gray_to_blue_10dp_enabled"
+            android:background="@drawable/btn_gray300_radius_10dp"
             android:text="@string/keyword_next"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"

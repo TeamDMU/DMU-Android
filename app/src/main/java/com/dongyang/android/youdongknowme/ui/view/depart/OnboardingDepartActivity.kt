@@ -2,17 +2,18 @@ package com.dongyang.android.youdongknowme.ui.view.depart
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityOnboardingDepartBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.adapter.OnboardingDepartAdapter
 import com.dongyang.android.youdongknowme.ui.view.keyword.OnboardingKeywordActivity
-import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
 
 class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, DepartViewModel>(),
     DepartClickListener {
@@ -42,7 +43,7 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
         }
 
         // 부분 색상 지정
-        setSpanText(baseContext, binding.tvOnboardingDepartTitleMain, startIdx = 0, endIdx = 5)
+        setSpanText(binding.tvOnboardingDepartTitleMain, startIdx = 0, endIdx = 5)
     }
 
     override fun initDataBinding() = Unit
@@ -50,10 +51,12 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
     override fun initAfterBinding() {
         binding.ibOnboardingDepartSearchClear.setOnClickListener {
             binding.etOnboardingDepartSearch.text.clear()
+            setSearchColor(false)
         }
 
         binding.etOnboardingDepartSearch.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(charSequence: CharSequence?, i: Int, i1: Int, i2: Int) = Unit
+            override fun beforeTextChanged(charSequence: CharSequence?, i: Int, i1: Int, i2: Int) =
+                Unit
 
             override fun onTextChanged(charSequence: CharSequence?, i: Int, i1: Int, i2: Int) = Unit
 
@@ -69,6 +72,12 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
                     for (item in items) {
                         if (item.contains(searchText)) {
                             searchList.add(item)
+
+                            if (item == searchText) {
+                                setSearchColor(true)
+                            } else {
+                                setSearchColor(false)
+                            }
                         }
                     }
                     adapter.submitList(searchList)
@@ -80,27 +89,75 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
             adapter.submitPosition(it)
 
             if (it != -1) {
-                getDepart(searchList)
                 binding.etOnboardingDepartSearch.setText(
                     searchList[viewModel.selectDepartPosition.value ?: 0]
                 )
                 binding.etOnboardingDepartSearch.setSelection(binding.etOnboardingDepartSearch.text.length)
             }
         }
+
+        binding.btnOnboardingDepartNext.setOnClickListener {
+            getDepart(searchList)
+        }
+    }
+
+    private fun setSearchColor(isContains: Boolean) {
+        if (isContains) {
+            binding.linearLayoutOnboardingDepartSearch.setBackgroundResource(R.drawable.bg_stroke_blue300_radius_2dp)
+            binding.etOnboardingDepartSearch.setTextColor(getColor(R.color.blue300))
+            binding.etOnboardingDepartSearch.compoundDrawableTintList =
+                ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                        this@OnboardingDepartActivity,
+                        R.color.blue300
+                    )
+                )
+            binding.btnOnboardingDepartNext.backgroundTintList =
+                ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                        this@OnboardingDepartActivity,
+                        R.color.blue300
+                    )
+                )
+        } else {
+            viewModel.setSelectPosition(-1)
+
+            binding.linearLayoutOnboardingDepartSearch.setBackgroundResource(R.drawable.bg_stroke_gray300_radius_2dp)
+            binding.etOnboardingDepartSearch.setTextColor(getColor(R.color.gray300))
+            binding.etOnboardingDepartSearch.compoundDrawableTintList =
+                ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                        this@OnboardingDepartActivity,
+                        R.color.gray300
+                    )
+                )
+            binding.btnOnboardingDepartNext.backgroundTintList =
+                ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                        this@OnboardingDepartActivity,
+                        R.color.gray300
+                    )
+                )
+        }
     }
 
     // 컨테이너 클릭 시 선택한 학과의 포지션 저장
     override fun containerClick(position: Int) {
+        if (searchList.isEmpty()) {
+            return
+        }
         viewModel.setSelectPosition(position)
     }
 
     // 확인 버튼을 누르면 내부 DB에 학과를 담고 메인 액티비티로 이동
     private fun getDepart(items: ArrayList<String>) {
-        return binding.btnOnboardingDepartNext.setOnClickListener {
+        if (viewModel.selectDepartPosition.value != -1) {
             viewModel.setDepartment(items[viewModel.selectDepartPosition.value ?: 0])
             val intent = Intent(this, OnboardingKeywordActivity::class.java)
             startActivity(intent)
             finish()
+        } else {
+            Toast.makeText(this, R.string.toast_msg_department, Toast.LENGTH_SHORT).show()
         }
     }
 

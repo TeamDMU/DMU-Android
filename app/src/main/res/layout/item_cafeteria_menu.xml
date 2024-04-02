@@ -14,7 +14,8 @@
             android:backgroundTint="@color/blue100"
             android:clickable="false"
             android:text="@{menu, default = 해바라기멸치볶음}"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="@color/gray600" />
 
     </LinearLayout>
 
