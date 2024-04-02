@@ -1,18 +1,15 @@
 package com.dongyang.android.youdongknowme.ui.view.setting
 
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
-import android.net.Uri
-import android.provider.Settings
 import androidx.core.content.ContextCompat
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityOnboardingPermissionBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
-import com.dongyang.android.youdongknowme.ui.view.setting.SettingViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class OnboardingPermissionActivity :
     BaseActivity<ActivityOnboardingPermissionBinding, SettingViewModel>() {
@@ -50,10 +47,10 @@ class OnboardingPermissionActivity :
                     // 알림 권한이 허용 상태
                     setPermissionSwitch(true)
                 } else {
+
                     // 알림 권한이 미허용 상태
-                    val intent =
-                        Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).setData(Uri.parse("package:" + this.packageName))
-                    startActivity(intent)
+                    val dialog = DialogPermission(getString(R.string.dialog_permission_title), getString(R.string.dialog_permission_content), this.packageName)
+                    dialog.show(supportFragmentManager, "CustomDialog")
                 }
             } else {
                 // 온보딩 알림 스위치 비활성화

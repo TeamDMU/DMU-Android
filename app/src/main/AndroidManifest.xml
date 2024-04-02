@@ -59,8 +59,7 @@
         <activity
             android:name=".ui.view.main.MainActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan" />
-        <!-- Firebase Cloud Messaging -->
+            android:windowSoftInputMode="adjustPan" /> <!-- Firebase Cloud Messaging -->
         <service
             android:name=".service.FCMService"
             android:exported="false">
