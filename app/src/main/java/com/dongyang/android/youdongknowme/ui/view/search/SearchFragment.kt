@@ -24,6 +24,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
     override val viewModel: SearchViewModel by viewModel()
 
     private lateinit var adapter: NoticeAdapter
+    private var searchContent: String = ""
 
     override fun initStartView() {
         setupRecyclerview()
@@ -45,6 +46,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
             if (searchNotices.isNotEmpty()) {
                 adapter.submitList(searchNotices)
             }
+        }
+
+        viewModel.searchContent.observe(viewLifecycleOwner) { content ->
+            searchContent = content
         }
 
         viewModel.errorState.observe(viewLifecycleOwner, EventObserver { resId ->
@@ -117,14 +122,23 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
     private fun onSearchBtnClickListener() {
         binding.etSearchBar.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                viewModel.fetchSearchNotices()
-                adapter.submitList(emptyList())
+                if (validateSearchContentLength()) {
+                    viewModel.fetchSearchNotices()
+                    adapter.submitList(emptyList())
+                } else {
+                    binding.etSearchBar.text.clear()
+                    showToast(getString(R.string.search_minimum))
+                }
                 requireContext().hideKeyboard(binding.root)
                 true
             } else {
                 false
             }
         }
+    }
+
+    private fun validateSearchContentLength(): Boolean {
+        return searchContent.length >= 2
     }
 
     private fun navigateToDetail(url: String) {

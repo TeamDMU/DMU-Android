@@ -24,7 +24,7 @@ class SearchViewModel(
     val isError: LiveData<Boolean> = _isError
 
     private val _searchContent: MutableLiveData<String> = MutableLiveData()
-    private val searchContent: LiveData<String> = _searchContent
+    val searchContent: LiveData<String> = _searchContent
 
     private val _searchClearVisibility: MutableLiveData<Boolean> = MutableLiveData()
     val searchClearVisibility: LiveData<Boolean> get() = _searchClearVisibility
