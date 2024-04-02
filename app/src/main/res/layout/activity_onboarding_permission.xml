@@ -59,7 +59,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_permission_title_sub"
-            app:strokeColor="@color/gray300"
+            app:strokeColor="@color/gray400"
             app:strokeWidth="3dp">
 
             <androidx.appcompat.widget.SwitchCompat
@@ -69,12 +69,12 @@
                 android:layout_height="match_parent"
                 android:layout_margin="16dp"
                 android:drawableStart="@drawable/ic_alarm_fill"
-                android:drawableTint="@color/gray300"
+                android:drawableTint="@color/gray400"
                 android:paddingHorizontal="32dp"
                 android:paddingVertical="16dp"
                 android:text="@string/setting_keyword_switch"
                 android:textAlignment="center"
-                android:textColor="@color/gray300" />
+                android:textColor="@color/gray400" />
         </com.google.android.material.card.MaterialCardView>
 
         <androidx.appcompat.widget.AppCompatButton

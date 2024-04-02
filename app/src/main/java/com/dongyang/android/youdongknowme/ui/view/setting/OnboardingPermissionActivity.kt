@@ -66,7 +66,7 @@ class OnboardingPermissionActivity :
         val resources = if (isChecked) {
             R.color.blue300
         } else {
-            R.color.gray300
+            R.color.gray400
         }
 
         binding.switchPermission.compoundDrawableTintList =
