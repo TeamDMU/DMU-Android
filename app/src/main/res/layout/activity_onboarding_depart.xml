@@ -89,7 +89,8 @@
                 android:layout_marginHorizontal="16dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_close_black"
-                app:tint="@color/gray400" />
+                app:tint="@color/gray400"
+                android:visibility="invisible" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
