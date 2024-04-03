@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.dongyang.android.youdongknowme.databinding.DialogPermissionBinding
 
-class DialogPermission(val title: String, val content: String, val pacakageName: String) : DialogFragment() {
+class PermissionDialog(val title: String, val content: String, val pacakageName: String) : DialogFragment() {
     private var _binding: DialogPermissionBinding? = null
     private val binding get() = _binding!!
 

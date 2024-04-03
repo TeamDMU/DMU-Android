@@ -129,7 +129,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
                 binding.switchSettingUniversityAlarm.isChecked = false
                 binding.switchSettingDepartmentAlarm.isChecked = false
 
-                val dialog = DialogPermission(getString(R.string.dialog_permission_title), getString(R.string.dialog_permission_content), requireContext().packageName)
+                val dialog = PermissionDialog(getString(R.string.dialog_permission_title), getString(R.string.dialog_permission_content), requireContext().packageName)
                 dialog.show(parentFragmentManager, "CustomDialog")
             }
         }

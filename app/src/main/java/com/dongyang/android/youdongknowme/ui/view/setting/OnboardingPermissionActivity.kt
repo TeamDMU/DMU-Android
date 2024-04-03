@@ -49,7 +49,7 @@ class OnboardingPermissionActivity :
                 } else {
 
                     // 알림 권한이 미허용 상태
-                    val dialog = DialogPermission(getString(R.string.dialog_permission_title), getString(R.string.dialog_permission_content), this.packageName)
+                    val dialog = PermissionDialog(getString(R.string.dialog_permission_title), getString(R.string.dialog_permission_content), this.packageName)
                     dialog.show(supportFragmentManager, "CustomDialog")
                 }
             } else {
