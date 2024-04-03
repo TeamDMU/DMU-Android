@@ -68,7 +68,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
         viewModel.getUserTopic()
 
         binding.switchSettingUniversityAlarm.setOnCheckedChangeListener { compoundButton, _ ->
-            checkPermission(binding.switchSettingUniversityAlarm, binding.switchSettingUniversityAlarm.isChecked)
+            checkPermission(binding.switchSettingUniversityAlarm)
             if (compoundButton.isChecked) {
                 if (topics.isNotEmpty()) {
                     viewModel.updateUserTopic(topics)
@@ -79,7 +79,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
         }
 
         binding.switchSettingDepartmentAlarm.setOnCheckedChangeListener { compoundButton, _ ->
-            checkPermission(binding.switchSettingDepartmentAlarm, binding.switchSettingDepartmentAlarm.isChecked)
+            checkPermission(binding.switchSettingDepartmentAlarm)
             if (compoundButton.isChecked) {
                 if (department.isNotEmpty()) {
                     viewModel.updateUserDepartment(department)
@@ -121,7 +121,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
         }
     }
 
-    private fun checkPermission(switch: SwitchCompat, isChecked: Boolean){
+    private fun checkPermission(switch: SwitchCompat){
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (PackageManager.PERMISSION_DENIED == ContextCompat.checkSelfPermission(
                     requireContext(), Manifest.permission.POST_NOTIFICATIONS
@@ -136,10 +136,10 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
                 val dialog = DialogPermission(getString(R.string.dialog_permission_title), getString(R.string.dialog_permission_content), requireContext().packageName)
                 dialog.show(parentFragmentManager, "CustomDialog")
             } else {
-                switch.isChecked = isChecked
+                switch.isChecked = !switch.isChecked
             }
         } else {
-            switch.isChecked = isChecked
+            switch.isChecked = !switch.isChecked
         }
     }
 
