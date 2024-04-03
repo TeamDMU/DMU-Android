@@ -127,6 +127,7 @@
     <string name="cafeteria_no_menu">&#128517; 등록된 메뉴가 없어요.</string>
     <string name="cafeteria_korean">🍚 한식</string>
     <string name="cafeteria_another">🍛 일품</string>
+    <string name="cafeteria_another_list">김치볶음밥 4,900원 / 라면 4,000원 / 치즈라면 4,500원 / 해물짬뽕라면 4,500원 / 돈가스 5,000원 / 치즈돈가스 5,500원 / 고구마치즈돈까스 6,000원</string>
 
     <!-- license -->
     <string name="license_title">오픈소스 라이센스</string>
