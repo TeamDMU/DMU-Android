@@ -1,6 +1,7 @@
 package com.dongyang.android.youdongknowme.ui.view.cafeteria
 
 import android.annotation.SuppressLint
+import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
@@ -58,7 +59,11 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
         binding.cvCafeteriaCalendar.apply {
             val dayWidth = wmc.bounds.width() / 5
-            val dayHeight: Int = (dayWidth * 1.25).toInt()
+            val dayHeight: Int = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            124f,
+            resources.displayMetrics
+            ).toInt()
 
             daySize = Size(dayWidth, dayHeight)
         }
