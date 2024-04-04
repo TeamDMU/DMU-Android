@@ -1,6 +1,7 @@
 package com.dongyang.android.youdongknowme.ui.view.cafeteria
 
 import android.annotation.SuppressLint
+import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
@@ -58,7 +59,11 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
         binding.cvCafeteriaCalendar.apply {
             val dayWidth = wmc.bounds.width() / 5
-            val dayHeight: Int = (dayWidth * 1.25).toInt()
+            val dayHeight: Int = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            124f,
+            resources.displayMetrics
+            ).toInt()
 
             daySize = Size(dayWidth, dayHeight)
         }
@@ -85,9 +90,8 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         viewModel.menus.observe(viewLifecycleOwner) {
             koreanMenuAdapter.submitList(it)
             // 일품 메뉴 : 일품 메뉴는 리스트로 제작하여 등록
-            anotherMenuAdapter.submitList(listOf(getString(R.string.cafeteria_no_menu)))
+            anotherMenuAdapter.submitList(getString(R.string.cafeteria_another_list).split("/").map { it.trim() })
         }
-
     }
 
     @SuppressLint("ClickableViewAccessibility")

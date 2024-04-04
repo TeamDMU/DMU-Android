@@ -18,7 +18,7 @@ class CafeteriaContainer(
     private val bind = ItemCalendarDayBinding.bind(view)
     private lateinit var day: CalendarDay
 
-    private val dateFormatter = DateTimeFormatter.ofPattern("dd")
+    private val dateFormatter = DateTimeFormatter.ofPattern("d")
     private val dayFormatter = DateTimeFormatter.ofPattern("EEE")
     private val monthFormatter = DateTimeFormatter.ofPattern("MMM")
 
