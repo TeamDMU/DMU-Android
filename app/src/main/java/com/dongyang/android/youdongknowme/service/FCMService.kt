@@ -57,15 +57,15 @@ class FCMService : FirebaseMessagingService() {
         val pendingIntent = if (detailIntent != null) {
             TaskStackBuilder.create(this).run {
                 addNextIntent(mainIntent)
-                addNextIntentWithParentStack(detailIntent) // DetailActivity를 부모 스택으로 추가
-                getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+                addNextIntentWithParentStack(detailIntent)
+                getPendingIntent(0, PendingIntent.FLAG_IMMUTABLE)
             }
         } else {
             PendingIntent.getActivity(
                 this,
                 0,
                 mainIntent,
-                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+                PendingIntent.FLAG_IMMUTABLE
             )
         }
 
