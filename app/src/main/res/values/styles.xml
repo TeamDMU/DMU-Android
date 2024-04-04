@@ -13,7 +13,7 @@
         <item name="chipStrokeColor">@color/bg_chip_stroke_select</item>
         <item name="chipStrokeWidth">1dp</item>
         <item name="android:textAlignment">center</item>
-        <item name="rippleColor">@color/blue300</item>
+        <item name="rippleColor">@null</item>
         <item name="chipMinTouchTargetSize">0dp</item>
         <item name="android:textColor">@color/bg_chip_text_select</item>
         <item name="chipCornerRadius">10dp</item>

@@ -82,6 +82,10 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
                 startActivity(intent)
                 finish()
             }
+        } else {
+            val intent = OnboardingDepartActivity.createIntent(this@SplashActivity)
+            startActivity(intent)
+            finish()
         }
     }
 

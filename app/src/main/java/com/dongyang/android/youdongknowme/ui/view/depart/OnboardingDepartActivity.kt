@@ -7,6 +7,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityOnboardingDepartBinding
@@ -67,8 +68,10 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
 
                 if (searchText.isEmpty()) {
                     adapter.submitList(emptyList)
+                    binding.ibOnboardingDepartSearchClear.isVisible=false
                 } else {
                     // 검색 단어를 포함하는지 확인
+                    binding.ibOnboardingDepartSearchClear.isVisible=true
                     for (item in items) {
                         if (item.contains(searchText)) {
                             searchList.add(item)
