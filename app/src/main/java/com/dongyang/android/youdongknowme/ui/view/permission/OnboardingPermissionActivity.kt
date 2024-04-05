@@ -9,19 +9,16 @@ import com.dongyang.android.youdongknowme.databinding.ActivityOnboardingPermissi
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
 import com.dongyang.android.youdongknowme.ui.view.setting.PermissionDialog
-import com.dongyang.android.youdongknowme.ui.view.setting.SettingViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class OnboardingPermissionActivity :
-    BaseActivity<ActivityOnboardingPermissionBinding, SettingViewModel>() {
+    BaseActivity<ActivityOnboardingPermissionBinding, PermissionViewModel>() {
 
     override val layoutResourceId: Int = R.layout.activity_onboarding_permission
-    override val viewModel: SettingViewModel by viewModel()
+    override val viewModel: PermissionViewModel by viewModel()
 
     override fun initStartView() {
         viewModel.checkAccessAlarm()
-        viewModel.getUserDepartment()
         setPermissionSwitch(false)
 
         setSpanText(binding.tvPermissionTitleMain, startIdx = 0, endIdx = 9)

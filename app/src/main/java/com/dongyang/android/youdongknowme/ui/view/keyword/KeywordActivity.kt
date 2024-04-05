@@ -1,6 +1,5 @@
 package com.dongyang.android.youdongknowme.ui.view.keyword
 
-import android.content.Intent
 import android.content.res.ColorStateList
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -9,7 +8,6 @@ import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
 import com.dongyang.android.youdongknowme.databinding.ActivityKeywordBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
-import com.dongyang.android.youdongknowme.ui.view.permission.OnboardingPermissionActivity
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import org.koin.androidx.viewmodel.ext.android.viewModel
