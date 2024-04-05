@@ -2,10 +2,9 @@ package com.dongyang.android.youdongknowme.ui.view.splash
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
-import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
@@ -28,11 +27,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
     private var intentJob: Job? = null
 
     override fun initStartView() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            val content: View = findViewById(android.R.id.content)
-            content.viewTreeObserver.addOnPreDrawListener { false }
-        }
-
         viewModel.checkFirstLaunch()
     }
 
@@ -52,6 +46,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
@@ -100,7 +95,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
     }
 
     companion object {
-        private const val SPLASH_TIME_MILLIS = 1_500L
+        private const val SPLASH_TIME_MILLIS = 3_000L
         private const val REQUEST_PERMISSION_CODE = 100
     }
 }

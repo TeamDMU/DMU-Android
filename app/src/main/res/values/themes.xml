@@ -18,7 +18,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.YouDongKnowMe.Splash" parent="Theme.YouDongKnowMe"></style>
+    <style name="Theme.YouDongKnowMe.Splash" parent="Theme.YouDongKnowMe" />
 
     <!-- 달력 연, 월 스타일 지정 -->
     <style name="CalendarHeader">
