@@ -3,6 +3,7 @@ package com.dongyang.android.youdongknowme.ui.view.permission
 import android.Manifest
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
+import android.os.Build
 import androidx.core.content.ContextCompat
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityOnboardingPermissionBinding
@@ -33,27 +34,34 @@ class OnboardingPermissionActivity :
             finish()
         }
 
-        binding.switchPermission.setOnCheckedChangeListener { compoundButton, _ ->
-            if (compoundButton.isChecked) {
-                // 권환 확인 전 스위치 초기화
-                binding.switchPermission.isChecked = false
 
-                // 온보딩 알림 스위치를  활성화
-                if (PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(
-                        this, Manifest.permission.POST_NOTIFICATIONS
-                    )
-                ) {
-                    // 알림 권한이 허용 상태
-                    setPermissionSwitch(true)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            binding.switchPermission.setOnClickListener {
+                if (binding.switchPermission.isChecked) {
+                    // 온보딩 알림 스위치를  활성화
+                    if (PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(
+                            this, Manifest.permission.POST_NOTIFICATIONS
+                        )
+                    ) {
+                        // 알림 권한이 허용 상태
+                        setPermissionSwitch(true)
+                        return@setOnClickListener
+                    } else {
+                        // 알림 권한이 미허용 상태
+                        val dialog = PermissionDialog(
+                            getString(R.string.dialog_permission_title),
+                            getString(R.string.dialog_permission_content),
+                            this.packageName
+                        )
+                        dialog.show(supportFragmentManager, "CustomDialog")
+                        setPermissionSwitch(false)
+                        return@setOnClickListener
+                    }
                 } else {
-
-                    // 알림 권한이 미허용 상태
-                    val dialog = PermissionDialog(getString(R.string.dialog_permission_title), getString(R.string.dialog_permission_content), this.packageName)
-                    dialog.show(supportFragmentManager, "CustomDialog")
+                    // 온보딩 알림 스위치 활성화
+                    setPermissionSwitch(true)
+                    return@setOnClickListener
                 }
-            } else {
-                // 온보딩 알림 스위치 비활성화
-                setPermissionSwitch(false)
             }
         }
     }
