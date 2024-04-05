@@ -1,4 +1,4 @@
-package com.dongyang.android.youdongknowme.ui.view.setting
+package com.dongyang.android.youdongknowme.ui.view.permission
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -8,6 +8,8 @@ import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityOnboardingPermissionBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.view.main.MainActivity
+import com.dongyang.android.youdongknowme.ui.view.setting.PermissionDialog
+import com.dongyang.android.youdongknowme.ui.view.setting.SettingViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 

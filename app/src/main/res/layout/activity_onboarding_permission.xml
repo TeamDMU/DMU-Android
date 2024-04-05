@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.view.setting.OnboardingPermissionActivity">
+        tools:context=".ui.view.permission.OnboardingPermissionActivity">
 
         <TextView
             android:id="@+id/tv_permission_title_main"

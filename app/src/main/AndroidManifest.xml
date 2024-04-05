@@ -22,7 +22,7 @@
         android:theme="@style/Theme.YouDongKnowMe"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.view.setting.OnboardingPermissionActivity"
+            android:name=".ui.view.permission.OnboardingPermissionActivity"
             android:exported="false" />
         <activity
             android:name=".ui.view.license.LicenseActivity"
