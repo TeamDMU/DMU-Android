@@ -37,7 +37,7 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
     val myTopics: LiveData<List<String>> get() = _myTopics
 
     private val _FCMToken: MutableLiveData<String> = MutableLiveData()
-    val FCMToken: LiveData<String> get() = _FCMToken
+    private val FCMToken: LiveData<String> get() = _FCMToken
 
     init {
         checkAccessAlarm()
