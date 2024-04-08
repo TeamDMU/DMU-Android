@@ -44,7 +44,8 @@ class OnboardingPermissionActivity :
                         val dialog = PermissionDialog(
                             getString(R.string.dialog_permission_title),
                             getString(R.string.dialog_permission_content),
-                            this.packageName
+                            this.packageName,
+                            cancelListener = { setPermissionSwitch(false) }
                         )
                         dialog.show(supportFragmentManager, "CustomDialog")
                     }
@@ -68,11 +69,25 @@ class OnboardingPermissionActivity :
             R.color.gray400
         }
 
+        binding.switchPermission.isChecked = isChecked
         binding.switchPermission.compoundDrawableTintList =
             ColorStateList.valueOf(ContextCompat.getColor(this, resources))
         binding.switchPermission.setTextColor(getColor(resources))
         binding.mvSwitchPermission.strokeColor = getColor(resources)
         viewModel.setIsAccessUniversityAlarm(isChecked)
         viewModel.setIsAccessDepartAlarm(isChecked)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(
+                    this, Manifest.permission.POST_NOTIFICATIONS
+                )
+            ) {
+                setPermissionSwitch(true)
+            }
+        }
     }
 }
