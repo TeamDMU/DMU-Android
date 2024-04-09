@@ -68,7 +68,10 @@ class CafeteriaViewModel(
         val cafeteriaList = _cafeteriaList.value ?: emptyList()
         _selectedDate.value = selectedDate
         _menus.postValue(
-            cafeteriaList.find { it.date == selectedDate.toString() }?.menus ?: emptyMenu
+            cafeteriaList.find { it.date == selectedDate.toString() }?.menus
+                .takeIf { it.isNullOrEmpty() }
+                ?.let { emptyMenu }
+                ?: cafeteriaList.find { it.date == selectedDate.toString() }?.menus
         )
     }
 }
