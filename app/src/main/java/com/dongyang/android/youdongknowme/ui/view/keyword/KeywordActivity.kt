@@ -62,7 +62,6 @@ class KeywordActivity : BaseActivity<ActivityKeywordBinding, KeywordViewModel>()
 
         binding.btnKeywordComplete.setOnClickListener {
             viewModel.subscribeCheckedKeyword()
-            setResult(RESULT_OK)
 
             if (viewModel.checkKeywordList.value?.isNotEmpty() == true) {
                 viewModel.subscribeCheckedKeyword()
