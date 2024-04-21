@@ -53,7 +53,6 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
 
     override fun initAfterBinding() {
 
-        viewModel.checkAccessAlarm()
         viewModel.getUserDepartment()
         viewModel.getUserTopic()
 

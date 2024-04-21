@@ -46,9 +46,10 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
         getUserDepartment()
     }
 
-    fun checkAccessAlarm() {
+    private fun checkAccessAlarm() {
         val isAccessUniversityAlarm = settingRepository.getIsAccessUniversityAlarm()
         _isAccessUniversityAlarm.postValue(isAccessUniversityAlarm)
+
         val isAccessDepartAlarm = settingRepository.getIsAccessDepartAlarm()
         _isAccessDepartAlarm.postValue(isAccessDepartAlarm)
     }
