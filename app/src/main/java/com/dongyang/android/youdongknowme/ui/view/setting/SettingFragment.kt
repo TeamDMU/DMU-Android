@@ -40,11 +40,13 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
 
         viewModel.myTopics.observe(viewLifecycleOwner) { myTopics ->
             topics = myTopics
+            viewModel.updateUserTopic(topics)
         }
 
         viewModel.myDepartment.observe(viewLifecycleOwner) { myDepartment ->
             binding.tvSettingDepartment.text = myDepartment
             department = myDepartment
+            viewModel.updateUserDepartment(department)
         }
 
         viewModel.isAccessUniversityAlarm.observe(viewLifecycleOwner) { isChecked ->
@@ -128,10 +130,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
                 getString(R.string.dialog_permission_title),
                 getString(R.string.dialog_permission_content),
                 requireContext().packageName,
-                cancelListener = {
-                    binding.switchSettingDepartmentAlarm.isChecked = false
-                    binding.switchSettingUniversityAlarm.isChecked = false
-                }
+                cancelListener = { alarmOffToTIRAMISU() }
             )
             dialog.show(parentFragmentManager, "CustomDialog")
         }
@@ -163,6 +162,11 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
             }
     }
 
+    private fun alarmOffToTIRAMISU() {
+        binding.switchSettingUniversityAlarm.isChecked = false
+        binding.switchSettingDepartmentAlarm.isChecked = false
+    }
+
     private fun checkNotificationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (PackageManager.PERMISSION_DENIED == ContextCompat.checkSelfPermission(
@@ -171,6 +175,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
             ) {
                 viewModel.setIsAccessDepartAlarm(false)
                 viewModel.setIsAccessUniversityAlarm(false)
+                alarmOffToTIRAMISU()
             }
         }
     }
