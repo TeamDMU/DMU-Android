@@ -11,7 +11,7 @@ import com.dongyang.android.youdongknowme.ui.view.util.Event
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
-    private val noticeRepository: NoticeRepository
+    private val noticeRepository: NoticeRepository,
 ) : BaseViewModel() {
 
     private val _errorState: MutableLiveData<Event<Int>> = MutableLiveData()
@@ -70,7 +70,6 @@ class SearchViewModel(
             when (val result =
                 noticeRepository.fetchSearchNotices(
                     searchContent.value.toString(),
-                    myDepartment.value.toString(),
                     searchNoticeCurrentPage
                 )) {
                 is NetworkResult.Success -> {
