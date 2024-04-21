@@ -95,7 +95,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
     }
 
     companion object {
-        private const val SPLASH_TIME_MILLIS = 3_000L
+        private const val SPLASH_TIME_MILLIS = 1_500L
         private const val REQUEST_PERMISSION_CODE = 100
     }
 }
