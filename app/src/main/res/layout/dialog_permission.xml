@@ -9,7 +9,7 @@
     android:background="@drawable/bg_stroke_gray300_radius_2dp">
 
     <TextView
-        android:id="@+id/customTvTitle"
+        android:id="@+id/tv_dialog_permission_title"
         style="@style/PretendardBold20"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/customTvContent"
+        android:id="@+id/tv_dialog_permission_content"
         style="@style/PretendardMedium16"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -33,10 +33,10 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customTvTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_dialog_permission_title" />
 
     <TextView
-        android:id="@+id/customTvBtn1"
+        android:id="@+id/tv_dialog_permission_cancle"
         style="@style/PretendardSemiBold16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,11 +46,11 @@
         android:hint="취소"
         android:textColor="@color/blue300"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/customTvBtn2"
-        app:layout_constraintTop_toBottomOf="@+id/customTvContent" />
+        app:layout_constraintEnd_toStartOf="@+id/tv_dialog_permission_complete"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dialog_permission_content" />
 
     <TextView
-        android:id="@+id/customTvBtn2"
+        android:id="@+id/tv_dialog_permission_complete"
         style="@style/PretendardSemiBold16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,6 +60,4 @@
         android:textColor="@color/blue300"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
