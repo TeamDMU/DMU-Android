@@ -145,4 +145,8 @@
     <!-- permission dialog -->
     <string name="dialog_permission_title">기기 알림이 꺼져있습니다.</string>
     <string name="dialog_permission_content"><![CDATA[알림 설정(DMforU 설정 > 개인정보 보호 > 알림)을 활성화해야 공지 사항에 대한 키워드를 받을 수 있습니다.]]></string>
+    <string name="dialog_permission_early_title">제목</string>
+    <string name="dialog_permission_early_content">내용</string>
+    <string name="dialog_permission_early_cancel">취소</string>
+    <string name="dialog_permission_early_complete">설정 화면 이동</string>
 </resources>
