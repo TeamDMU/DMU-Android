@@ -11,7 +11,7 @@ import com.dongyang.android.youdongknowme.ui.view.util.Event
 import kotlinx.coroutines.launch
 
 class NoticeViewModel(
-    private val noticeRepository: NoticeRepository
+    private val noticeRepository: NoticeRepository,
 ) : BaseViewModel() {
 
     private val _errorState: MutableLiveData<Event<Int>> = MutableLiveData()
@@ -26,27 +26,20 @@ class NoticeViewModel(
     private val _selectedTab: MutableLiveData<Event<NoticeTabType>> = MutableLiveData()
     val selectedTab: LiveData<Event<NoticeTabType>> = _selectedTab
 
-    private val _myDepartment: MutableLiveData<String> = MutableLiveData()
-    private val myDepartment: LiveData<String> = _myDepartment
-
     private val _universityNotices: MutableLiveData<List<Notice>?> = MutableLiveData()
     val universityNotices: LiveData<List<Notice>?> = _universityNotices
 
     private val _departmentNotices: MutableLiveData<List<Notice>?> = MutableLiveData()
     val departmentNotices: LiveData<List<Notice>?> = _departmentNotices
 
+    private var department: String
     private var universityNoticeCurrentPage = 1
     private var departmentNoticeCurrentPage = 1
 
     init {
         updateSelectedTabType(NoticeTabType.SCHOOL)
         fetchUniversityNotices()
-        getUserDepartment()
-    }
-
-    private fun getUserDepartment() {
-        val myDepartment = noticeRepository.getUserDepartment()
-        _myDepartment.postValue(myDepartment)
+        department = noticeRepository.getUserDepartment()
     }
 
     fun updateSelectedTabType(tabType: NoticeTabType) {
@@ -88,7 +81,6 @@ class NoticeViewModel(
         viewModelScope.launch {
             when (val result =
                 noticeRepository.fetchDepartmentNotices(
-                    myDepartment.value.toString(),
                     departmentNoticeCurrentPage
                 )) {
                 is NetworkResult.Success -> {
@@ -132,7 +124,6 @@ class NoticeViewModel(
                 NoticeTabType.FACULTY -> viewModelScope.launch {
                     when (val result =
                         noticeRepository.fetchDepartmentNotices(
-                            myDepartment.value.toString(),
                             DEFAULT_REFRESH_PAGE
                         )) {
                         is NetworkResult.Success -> {
@@ -149,6 +140,15 @@ class NoticeViewModel(
                     }
                 }
             }
+        }
+    }
+
+    fun refreshIfChangedDepartment() {
+        val currentDepartment = noticeRepository.getUserDepartment()
+
+        if (department != currentDepartment) {
+            department = currentDepartment
+            refreshNotices()
         }
     }
 

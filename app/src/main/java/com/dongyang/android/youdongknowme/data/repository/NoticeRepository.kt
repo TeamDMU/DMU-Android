@@ -28,12 +28,11 @@ class NoticeRepository(
     }
 
     suspend fun fetchDepartmentNotices(
-        department: String,
         page: Int
     ): NetworkResult<List<Notice>> {
         return try {
             val departmentNotices = RetrofitObject.getNetwork().create(NoticeService::class.java)
-                .getDepartmentNotice(department, page, DEFAULT_SIZE)
+                .getDepartmentNotice(getUserDepartment(), page, DEFAULT_SIZE)
             NetworkResult.Success(departmentNotices)
         } catch (exception: Exception) {
             val error = errorResponseHandler.getError(exception)
@@ -43,12 +42,11 @@ class NoticeRepository(
 
     suspend fun fetchSearchNotices(
         searchWord: String,
-        department: String,
         page: Int
     ): NetworkResult<List<Notice>> {
         return try {
             val searchNotices = RetrofitObject.getNetwork().create(NoticeService::class.java)
-                .getSearchNotice(searchWord, department, page, DEFAULT_SIZE)
+                .getSearchNotice(searchWord, getUserDepartment(), page, DEFAULT_SIZE)
             NetworkResult.Success(searchNotices)
         } catch (exception: Exception) {
             val error = errorResponseHandler.getError(exception)

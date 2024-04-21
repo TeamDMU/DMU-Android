@@ -1,6 +1,5 @@
 package com.dongyang.android.youdongknowme.ui.view.notice
 
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dongyang.android.youdongknowme.R
@@ -117,5 +116,11 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>() {
     private fun navigateToDetail(url: String) {
         val intent = DetailActivity.newIntent(requireContext(), url)
         startActivity(intent)
+    }
+
+    // TODO 더 나은 로직으로 제거
+    override fun onResume() {
+        super.onResume()
+        viewModel.refreshIfChangedDepartment()
     }
 }
