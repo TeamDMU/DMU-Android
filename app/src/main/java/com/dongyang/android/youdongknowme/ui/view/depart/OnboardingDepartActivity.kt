@@ -47,7 +47,16 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
         setSpanText(binding.tvOnboardingDepartTitleMain, startIdx = 0, endIdx = 5)
     }
 
-    override fun initDataBinding() = Unit
+    override fun initDataBinding() {
+
+        viewModel.selectDepartPosition.observe(this) { position ->
+            if (position != -1 && position < searchList.size) {
+                adapter.submitPosition(position)
+                binding.etOnboardingDepartSearch.setText(searchList[position])
+                binding.etOnboardingDepartSearch.setSelection(binding.etOnboardingDepartSearch.text.length)
+            }
+        }
+    }
 
     override fun initAfterBinding() {
         binding.ibOnboardingDepartSearchClear.setOnClickListener {
@@ -64,14 +73,13 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
             override fun afterTextChanged(editable: Editable?) {
                 val searchText =
                     binding.etOnboardingDepartSearch.text.toString().replace("\\s".toRegex(), "")
-                searchList = ArrayList<String>()
+                searchList.clear()
 
                 if (searchText.isEmpty()) {
                     adapter.submitList(emptyList)
-                    binding.ibOnboardingDepartSearchClear.isVisible=false
+                    binding.ibOnboardingDepartSearchClear.isVisible = false
                 } else {
-                    // 검색 단어를 포함하는지 확인
-                    binding.ibOnboardingDepartSearchClear.isVisible=true
+                    binding.ibOnboardingDepartSearchClear.isVisible = true
                     for (item in items) {
                         if (item.contains(searchText)) {
                             searchList.add(item)
@@ -87,17 +95,6 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
                 }
             }
         })
-
-        viewModel.selectDepartPosition.observe(this) {
-            adapter.submitPosition(it)
-
-            if (it != -1) {
-                binding.etOnboardingDepartSearch.setText(
-                    searchList[viewModel.selectDepartPosition.value ?: 0]
-                )
-                binding.etOnboardingDepartSearch.setSelection(binding.etOnboardingDepartSearch.text.length)
-            }
-        }
 
         binding.btnOnboardingDepartNext.setOnClickListener {
             getDepart(searchList)
@@ -155,7 +152,7 @@ class OnboardingDepartActivity : BaseActivity<ActivityOnboardingDepartBinding, D
     // 확인 버튼을 누르면 내부 DB에 학과를 담고 메인 액티비티로 이동
     private fun getDepart(items: ArrayList<String>) {
         if (viewModel.selectDepartPosition.value != -1) {
-            viewModel.setDepartment(items[viewModel.selectDepartPosition.value ?: 0])
+            viewModel.setDepartment(items[0])
             val intent = Intent(this, OnboardingKeywordActivity::class.java)
             startActivity(intent)
             finish()

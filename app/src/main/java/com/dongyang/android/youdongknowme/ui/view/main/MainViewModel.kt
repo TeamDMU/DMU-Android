@@ -9,7 +9,6 @@ import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.standard.network.NetworkResult
 import com.dongyang.android.youdongknowme.ui.view.util.Event
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel() {
     private val _errorState: MutableLiveData<Event<Int>> = MutableLiveData()
@@ -33,44 +32,49 @@ class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel(
     private val _isFirstLaunch: MutableLiveData<Boolean> = MutableLiveData(false)
     val isFirstLaunch: LiveData<Boolean> get() = _isFirstLaunch
 
-    init{
+    init {
+        checkFirstLaunch()
         getUserDepart()
         getUserTopic()
     }
 
-    fun checkFirstLaunch() {
+    private fun checkFirstLaunch() {
         if (mainRepository.getIsFirstLaunch()) {
             _isFirstLaunch.value = true
         }
     }
 
-    fun setFCMToken(token: String){
+    private fun getUserDepart() {
+        _myDepartment.value = mainRepository.getUserDepartment()
+    }
+
+    private fun getUserTopic() {
+        viewModelScope.launch {
+            _myTopics.value = mainRepository.getUserTopic()
+        }
+    }
+
+    fun setFCMToken(token: String) {
         mainRepository.setFCMToken(token)
         _FCMToken.value = token
     }
 
-    private fun getUserDepart(){
-        _myDepartment.value = mainRepository.getUserDepartment()
-    }
-
-    private fun getUserTopic(){
-        viewModelScope.launch {
-            _myTopics.value = mainRepository.getUserTopic()
-        }
+    fun setIsFirstLaunch(boolean: Boolean) {
+        mainRepository.setIsFirstLaunch(boolean)
     }
 
     fun setInitToken() {
         _isLoading.postValue(true)
 
         viewModelScope.launch {
-            when (val result = mainRepository.setUserToken(Token(
-                token = FCMToken.value.toString(),
-                department = myDepartment.value ?: "",
-                topics = myTopics.value ?: emptyList()
-            )
+            when (val result = mainRepository.setUserToken(
+                Token(
+                    token = FCMToken.value.toString(),
+                    department = myDepartment.value ?: "",
+                    topics = myTopics.value ?: emptyList()
+                )
             )) {
                 is NetworkResult.Success -> {
-                    Timber.d("first ${FCMToken.value.toString()}")
                     mainRepository.setIsFirstLaunch(false)
                     _isFirstLaunch.postValue(false)
                     _isLoading.postValue(false)
