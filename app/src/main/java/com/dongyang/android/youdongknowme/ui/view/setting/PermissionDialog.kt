@@ -12,20 +12,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.dongyang.android.youdongknowme.databinding.DialogPermissionBinding
 
-class PermissionDialog(
-    val title: String,
-    val content: String,
-    val pacakageName: String,
-    val cancelListener: () -> Unit
-) : DialogFragment() {
+class PermissionDialog(val title: String, val content: String, val pacakageName: String) : DialogFragment() {
     private var _binding: DialogPermissionBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = DialogPermissionBinding.inflate(inflater, container, false)
         val view = binding.root
 
@@ -38,10 +29,8 @@ class PermissionDialog(
 
         // 취소 버튼
         binding.customTvBtn1.setOnClickListener {
-            cancelListener()
             dismiss()
         }
-
         // 확인 버튼
         binding.customTvBtn2.setOnClickListener {
             val intent =

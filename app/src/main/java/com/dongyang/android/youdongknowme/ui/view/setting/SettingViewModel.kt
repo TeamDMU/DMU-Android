@@ -40,12 +40,11 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
     val FCMToken: LiveData<String> get() = _FCMToken
 
     init {
-        checkAccessAlarm()
         getUserFCMToken()
         getUserDepartment()
     }
 
-    private fun checkAccessAlarm() {
+    fun checkAccessAlarm() {
         val isAccessUniversityAlarm = settingRepository.getIsAccessUniversityAlarm()
         _isAccessUniversityAlarm.postValue(isAccessUniversityAlarm)
 

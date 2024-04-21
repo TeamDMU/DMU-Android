@@ -1,13 +1,17 @@
 package com.dongyang.android.youdongknowme.ui.view.setting
 
-import android.Manifest
 import android.app.Activity
+import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.ColorStateList
 import android.net.Uri
-import android.os.Build
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import android.os.Build
+import android.view.View
+import android.widget.Switch
+import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentSettingBinding
@@ -33,20 +37,19 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
         binding.tvSettingAppVersion.text = getAppVersion()
         setResultKeyword()
         setResultDepartment()
-        checkNotificationPermission()
     }
 
     override fun initDataBinding() {
-
-        viewModel.myTopics.observe(viewLifecycleOwner) { myTopics ->
-            topics = myTopics
-            viewModel.updateUserTopic(topics)
-        }
 
         viewModel.myDepartment.observe(viewLifecycleOwner) { myDepartment ->
             binding.tvSettingDepartment.text = myDepartment
             department = myDepartment
             viewModel.updateUserDepartment(department)
+        }
+
+        viewModel.myTopics.observe(viewLifecycleOwner) { myTopics ->
+            topics = myTopics
+            viewModel.updateUserTopic(topics)
         }
 
         viewModel.isAccessUniversityAlarm.observe(viewLifecycleOwner) { isChecked ->
@@ -60,15 +63,14 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
 
     override fun initAfterBinding() {
 
+        viewModel.checkAccessAlarm()
         viewModel.getUserDepartment()
         viewModel.getUserTopic()
 
-        binding.switchSettingUniversityAlarm.setOnClickListener {
-            if (binding.switchSettingUniversityAlarm.isChecked) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    checkPermissionForTIRAMISU()
-                }
-                if (department.isNotEmpty()) {
+        binding.switchSettingUniversityAlarm.setOnCheckedChangeListener { compoundButton, _ ->
+            checkPermission(binding.switchSettingUniversityAlarm)
+            if (compoundButton.isChecked) {
+                if (topics.isNotEmpty()) {
                     viewModel.updateUserTopic(topics)
                 }
             } else {
@@ -76,11 +78,9 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
             }
         }
 
-        binding.switchSettingDepartmentAlarm.setOnClickListener {
-            if (binding.switchSettingDepartmentAlarm.isChecked) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    checkPermissionForTIRAMISU()
-                }
+        binding.switchSettingDepartmentAlarm.setOnCheckedChangeListener { compoundButton, _ ->
+            checkPermission(binding.switchSettingDepartmentAlarm)
+            if (compoundButton.isChecked) {
                 if (department.isNotEmpty()) {
                     viewModel.updateUserDepartment(department)
                 }
@@ -121,18 +121,25 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
         }
     }
 
-    private fun checkPermissionForTIRAMISU() {
-        if (PackageManager.PERMISSION_DENIED == ContextCompat.checkSelfPermission(
-                requireContext(), Manifest.permission.POST_NOTIFICATIONS
-            )
-        ) {
-            val dialog = PermissionDialog(
-                getString(R.string.dialog_permission_title),
-                getString(R.string.dialog_permission_content),
-                requireContext().packageName,
-                cancelListener = { alarmOffToTIRAMISU() }
-            )
-            dialog.show(parentFragmentManager, "CustomDialog")
+    private fun checkPermission(switch: SwitchCompat){
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (PackageManager.PERMISSION_DENIED == ContextCompat.checkSelfPermission(
+                    requireContext(), Manifest.permission.POST_NOTIFICATIONS
+                )
+            ) {
+                // 알림 권한 설정 미허용
+                viewModel.setIsAccessDepartAlarm(false)
+                viewModel.setIsAccessUniversityAlarm(false)
+                binding.switchSettingUniversityAlarm.isChecked = false
+                binding.switchSettingDepartmentAlarm.isChecked = false
+
+                val dialog = PermissionDialog(getString(R.string.dialog_permission_title), getString(R.string.dialog_permission_content), requireContext().packageName)
+                dialog.show(parentFragmentManager, "CustomDialog")
+            } else {
+                switch.isChecked = !switch.isChecked
+            }
+        } else {
+            switch.isChecked = !switch.isChecked
         }
     }
 
@@ -160,28 +167,5 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
                     binding.switchSettingDepartmentAlarm.isChecked = true
                 }
             }
-    }
-
-    private fun alarmOffToTIRAMISU() {
-        binding.switchSettingUniversityAlarm.isChecked = false
-        binding.switchSettingDepartmentAlarm.isChecked = false
-    }
-
-    private fun checkNotificationPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (PackageManager.PERMISSION_DENIED == ContextCompat.checkSelfPermission(
-                    requireContext(), Manifest.permission.POST_NOTIFICATIONS
-                )
-            ) {
-                viewModel.setIsAccessDepartAlarm(false)
-                viewModel.setIsAccessUniversityAlarm(false)
-                alarmOffToTIRAMISU()
-            }
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        checkNotificationPermission()
     }
 }
