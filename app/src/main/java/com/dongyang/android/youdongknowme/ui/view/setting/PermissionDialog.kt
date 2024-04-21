@@ -33,17 +33,17 @@ class PermissionDialog(
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         // 제목, 내용 설정
-        binding.customTvTitle.text = title
-        binding.customTvContent.text = content
+        binding.tvDialogPermissionTitle.text = title
+        binding.tvDialogPermissionContent.text = content
 
         // 취소 버튼
-        binding.customTvBtn1.setOnClickListener {
+        binding.tvDialogPermissionCancel.setOnClickListener {
             cancelListener?.invoke()
             dismiss()
         }
 
         // 확인 버튼
-        binding.customTvBtn2.setOnClickListener {
+        binding.tvDialogPermissionComplete.setOnClickListener {
             val intent =
                 Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).setData(Uri.parse("package:$pacakageName"))
             startActivity(intent)
