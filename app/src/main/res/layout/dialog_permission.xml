@@ -36,7 +36,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_dialog_permission_title" />
 
     <TextView
-        android:id="@+id/tv_dialog_permission_cancle"
+        android:id="@+id/tv_dialog_permission_cancel"
         style="@style/PretendardSemiBold16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
