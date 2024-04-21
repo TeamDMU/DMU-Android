@@ -6,7 +6,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.plusAssign
 import androidx.navigation.ui.setupWithNavController
 import com.dongyang.android.youdongknowme.R
-import com.dongyang.android.youdongknowme.data.local.SharedPreference
 import com.dongyang.android.youdongknowme.databinding.ActivityMainBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.view.util.KeepStateNavigator
@@ -34,8 +33,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         navController.navigatorProvider += navigator
         navController.setGraph(R.navigation.dmu_navigation)
         binding.mainNvBottom.setupWithNavController(navController)
-
-        viewModel.checkFirstLaunch()
     }
 
     override fun initDataBinding() {
@@ -47,21 +44,19 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override fun initAfterBinding() = Unit
 
     private fun getFcmToken() {
+        viewModel.setIsFirstLaunch(false)
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 viewModel.setFCMToken(task.result).run { viewModel.setInitToken() }
-                Timber.d("first ${task.result}")
+                Timber.d("token ${task.result}")
             } else {
                 return@addOnCompleteListener
             }
-            val token = task.result
-            SharedPreference.setFcmToken(token)
-
-            Timber.d("token : ${token}")
         }
     }
 
     companion object {
+
         fun createIntent(context: Context): Intent {
             return Intent(context, MainActivity::class.java)
         }
