@@ -11,7 +11,6 @@ import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.standard.network.NetworkResult
 import com.dongyang.android.youdongknowme.ui.view.util.Event
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 /* 설정 뷰모델 */
 class SettingViewModel(private val settingRepository: SettingRepository) : BaseViewModel() {
@@ -88,7 +87,6 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
                 )
             )) {
                 is NetworkResult.Success -> {
-                    Timber.d(department)
                     setIsAccessDepartAlarm(true)
                     _isLoading.postValue(false)
                     _isError.postValue(false)
@@ -127,18 +125,17 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
         }
     }
 
-    fun updateUserTopic() {
+    fun updateUserTopic(topic: List<String>) {
         _isLoading.postValue(true)
 
         viewModelScope.launch {
             when (val result = settingRepository.updateUserTopic(
                 UpdateTopic(
                     token = FCMToken.value.toString(),
-                    topics = myTopics.value ?: emptyList()
+                    topics = topic
                 )
             )) {
                 is NetworkResult.Success -> {
-                    Timber.d("${myTopics.value}")
                     setIsAccessUniversityAlarm(true)
                     _isLoading.postValue(false)
                     _isError.postValue(false)

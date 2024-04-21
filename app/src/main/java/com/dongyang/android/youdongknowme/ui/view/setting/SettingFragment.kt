@@ -1,10 +1,13 @@
 package com.dongyang.android.youdongknowme.ui.view.setting
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentSettingBinding
@@ -20,14 +23,24 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
     override val layoutResourceId: Int = R.layout.fragment_setting
     override val viewModel: SettingViewModel by viewModel()
 
+    private lateinit var resultLauncherKeyword: ActivityResultLauncher<Intent>
+    private lateinit var resultResultDepartment: ActivityResultLauncher<Intent>
+
+    private var topics: List<String> = emptyList()
     private var department: String = ""
 
     override fun initStartView() {
         binding.tvSettingAppVersion.text = getAppVersion()
+        setResultKeyword()
+        setResultDepartment()
         checkNotificationPermission()
     }
 
     override fun initDataBinding() {
+
+        viewModel.myTopics.observe(viewLifecycleOwner) { myTopics ->
+            topics = myTopics
+        }
 
         viewModel.myDepartment.observe(viewLifecycleOwner) { myDepartment ->
             binding.tvSettingDepartment.text = myDepartment
@@ -36,18 +49,10 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
 
         viewModel.isAccessUniversityAlarm.observe(viewLifecycleOwner) { isChecked ->
             binding.switchSettingUniversityAlarm.isChecked = isChecked
-
-            if (isChecked) {
-                viewModel.updateUserTopic()
-            }
         }
 
         viewModel.isAccessDepartAlarm.observe(viewLifecycleOwner) { isChecked ->
             binding.switchSettingDepartmentAlarm.isChecked = isChecked
-
-            if (isChecked) {
-                viewModel.updateUserDepartment(department)
-            }
         }
     }
 
@@ -62,7 +67,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
                     checkPermissionForTIRAMISU()
                 }
                 if (department.isNotEmpty()) {
-                    viewModel.updateUserTopic()
+                    viewModel.updateUserTopic(topics)
                 }
             } else {
                 viewModel.removeUserTopic()
@@ -84,12 +89,12 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
 
         binding.btnSettingEditKeyword.setOnClickListener {
             val intent = Intent(requireActivity(), KeywordActivity::class.java)
-            startActivity(intent)
+            resultLauncherKeyword.launch(intent)
         }
 
         binding.btnSettingEditDepartment.setOnClickListener {
             val intent = Intent(requireActivity(), DepartActivity::class.java)
-            startActivity(intent)
+            resultResultDepartment.launch(intent)
         }
 
         binding.btnSettingAppHelp.setOnClickListener {
@@ -119,13 +124,15 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
                 requireContext(), Manifest.permission.POST_NOTIFICATIONS
             )
         ) {
-            val dialog = PermissionDialog(getString(R.string.dialog_permission_title),
+            val dialog = PermissionDialog(
+                getString(R.string.dialog_permission_title),
                 getString(R.string.dialog_permission_content),
                 requireContext().packageName,
                 cancelListener = {
                     binding.switchSettingDepartmentAlarm.isChecked = false
                     binding.switchSettingUniversityAlarm.isChecked = false
-                })
+                }
+            )
             dialog.show(parentFragmentManager, "CustomDialog")
         }
     }
@@ -134,6 +141,26 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
         val packageManager =
             requireContext().packageManager.getPackageInfo(requireContext().packageName, 0)
         return packageManager.versionName
+    }
+
+    private fun setResultKeyword() {
+        resultLauncherKeyword =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    viewModel.getUserTopic().run { viewModel.updateUserTopic(topics) }
+                    binding.switchSettingUniversityAlarm.isChecked = true
+                }
+            }
+    }
+
+    private fun setResultDepartment() {
+        resultResultDepartment =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    viewModel.getUserDepartment()
+                    binding.switchSettingDepartmentAlarm.isChecked = true
+                }
+            }
     }
 
     private fun checkNotificationPermission() {
@@ -151,8 +178,5 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
     override fun onResume() {
         super.onResume()
         checkNotificationPermission()
-        viewModel.checkAccessAlarm()
-        viewModel.getUserDepartment()
-        viewModel.getUserTopic()
     }
 }
