@@ -28,7 +28,7 @@ class PermissionDialog(val title: String, val content: String, val pacakageName:
         binding.tvDialogPermissionContent.text = content
 
         // 취소 버튼
-        binding.tvDialogPermissionCancle.setOnClickListener {
+        binding.tvDialogPermissionCancel.setOnClickListener {
             dismiss()
         }
         // 확인 버튼
