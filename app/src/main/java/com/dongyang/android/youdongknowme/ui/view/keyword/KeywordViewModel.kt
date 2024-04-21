@@ -6,14 +6,11 @@ import androidx.lifecycle.viewModelScope
 import com.dongyang.android.youdongknowme.data.local.entity.KeywordEntity
 import com.dongyang.android.youdongknowme.data.repository.KeywordRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
-import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.launch
 
 class KeywordViewModel(
     private val keywordRepository: KeywordRepository
 ) : BaseViewModel() {
-
-    private val firebaseMessaging = FirebaseMessaging.getInstance()
 
     private val _localKeywordList: MutableLiveData<List<KeywordEntity>> = MutableLiveData()
     val localKeywordList: LiveData<List<KeywordEntity>> get() = _localKeywordList
@@ -37,14 +34,12 @@ class KeywordViewModel(
                     viewModelScope.launch {
                         keywordRepository.updateUserKeywords(true, localKeyword.name)
                     }
-                    firebaseMessaging.subscribeToTopic(localKeyword.englishName)
                 }
             } else {
                 if (localKeyword.isSubscribe) {
                     viewModelScope.launch {
                         keywordRepository.updateUserKeywords(false, localKeyword.name)
                     }
-                    firebaseMessaging.unsubscribeFromTopic(localKeyword.englishName)
                 }
             }
         }

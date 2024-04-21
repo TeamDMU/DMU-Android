@@ -24,10 +24,10 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
     private val _isError: MutableLiveData<Boolean> = MutableLiveData()
     val isError: LiveData<Boolean> = _isError
 
-    private val _isAccessUniversityAlarm: MutableLiveData<Boolean> = MutableLiveData(false)
+    private val _isAccessUniversityAlarm: MutableLiveData<Boolean> = MutableLiveData()
     val isAccessUniversityAlarm: LiveData<Boolean> get() = _isAccessUniversityAlarm
 
-    private val _isAccessDepartAlarm: MutableLiveData<Boolean> = MutableLiveData(false)
+    private val _isAccessDepartAlarm: MutableLiveData<Boolean> = MutableLiveData()
     val isAccessDepartAlarm: LiveData<Boolean> get() = _isAccessDepartAlarm
 
     private val _myDepartment: MutableLiveData<String> = MutableLiveData()
@@ -36,35 +36,37 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
     private val _myTopics: MutableLiveData<List<String>> = MutableLiveData()
     val myTopics: LiveData<List<String>> get() = _myTopics
 
-    private val _FCMToken: MutableLiveData<String> = MutableLiveData()
-    val FCMToken: LiveData<String> get() = _FCMToken
+    private var FCMToken: String = ""
 
     init {
+        checkAccessAlarm()
         getUserFCMToken()
+        getUserTopic()
         getUserDepartment()
     }
 
     fun checkAccessAlarm() {
         val isAccessUniversityAlarm = settingRepository.getIsAccessUniversityAlarm()
         _isAccessUniversityAlarm.postValue(isAccessUniversityAlarm)
-
         val isAccessDepartAlarm = settingRepository.getIsAccessDepartAlarm()
         _isAccessDepartAlarm.postValue(isAccessDepartAlarm)
     }
 
     fun setIsAccessUniversityAlarm(isAccessSchoolAlarm: Boolean) {
         settingRepository.setIsAccessSchoolAlarm(isAccessSchoolAlarm)
+        checkAccessAlarm()
     }
 
     fun setIsAccessDepartAlarm(isAccessDepartAlarm: Boolean) {
         settingRepository.setIsAccessDepartAlarm(isAccessDepartAlarm)
+        checkAccessAlarm()
     }
 
     fun getUserDepartment() {
         _myDepartment.value = settingRepository.getUserDepartment()
     }
 
-    fun getUserTopic() {
+    private fun getUserTopic() {
         viewModelScope.launch {
             val keyword = settingRepository.getUserTopic()
             _myTopics.value = keyword
@@ -72,68 +74,21 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
     }
 
     private fun getUserFCMToken() {
-        _FCMToken.value = settingRepository.getUserFCMToken()
+        FCMToken = settingRepository.getUserFCMToken()
     }
 
-    fun updateUserDepartment(department: String) {
+    fun updateUserTopic() {
         _isLoading.postValue(true)
 
         viewModelScope.launch {
-            when (val result = settingRepository.updateUserDepartment(
-                UpdateDepartment(
-                    token = FCMToken.value.toString(),
-                    department = department
-                )
-            )) {
-                is NetworkResult.Success -> {
-                    setIsAccessDepartAlarm(true)
-                    _isLoading.postValue(false)
-                    _isError.postValue(false)
-                }
-
-                is NetworkResult.Error -> {
-                    handleError(result, _errorState)
-                    _isLoading.postValue(false)
-                    _isError.postValue(true)
-                }
-            }
-        }
-    }
-
-    fun removeUserDepartment() {
-        _isLoading.postValue(true)
-
-        viewModelScope.launch {
-            when (val result =
-                settingRepository.removeUserDepartment(
-                    RemoveToken(token = FCMToken.value.toString())
-                )
-            ) {
-                is NetworkResult.Success -> {
-                    setIsAccessDepartAlarm(false)
-                    _isLoading.postValue(false)
-                    _isError.postValue(false)
-                }
-
-                is NetworkResult.Error -> {
-                    handleError(result, _errorState)
-                    _isLoading.postValue(false)
-                    _isError.postValue(true)
-                }
-            }
-        }
-    }
-
-    fun updateUserTopic(topic: List<String>) {
-        _isLoading.postValue(true)
-
-        viewModelScope.launch {
-            when (val result = settingRepository.updateUserTopic(
+            val result = settingRepository.updateUserTopic(
                 UpdateTopic(
-                    token = FCMToken.value.toString(),
-                    topics = topic
+                    token = FCMToken,
+                    topics = myTopics.value ?: emptyList()
                 )
-            )) {
+            )
+
+            when (result) {
                 is NetworkResult.Success -> {
                     setIsAccessUniversityAlarm(true)
                     _isLoading.postValue(false)
@@ -142,6 +97,7 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
 
                 is NetworkResult.Error -> {
                     handleError(result, _errorState)
+                    setIsAccessUniversityAlarm(false)
                     _isLoading.postValue(false)
                     _isError.postValue(true)
                 }
@@ -153,10 +109,12 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
         _isLoading.postValue(true)
 
         viewModelScope.launch {
-            when (val result =
+            val result =
                 settingRepository.removeUserTopic(
-                    RemoveToken(token = FCMToken.value.toString())
-                )) {
+                    RemoveToken(token = FCMToken)
+                )
+
+            when (result) {
                 is NetworkResult.Success -> {
                     setIsAccessUniversityAlarm(false)
                     _isLoading.postValue(false)
@@ -165,6 +123,66 @@ class SettingViewModel(private val settingRepository: SettingRepository) : BaseV
 
                 is NetworkResult.Error -> {
                     handleError(result, _errorState)
+                    setIsAccessUniversityAlarm(false)
+                    _isLoading.postValue(false)
+                    _isError.postValue(true)
+                }
+            }
+        }
+    }
+
+    fun updateUserDepartment() {
+        val department = _myDepartment.value ?: run {
+            _isError.postValue(true)
+            setIsAccessDepartAlarm(false)
+            return
+        }
+
+        _isLoading.postValue(true)
+
+        viewModelScope.launch {
+            val result = settingRepository.updateUserDepartment(
+                UpdateDepartment(
+                    token = FCMToken,
+                    department = department
+                )
+            )
+
+            when (result) {
+                is NetworkResult.Success -> {
+                    setIsAccessDepartAlarm(true)
+                    _isLoading.postValue(false)
+                    _isError.postValue(false)
+                }
+
+                is NetworkResult.Error -> {
+                    handleError(result, _errorState)
+                    setIsAccessDepartAlarm(false)
+                    _isLoading.postValue(false)
+                    _isError.postValue(true)
+                }
+            }
+        }
+    }
+
+    fun removeUserDepartment() {
+        _isLoading.postValue(true)
+
+        viewModelScope.launch {
+            val result = settingRepository.removeUserDepartment(
+                RemoveToken(token = FCMToken)
+            )
+
+            when (result) {
+                is NetworkResult.Success -> {
+                    setIsAccessDepartAlarm(false)
+                    _isLoading.postValue(false)
+                    _isError.postValue(false)
+                }
+
+                is NetworkResult.Error -> {
+                    handleError(result, _errorState)
+                    setIsAccessDepartAlarm(false)
                     _isLoading.postValue(false)
                     _isError.postValue(true)
                 }
