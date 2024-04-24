@@ -7,7 +7,6 @@ import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.ui.adapter.DepartAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class DepartActivity : BaseActivity<ActivityDepartBinding, DepartViewModel>(), DepartClickListener {
 
     override val layoutResourceId: Int = R.layout.activity_depart
@@ -58,7 +57,6 @@ class DepartActivity : BaseActivity<ActivityDepartBinding, DepartViewModel>(), D
     private fun getDepart(items: ArrayList<String>) {
         return binding.btnDepartComplete.setOnClickListener {
             viewModel.setDepartment(items[viewModel.selectDepartPosition.value ?: 0])
-            setResult(RESULT_OK)
             finish()
         }
     }

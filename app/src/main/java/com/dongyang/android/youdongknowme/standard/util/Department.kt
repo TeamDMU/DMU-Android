@@ -6,8 +6,8 @@ sealed class Department(
 ) {
     object Mechanical : Department("기계공학과", CODE.MECHANICAL_ENGINE_CODE)
     object MechanicalDesign : Department("기계설계공학과", CODE.MECHANICAL_DESIGN_CODE)
-    object Automation : Department("로봇공학과", CODE.ROBOT_ENGINE_CODE)
-    object Robot : Department("자동화공학과", CODE.AUTOMATION_ENGINE_CODE)
+    object Automation : Department("자동화공학과", CODE.AUTOMATION_ENGINE_CODE)
+    object Robot : Department("로봇공학과", CODE.ROBOT_ENGINE_CODE)
     object Electrical : Department("전기공학과", CODE.ELECTRICAL_ENGINE_CODE)
     object InfoElectrical : Department("정보전자공학과", CODE.INFO_ELECTRONIC_ENGINE_CODE)
     object Semiconductor : Department("반도체전자공학과", CODE.SEMICONDUCTOR_ENGINE_CODE)
