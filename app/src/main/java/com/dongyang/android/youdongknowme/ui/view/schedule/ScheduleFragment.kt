@@ -18,7 +18,8 @@ interface OnDateSelectedListener {
 }
 
 /* 학사 일정 화면 */
-class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel>(), OnDateSelectedListener {
+class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel>(),
+    OnDateSelectedListener {
 
     override val layoutResourceId: Int = R.layout.fragment_schedule
     override val viewModel: ScheduleViewModel by viewModel()
@@ -45,8 +46,22 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
 
         viewModel.setPickedDate(binding.mvScheduleCalendar.currentDate)
 
-        binding.mvScheduleCalendar.leftArrow.setTintList(ColorStateList.valueOf(ContextCompat.getColor(this.requireContext(), R.color.blue300)))
-        binding.mvScheduleCalendar.rightArrow.setTintList(ColorStateList.valueOf(ContextCompat.getColor(this.requireContext(), R.color.blue300)))
+        binding.mvScheduleCalendar.leftArrow.setTintList(
+            ColorStateList.valueOf(
+                ContextCompat.getColor(
+                    this.requireContext(),
+                    R.color.blue300
+                )
+            )
+        )
+        binding.mvScheduleCalendar.rightArrow.setTintList(
+            ColorStateList.valueOf(
+                ContextCompat.getColor(
+                    this.requireContext(),
+                    R.color.blue300
+                )
+            )
+        )
 
         adapter = ScheduleAdapter()
         binding.rvScheduleList.apply {
@@ -91,7 +106,11 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
         }
 
         binding.mvScheduleCalendar.setOnTitleClickListener {
-            val dialog = DatePickerDialog(year = year.toInt(), month = month.toInt(), dateSelectedListener = this)
+            val dialog = DatePickerDialog(
+                year = year.toInt(),
+                month = month.toInt(),
+                dateSelectedListener = this
+            )
             dialog.show(requireActivity().supportFragmentManager, "CustomDialog")
         }
 

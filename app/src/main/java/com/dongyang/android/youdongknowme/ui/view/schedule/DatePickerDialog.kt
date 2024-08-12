@@ -41,8 +41,10 @@ class DatePickerDialog(
         binding.numberpickerDialogDatepickerMonth.wrapSelectorWheel = false
 
         // editText 설정 막기
-        binding.numberpickerDialogDatepickerYear.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
-        binding.numberpickerDialogDatepickerMonth.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+        binding.numberpickerDialogDatepickerYear.descendantFocusability =
+            NumberPicker.FOCUS_BLOCK_DESCENDANTS
+        binding.numberpickerDialogDatepickerMonth.descendantFocusability =
+            NumberPicker.FOCUS_BLOCK_DESCENDANTS
 
         // 연도 및 월의 최소/최대값 설정
         with(binding.numberpickerDialogDatepickerYear) {
@@ -71,8 +73,14 @@ class DatePickerDialog(
         }
 
         binding.tvDialogPermissionComplete.setOnClickListener {
-            viewModel.setDatePicker(binding.numberpickerDialogDatepickerYear.value, binding.numberpickerDialogDatepickerMonth.value)
-            dateSelectedListener.onDateSelected(binding.numberpickerDialogDatepickerYear.value, binding.numberpickerDialogDatepickerMonth.value)
+            viewModel.setDatePicker(
+                binding.numberpickerDialogDatepickerYear.value,
+                binding.numberpickerDialogDatepickerMonth.value
+            )
+            dateSelectedListener.onDateSelected(
+                binding.numberpickerDialogDatepickerYear.value,
+                binding.numberpickerDialogDatepickerMonth.value
+            )
             dismiss()
         }
 
@@ -84,7 +92,10 @@ class DatePickerDialog(
         val dialog = super.onCreateDialog(savedInstanceState)
 
         dialog.window?.let { window ->
-            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            window.setLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
             window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         }
 

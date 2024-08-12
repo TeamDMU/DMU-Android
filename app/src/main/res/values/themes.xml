@@ -28,7 +28,7 @@
     </style>
 
     <!-- 데이트 픽커 스타일 지정 -->
-    <style name="Theme.YouDongKnowMe.NumberPicker" parent="Theme.YouDongKnowMe" >
+    <style name="Theme.YouDongKnowMe.NumberPicker" parent="Theme.YouDongKnowMe">
         <item name="colorControlNormal">@color/blue200</item>
     </style>
 </resources>
