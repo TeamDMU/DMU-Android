@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:backgroundTint="@color/white"
+    android:background="@drawable/bg_stroke_gray300_radius_2dp">
+
+    <NumberPicker
+        android:id="@+id/numberpicker_dialog_datepicker_year"
+        android:layout_width="63dp"
+        android:layout_height="124dp"
+        app:layout_constraintEnd_toStartOf="@id/numberpicker_dialog_datepicker_month"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <NumberPicker
+        android:id="@+id/numberpicker_dialog_datepicker_month"
+        android:layout_width="63dp"
+        android:layout_height="124dp"
+        android:layout_marginStart="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/numberpicker_dialog_datepicker_year"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_dialog_datepicker_cancel"
+        style="@style/PretendardSemiBold16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="20dp"
+        android:hint="@string/dialog_datepicker_cancel"
+        android:textColor="@color/blue300"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_dialog_permission_complete"
+        app:layout_constraintTop_toBottomOf="@+id/numberpicker_dialog_datepicker_month" />
+
+    <TextView
+        android:id="@+id/tv_dialog_permission_complete"
+        style="@style/PretendardSemiBold16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="20dp"
+        android:hint="@string/dialog_datepicker_comlete"
+        android:textColor="@color/blue300"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

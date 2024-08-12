@@ -41,6 +41,11 @@ class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : Ba
         _pickMonth.value = date.month
     }
 
+    fun setDatePicker(year: Int, month: Int) {
+        _pickYear.value = year
+        _pickMonth.value = month
+    }
+
     fun getSchedules() {
         // 로컬에 저장한 데이터가 없으면 네트워크에서 데이터를 받아와 로컬에 저장 및 화면에 출력
         if (scheduleRepository.getLocalSchedules() == NO_SCHEDULE) {
@@ -51,7 +56,6 @@ class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : Ba
                         val scheduleList = result.data
 
                         // 선택한 연월 조건에 따라 리스트 출력
-
                         _scheduleList.postValue(getSchedulesForPickDate(scheduleList))
 
                         scheduleRepository.setLocalSchedules(Gson().toJson(scheduleList))

@@ -1,14 +1,7 @@
 package com.dongyang.android.youdongknowme.ui.view.schedule
 
 import android.content.res.ColorStateList
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.PorterDuff
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dongyang.android.youdongknowme.R
@@ -20,15 +13,34 @@ import com.prolificinteractive.materialcalendarview.CalendarDay
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.LocalDate
 
+interface OnDateSelectedListener {
+    fun onDateSelected(year: Int, month: Int)
+}
+
 /* 학사 일정 화면 */
-class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel>() {
+class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel>(), OnDateSelectedListener {
 
     override val layoutResourceId: Int = R.layout.fragment_schedule
     override val viewModel: ScheduleViewModel by viewModel()
 
     private lateinit var adapter: ScheduleAdapter
 
+    private var _year = LocalDate.now().year.toString()
+    private var year = _year
+
+    private var _month = LocalDate.now().month.toString()
+    private var month = _month
+
+    override fun onDateSelected(year: Int, month: Int) {
+
+        // 선택된 연도와 월을 사용하여 CalendarView 업데이트
+        val date = CalendarDay.from(year, month, 1)
+        binding.mvScheduleCalendar.currentDate = date
+        binding.mvScheduleCalendar.setCurrentDate(date, true)
+    }
+
     override fun initStartView() {
+
         binding.vm = viewModel
 
         viewModel.setPickedDate(binding.mvScheduleCalendar.currentDate)
@@ -55,6 +67,10 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
             else dismissLoading()
         }
 
+        viewModel.pickYear.observe(viewLifecycleOwner) {
+            viewModel.getSchedules()
+        }
+
         viewModel.pickMonth.observe(viewLifecycleOwner) {
             viewModel.getSchedules()
         }
@@ -74,6 +90,11 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
             viewModel.setPickedDate(date)
         }
 
+        binding.mvScheduleCalendar.setOnTitleClickListener {
+            val dialog = DatePickerDialog(year = year.toInt(), month = month.toInt(), dateSelectedListener = this)
+            dialog.show(requireActivity().supportFragmentManager, "CustomDialog")
+        }
+
         // 최소 날짜, 최대 날짜 지정
         binding.mvScheduleCalendar.apply {
             this.state().edit().setMinimumDate(CalendarDay.from(2023, 1, 1))
@@ -86,8 +107,8 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
             val inputText: LocalDate = day.date
             val calendarHeaderElements = inputText.toString().split("-").toTypedArray()
 
-            val year = calendarHeaderElements[0]
-            val month = calendarHeaderElements[1]
+            year = calendarHeaderElements[0]
+            month = calendarHeaderElements[1]
 
             val calendarHeaderBuilder = StringBuilder()
             calendarHeaderBuilder.append(year)
