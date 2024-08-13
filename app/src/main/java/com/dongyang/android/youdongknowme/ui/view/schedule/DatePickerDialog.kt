@@ -16,7 +16,6 @@ class DatePickerDialog(
     val year: Int,
     val month: Int,
     private val dateSelectedListener: ScheduleFragment,
-    private val cancelListener: (() -> Unit)? = null,
 ) : DialogFragment() {
 
     private var _binding: DialogDatepickerBinding? = null
@@ -65,12 +64,6 @@ class DatePickerDialog(
         // 초기 설정
         binding.numberpickerDialogDatepickerYear.value = year
         binding.numberpickerDialogDatepickerMonth.value = month
-
-        // 취소 버튼 클릭시
-        binding.tvDialogDatepickerCancel.setOnClickListener {
-            cancelListener?.invoke()
-            dismiss()
-        }
 
         binding.tvDialogPermissionComplete.setOnClickListener {
             viewModel.setDatePicker(
