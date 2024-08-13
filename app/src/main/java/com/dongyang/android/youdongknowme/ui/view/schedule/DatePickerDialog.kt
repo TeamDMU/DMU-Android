@@ -45,12 +45,14 @@ class DatePickerDialog(
         binding.numberpickerDialogDatepickerMonth.descendantFocusability =
             NumberPicker.FOCUS_BLOCK_DESCENDANTS
 
-        // 연도 및 월의 최소/최대값 설정
+        // 연도 최소/최대값 설정 및 출력 방식 설정
         with(binding.numberpickerDialogDatepickerYear) {
             minValue = currentYear - 1
             maxValue = currentYear + 1
+            displayedValues=((minValue..maxValue).map{"$it 년"}.toTypedArray())
         }
 
+        // 월 최소/최대값 설정 및 출력 방식 설정
         with(binding.numberpickerDialogDatepickerMonth) {
             minValue = 1
             maxValue = if (year == currentYear + 1) 2 else 12
@@ -59,6 +61,8 @@ class DatePickerDialog(
             binding.numberpickerDialogDatepickerYear.setOnValueChangedListener { _, _, newYear ->
                 maxValue = if (newYear == currentYear + 1) 2 else 12
             }
+
+            displayedValues=((minValue..maxValue).map{"$it 월"}.toTypedArray())
         }
 
         // 초기 설정
