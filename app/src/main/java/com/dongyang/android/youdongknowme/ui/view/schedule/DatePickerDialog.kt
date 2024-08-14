@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.NumberPicker
 import androidx.fragment.app.DialogFragment
+import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.DialogDatepickerBinding
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.LocalDate
 
@@ -16,7 +19,7 @@ class DatePickerDialog(
     val year: Int,
     val month: Int,
     private val dateSelectedListener: ScheduleFragment,
-) : DialogFragment() {
+) : BottomSheetDialogFragment() {
 
     private var _binding: DialogDatepickerBinding? = null
     private val binding get() = _binding!!
@@ -85,29 +88,7 @@ class DatePickerDialog(
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-
-        val dialog = super.onCreateDialog(savedInstanceState)
-
-        dialog.window?.let { window ->
-            window.setLayout(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
-            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-        }
-
-        return dialog
-    }
-
-    override fun onStart() {
-
-        super.onStart()
-
-        dialog?.window?.let { window ->
-            val layoutParams = window.attributes
-            layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
-            window.attributes = layoutParams
-        }
+        return BottomSheetDialog(requireContext(), R.style.CustomBottomSheetDialogTheme)
     }
 
     override fun onDestroyView() {

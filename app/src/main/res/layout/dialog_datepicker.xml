@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="20dp"
-    android:background="@drawable/bg_stroke_gray300_radius_2dp"
-    android:backgroundTint="@color/white">
+    android:layout_margin="20dp">
 
     <NumberPicker
         android:id="@+id/numberpicker_dialog_datepicker_year"
@@ -46,5 +44,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/numberpicker_dialog_datepicker_year" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
