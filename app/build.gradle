@@ -15,8 +15,8 @@ android {
         applicationId "com.dongyang.android.youdongknowme"
         minSdk 24
         targetSdk 34
-        versionCode 10
-        versionName "2.0.0"
+        versionCode 11
+        versionName "2.0.1"
 
         buildConfigField "String", "API_KEY", properties['API_KEY']
         buildConfigField "String", "BASE_URL", properties['BASE_URL']
