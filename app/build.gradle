@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    compileSdk 34
 
     Properties properties = new Properties()
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
@@ -14,7 +14,7 @@ android {
     defaultConfig {
         applicationId "com.dongyang.android.youdongknowme"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 10
         versionName "2.0.0"
 
