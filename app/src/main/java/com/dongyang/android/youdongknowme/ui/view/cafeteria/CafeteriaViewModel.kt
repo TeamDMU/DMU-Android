@@ -8,9 +8,11 @@ import com.dongyang.android.youdongknowme.data.remote.entity.Cafeteria
 import com.dongyang.android.youdongknowme.data.repository.CafeteriaRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.standard.network.NetworkResult
+import com.dongyang.android.youdongknowme.standard.util.Weekdays
 import com.dongyang.android.youdongknowme.ui.view.util.Event
 import com.dongyang.android.youdongknowme.ui.view.util.ResourceProvider
 import kotlinx.coroutines.launch
+import java.text.DecimalFormat
 import java.time.LocalDate
 
 class CafeteriaViewModel(
@@ -33,8 +35,11 @@ class CafeteriaViewModel(
     private val _cafeteriaList: MutableLiveData<List<Cafeteria>> = MutableLiveData()
     val cafeteriaList: LiveData<List<Cafeteria>> = _cafeteriaList
 
-    private val _menus: MutableLiveData<List<String>> = MutableLiveData()
-    val menus: LiveData<List<String>> = _menus
+    private val _koreaMenu: MutableLiveData<List<String>> = MutableLiveData()
+    val koreaMenu: LiveData<List<String>> = _koreaMenu
+
+    private val _daysMenu: MutableLiveData<List<String>> = MutableLiveData()
+    val daysMenu: LiveData<List<String>> = _daysMenu
 
     private val emptyMenu = listOf(resourceProvider.getString(R.string.cafeteria_no_menu))
 
@@ -68,12 +73,27 @@ class CafeteriaViewModel(
         val cafeteriaList = _cafeteriaList.value ?: emptyList()
         _selectedDate.value = selectedDate
         val selectedMenu = cafeteriaList.find { it.date == selectedDate.toString() }?.menus
-        _menus.postValue(
+        _koreaMenu.postValue(
             if (selectedMenu.isNullOrEmpty()) {
                 emptyMenu
             } else {
                 selectedMenu
             }
         )
+    }
+
+    fun updateAnotherMenus(selectedDate: LocalDate) {
+        viewModelScope.launch {
+            val dateToWeekday: Weekdays = Weekdays.from(selectedDate.dayOfWeek)
+            runCatching {
+                cafeteriaRepository.fetchAnotherMenus(dateToWeekday)
+            }.onSuccess { daysMenu ->
+                val formatter = DecimalFormat("#,###")
+                val formattedMenuWithPrice = daysMenu.map { "${it.menuNameKr} ${formatter.format(it.price)}원" }
+                _daysMenu.value = formattedMenuWithPrice
+            }.onFailure {
+                _isError.value = true
+            }
+        }
     }
 }
