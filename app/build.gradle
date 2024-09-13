@@ -18,7 +18,6 @@ android {
         versionCode 11
         versionName "2.0.1"
 
-        buildConfigField "String", "API_KEY", properties['API_KEY']
         buildConfigField "String", "BASE_URL", properties['BASE_URL']
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
