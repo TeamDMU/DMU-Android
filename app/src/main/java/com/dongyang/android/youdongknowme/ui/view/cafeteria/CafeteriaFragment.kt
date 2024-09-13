@@ -73,7 +73,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             override fun bind(container: CafeteriaContainer, day: CalendarDay) = container.bind(day)
         }
 
-        viewModel.updateAnotherMenus(findNearestMonday(LocalDate.now()))
+        viewModel.updateDaysMenu(findNearestMonday(LocalDate.now()))
     }
 
     override fun initDataBinding() {
@@ -109,7 +109,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
         binding.cafeteriaErrorContainer.refresh.setOnClickListener {
             viewModel.fetchCafeteria()
-            viewModel.updateAnotherMenus(findNearestMonday(LocalDate.now()))
+            viewModel.updateDaysMenu(findNearestMonday(LocalDate.now()))
         }
 
         binding.cvCafeteriaCalendar.setOnTouchListener { _, event ->

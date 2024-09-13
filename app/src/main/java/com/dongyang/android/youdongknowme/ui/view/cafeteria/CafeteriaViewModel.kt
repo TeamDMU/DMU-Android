@@ -82,7 +82,7 @@ class CafeteriaViewModel(
         )
     }
 
-    fun updateAnotherMenus(selectedDate: LocalDate) {
+    fun updateDaysMenu(selectedDate: LocalDate) {
         viewModelScope.launch {
             val dateToWeekday: Weekdays = Weekdays.from(selectedDate.dayOfWeek)
             runCatching {
