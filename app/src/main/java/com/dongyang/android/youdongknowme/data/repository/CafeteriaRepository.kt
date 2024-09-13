@@ -21,7 +21,7 @@ class CafeteriaRepository(
         }
     }
 
-    fun fetchAnotherMenus(todayDay: Weekdays): List<DaysMenu> {
+    fun fetchDaysMenu(todayDay: Weekdays): List<DaysMenu> {
         return DaysMenu.values().filter { menu ->
             menu.operatingDays.contains(todayDay)
         }

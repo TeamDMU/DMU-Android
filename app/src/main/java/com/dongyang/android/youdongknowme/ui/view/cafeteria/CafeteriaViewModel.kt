@@ -86,7 +86,7 @@ class CafeteriaViewModel(
         viewModelScope.launch {
             val dateToWeekday: Weekdays = Weekdays.from(selectedDate.dayOfWeek)
             runCatching {
-                cafeteriaRepository.fetchAnotherMenus(dateToWeekday)
+                cafeteriaRepository.fetchDaysMenu(dateToWeekday)
             }.onSuccess { daysMenu ->
                 val formatter = DecimalFormat("#,###")
                 val formattedMenuWithPrice = daysMenu.map { "${it.menuNameKr} ${formatter.format(it.price)}원" }
