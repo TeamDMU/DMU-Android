@@ -2,12 +2,12 @@ package com.dongyang.android.youdongknowme.standard.util
 
 import java.time.DayOfWeek
 
-enum class Weekdays(val dayKr: String) {
-    MONDAY("월"),
-    TUESDAY("화"),
-    WEDNESDAY("수"),
-    THURSDAY("목"),
-    FRIDAY("금");
+enum class Weekdays {
+    MONDAY,
+    TUESDAY,
+    WEDNESDAY,
+    THURSDAY,
+    FRIDAY;
 
     companion object {
 
