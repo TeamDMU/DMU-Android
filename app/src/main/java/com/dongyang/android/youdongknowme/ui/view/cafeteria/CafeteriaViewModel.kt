@@ -35,11 +35,11 @@ class CafeteriaViewModel(
     private val _cafeteriaList: MutableLiveData<List<Cafeteria>> = MutableLiveData()
     val cafeteriaList: LiveData<List<Cafeteria>> = _cafeteriaList
 
-    private val _koreaMenu: MutableLiveData<List<String>> = MutableLiveData()
-    val koreaMenu: LiveData<List<String>> = _koreaMenu
+    private val _koreaMenus: MutableLiveData<List<String>> = MutableLiveData()
+    val koreaMenus: LiveData<List<String>> = _koreaMenus
 
-    private val _daysMenu: MutableLiveData<List<String>> = MutableLiveData()
-    val daysMenu: LiveData<List<String>> = _daysMenu
+    private val _daysMenus: MutableLiveData<List<String>> = MutableLiveData()
+    val daysMenus: LiveData<List<String>> = _daysMenus
 
     private val emptyMenu = listOf(resourceProvider.getString(R.string.cafeteria_no_menu))
 
@@ -73,7 +73,7 @@ class CafeteriaViewModel(
         val cafeteriaList = _cafeteriaList.value ?: emptyList()
         _selectedDate.value = selectedDate
         val selectedMenu = cafeteriaList.find { it.date == selectedDate.toString() }?.menus
-        _koreaMenu.postValue(
+        _koreaMenus.postValue(
             if (selectedMenu.isNullOrEmpty()) {
                 emptyMenu
             } else {
@@ -86,11 +86,11 @@ class CafeteriaViewModel(
         viewModelScope.launch {
             val dateToWeekday: Weekdays = Weekdays.from(selectedDate.dayOfWeek)
             runCatching {
-                cafeteriaRepository.fetchDaysMenu(dateToWeekday)
-            }.onSuccess { daysMenu ->
+                cafeteriaRepository.fetchDaysMenus(dateToWeekday)
+            }.onSuccess { daysMenus ->
                 val formatter = DecimalFormat("#,###")
-                val formattedMenuWithPrice = daysMenu.map { "${it.menuNameKr} ${formatter.format(it.price)}원" }
-                _daysMenu.value = formattedMenuWithPrice
+                val formattedMenuWithPrice = daysMenus.map { "${it.menuNameKr} ${formatter.format(it.price)}원" }
+                _daysMenus.value = formattedMenuWithPrice
             }.onFailure {
                 _isError.value = true
             }

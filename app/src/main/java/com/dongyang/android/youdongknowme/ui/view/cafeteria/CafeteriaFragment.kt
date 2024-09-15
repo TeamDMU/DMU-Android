@@ -86,11 +86,11 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             showToast(getString(resId))
         })
 
-        viewModel.koreaMenu.observe(viewLifecycleOwner) {
+        viewModel.koreaMenus.observe(viewLifecycleOwner) {
             koreanMenuAdapter.submitList(it)
         }
 
-        viewModel.daysMenu.observe(viewLifecycleOwner) {
+        viewModel.daysMenus.observe(viewLifecycleOwner) {
             anotherMenuAdapter.submitList(it)
         }
     }
@@ -145,7 +145,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             viewModel = viewModel,
             calendarView = binding.cvCafeteriaCalendar,
             oldDate = viewModel.selectedDate.value,
-            selectedDate = findNearestMonday(LocalDate.now()),
+            selectedDate = findNearestMonday(LocalDate.now())
         )
     }
 }

@@ -8,7 +8,7 @@ import com.dongyang.android.youdongknowme.standard.network.RetrofitObject
 import com.dongyang.android.youdongknowme.standard.util.Weekdays
 
 class CafeteriaRepository(
-    private val errorResponseHandler: ErrorResponseHandler,
+    private val errorResponseHandler: ErrorResponseHandler
 ) {
     suspend fun fetchMenuList(): NetworkResult<List<Cafeteria>> {
         return try {
@@ -21,7 +21,7 @@ class CafeteriaRepository(
         }
     }
 
-    fun fetchDaysMenu(todayDay: Weekdays): List<DaysMenu> {
+    fun fetchDaysMenus(todayDay: Weekdays): List<DaysMenu> {
         return DaysMenu.values().filter { menu ->
             menu.operatingDays.contains(todayDay)
         }
