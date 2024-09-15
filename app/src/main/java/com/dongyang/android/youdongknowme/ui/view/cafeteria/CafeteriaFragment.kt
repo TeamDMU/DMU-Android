@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
-import androidx.recyclerview.widget.RecyclerView
 import androidx.window.layout.WindowMetricsCalculator
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentCafeteriaBinding
@@ -17,11 +16,10 @@ import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.utils.Size
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.time.DayOfWeek
+import java.time.DayOfWeek.*
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.temporal.TemporalAdjusters
-
 
 class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewModel>(),
     CalendarInterface {
@@ -60,9 +58,9 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         binding.cvCafeteriaCalendar.apply {
             val dayWidth = wmc.bounds.width() / 5
             val dayHeight: Int = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            124f,
-            resources.displayMetrics
+                TypedValue.COMPLEX_UNIT_DIP,
+                124f,
+                resources.displayMetrics
             ).toInt()
 
             daySize = Size(dayWidth, dayHeight)
@@ -74,10 +72,11 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
             override fun bind(container: CafeteriaContainer, day: CalendarDay) = container.bind(day)
         }
+
+        viewModel.updateDaysMenu(findNearestMonday(LocalDate.now()))
     }
 
     override fun initDataBinding() {
-
         viewModel.isLoading.observe(viewLifecycleOwner) {
             if (it) showLoading()
             else dismissLoading()
@@ -87,10 +86,12 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             showToast(getString(resId))
         })
 
-        viewModel.menus.observe(viewLifecycleOwner) {
+        viewModel.koreaMenus.observe(viewLifecycleOwner) {
             koreanMenuAdapter.submitList(it)
-            // 일품 메뉴 : 일품 메뉴는 리스트로 제작하여 등록
-            anotherMenuAdapter.submitList(getString(R.string.cafeteria_another_list).split("/").map { it.trim() })
+        }
+
+        viewModel.daysMenus.observe(viewLifecycleOwner) {
+            anotherMenuAdapter.submitList(it)
         }
     }
 
@@ -101,13 +102,14 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         binding.cvCafeteriaCalendar.setup(
             YearMonth.from(nearestMonday),
             YearMonth.from(nearestMonday.plusDays(4)),
-            DayOfWeek.MONDAY
+            MONDAY
         )
 
         binding.cvCafeteriaCalendar.scrollToDate(nearestMonday)
 
         binding.cafeteriaErrorContainer.refresh.setOnClickListener {
             viewModel.fetchCafeteria()
+            viewModel.updateDaysMenu(findNearestMonday(LocalDate.now()))
         }
 
         binding.cvCafeteriaCalendar.setOnTouchListener { _, event ->
@@ -123,16 +125,16 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
     private fun findNearestMonday(currentDate: LocalDate): LocalDate {
         return when (currentDate.dayOfWeek) {
-            DayOfWeek.SATURDAY, DayOfWeek.SUNDAY -> {
-                currentDate.with(TemporalAdjusters.next(DayOfWeek.MONDAY))
+            SATURDAY, SUNDAY -> {
+                currentDate.with(TemporalAdjusters.next(MONDAY))
             }
 
-            DayOfWeek.MONDAY -> {
+            MONDAY -> {
                 currentDate
             }
 
             else -> {
-                currentDate.with(TemporalAdjusters.previous(DayOfWeek.MONDAY))
+                currentDate.with(TemporalAdjusters.previous(MONDAY))
             }
         }
     }
@@ -140,10 +142,10 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     override fun onPause() {
         super.onPause()
         notifyDateChanged(
-            viewModel,
-            binding.cvCafeteriaCalendar,
-            viewModel.selectedDate.value,
-            LocalDate.now()
+            viewModel = viewModel,
+            calendarView = binding.cvCafeteriaCalendar,
+            oldDate = viewModel.selectedDate.value,
+            selectedDate = findNearestMonday(LocalDate.now())
         )
     }
 }
