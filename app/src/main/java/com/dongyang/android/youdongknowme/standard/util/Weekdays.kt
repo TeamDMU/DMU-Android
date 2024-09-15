@@ -18,7 +18,7 @@ enum class Weekdays {
                 DayOfWeek.WEDNESDAY -> WEDNESDAY
                 DayOfWeek.THURSDAY -> THURSDAY
                 DayOfWeek.FRIDAY -> FRIDAY
-                else -> throw IllegalArgumentException("에러")
+                else -> throw IllegalArgumentException("월요일 - 금요일을 벗어났습니다.")
             }
         }
     }
