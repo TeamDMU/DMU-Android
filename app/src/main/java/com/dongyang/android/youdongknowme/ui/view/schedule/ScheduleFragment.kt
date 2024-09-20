@@ -13,13 +13,9 @@ import com.prolificinteractive.materialcalendarview.CalendarDay
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.LocalDate
 
-interface OnDateSelectedListener {
-    fun onDateSelected(year: Int, month: Int)
-}
-
 /* 학사 일정 화면 */
 class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel>(),
-    OnDateSelectedListener {
+    ScheduleClickListener {
 
     override val layoutResourceId: Int = R.layout.fragment_schedule
     override val viewModel: ScheduleViewModel by viewModel()
@@ -32,12 +28,27 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
     private var _month = LocalDate.now().month.toString()
     private var month = _month
 
-    override fun onDateSelected(year: Int, month: Int) {
+    override fun buttonClick(date: CalendarDay) {
+        viewModel.setPickedDate(date)
+    }
 
-        // 선택된 연도와 월을 사용하여 CalendarView 업데이트
-        val date = CalendarDay.from(year, month, 1)
-        binding.mvScheduleCalendar.currentDate = date
-        binding.mvScheduleCalendar.setCurrentDate(date, true)
+    // 연/월 방식으로 타이틀 처리
+    fun setCalenderHeader() {
+        binding.mvScheduleCalendar.setTitleFormatter { day ->
+            val inputText: LocalDate = day.date
+            val calendarHeaderElements = inputText.toString().split("-").toTypedArray()
+
+            year = calendarHeaderElements[0]
+            month = calendarHeaderElements[1]
+
+            val calendarHeaderBuilder = StringBuilder()
+            calendarHeaderBuilder.append(year)
+                .append(getString(R.string.calendar_year))
+                .append(" ")
+                .append(month)
+                .append(getString(R.string.calendar_month))
+            calendarHeaderBuilder.toString()
+        }
     }
 
     override fun initStartView() {
@@ -90,6 +101,10 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
             viewModel.getSchedules()
         }
 
+        viewModel.selectedDate.observe(viewLifecycleOwner) { date ->
+            updateCalendarViewHeader(date)
+        }
+
         viewModel.scheduleList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
@@ -98,6 +113,13 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
             viewModel.getSchedules()
         }
     }
+
+    private fun updateCalendarViewHeader(date: CalendarDay) {
+        binding.mvScheduleCalendar.setCurrentDate(date)
+
+        setCalenderHeader()
+    }
+
 
     override fun initAfterBinding() {
 
@@ -109,7 +131,7 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
             val dialog = DatePickerDialog(
                 year = year.toInt(),
                 month = month.toInt(),
-                dateSelectedListener = this
+                listener = this@ScheduleFragment
             )
             dialog.show(requireActivity().supportFragmentManager, "CustomDialog")
         }
@@ -121,21 +143,6 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding, ScheduleViewModel
                 .commit()
         }
 
-        // 연/월 방식으로 타이틀 처리
-        binding.mvScheduleCalendar.setTitleFormatter { day ->
-            val inputText: LocalDate = day.date
-            val calendarHeaderElements = inputText.toString().split("-").toTypedArray()
-
-            year = calendarHeaderElements[0]
-            month = calendarHeaderElements[1]
-
-            val calendarHeaderBuilder = StringBuilder()
-            calendarHeaderBuilder.append(year)
-                .append(getString(R.string.calendar_year))
-                .append(" ")
-                .append(month)
-                .append(getString(R.string.calendar_month))
-            calendarHeaderBuilder.toString()
-        }
+        setCalenderHeader()
     }
 }

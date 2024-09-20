@@ -36,14 +36,14 @@ class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : Ba
     private val _pickMonth = MutableLiveData<Int>()
     val pickMonth: LiveData<Int> = _pickMonth
 
+    private val _selectedDate = MutableLiveData<CalendarDay>()
+    val selectedDate: LiveData<CalendarDay> = _selectedDate
+
     fun setPickedDate(date: CalendarDay) {
+        _selectedDate.value = date
         _pickYear.value = date.year
         _pickMonth.value = date.month
-    }
-
-    fun setDatePicker(year: Int, month: Int) {
-        _pickYear.value = year
-        _pickMonth.value = month
+        getSchedules()
     }
 
     fun getSchedules() {

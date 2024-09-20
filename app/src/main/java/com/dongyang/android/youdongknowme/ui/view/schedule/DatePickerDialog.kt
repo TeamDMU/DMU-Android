@@ -5,26 +5,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.NumberPicker
-import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.DialogDatepickerBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.prolificinteractive.materialcalendarview.CalendarDay
 import org.threeten.bp.LocalDate
 
 class DatePickerDialog(
-    val year: Int,
-    val month: Int,
-    private val dateSelectedListener: ScheduleFragment,
+    private val year: Int,
+    private val month: Int,
+    private val listener: ScheduleClickListener
 ) : BottomSheetDialogFragment() {
 
     private var _binding: DialogDatepickerBinding? = null
     private val binding get() = _binding!!
-
-    private val viewModel: ScheduleViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,7 +49,9 @@ class DatePickerDialog(
         with(binding.numberpickerDialogDatepickerYear) {
             minValue = currentYear - 1
             maxValue = currentYear + 1
-            displayedValues=((minValue..maxValue).map{"$it 년"}.toTypedArray())
+            displayedValues =
+                ((minValue..maxValue).map { "$it${getString(R.string.calendar_year)}" }
+                    .toTypedArray())
         }
 
         // 월 최소/최대값 설정 및 출력 방식 설정
@@ -65,29 +64,36 @@ class DatePickerDialog(
                 maxValue = if (newYear == currentYear + 1) 2 else 12
             }
 
-            displayedValues=((minValue..maxValue).map{"$it 월"}.toTypedArray())
+            displayedValues =
+                ((minValue..maxValue).map { "$it${getString(R.string.calendar_month)}" }
+                    .toTypedArray())
         }
 
         // 초기 설정
         binding.numberpickerDialogDatepickerYear.value = year
         binding.numberpickerDialogDatepickerMonth.value = month
 
-        binding.tvDialogPermissionComplete.setOnClickListener {
-            viewModel.setDatePicker(
-                binding.numberpickerDialogDatepickerYear.value,
-                binding.numberpickerDialogDatepickerMonth.value
-            )
-            dateSelectedListener.onDateSelected(
-                binding.numberpickerDialogDatepickerYear.value,
-                binding.numberpickerDialogDatepickerMonth.value
-            )
-            dismiss()
-        }
-
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.tvDialogPermissionComplete.setOnClickListener {
+            val year = binding.numberpickerDialogDatepickerYear.value
+            val month = binding.numberpickerDialogDatepickerMonth.value
+            val date = CalendarDay.from(year, month, 1)
+
+            listener.buttonClick(date = date)
+
+            dismiss()
+        }
+    }
+
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+
         return BottomSheetDialog(requireContext(), R.style.CustomBottomSheetDialogTheme)
     }
 
