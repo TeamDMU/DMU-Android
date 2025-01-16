@@ -11,6 +11,8 @@ import com.dongyang.android.youdongknowme.standard.network.NetworkResult
 import com.dongyang.android.youdongknowme.ui.view.util.Event
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import kotlinx.coroutines.launch
+import org.threeten.bp.LocalDate
+import java.util.Date
 
 /* 학사 일정 뷰모델 */
 class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : BaseViewModel() {
@@ -33,9 +35,16 @@ class ScheduleViewModel(private val scheduleRepository: ScheduleRepository) : Ba
     private val _pickMonth = MutableLiveData<Int>()
     val pickMonth: LiveData<Int> = _pickMonth
 
+    private var _currentYear = MutableLiveData<Int>()
+    val currentYear: LiveData<Int> = _currentYear
+
     fun setPickedDate(date: CalendarDay) {
         _pickYear.value = date.year
         _pickMonth.value = date.month
+    }
+
+    fun setCurrentYear(date: LocalDate){
+        _currentYear.value = date.year
     }
 
     fun getSchedules() {
