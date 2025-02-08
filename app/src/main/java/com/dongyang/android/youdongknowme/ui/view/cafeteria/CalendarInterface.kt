@@ -11,6 +11,7 @@ interface CalendarInterface {
         selectedDate: LocalDate
     ) {
         viewModel.updateMenuList(selectedDate)
+        viewModel.updateDaysMenu(selectedDate)
         calendarView.notifyDateChanged(selectedDate)
         oldDate?.let { calendarView.notifyDateChanged(it) }
     }

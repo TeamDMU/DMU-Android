@@ -122,12 +122,11 @@
     <string name="cafeteria_student">학생식당</string>
     <string name="cafeteria_menu">메뉴</string>
     <string name="cafeteria_lunch">점심</string>
-    <string name="cafeteria_time">11:30 - 14:00, 16:30 - 18:00</string>
+    <string name="cafeteria_time">11:00 - 14:00, 16:30 - 18:00</string>
     <string name="cafeteria_place">8호관 3층</string>
     <string name="cafeteria_no_menu">&#128517; 등록된 메뉴가 없어요.</string>
     <string name="cafeteria_korean">🍚 한식</string>
     <string name="cafeteria_another">🍛 일품</string>
-    <string name="cafeteria_another_list">라면 3,500원 / 치즈라면 4,000원 / 해물라면 4,500원 / 돈까스 5,500원 / 치즈돈까스 5,500원 / 고구마치즈돈까스 6,000원 / 스팸김치볶음밥 4,900원 / 치킨마요덮밥 4,500원 / 불닭마요덮밥 4,500원 / 오므라이스 5,500원</string>
 
     <!-- license -->
     <string name="license_title">오픈소스 라이센스</string>
