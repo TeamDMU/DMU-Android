@@ -1,4 +1,3 @@
-
 object CODE {
     const val SCHOOL_CODE = 1
 
@@ -31,4 +30,6 @@ object CODE {
     const val HOTEL_TOURISM_CODE = 604
     const val MANAGEMENT_INFORMATION_CODE = 605
     const val BIG_DATA_MANAGEMENT_CODE = 606
+
+    const val UNDECLARED_MAJOR_CODE = 701
 }
