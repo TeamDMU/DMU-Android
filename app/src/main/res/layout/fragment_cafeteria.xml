@@ -13,7 +13,8 @@
             layout="@layout/standard_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
-            app:title="@{@string/cafeteria_title}" />
+            app:title="@{@string/cafeteria_title}"
+            app:titleLeft="@{true}" />
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nsv_cafeteria_content"

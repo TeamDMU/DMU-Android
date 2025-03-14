@@ -26,14 +26,16 @@
         <TextView
             android:id="@+id/tv_toolbar_title"
             style="@style/PretendardSemiBold20"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{title}"
+            android:layout_marginHorizontal="20dp"
             android:textColor="@color/gray500"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_toolbar_exit"
+            android:gravity="@{titleLeft ? android.view.Gravity.START : android.view.Gravity.CENTER}"
+            app:layout_constraintBottom_toBottomOf="@id/btn_toolbar_exit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btn_toolbar_exit" />
+            app:layout_constraintTop_toTopOf="@id/btn_toolbar_exit" />
 
         <TextView
             android:id="@+id/tv_toolbar_action_button"
@@ -62,5 +64,9 @@
         <variable
             name="title"
             type="String" />
+
+        <variable
+            name="titleLeft"
+            type="java.lang.Boolean" />
     </data>
 </layout>

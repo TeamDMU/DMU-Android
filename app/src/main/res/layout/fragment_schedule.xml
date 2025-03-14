@@ -15,7 +15,8 @@
             android:layout_height="?android:attr/actionBarSize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:title="@{@string/schedule_title}" />
+            app:title="@{@string/schedule_title}"
+            app:titleLeft="@{true}" />
 
         <com.prolificinteractive.materialcalendarview.MaterialCalendarView
             android:id="@+id/mv_schedule_calendar"
