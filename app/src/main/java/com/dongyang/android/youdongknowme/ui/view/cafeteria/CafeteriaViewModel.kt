@@ -43,6 +43,9 @@ class CafeteriaViewModel(
 
     private val emptyMenu = listOf(resourceProvider.getString(R.string.cafeteria_no_menu))
 
+    private val _selectedCategory = MutableLiveData<String>()
+    val selectedCategory: LiveData<String> get() = _selectedCategory
+
     init {
         fetchCafeteria()
     }
@@ -95,5 +98,9 @@ class CafeteriaViewModel(
                 _isError.value = true
             }
         }
+    }
+
+    fun setCategory(category: String) {
+        _selectedCategory.value = category
     }
 }

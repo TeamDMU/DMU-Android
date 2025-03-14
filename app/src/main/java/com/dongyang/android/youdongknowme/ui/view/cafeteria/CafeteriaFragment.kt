@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
+import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.window.layout.WindowMetricsCalculator
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentCafeteriaBinding
@@ -12,6 +14,8 @@ import com.dongyang.android.youdongknowme.ui.adapter.CafeteriaAdapter
 import com.dongyang.android.youdongknowme.ui.view.util.EventObserver
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.button.MaterialButtonToggleGroup
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.utils.Size
@@ -74,6 +78,21 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         }
 
         viewModel.updateDaysMenu(findNearestMonday(LocalDate.now()))
+
+        binding.tgCategory.check(binding.btnKorean.id)
+        viewModel.setCategory("한식")
+        updateButtonColors("한식")
+
+        binding.tgCategory.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            val category = when (checkedId) {
+                binding.btnKorean.id -> "한식"
+                binding.btnAnother.id -> "일품"
+                else -> ""
+            }
+            if (isChecked) {
+                viewModel.setCategory(category)
+            }
+        }
     }
 
     override fun initDataBinding() {
@@ -92,6 +111,10 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
         viewModel.daysMenus.observe(viewLifecycleOwner) {
             anotherMenuAdapter.submitList(it)
+        }
+
+        viewModel.selectedCategory.observe(viewLifecycleOwner) { selectedCategory ->
+            updateButtonColors(selectedCategory)
         }
     }
 
@@ -146,6 +169,24 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             calendarView = binding.cvCafeteriaCalendar,
             oldDate = viewModel.selectedDate.value,
             selectedDate = findNearestMonday(LocalDate.now())
+        )
+    }
+
+    private fun updateButtonColors(selectedCategory: String) {
+        binding.mvCafeteriaMenu.isVisible = selectedCategory == "한식"
+        binding.mvCafeteriaAnother.isVisible = selectedCategory == "일품"
+
+        binding.btnKorean.setBackgroundColor(
+            ContextCompat.getColor(
+                requireContext(),
+                if (selectedCategory == "한식") R.color.white else R.color.gray200
+            )
+        )
+        binding.btnAnother.setBackgroundColor(
+            ContextCompat.getColor(
+                requireContext(),
+                if (selectedCategory == "일품") R.color.white else R.color.gray200
+            )
         )
     }
 }

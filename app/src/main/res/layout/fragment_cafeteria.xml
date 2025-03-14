@@ -103,6 +103,47 @@
                         app:layout_constraintEnd_toEndOf="parent" />
                 </LinearLayout>
 
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mv_category_toggle_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="20dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cafeteria_info_container">
+
+                    <com.google.android.material.button.MaterialButtonToggleGroup
+                        android:id="@+id/tg_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/gray200"
+                        android:paddingHorizontal="4dp"
+                        app:singleSelection="true">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_korean"
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/cafeteria_category_korean"
+                            android:textColor="@color/black"
+                            app:backgroundTint="@color/white" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_another"
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cafeteria_category_another"
+                            android:textColor="@color/black"
+                            app:backgroundTint="@color/white" />
+                    </com.google.android.material.button.MaterialButtonToggleGroup>
+                </com.google.android.material.card.MaterialCardView>
+
                 <LinearLayout
                     bind_is_error="@{!vm.isError()}"
                     bind_is_loading="@{vm.isLoading()}"
@@ -132,7 +173,7 @@
                     app:cardCornerRadius="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cafeteria_info_container"
+                    app:layout_constraintTop_toBottomOf="@id/mv_category_toggle_group"
                     app:strokeColor="@color/blue300"
                     app:strokeWidth="2dp">
 
