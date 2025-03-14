@@ -12,9 +12,9 @@
         tools:layout="@layout/fragment_notice" />
     <keep_state_fragment
         android:id="@+id/searchFragment"
-        android:name="com.dongyang.android.youdongknowme.ui.view.search.SearchFragment"
+        android:name="com.dongyang.android.youdongknowme.ui.view.search.SearchActivity"
         android:label="SearchFragment"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/activity_search" />
     <keep_state_fragment
         android:id="@+id/scheduleFragment"
         android:name="com.dongyang.android.youdongknowme.ui.view.schedule.ScheduleFragment"
