@@ -161,8 +161,8 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     }
 
     private fun updateCafeteriaState(selectedCategory: String) {
-        binding.mvCafeteriaKorean.isVisible = selectedCategory == korean
-        binding.mvCafeteriaAnother.isVisible = selectedCategory == another
+        binding.linearLayoutCafeteriaKorean.isVisible = selectedCategory == korean
+        binding.linearLayoutCafeteriaAnother.isVisible = selectedCategory == another
 
         binding.btnKorean.setBackgroundColor(
             ContextCompat.getColor(
