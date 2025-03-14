@@ -105,7 +105,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             koreanMenuAdapter.submitList(it)
         }
 
-        viewModel.daysMenus.observe(viewLifecycleOwner) {
+        viewModel.anotherMenus.observe(viewLifecycleOwner) {
             anotherMenuAdapter.submitList(it)
         }
 

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dongyang.android.youdongknowme.databinding.ItemCafeteriaAnotherBinding
-import com.dongyang.android.youdongknowme.databinding.ItemCafeteriaKoreanBinding
 
 class CafeteriaAnotherAdapter : RecyclerView.Adapter<CafeteriaAnotherAdapter.ViewHolder>() {
 
@@ -13,12 +12,14 @@ class CafeteriaAnotherAdapter : RecyclerView.Adapter<CafeteriaAnotherAdapter.Vie
         setHasStableIds(true)
     }
 
-    private var menu = arrayListOf<String>()
+    private var menu = arrayListOf<Array<String>>()
 
     inner class ViewHolder(private val binding: ItemCafeteriaAnotherBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: String) {
-            binding.anotherMenu = item
+        fun bind(item: Array<String>) {
+            binding.menuKr = item[0]
+            binding.menuEn = item[1]
+            binding.menuPrice = item[2]
         }
     }
 
@@ -39,7 +40,7 @@ class CafeteriaAnotherAdapter : RecyclerView.Adapter<CafeteriaAnotherAdapter.Vie
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun submitList(item: List<String>) {
+    fun submitList(item: List<Array<String>>) {
         menu.clear()
         menu.addAll(item)
         notifyDataSetChanged()

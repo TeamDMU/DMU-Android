@@ -38,8 +38,8 @@ class CafeteriaViewModel(
     private val _koreaMenus: MutableLiveData<List<String>> = MutableLiveData()
     val koreaMenus: LiveData<List<String>> = _koreaMenus
 
-    private val _daysMenus: MutableLiveData<List<String>> = MutableLiveData()
-    val daysMenus: LiveData<List<String>> = _daysMenus
+    private val _anotherMenus: MutableLiveData<List<Array<String>>> = MutableLiveData()
+    val anotherMenus: LiveData<List<Array<String>>> = _anotherMenus
 
     private val emptyMenu = listOf(resourceProvider.getString(R.string.cafeteria_no_menu))
 
@@ -91,9 +91,17 @@ class CafeteriaViewModel(
             runCatching {
                 cafeteriaRepository.fetchDaysMenus(dateToWeekday)
             }.onSuccess { daysMenus ->
-                val formatter = DecimalFormat("#,###")
-                val formattedMenuWithPrice = daysMenus.map { "${it.menuNameKr} ${formatter.format(it.price)}원" }
-                _daysMenus.value = formattedMenuWithPrice
+                val formattedPrice = DecimalFormat("#,###")
+                _anotherMenus.value = daysMenus.map { menu ->
+                    arrayOf(
+                        menu.menuNameKr,
+                        menu.name.split('_')
+                            .joinToString(" ") { word ->
+                                word.lowercase().replaceFirstChar { firstChar -> firstChar.uppercase() }
+                            },
+                        "${formattedPrice.format(menu.price)}원"
+                    )
+                }
             }.onFailure {
                 _isError.value = true
             }

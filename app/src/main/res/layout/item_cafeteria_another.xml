@@ -31,14 +31,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="@{anotherMenu, default = 라면}"
+                android:text="@{menuKr, default = 라면}"
                 android:textColor="@color/gray600" />
 
             <TextView
                 style="@style/PretendardRegular16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{anotherMenu, default = Ramen}"
+                android:text="@{menuEn, default = Ramen}"
                 android:textColor="@color/gray400" />
 
             <TextView
@@ -54,7 +54,11 @@
     <data>
 
         <variable
-            name="anotherMenu"
+            name="menuKr"
+            type="String" />
+
+        <variable
+            name="menuEn"
             type="String" />
 
         <variable
