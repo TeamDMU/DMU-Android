@@ -18,7 +18,6 @@ import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.utils.Size
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 import java.time.DayOfWeek.*
 import java.time.LocalDate
 import java.time.YearMonth
@@ -80,7 +79,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             val category = when (checkedId) {
                 binding.btnKorean.id -> "한식"
                 binding.btnAnother.id -> "일품"
-               else -> "한식"
+                else -> "한식"
             }
             if (isChecked) {
                 viewModel.setCategory(category)
@@ -125,7 +124,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
         binding.cafeteriaErrorContainer.refresh.setOnClickListener {
             viewModel.fetchCafeteria()
-            viewModel.updateDaysMenu(viewModel.selectedDate.value?:nearestMonday)
+            viewModel.updateDaysMenu(viewModel.selectedDate.value ?: nearestMonday)
         }
 
         binding.cvCafeteriaCalendar.setOnTouchListener { _, event ->
