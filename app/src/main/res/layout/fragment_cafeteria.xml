@@ -163,7 +163,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/mv_cafeteria_menu"
+                    android:id="@+id/mv_cafeteria_korean"
                     bind_is_error="@{vm.cafeteriaList == null}"
                     bind_is_loading="@{vm.isLoading()}"
                     android:layout_width="0dp"
@@ -241,7 +241,7 @@
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/mv_cafeteria_menu">
+                    app:layout_constraintTop_toBottomOf="@id/mv_cafeteria_korean">
 
                     <TextView
                         style="@style/PretendardMedium12"

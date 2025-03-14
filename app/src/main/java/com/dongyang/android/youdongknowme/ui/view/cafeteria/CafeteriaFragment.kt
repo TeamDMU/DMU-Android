@@ -18,6 +18,7 @@ import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.utils.Size
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 import java.time.DayOfWeek.*
 import java.time.LocalDate
 import java.time.YearMonth
@@ -73,17 +74,13 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             override fun bind(container: CafeteriaContainer, day: CalendarDay) = container.bind(day)
         }
 
-        viewModel.updateDaysMenu(findNearestMonday(LocalDate.now()))
-
-        binding.tgCategory.check(binding.btnKorean.id)
-        viewModel.setCategory("한식")
-        updateButtonColors("한식")
+        viewModel.selectedDate.value?.let { viewModel.updateDaysMenu(it) }
 
         binding.tgCategory.addOnButtonCheckedListener { _, checkedId, isChecked ->
             val category = when (checkedId) {
                 binding.btnKorean.id -> "한식"
                 binding.btnAnother.id -> "일품"
-                else -> ""
+               else -> "한식"
             }
             if (isChecked) {
                 viewModel.setCategory(category)
@@ -110,7 +107,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         }
 
         viewModel.selectedCategory.observe(viewLifecycleOwner) { selectedCategory ->
-            updateButtonColors(selectedCategory)
+            updateCafeteriaState(selectedCategory)
         }
     }
 
@@ -128,7 +125,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
         binding.cafeteriaErrorContainer.refresh.setOnClickListener {
             viewModel.fetchCafeteria()
-            viewModel.updateDaysMenu(findNearestMonday(LocalDate.now()))
+            viewModel.updateDaysMenu(viewModel.selectedDate.value?:nearestMonday)
         }
 
         binding.cvCafeteriaCalendar.setOnTouchListener { _, event ->
@@ -140,6 +137,9 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
                 else -> false
             }
         }
+
+        binding.tgCategory.check(binding.btnKorean.id)
+        viewModel.setCategory("한식")
     }
 
     private fun findNearestMonday(currentDate: LocalDate): LocalDate {
@@ -158,8 +158,8 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         }
     }
 
-    private fun updateButtonColors(selectedCategory: String) {
-        binding.mvCafeteriaMenu.isVisible = selectedCategory == "한식"
+    private fun updateCafeteriaState(selectedCategory: String) {
+        binding.mvCafeteriaKorean.isVisible = selectedCategory == "한식"
         binding.mvCafeteriaAnother.isVisible = selectedCategory == "일품"
 
         binding.btnKorean.setBackgroundColor(

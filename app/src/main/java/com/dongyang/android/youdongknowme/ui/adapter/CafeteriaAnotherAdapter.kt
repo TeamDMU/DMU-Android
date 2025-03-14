@@ -34,6 +34,9 @@ class CafeteriaAnotherAdapter : RecyclerView.Adapter<CafeteriaAnotherAdapter.Vie
             if (drawableResId != 0) {
                 binding.imgAnother.setImageResource(drawableResId)
                 binding.imgAnother.setPadding(0)
+            } else{
+                binding.imgAnother.setImageResource(R.drawable.img_cafeteria_korean)
+                binding.imgAnother.setPadding(15)
             }
         }
     }

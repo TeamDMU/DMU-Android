@@ -32,6 +32,12 @@ class CafeteriaRepository(
         val price: Int,
         val operatingDays: List<Weekdays>,
     ) {
+        SPAM_KIMCHI_FRIED_RICE("스팸 김치 볶음밥", 4_900, listOf(Weekdays.MONDAY, Weekdays.TUESDAY)),
+        CHICKEN_MAYO_RICE("치킨 마요 덮밥", 4_900, listOf(Weekdays.WEDNESDAY)),
+        SPICY_MAYO_RICE("불닭 마요 덮밥", 4_900, listOf(Weekdays.WEDNESDAY)),
+        PORK_BELLY_RICE("삼겹살 덮밥", 5_500, listOf(Weekdays.THURSDAY)),
+        JANGJORIM_BUTTER_RICE("장조림 버터 비빔밥", 4_500, listOf(Weekdays.FRIDAY)),
+
         RAMEN("라면", 3_500, Weekdays.values().toList()),
         CHEESE_RAMEN("치즈 라면", 4_000, Weekdays.values().toList()),
         SEAFOOD_RAMEN("해물짬뽕 라면", 4_500, Weekdays.values().toList()),
@@ -47,11 +53,5 @@ class CafeteriaRepository(
         BRISKET_CHICKEN_CUTLET("통가슴살 치킨까스", 5_200, Weekdays.values().toList()),
         SWEET_POTATO_CHEESE_PORK_CUTLET("고구마 치즈 돈까스", 6_000, Weekdays.values().toList()),
         HOMEMADE_KING_PORK_CUTLET("수제 왕 돈까스", 6_000, Weekdays.values().toList()),
-
-        SPAM_KIMCHI_FRIED_RICE("스팸 김치 볶음밥", 4_900, listOf(Weekdays.MONDAY, Weekdays.TUESDAY)),
-        CHICKEN_MAYO_RICE("치킨 마요 덮밥", 4_900, listOf(Weekdays.WEDNESDAY)),
-        SPICY_MAYO_RICE("불닭 마요 덮밥", 4_900, listOf(Weekdays.WEDNESDAY)),
-        PORK_BELLY_RICE("삼겹살 덮밥", 5_500, listOf(Weekdays.THURSDAY)),
-        JANGJORIM_BUTTER_RICE("장조림 버터 비빔밥", 4_500, listOf(Weekdays.FRIDAY)),
     }
 }
