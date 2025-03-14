@@ -95,10 +95,7 @@ class CafeteriaViewModel(
                 _anotherMenus.value = daysMenus.map { menu ->
                     arrayOf(
                         menu.menuNameKr,
-                        menu.name.split('_')
-                            .joinToString(" ") { word ->
-                                word.lowercase().replaceFirstChar { firstChar -> firstChar.uppercase() }
-                            },
+                        menu.name,
                         "${formattedPrice.format(menu.price)}원"
                     )
                 }
