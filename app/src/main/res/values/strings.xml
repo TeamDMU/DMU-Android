@@ -125,7 +125,10 @@
     <string name="cafeteria_time">11:00 - 14:00, 16:30 - 18:00</string>
     <string name="cafeteria_place">8호관 3층</string>
     <string name="cafeteria_no_menu">&#128517; 등록된 메뉴가 없어요.</string>
-    <string name="cafeteria_korean">🍚 한식</string>
+    <string name="cafeteria_korean_title">백반</string>
+    <string name="cafeteria_korean_subtitle">Baekban</string>
+    <string name="cafeteria_korean_price">6,500원</string>
+    <string name="cafeteria_korean_emoji">📋</string>
     <string name="cafeteria_another">🍛 일품</string>
     <string name="cafeteria_category_korean">한식🍚</string>
     <string name="cafeteria_category_another">일품🍛</string>

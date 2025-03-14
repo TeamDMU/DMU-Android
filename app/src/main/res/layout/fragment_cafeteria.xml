@@ -162,46 +162,76 @@
                         android:layout_gravity="center" />
                 </LinearLayout>
 
-                <com.google.android.material.card.MaterialCardView
+                <LinearLayout
                     android:id="@+id/mv_cafeteria_menu"
                     bind_is_error="@{vm.cafeteriaList == null}"
                     bind_is_loading="@{vm.isLoading()}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="12dp"
-                    app:cardCornerRadius="16dp"
+                    android:layout_margin="20dp"
+                    android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/mv_category_toggle_group"
-                    app:strokeColor="@color/blue300"
-                    app:strokeWidth="2dp">
+                    app:layout_constraintTop_toBottomOf="@id/mv_category_toggle_group">
+
+                    <LinearLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/bg_gray100_rounded_corner"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/img_cafeteria_korean" />
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="8dp">
+                        android:layout_marginStart="25dp"
+                        android:orientation="vertical">
 
                         <TextView
-                            style="@style/PretendardBold20"
+                            style="@style/PretendardSemiBold20"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="12dp"
-                            android:text="@string/cafeteria_korean"
-                            android:textColor="@color/black" />
+                            android:text="@string/cafeteria_korean_title"
+                            android:textColor="@color/gray600" />
+
+                        <TextView
+                            style="@style/PretendardRegular16"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cafeteria_korean_subtitle"
+                            android:textColor="@color/gray400" />
+
+                        <TextView
+                            style="@style/PretendardSemiBold16"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/cafeteria_korean_price"
+                            android:textColor="@color/gray600" />
+
+
+                        <TextView
+                            style="@style/PretendardSemiBold16"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="16dp"
+                            android:text="@string/cafeteria_korean_emoji"
+                            android:textColor="@color/gray600" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_cafeteria_menu_list"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginVertical="8dp"
-                            android:layout_marginStart="8dp"
                             android:overScrollMode="never"
                             tools:listitem="@layout/item_cafeteria_menu" />
                     </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/mv_cafeteria_another"

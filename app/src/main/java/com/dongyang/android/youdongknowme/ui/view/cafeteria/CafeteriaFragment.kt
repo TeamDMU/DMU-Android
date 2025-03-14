@@ -6,6 +6,7 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.window.layout.WindowMetricsCalculator
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentCafeteriaBinding
@@ -41,8 +42,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         anotherMenuAdapter = CafeteriaAdapter()
 
         binding.rvCafeteriaMenuList.apply {
-            val layoutManager = FlexboxLayoutManager(context)
-            layoutManager.flexDirection = FlexDirection.ROW
+            val layoutManager = LinearLayoutManager(context)
             this.adapter = this@CafeteriaFragment.koreanMenuAdapter
             this.layoutManager = layoutManager
             this.setHasFixedSize(true)
