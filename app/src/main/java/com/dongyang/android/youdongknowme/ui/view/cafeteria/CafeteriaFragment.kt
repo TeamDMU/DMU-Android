@@ -162,16 +162,6 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        notifyDateChanged(
-            viewModel = viewModel,
-            calendarView = binding.cvCafeteriaCalendar,
-            oldDate = viewModel.selectedDate.value,
-            selectedDate = findNearestMonday(LocalDate.now())
-        )
-    }
-
     private fun updateButtonColors(selectedCategory: String) {
         binding.mvCafeteriaMenu.isVisible = selectedCategory == "한식"
         binding.mvCafeteriaAnother.isVisible = selectedCategory == "일품"
