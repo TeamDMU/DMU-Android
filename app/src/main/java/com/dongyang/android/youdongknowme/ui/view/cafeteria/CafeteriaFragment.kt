@@ -32,6 +32,9 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     private lateinit var koreanMenuAdapter: CafeteriaKoreanAdapter
     private lateinit var anotherMenuAdapter: CafeteriaAnotherAdapter
 
+    private val korean = R.string.cafeteria_korean.toString()
+    private val another = R.string.cafeteria_another.toString()
+
     override fun initStartView() {
         binding.vm = viewModel
 
@@ -77,9 +80,9 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
         binding.tgCategory.addOnButtonCheckedListener { _, checkedId, isChecked ->
             val category = when (checkedId) {
-                binding.btnKorean.id -> "한식"
-                binding.btnAnother.id -> "일품"
-                else -> "한식"
+                binding.btnKorean.id -> korean
+                binding.btnAnother.id -> another
+                else -> korean
             }
             if (isChecked) {
                 viewModel.setCategory(category)
@@ -138,7 +141,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         }
 
         binding.tgCategory.check(binding.btnKorean.id)
-        viewModel.setCategory("한식")
+        viewModel.setCategory(R.string.cafeteria_korean.toString())
     }
 
     private fun findNearestMonday(currentDate: LocalDate): LocalDate {
@@ -158,19 +161,19 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     }
 
     private fun updateCafeteriaState(selectedCategory: String) {
-        binding.mvCafeteriaKorean.isVisible = selectedCategory == "한식"
-        binding.mvCafeteriaAnother.isVisible = selectedCategory == "일품"
+        binding.mvCafeteriaKorean.isVisible = selectedCategory == korean
+        binding.mvCafeteriaAnother.isVisible = selectedCategory == another
 
         binding.btnKorean.setBackgroundColor(
             ContextCompat.getColor(
                 requireContext(),
-                if (selectedCategory == "한식") R.color.white else R.color.gray200
+                if (selectedCategory == korean) R.color.white else R.color.gray200
             )
         )
         binding.btnAnother.setBackgroundColor(
             ContextCompat.getColor(
                 requireContext(),
-                if (selectedCategory == "일품") R.color.white else R.color.gray200
+                if (selectedCategory == another) R.color.white else R.color.gray200
             )
         )
     }

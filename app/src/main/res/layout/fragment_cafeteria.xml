@@ -130,7 +130,7 @@
                             android:layout_height="wrap_content"
                             android:checked="true"
                             android:stateListAnimator="@null"
-                            android:text="@string/cafeteria_category_korean"
+                            android:text="@string/cafeteria_button_korean"
                             android:textColor="@color/black"
                             app:backgroundTint="@color/white"
                             app:cornerRadius="8dp" />
@@ -141,7 +141,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:stateListAnimator="@null"
-                            android:text="@string/cafeteria_category_another"
+                            android:text="@string/cafeteria_button_another"
                             android:textColor="@color/black"
                             app:backgroundTint="@color/white"
                             app:cornerRadius="8dp" />
