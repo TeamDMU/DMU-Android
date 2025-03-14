@@ -125,22 +125,24 @@
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btn_korean"
-                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            style="@style/PretendardMedium16"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="true"
                             android:text="@string/cafeteria_category_korean"
                             android:textColor="@color/black"
-                            app:backgroundTint="@color/white" />
+                            app:backgroundTint="@color/white"
+                            app:cornerRadius="8dp" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btn_another"
-                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            style="@style/PretendardMedium16"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/cafeteria_category_another"
                             android:textColor="@color/black"
-                            app:backgroundTint="@color/white" />
+                            app:backgroundTint="@color/white"
+                            app:cornerRadius="8dp" />
                     </com.google.android.material.button.MaterialButtonToggleGroup>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -194,7 +196,6 @@
                         android:orientation="vertical">
 
                         <TextView
-                            style="@style/PretendardSemiBold20"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/cafeteria_korean_title"
