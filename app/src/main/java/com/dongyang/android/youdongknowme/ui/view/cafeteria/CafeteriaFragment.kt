@@ -11,12 +11,9 @@ import androidx.window.layout.WindowMetricsCalculator
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentCafeteriaBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
-import com.dongyang.android.youdongknowme.ui.adapter.CafeteriaAdapter
+import com.dongyang.android.youdongknowme.ui.adapter.CafeteriaAnotherAdapter
+import com.dongyang.android.youdongknowme.ui.adapter.CafeteriaKoreanAdapter
 import com.dongyang.android.youdongknowme.ui.view.util.EventObserver
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexboxLayoutManager
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.button.MaterialButtonToggleGroup
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.utils.Size
@@ -32,14 +29,14 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     override val layoutResourceId: Int = R.layout.fragment_cafeteria
     override val viewModel: CafeteriaViewModel by viewModel()
 
-    private lateinit var koreanMenuAdapter: CafeteriaAdapter
-    private lateinit var anotherMenuAdapter: CafeteriaAdapter
+    private lateinit var koreanMenuAdapter: CafeteriaKoreanAdapter
+    private lateinit var anotherMenuAdapter: CafeteriaAnotherAdapter
 
     override fun initStartView() {
         binding.vm = viewModel
 
-        koreanMenuAdapter = CafeteriaAdapter()
-        anotherMenuAdapter = CafeteriaAdapter()
+        koreanMenuAdapter = CafeteriaKoreanAdapter()
+        anotherMenuAdapter = CafeteriaAnotherAdapter()
 
         binding.rvCafeteriaMenuList.apply {
             val layoutManager = LinearLayoutManager(context)
@@ -49,8 +46,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         }
 
         binding.rvCafeteriaAnotherMenuList.apply {
-            val layoutManager = FlexboxLayoutManager(context)
-            layoutManager.flexDirection = FlexDirection.ROW
+            val layoutManager = LinearLayoutManager(context)
             this.adapter = this@CafeteriaFragment.anotherMenuAdapter
             this.layoutManager = layoutManager
             this.setHasFixedSize(true)

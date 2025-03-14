@@ -129,7 +129,7 @@
     <string name="cafeteria_korean_subtitle">Baekban</string>
     <string name="cafeteria_korean_price">6,500원</string>
     <string name="cafeteria_korean_emoji">📋</string>
-    <string name="cafeteria_another">🍛 일품</string>
+    <string name="cafeteria_another_description">*해당 사진은 AI를 통해 생성된 이미지입니다.</string>
     <string name="cafeteria_category_korean">한식🍚</string>
     <string name="cafeteria_category_another">일품🍛</string>
 
