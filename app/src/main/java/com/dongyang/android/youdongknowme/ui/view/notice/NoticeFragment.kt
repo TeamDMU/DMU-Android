@@ -1,5 +1,7 @@
 package com.dongyang.android.youdongknowme.ui.view.notice
 
+import android.content.Intent
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dongyang.android.youdongknowme.R
@@ -7,6 +9,7 @@ import com.dongyang.android.youdongknowme.databinding.FragmentNoticeBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
 import com.dongyang.android.youdongknowme.ui.adapter.NoticeAdapter
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailActivity
+import com.dongyang.android.youdongknowme.ui.view.search.SearchActivity
 import com.dongyang.android.youdongknowme.ui.view.util.EventObserver
 import com.google.android.material.tabs.TabLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -28,6 +31,11 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding, NoticeViewModel>() {
         }
         setupTabLayout()
         setupInfinityScroll()
+
+        binding.btnSearch.setOnClickListener {
+            val intent = Intent(requireContext(), SearchActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun initDataBinding() {

@@ -6,12 +6,11 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dongyang.android.youdongknowme.R
-import com.dongyang.android.youdongknowme.databinding.FragmentSearchBinding
-import com.dongyang.android.youdongknowme.standard.base.BaseFragment
+import com.dongyang.android.youdongknowme.databinding.ActivitySearchBinding
+import com.dongyang.android.youdongknowme.standard.base.BaseActivity
 import com.dongyang.android.youdongknowme.standard.util.dpToPx
 import com.dongyang.android.youdongknowme.ui.adapter.NoticeAdapter
 import com.dongyang.android.youdongknowme.ui.view.detail.DetailActivity
@@ -20,9 +19,9 @@ import com.dongyang.android.youdongknowme.ui.view.util.hideKeyboard
 import com.dongyang.android.youdongknowme.ui.view.util.showKeyboard
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
+class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
 
-    override val layoutResourceId: Int = R.layout.fragment_search
+    override val layoutResourceId: Int = R.layout.activity_search
     override val viewModel: SearchViewModel by viewModel()
 
     private lateinit var adapter: NoticeAdapter
@@ -40,12 +39,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
     }
 
     override fun initDataBinding() {
-        viewModel.isLoading.observe(viewLifecycleOwner) {
+        viewModel.isLoading.observe(this) {
             if (it) showLoading()
             else dismissLoading()
         }
 
-        viewModel.searchNotices.observe(viewLifecycleOwner) { searchNotices ->
+        viewModel.searchNotices.observe(this) { searchNotices ->
             if (searchNotices.isNotEmpty()) {
                 setupRecyclerViewMargin()
                 adapter.submitList(searchNotices)
@@ -56,15 +55,15 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
             }
         }
 
-        viewModel.searchContent.observe(viewLifecycleOwner) { content ->
+        viewModel.searchContent.observe(this) { content ->
             searchContent = content
         }
 
-        viewModel.errorState.observe(viewLifecycleOwner, EventObserver { resId ->
+        viewModel.errorState.observe(this, EventObserver { resId ->
             showToast(getString(resId))
         })
 
-        viewModel.noSearchResult.observe(viewLifecycleOwner) { noSearchResult ->
+        viewModel.noSearchResult.observe(this) { noSearchResult ->
             if (noSearchResult) {
                 binding.clSearchEmpty.visibility = View.VISIBLE
             } else {
@@ -73,18 +72,20 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
         }
     }
 
-    override fun initAfterBinding() = Unit
+    override fun initAfterBinding() {
+        binding.toolbarSearch.btnToolbarExit.setOnClickListener { finish() }
+    }
 
     private fun setupRecyclerViewMargin() {
         if (::adapter.isInitialized.not()) {
             val marginDp = SEARCH_RESULT_RECYCLERVIEW_MARGIN_TOP_FOR_TOUCH
-            val marginPx = marginDp.dpToPx(requireContext())
+            val marginPx = marginDp.dpToPx(this)
             val layoutParams = binding.rvSearchResult.layoutParams as ViewGroup.MarginLayoutParams
             layoutParams.topMargin = marginPx
             binding.rvSearchResult.layoutParams = layoutParams
         } else {
             val marginDp = SEARCH_RESULT_RECYCLERVIEW_MARGIN_TOP_DEFAULT
-            val marginPx = marginDp.dpToPx(requireContext())
+            val marginPx = marginDp.dpToPx(this)
             val layoutParams = binding.rvSearchResult.layoutParams as ViewGroup.MarginLayoutParams
             layoutParams.topMargin = marginPx
             binding.rvSearchResult.layoutParams = layoutParams
@@ -94,8 +95,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
     private fun setupRecyclerview() {
         adapter = NoticeAdapter(onItemClick = { url -> navigateToDetail(url) })
         binding.rvSearchResult.apply {
-            this.adapter = this@SearchFragment.adapter
-            layoutManager = LinearLayoutManager(requireActivity())
+            this.adapter = this@SearchActivity.adapter
+            layoutManager = LinearLayoutManager(this@SearchActivity)
             itemAnimator = null
             setHasFixedSize(true)
         }
@@ -103,13 +104,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
 
     private fun showKeyboardOnEditTextFocus() {
         binding.etSearchBar.requestFocus()
-        requireContext().showKeyboard(binding.etSearchBar)
+        showKeyboard(binding.etSearchBar)
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setupHideKeyboardOnOutsideTouch() {
         binding.root.setOnTouchListener { _, _ ->
-            requireContext().hideKeyboard(binding.root)
+            hideKeyboard(binding.root)
             false
         }
     }
@@ -127,7 +128,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
             }
         })
 
-        viewModel.searchClearVisibility.observe(viewLifecycleOwner) { isValid ->
+        viewModel.searchClearVisibility.observe(this) { isValid ->
             binding.ivSearchClear.visibility = if (isValid) View.VISIBLE else View.GONE
         }
     }
@@ -139,7 +140,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
     }
 
     private fun onSearchBtnClickListener() {
-        binding.etSearchBar.setOnEditorActionListener { v, actionId, event ->
+        binding.etSearchBar.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 if (validateSearchContentLength()) {
                     viewModel.fetchSearchNotices()
@@ -148,7 +149,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
                     binding.etSearchBar.text.clear()
                     showToast(getString(R.string.search_minimum))
                 }
-                requireContext().hideKeyboard(binding.root)
+                hideKeyboard(binding.root)
                 true
             } else {
                 false
@@ -161,7 +162,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
     }
 
     private fun navigateToDetail(url: String) {
-        val intent = DetailActivity.newIntent(requireContext(), url)
+        val intent = DetailActivity.newIntent(this, url)
         startActivity(intent)
     }
 

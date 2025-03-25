@@ -9,7 +9,7 @@
     <string name="menu_main_bottom_home">공지</string>
     <string name="menu_main_bottom_calendar">일정</string>
     <string name="menu_main_bottom_setting">설정</string>
-    <string name="menu_main_bottom_search">검색</string>
+    <string name="menu_main_bottom_cafeteria">식단</string>
 
     <!-- department -->
     <string name="department_title">학과선택</string>
@@ -132,6 +132,7 @@
     <string name="license_title">오픈소스 라이센스</string>
 
     <!-- search -->
+    <string name="search_title">검색</string>
     <string name="search_hint">검색어를 입력하세요.</string>
     <string name="search_no_result">검색 결과를 찾을 수 없어요</string>
     <string name="search_another_search">다른 키워드로 검색해보세요.</string>

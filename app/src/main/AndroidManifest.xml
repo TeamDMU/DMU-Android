@@ -21,6 +21,9 @@
         android:theme="@style/Theme.YouDongKnowMe"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.view.search.SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.view.setting.OnboardingPermissionActivity"
             android:exported="false" />
         <activity
