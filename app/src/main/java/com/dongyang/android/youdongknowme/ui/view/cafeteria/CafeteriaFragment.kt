@@ -32,8 +32,8 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     private lateinit var koreanMenuAdapter: CafeteriaKoreanAdapter
     private lateinit var anotherMenuAdapter: CafeteriaAnotherAdapter
 
-    private val korean = R.string.cafeteria_korean.toString()
-    private val another = R.string.cafeteria_another.toString()
+    private val korean by lazy { getString(R.string.cafeteria_korean) }
+    private val another by lazy { getString(R.string.cafeteria_another) }
 
     override fun initStartView() {
         binding.vm = viewModel
