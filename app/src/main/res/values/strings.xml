@@ -124,7 +124,7 @@
     <string name="cafeteria_lunch">점심</string>
     <string name="cafeteria_time">11:00 - 14:00, 16:30 - 18:00</string>
     <string name="cafeteria_place">8호관 3층</string>
-    <string name="cafeteria_no_menu">&#128517; 등록된 메뉴가 없어요.</string>
+    <string name="cafeteria_menu_weekend">&#128683; 주말에는 식당을 운영하지 않아요.</string>
     <string name="cafeteria_korean_title">백반</string>
     <string name="cafeteria_korean_subtitle">Baekban</string>
     <string name="cafeteria_korean_price">6,500원</string>

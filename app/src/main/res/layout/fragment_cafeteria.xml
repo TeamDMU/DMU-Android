@@ -263,6 +263,23 @@
                         android:overScrollMode="never"
                         tools:listitem="@layout/item_cafeteria_another" />
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_cafeteria_weekend"
+                    style="@style/PretendardMedium18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/btn_gray100_radius_10dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:text="@string/cafeteria_menu_weekend"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray500"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mv_category_toggle_group" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

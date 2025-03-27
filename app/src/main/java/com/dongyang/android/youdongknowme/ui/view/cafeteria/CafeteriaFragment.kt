@@ -166,8 +166,15 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         val activeColor = ContextCompat.getColor(requireContext(), R.color.white)
         val inactiveColor = ContextCompat.getColor(requireContext(), R.color.gray200)
 
-        binding.linearLayoutCafeteriaKorean.isVisible = selectedCategory == korean
-        binding.linearLayoutCafeteriaAnother.isVisible = selectedCategory == another
+        if (viewModel.selectedDate.value?.dayOfWeek == SATURDAY || viewModel.selectedDate.value?.dayOfWeek == SUNDAY){
+            binding.linearLayoutCafeteriaKorean.isVisible = false
+            binding.linearLayoutCafeteriaAnother.isVisible = false
+            binding.tvCafeteriaWeekend.isVisible = true
+        } else {
+            binding.linearLayoutCafeteriaKorean.isVisible = selectedCategory == korean
+            binding.linearLayoutCafeteriaAnother.isVisible = selectedCategory == another
+            binding.tvCafeteriaWeekend.isVisible = false
+        }
 
         binding.btnKorean.setBackgroundColor(if (selectedCategory == korean) activeColor else inactiveColor)
         binding.btnAnother.setBackgroundColor(if (selectedCategory == another) activeColor else inactiveColor)
