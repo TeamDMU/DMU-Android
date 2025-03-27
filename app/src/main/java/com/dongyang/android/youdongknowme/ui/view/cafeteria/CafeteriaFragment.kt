@@ -145,23 +145,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         binding.tgCategory.check(binding.btnKorean.id)
         viewModel.setCategory(R.string.cafeteria_korean.toString())
     }
-
-    private fun findNearestMonday(currentDate: LocalDate): LocalDate {
-        return when (currentDate.dayOfWeek) {
-            SATURDAY, SUNDAY -> {
-                currentDate.with(TemporalAdjusters.next(MONDAY))
-            }
-
-            MONDAY -> {
-                currentDate
-            }
-
-            else -> {
-                currentDate.with(TemporalAdjusters.previous(MONDAY))
-            }
-        }
-    }
-
+    
     private fun updateCafeteriaState(selectedCategory: String) {
         val activeColor = ContextCompat.getColor(requireContext(), R.color.white)
         val inactiveColor = ContextCompat.getColor(requireContext(), R.color.gray200)
@@ -178,5 +162,21 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
         binding.btnKorean.setBackgroundColor(if (selectedCategory == korean) activeColor else inactiveColor)
         binding.btnAnother.setBackgroundColor(if (selectedCategory == another) activeColor else inactiveColor)
+    }
+
+    private fun findNearestMonday(currentDate: LocalDate): LocalDate {
+        return when (currentDate.dayOfWeek) {
+            SATURDAY, SUNDAY -> {
+                currentDate.with(TemporalAdjusters.next(MONDAY))
+            }
+
+            MONDAY -> {
+                currentDate
+            }
+
+            else -> {
+                currentDate.with(TemporalAdjusters.previous(MONDAY))
+            }
+        }
     }
 }
