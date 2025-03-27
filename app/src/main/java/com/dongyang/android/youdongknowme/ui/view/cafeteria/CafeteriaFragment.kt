@@ -76,8 +76,6 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             override fun bind(container: CafeteriaContainer, day: CalendarDay) = container.bind(day)
         }
 
-        viewModel.selectedDate.value?.let { viewModel.updateDaysMenu(it) }
-
         binding.tgCategory.addOnButtonCheckedListener { _, checkedId, isChecked ->
             val category = when (checkedId) {
                 binding.btnKorean.id -> korean
@@ -110,6 +108,10 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
         viewModel.selectedCategory.observe(viewLifecycleOwner) { selectedCategory ->
             updateCafeteriaState(selectedCategory)
+        }
+
+        viewModel.selectedDate.observe(viewLifecycleOwner) {
+            viewModel.updateDaysMenu(it)
         }
     }
 
