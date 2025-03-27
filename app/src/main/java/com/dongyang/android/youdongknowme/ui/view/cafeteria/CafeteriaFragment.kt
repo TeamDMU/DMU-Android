@@ -41,7 +41,11 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         koreanMenuAdapter = CafeteriaKoreanAdapter()
         anotherMenuAdapter = CafeteriaAnotherAdapter()
 
-        binding.rvCafeteriaMenuList.apply {
+        binding.rvCafeteriaKoreanMenuList.isVisible = false
+        binding.rvCafeteriaAnotherMenuList.isVisible = false
+        binding.tvCafeteriaAnotherNotice.isVisible = false
+
+        binding.rvCafeteriaKoreanMenuList.apply {
             val layoutManager = LinearLayoutManager(context)
             this.adapter = this@CafeteriaFragment.koreanMenuAdapter
             this.layoutManager = layoutManager
@@ -53,6 +57,20 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             this.adapter = this@CafeteriaFragment.anotherMenuAdapter
             this.layoutManager = layoutManager
             this.setHasFixedSize(true)
+        }
+
+        binding.tgCategory.check(binding.btnKorean.id)
+        viewModel.setCategory(korean)
+
+        binding.tgCategory.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            val category = when (checkedId) {
+                binding.btnKorean.id -> korean
+                binding.btnAnother.id -> another
+                else -> korean
+            }
+            if (isChecked) {
+                viewModel.setCategory(category)
+            }
         }
 
         val wmc =
@@ -74,17 +92,6 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
                 CafeteriaContainer(view, binding.cvCafeteriaCalendar, viewModel)
 
             override fun bind(container: CafeteriaContainer, day: CalendarDay) = container.bind(day)
-        }
-
-        binding.tgCategory.addOnButtonCheckedListener { _, checkedId, isChecked ->
-            val category = when (checkedId) {
-                binding.btnKorean.id -> korean
-                binding.btnAnother.id -> another
-                else -> korean
-            }
-            if (isChecked) {
-                viewModel.setCategory(category)
-            }
         }
     }
 
@@ -141,28 +148,27 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
                 else -> false
             }
         }
-
-        binding.tgCategory.check(binding.btnKorean.id)
-        viewModel.setCategory(R.string.cafeteria_korean.toString())
     }
-    
+
     private fun updateCafeteriaState(selectedCategory: String) {
         val activeColor = ContextCompat.getColor(requireContext(), R.color.white)
         val inactiveColor = ContextCompat.getColor(requireContext(), R.color.gray200)
 
-        if (viewModel.selectedDate.value?.dayOfWeek == SATURDAY || viewModel.selectedDate.value?.dayOfWeek == SUNDAY){
-            binding.linearLayoutCafeteriaKorean.isVisible = false
-            binding.linearLayoutCafeteriaAnother.isVisible = false
+        binding.tvCafeteriaWeekend.isVisible = false
+
+        if (viewModel.selectedDate.value?.dayOfWeek == SATURDAY || viewModel.selectedDate.value?.dayOfWeek == SUNDAY) {
             binding.tvCafeteriaWeekend.isVisible = true
         } else {
             binding.linearLayoutCafeteriaKorean.isVisible = selectedCategory == korean
-            binding.linearLayoutCafeteriaAnother.isVisible = selectedCategory == another
-            binding.tvCafeteriaWeekend.isVisible = false
+            binding.rvCafeteriaKoreanMenuList.isVisible = selectedCategory == korean
+            binding.rvCafeteriaAnotherMenuList.isVisible = selectedCategory == another
+            binding.tvCafeteriaAnotherNotice.isVisible = selectedCategory == another
         }
 
         binding.btnKorean.setBackgroundColor(if (selectedCategory == korean) activeColor else inactiveColor)
         binding.btnAnother.setBackgroundColor(if (selectedCategory == another) activeColor else inactiveColor)
     }
+
 
     private fun findNearestMonday(currentDate: LocalDate): LocalDate {
         return when (currentDate.dayOfWeek) {

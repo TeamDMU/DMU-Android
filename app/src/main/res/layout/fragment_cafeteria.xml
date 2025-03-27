@@ -149,24 +149,6 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <LinearLayout
-                    bind_is_error="@{!vm.isError()}"
-                    bind_is_loading="@{vm.isLoading()}"
-                    android:layout_width="0dp"
-                    android:layout_height="300dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cafeteria_info_container">
-
-                    <include
-                        android:id="@+id/cafeteria_error_container"
-                        layout="@layout/standard_error"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center" />
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/linearLayout_cafeteria_korean"
                     bind_is_error="@{vm.cafeteriaList == null}"
                     bind_is_loading="@{vm.isLoading()}"
@@ -228,7 +210,7 @@
                             android:textColor="@color/gray600" />
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rv_cafeteria_menu_list"
+                            android:id="@+id/rv_cafeteria_korean_menu_list"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:overScrollMode="never"
@@ -245,9 +227,10 @@
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/linearLayout_cafeteria_korean">
+                    app:layout_constraintTop_toBottomOf="@id/mv_category_toggle_group">
 
                     <TextView
+                        android:id="@+id/tv_cafeteria_another_notice"
                         style="@style/PretendardMedium12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -280,6 +263,24 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/mv_category_toggle_group" />
+
+                <LinearLayout
+                    bind_is_error="@{!vm.isError()}"
+                    bind_is_loading="@{vm.isLoading()}"
+                    android:layout_width="0dp"
+                    android:layout_height="300dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cafeteria_info_container">
+
+                    <include
+                        android:id="@+id/cafeteria_error_container"
+                        layout="@layout/standard_error"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center" />
+                </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
