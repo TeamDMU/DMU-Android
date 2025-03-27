@@ -98,7 +98,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             showToast(getString(resId))
         })
 
-        viewModel.koreaMenus.observe(viewLifecycleOwner) {
+        viewModel.koreanMenus.observe(viewLifecycleOwner) {
             koreanMenuAdapter.submitList(it)
         }
 

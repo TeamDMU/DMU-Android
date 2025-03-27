@@ -3,7 +3,6 @@ package com.dongyang.android.youdongknowme.ui.view.cafeteria
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.data.remote.entity.Cafeteria
 import com.dongyang.android.youdongknowme.data.repository.CafeteriaRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
@@ -35,13 +34,11 @@ class CafeteriaViewModel(
     private val _cafeteriaList: MutableLiveData<List<Cafeteria>> = MutableLiveData()
     val cafeteriaList: LiveData<List<Cafeteria>> = _cafeteriaList
 
-    private val _koreaMenus: MutableLiveData<List<String>> = MutableLiveData()
-    val koreaMenus: LiveData<List<String>> = _koreaMenus
+    private val _koreanMenus: MutableLiveData<List<String>> = MutableLiveData()
+    val koreanMenus: LiveData<List<String>> = _koreanMenus
 
     private val _anotherMenus: MutableLiveData<List<Array<String>>> = MutableLiveData()
     val anotherMenus: LiveData<List<Array<String>>> = _anotherMenus
-
-    private val emptyMenu = listOf(resourceProvider.getString(R.string.cafeteria_no_menu))
 
     private val _selectedCategory = MutableLiveData<String>()
     val selectedCategory: LiveData<String> get() = _selectedCategory
@@ -58,7 +55,6 @@ class CafeteriaViewModel(
                     val menuList = result.data
                     _cafeteriaList.value = menuList
                     _selectedDate.value = LocalDate.now()
-                    selectedDate.value?.let { updateMenuList(it) }
                     _isError.postValue(false)
                     _isLoading.postValue(false)
                 }
@@ -75,13 +71,8 @@ class CafeteriaViewModel(
     fun updateMenuList(selectedDate: LocalDate) {
         val cafeteriaList = _cafeteriaList.value ?: emptyList()
         _selectedDate.value = selectedDate
-        val selectedMenu = cafeteriaList.find { it.date == selectedDate.toString() }?.menus
-        _koreaMenus.postValue(
-            if (selectedMenu.isNullOrEmpty()) {
-                emptyMenu
-            } else {
-                selectedMenu
-            }
+        _koreanMenus.postValue(
+            cafeteriaList.find { it.date == selectedDate.toString() }?.menus ?: emptyList()
         )
     }
 
