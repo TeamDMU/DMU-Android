@@ -161,20 +161,13 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     }
 
     private fun updateCafeteriaState(selectedCategory: String) {
+        val activeColor = ContextCompat.getColor(requireContext(), R.color.white)
+        val inactiveColor = ContextCompat.getColor(requireContext(), R.color.gray200)
+
         binding.linearLayoutCafeteriaKorean.isVisible = selectedCategory == korean
         binding.linearLayoutCafeteriaAnother.isVisible = selectedCategory == another
 
-        binding.btnKorean.setBackgroundColor(
-            ContextCompat.getColor(
-                requireContext(),
-                if (selectedCategory == korean) R.color.white else R.color.gray200
-            )
-        )
-        binding.btnAnother.setBackgroundColor(
-            ContextCompat.getColor(
-                requireContext(),
-                if (selectedCategory == another) R.color.white else R.color.gray200
-            )
-        )
+        binding.btnKorean.setBackgroundColor(if (selectedCategory == korean) activeColor else inactiveColor)
+        binding.btnAnother.setBackgroundColor(if (selectedCategory == another) activeColor else inactiveColor)
     }
 }
