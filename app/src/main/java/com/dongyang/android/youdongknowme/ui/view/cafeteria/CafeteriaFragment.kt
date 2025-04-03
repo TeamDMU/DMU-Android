@@ -41,10 +41,6 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         koreanMenuAdapter = CafeteriaKoreanAdapter()
         anotherMenuAdapter = CafeteriaAnotherAdapter()
 
-        binding.rvCafeteriaKoreanMenuList.isVisible = false
-        binding.rvCafeteriaAnotherMenuList.isVisible = false
-        binding.tvCafeteriaAnotherNotice.isVisible = false
-
         binding.rvCafeteriaKoreanMenuList.apply {
             val layoutManager = LinearLayoutManager(context)
             this.adapter = this@CafeteriaFragment.koreanMenuAdapter
@@ -68,6 +64,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
                 binding.btnAnother.id -> another
                 else -> korean
             }
+
             if (isChecked) {
                 viewModel.setCategory(category)
             }
@@ -153,17 +150,13 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     private fun updateCafeteriaState(selectedCategory: String) {
         val activeColor = ContextCompat.getColor(requireContext(), R.color.white)
         val inactiveColor = ContextCompat.getColor(requireContext(), R.color.gray200)
+        val isWeekend =
+            viewModel.selectedDate.value?.dayOfWeek == SATURDAY || viewModel.selectedDate.value?.dayOfWeek == SUNDAY
 
-        binding.tvCafeteriaWeekend.isVisible = false
+        binding.tvCafeteriaWeekend.isVisible = isWeekend
 
-        if (viewModel.selectedDate.value?.dayOfWeek == SATURDAY || viewModel.selectedDate.value?.dayOfWeek == SUNDAY) {
-            binding.tvCafeteriaWeekend.isVisible = true
-        } else {
-            binding.linearLayoutCafeteriaKorean.isVisible = selectedCategory == korean
-            binding.rvCafeteriaKoreanMenuList.isVisible = selectedCategory == korean
-            binding.rvCafeteriaAnotherMenuList.isVisible = selectedCategory == another
-            binding.tvCafeteriaAnotherNotice.isVisible = selectedCategory == another
-        }
+        binding.linearLayoutCafeteriaKorean.isVisible = selectedCategory == korean && !isWeekend
+        binding.linearLayoutCafeteriaAnother.isVisible = selectedCategory == another && !isWeekend
 
         binding.btnKorean.setBackgroundColor(if (selectedCategory == korean) activeColor else inactiveColor)
         binding.btnAnother.setBackgroundColor(if (selectedCategory == another) activeColor else inactiveColor)
@@ -172,7 +165,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
     private fun findNearestMonday(currentDate: LocalDate): LocalDate {
         return when (currentDate.dayOfWeek) {
-            SATURDAY, SUNDAY -> {
+            SUNDAY -> {
                 currentDate.with(TemporalAdjusters.next(MONDAY))
             }
 
