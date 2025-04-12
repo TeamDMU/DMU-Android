@@ -16,7 +16,6 @@ import java.time.LocalDate
 
 class CafeteriaViewModel(
     private val cafeteriaRepository: CafeteriaRepository,
-    private val resourceProvider: ResourceProvider,
 ) : BaseViewModel() {
 
     private val _errorState: MutableLiveData<Event<Int>> = MutableLiveData()
@@ -47,7 +46,7 @@ class CafeteriaViewModel(
         fetchCafeteria()
     }
 
-    fun fetchCafeteria() {
+    private fun fetchCafeteria() {
         viewModelScope.launch {
             _isLoading.postValue(true)
             when (val result = cafeteriaRepository.fetchMenuList()) {
@@ -97,6 +96,10 @@ class CafeteriaViewModel(
                 _isError.value = true
             }
         }
+    }
+
+    fun setSelectedDate(selectedDate: LocalDate){
+        _selectedDate.value = selectedDate
     }
 
     fun setCategory(category: String) {

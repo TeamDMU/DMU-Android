@@ -92,7 +92,7 @@ val viewModelModule = module {
         AlarmViewModel(get())
     }
     viewModel {
-        CafeteriaViewModel(get(), get())
+        CafeteriaViewModel(get())
     }
     viewModel {
         LicenseViewModel()

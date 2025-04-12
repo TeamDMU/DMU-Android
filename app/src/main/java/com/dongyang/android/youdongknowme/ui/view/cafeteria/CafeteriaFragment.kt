@@ -116,6 +116,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
         viewModel.selectedDate.observe(viewLifecycleOwner) {
             viewModel.updateDaysMenu(it)
+            viewModel.selectedCategory.value?.let { selectedCategory -> updateCafeteriaState(selectedCategory) }
         }
     }
 
@@ -132,7 +133,6 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         binding.cvCafeteriaCalendar.scrollToDate(nearestMonday)
 
         binding.cafeteriaErrorContainer.refresh.setOnClickListener {
-            viewModel.fetchCafeteria()
             viewModel.updateDaysMenu(viewModel.selectedDate.value ?: nearestMonday)
         }
 
