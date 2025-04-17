@@ -35,55 +35,9 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     override fun initStartView() {
         binding.vm = viewModel
 
-        binding.rvCafeteriaKoreanMenuList.apply {
-            val layoutManager = LinearLayoutManager(context)
-            this.adapter = this@CafeteriaFragment.koreanMenuAdapter
-            this.layoutManager = layoutManager
-            this.setHasFixedSize(true)
-        }
-
-        binding.rvCafeteriaAnotherMenuList.apply {
-            val layoutManager = LinearLayoutManager(context)
-            this.adapter = this@CafeteriaFragment.anotherMenuAdapter
-            this.layoutManager = layoutManager
-            this.setHasFixedSize(true)
-        }
-
-        binding.tgCategory.check(binding.btnKorean.id)
-        viewModel.setCategory(getString(R.string.cafeteria_korean))
-
-        binding.tgCategory.addOnButtonCheckedListener { _, checkedId, isChecked ->
-            val category = when (checkedId) {
-                binding.btnKorean.id -> getString(R.string.cafeteria_korean)
-                binding.btnAnother.id -> getString(R.string.cafeteria_another)
-                else -> getString(R.string.cafeteria_korean)
-            }
-
-            if (isChecked) {
-                viewModel.setCategory(category)
-            }
-        }
-
-        val wmc =
-            WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(requireActivity())
-
-        binding.cvCafeteriaCalendar.apply {
-            val dayWidth = wmc.bounds.width() / 5
-            val dayHeight: Int = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                124f,
-                resources.displayMetrics
-            ).toInt()
-
-            daySize = Size(dayWidth, dayHeight)
-        }
-
-        binding.cvCafeteriaCalendar.dayBinder = object : DayBinder<CafeteriaContainer> {
-            override fun create(view: View): CafeteriaContainer =
-                CafeteriaContainer(view, binding.cvCafeteriaCalendar, viewModel)
-
-            override fun bind(container: CafeteriaContainer, day: CalendarDay) = container.bind(day)
-        }
+        setupMenuRecyclerViews()
+        setupCategoryToggleGroup()
+        setupCalendar()
     }
 
     override fun initDataBinding() {
@@ -137,6 +91,58 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
                 }
 
                 else -> false
+            }
+        }
+    }
+
+    private fun setupMenuRecyclerViews() {
+        binding.rvCafeteriaKoreanMenuList.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = this@CafeteriaFragment.koreanMenuAdapter
+            setHasFixedSize(true)
+        }
+
+        binding.rvCafeteriaAnotherMenuList.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = this@CafeteriaFragment.anotherMenuAdapter
+            setHasFixedSize(true)
+        }
+    }
+
+    private fun setupCategoryToggleGroup() {
+        binding.tgCategory.check(binding.btnKorean.id)
+        viewModel.setCategory(getString(R.string.cafeteria_korean))
+
+        binding.tgCategory.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                val category = when (checkedId) {
+                    binding.btnKorean.id -> getString(R.string.cafeteria_korean)
+                    binding.btnAnother.id -> getString(R.string.cafeteria_another)
+                    else -> getString(R.string.cafeteria_korean)
+                }
+                viewModel.setCategory(category)
+            }
+        }
+    }
+
+    private fun setupCalendar() {
+        val wmc = WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(requireActivity())
+        val dayWidth = wmc.bounds.width() / 5
+        val dayHeight: Int = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            124f,
+            resources.displayMetrics
+        ).toInt()
+
+        binding.cvCafeteriaCalendar.apply {
+            daySize = Size(dayWidth, dayHeight)
+            dayBinder = object : DayBinder<CafeteriaContainer> {
+                override fun create(view: View): CafeteriaContainer =
+                    CafeteriaContainer(view, this@apply, viewModel)
+
+                override fun bind(container: CafeteriaContainer, day: CalendarDay) {
+                    container.bind(day)
+                }
             }
         }
     }
