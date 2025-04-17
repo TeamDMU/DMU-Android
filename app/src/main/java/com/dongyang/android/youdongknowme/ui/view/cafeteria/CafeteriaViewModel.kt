@@ -73,9 +73,7 @@ class CafeteriaViewModel(
     fun updateMenuList(selectedDate: LocalDate) {
         val cafeteriaList = _cafeteriaList.value ?: emptyList()
         _selectedDate.value = selectedDate
-        _koreanMenus.postValue(
-            cafeteriaList.find { it.date == selectedDate.toString() }?.menus ?: emptyList()
-        )
+        _koreanMenus.value = cafeteriaList.find { it.date == selectedDate.toString() }?.menus ?: emptyList()
     }
 
     fun updateDaysMenu(selectedDate: LocalDate) {
