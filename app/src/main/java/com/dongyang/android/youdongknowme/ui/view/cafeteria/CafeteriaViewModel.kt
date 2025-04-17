@@ -98,10 +98,6 @@ class CafeteriaViewModel(
         }
     }
 
-    fun setSelectedDate(selectedDate: LocalDate){
-        _selectedDate.value = selectedDate
-    }
-
     fun setCategory(category: String) {
         _selectedCategory.value = category
     }
