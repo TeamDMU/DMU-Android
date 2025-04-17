@@ -29,17 +29,14 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     override val layoutResourceId: Int = R.layout.fragment_cafeteria
     override val viewModel: CafeteriaViewModel by viewModel()
 
-    private lateinit var koreanMenuAdapter: CafeteriaKoreanAdapter
-    private lateinit var anotherMenuAdapter: CafeteriaAnotherAdapter
+    private val koreanMenuAdapter by lazy { CafeteriaKoreanAdapter() }
+    private val anotherMenuAdapter by lazy { CafeteriaAnotherAdapter() }
 
     private val korean by lazy { getString(R.string.cafeteria_korean) }
     private val another by lazy { getString(R.string.cafeteria_another) }
 
     override fun initStartView() {
         binding.vm = viewModel
-
-        koreanMenuAdapter = CafeteriaKoreanAdapter()
-        anotherMenuAdapter = CafeteriaAnotherAdapter()
 
         binding.rvCafeteriaKoreanMenuList.apply {
             val layoutManager = LinearLayoutManager(context)
