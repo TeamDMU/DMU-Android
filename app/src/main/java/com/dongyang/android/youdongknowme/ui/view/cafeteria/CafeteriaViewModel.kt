@@ -82,7 +82,6 @@ class CafeteriaViewModel(
             runCatching {
                 cafeteriaRepository.fetchDaysMenus(dateToWeekday)
             }.onSuccess { anotherMenus ->
-                val formattedPrice = DecimalFormat("#,###")
                 _anotherMenus.value = anotherMenus.map { menu ->
                     AnotherMenuItem(
                         menu.menuNameKr,
@@ -98,5 +97,9 @@ class CafeteriaViewModel(
 
     fun setCategory(category: String) {
         _selectedCategory.value = category
+    }
+
+    companion object {
+        private val formattedPrice = DecimalFormat("#,###")
     }
 }
