@@ -3,22 +3,23 @@ package com.dongyang.android.youdongknowme.ui.viewholder
 import androidx.core.view.setPadding
 import androidx.recyclerview.widget.RecyclerView
 import com.dongyang.android.youdongknowme.R
+import com.dongyang.android.youdongknowme.data.model.AnotherMenuItem
 import com.dongyang.android.youdongknowme.databinding.ItemCafeteriaAnotherBinding
 
 class CafeteriaAnotherViewHolder(
     private val binding: ItemCafeteriaAnotherBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: Array<String>) {
-        binding.menuKr = item[0]
-        binding.menuEn = item[1].split('_')
+    fun bind(item: AnotherMenuItem) {
+        binding.menuKr = item.menuNameKr
+        binding.menuEn = item.name.split('_')
             .joinToString(" ") { word ->
                 word.lowercase().replaceFirstChar { firstChar -> firstChar.uppercase() }
             }
-        binding.menuPrice = item[2]
+        binding.menuPrice = item.price
 
         val context = binding.root.context
-        val resourceName = "img_cafeteria_" + item[1].lowercase()
+        val resourceName = "img_cafeteria_" + item.name.lowercase()
         val drawableResId =
             context.resources.getIdentifier(resourceName, "drawable", context.packageName)
 

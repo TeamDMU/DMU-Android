@@ -9,7 +9,7 @@ import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.standard.network.NetworkResult
 import com.dongyang.android.youdongknowme.standard.util.Weekdays
 import com.dongyang.android.youdongknowme.ui.view.util.Event
-import com.dongyang.android.youdongknowme.ui.view.util.ResourceProvider
+import com.dongyang.android.youdongknowme.data.model.AnotherMenuItem
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 import java.time.LocalDate
@@ -36,8 +36,8 @@ class CafeteriaViewModel(
     private val _koreanMenus: MutableLiveData<List<String>> = MutableLiveData()
     val koreanMenus: LiveData<List<String>> = _koreanMenus
 
-    private val _anotherMenus: MutableLiveData<List<Array<String>>> = MutableLiveData()
-    val anotherMenus: LiveData<List<Array<String>>> = _anotherMenus
+    private val _anotherMenus: MutableLiveData<List<AnotherMenuItem>> = MutableLiveData()
+    val anotherMenus: LiveData<List<AnotherMenuItem>> = _anotherMenus
 
     private val _selectedCategory = MutableLiveData<String>()
     val selectedCategory: LiveData<String> get() = _selectedCategory
@@ -81,10 +81,10 @@ class CafeteriaViewModel(
             val dateToWeekday: Weekdays = Weekdays.from(selectedDate.dayOfWeek)
             runCatching {
                 cafeteriaRepository.fetchDaysMenus(dateToWeekday)
-            }.onSuccess { daysMenus ->
+            }.onSuccess { anotherMenus ->
                 val formattedPrice = DecimalFormat("#,###")
-                _anotherMenus.value = daysMenus.map { menu ->
-                    arrayOf(
+                _anotherMenus.value = anotherMenus.map { menu ->
+                    AnotherMenuItem(
                         menu.menuNameKr,
                         menu.name,
                         "${formattedPrice.format(menu.price)}원"
