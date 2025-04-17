@@ -32,9 +32,6 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     private val koreanMenuAdapter by lazy { CafeteriaKoreanAdapter() }
     private val anotherMenuAdapter by lazy { CafeteriaAnotherAdapter() }
 
-    private val korean by lazy { getString(R.string.cafeteria_korean) }
-    private val another by lazy { getString(R.string.cafeteria_another) }
-
     override fun initStartView() {
         binding.vm = viewModel
 
@@ -53,13 +50,13 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         }
 
         binding.tgCategory.check(binding.btnKorean.id)
-        viewModel.setCategory(korean)
+        viewModel.setCategory(getString(R.string.cafeteria_korean))
 
         binding.tgCategory.addOnButtonCheckedListener { _, checkedId, isChecked ->
             val category = when (checkedId) {
-                binding.btnKorean.id -> korean
-                binding.btnAnother.id -> another
-                else -> korean
+                binding.btnKorean.id -> getString(R.string.cafeteria_korean)
+                binding.btnAnother.id -> getString(R.string.cafeteria_another)
+                else -> getString(R.string.cafeteria_korean)
             }
 
             if (isChecked) {
@@ -152,11 +149,11 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
         binding.tvCafeteriaWeekend.isVisible = isWeekend
 
-        binding.linearLayoutCafeteriaKorean.isVisible = selectedCategory == korean && !isWeekend
-        binding.linearLayoutCafeteriaAnother.isVisible = selectedCategory == another && !isWeekend
+        binding.linearLayoutCafeteriaKorean.isVisible = selectedCategory == getString(R.string.cafeteria_korean) && !isWeekend
+        binding.linearLayoutCafeteriaAnother.isVisible = selectedCategory == getString(R.string.cafeteria_another) && !isWeekend
 
-        binding.btnKorean.setBackgroundColor(if (selectedCategory == korean) activeColor else inactiveColor)
-        binding.btnAnother.setBackgroundColor(if (selectedCategory == another) activeColor else inactiveColor)
+        binding.btnKorean.setBackgroundColor(if (selectedCategory == getString(R.string.cafeteria_korean)) activeColor else inactiveColor)
+        binding.btnAnother.setBackgroundColor(if (selectedCategory == getString(R.string.cafeteria_another)) activeColor else inactiveColor)
     }
 
 
