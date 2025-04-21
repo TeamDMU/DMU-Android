@@ -3,13 +3,13 @@ package com.dongyang.android.youdongknowme.ui.view.cafeteria
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.dongyang.android.youdongknowme.data.model.AnotherMenu
 import com.dongyang.android.youdongknowme.data.remote.entity.Cafeteria
 import com.dongyang.android.youdongknowme.data.repository.CafeteriaRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.standard.network.NetworkResult
 import com.dongyang.android.youdongknowme.standard.util.Weekdays
 import com.dongyang.android.youdongknowme.ui.view.util.Event
-import com.dongyang.android.youdongknowme.data.model.AnotherMenuItem
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 import java.time.LocalDate
@@ -36,8 +36,8 @@ class CafeteriaViewModel(
     private val _koreanMenus: MutableLiveData<List<String>> = MutableLiveData()
     val koreanMenus: LiveData<List<String>> = _koreanMenus
 
-    private val _anotherMenus: MutableLiveData<List<AnotherMenuItem>> = MutableLiveData()
-    val anotherMenus: LiveData<List<AnotherMenuItem>> = _anotherMenus
+    private val _anotherMenus: MutableLiveData<List<AnotherMenu>> = MutableLiveData()
+    val anotherMenus: LiveData<List<AnotherMenu>> = _anotherMenus
 
     private val _selectedCategory = MutableLiveData<String>()
     val selectedCategory: LiveData<String> get() = _selectedCategory
@@ -83,7 +83,7 @@ class CafeteriaViewModel(
                 cafeteriaRepository.fetchDaysMenus(dateToWeekday)
             }.onSuccess { anotherMenus ->
                 _anotherMenus.value = anotherMenus.map { menu ->
-                    AnotherMenuItem(
+                    AnotherMenu(
                         menu.menuNameKr,
                         menu.name,
                         "${formattedPrice.format(menu.price)}원"

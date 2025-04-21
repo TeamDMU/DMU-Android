@@ -4,10 +4,9 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.dongyang.android.youdongknowme.data.model.AnotherMenuItem
+import com.dongyang.android.youdongknowme.data.model.AnotherMenu
 import com.dongyang.android.youdongknowme.databinding.ItemCafeteriaAnotherBinding
 import com.dongyang.android.youdongknowme.ui.viewholder.CafeteriaAnotherViewHolder
-import java.text.DecimalFormat
 
 class CafeteriaAnotherAdapter : RecyclerView.Adapter<CafeteriaAnotherViewHolder>() {
 
@@ -15,7 +14,7 @@ class CafeteriaAnotherAdapter : RecyclerView.Adapter<CafeteriaAnotherViewHolder>
         setHasStableIds(true)
     }
 
-    private var menu = arrayListOf<AnotherMenuItem>()
+    private var menu = arrayListOf<AnotherMenu>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CafeteriaAnotherViewHolder {
         return CafeteriaAnotherViewHolder(
@@ -34,7 +33,7 @@ class CafeteriaAnotherAdapter : RecyclerView.Adapter<CafeteriaAnotherViewHolder>
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun submitList(item: List<AnotherMenuItem>) {
+    fun submitList(item: List<AnotherMenu>) {
         menu.clear()
         menu.addAll(item)
         notifyDataSetChanged()

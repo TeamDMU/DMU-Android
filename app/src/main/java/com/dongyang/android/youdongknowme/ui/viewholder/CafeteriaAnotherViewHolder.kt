@@ -3,14 +3,14 @@ package com.dongyang.android.youdongknowme.ui.viewholder
 import androidx.core.view.setPadding
 import androidx.recyclerview.widget.RecyclerView
 import com.dongyang.android.youdongknowme.R
-import com.dongyang.android.youdongknowme.data.model.AnotherMenuItem
+import com.dongyang.android.youdongknowme.data.model.AnotherMenu
 import com.dongyang.android.youdongknowme.databinding.ItemCafeteriaAnotherBinding
 
 class CafeteriaAnotherViewHolder(
     private val binding: ItemCafeteriaAnotherBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: AnotherMenuItem) {
+    fun bind(item: AnotherMenu) {
         binding.menuKr = item.menuNameKr
         binding.menuEn = item.name.split('_')
             .joinToString(" ") { word ->
