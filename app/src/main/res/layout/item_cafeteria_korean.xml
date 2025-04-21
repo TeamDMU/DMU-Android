@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/item_menu_container"
+        style="@style/PretendardRegular16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:clickable="false"
+        android:text="@{koreanMenu, default = 해바라기멸치볶음}"
+        android:textAlignment="center"
+        android:textColor="@color/gray600" />
+
+    <data>
+
+        <variable
+            name="koreanMenu"
+            type="String" />
+    </data>
+</layout>

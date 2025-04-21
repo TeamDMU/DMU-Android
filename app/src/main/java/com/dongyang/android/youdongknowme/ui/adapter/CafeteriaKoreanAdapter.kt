@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.dongyang.android.youdongknowme.databinding.ItemCafeteriaMenuBinding
+import com.dongyang.android.youdongknowme.databinding.ItemCafeteriaKoreanBinding
 
-class CafeteriaAdapter : RecyclerView.Adapter<CafeteriaAdapter.ViewHolder>() {
+class CafeteriaKoreanAdapter : RecyclerView.Adapter<CafeteriaKoreanAdapter.ViewHolder>() {
 
     init {
         setHasStableIds(true)
@@ -14,16 +14,16 @@ class CafeteriaAdapter : RecyclerView.Adapter<CafeteriaAdapter.ViewHolder>() {
 
     private var menu = arrayListOf<String>()
 
-    inner class ViewHolder(private val binding: ItemCafeteriaMenuBinding) :
+    inner class ViewHolder(private val binding: ItemCafeteriaKoreanBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: String) {
-            binding.menu = item
+            binding.koreanMenu = item
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemCafeteriaMenuBinding.inflate(
+            ItemCafeteriaKoreanBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )

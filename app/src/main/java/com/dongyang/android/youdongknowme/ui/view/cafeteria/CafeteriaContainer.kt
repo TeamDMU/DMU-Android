@@ -7,6 +7,7 @@ import com.dongyang.android.youdongknowme.databinding.ItemCalendarDayBinding
 import com.kizitonwose.calendarview.CalendarView
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.ui.ViewContainer
+import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 class CafeteriaContainer(
@@ -24,34 +25,44 @@ class CafeteriaContainer(
 
     init {
         view.setOnClickListener {
-            if (viewModel.selectedDate.value != day.date) {
-                notifyDateChanged(viewModel, calendarView, viewModel.selectedDate.value, day.date)
+            viewModel.selectedDate.value?.let { selectedDate ->
+                if (selectedDate != day.date) {
+                    notifyDateChanged(viewModel, calendarView, selectedDate, day.date)
+                }
             }
         }
     }
 
     fun bind(day: CalendarDay) {
         this.day = day
-        bind.itemCalendarDate.text = dateFormatter.format(day.date)
-        bind.itemCalendarDay.text = dayFormatter.format(day.date)
-        bind.itemCalendarMonth.text = monthFormatter.format(day.date)
+        bind.apply {
+            tvItemCalendarDate.text = dateFormatter.format(day.date)
+            tvItemCalendarDay.text = dayFormatter.format(day.date)
+            tvItemCalendarMonth.text = monthFormatter.format(day.date)
+        }
 
-        if (day.date == viewModel.selectedDate.value) {
-            bind.mvItemCalendarDate.setCardBackgroundColor(
-                ContextCompat.getColor(
-                    view.context,
-                    R.color.blue300
-                )
+        val (bgColor, textColor) = when (day.date) {
+            viewModel.selectedDate.value -> R.color.blue300 to R.color.white
+            LocalDate.now() -> R.color.gray200 to R.color.gray500
+            else -> R.color.white to R.color.gray500
+        }
+
+        bind.mvItemCalendarContainer.setCardBackgroundColor(
+            ContextCompat.getColor(
+                view.context,
+                bgColor
             )
-            bind.itemCalendarDate.setTextColor(ContextCompat.getColor(view.context, R.color.white))
-        } else {
-            bind.mvItemCalendarDate.setCardBackgroundColor(
-                ContextCompat.getColor(
-                    view.context,
-                    R.color.white
-                )
-            )
-            bind.itemCalendarDate.setTextColor(ContextCompat.getColor(view.context, R.color.black))
+        )
+        setTextColor(textColor)
+    }
+
+    private fun setTextColor(colorRes: Int) {
+        val color = ContextCompat.getColor(view.context, colorRes)
+
+        bind.apply {
+            tvItemCalendarDate.setTextColor(color)
+            tvItemCalendarDay.setTextColor(color)
+            tvItemCalendarMonth.setTextColor(color)
         }
     }
 }

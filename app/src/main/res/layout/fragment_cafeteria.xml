@@ -49,6 +49,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/gray200"
+                    app:layout_constraintEnd_toEndOf="@id/cafeteria_info_container"
+                    app:layout_constraintStart_toStartOf="@id/cv_cafeteria_calendar"
+                    app:layout_constraintTop_toBottomOf="@id/cv_cafeteria_calendar" />
+
                 <LinearLayout
                     android:id="@+id/cafeteria_info_container"
                     android:layout_width="0dp"
@@ -95,6 +103,163 @@
                         app:layout_constraintEnd_toEndOf="parent" />
                 </LinearLayout>
 
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mv_category_toggle_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="20dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cafeteria_info_container">
+
+                    <com.google.android.material.button.MaterialButtonToggleGroup
+                        android:id="@+id/tg_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/gray200"
+                        android:paddingHorizontal="4dp"
+                        app:singleSelection="true">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_korean"
+                            style="@style/PretendardMedium16"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:stateListAnimator="@null"
+                            android:text="@string/cafeteria_button_korean"
+                            android:textColor="@color/black"
+                            app:backgroundTint="@color/white"
+                            app:cornerRadius="8dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_another"
+                            style="@style/PretendardMedium16"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:stateListAnimator="@null"
+                            android:text="@string/cafeteria_button_another"
+                            android:textColor="@color/black"
+                            app:backgroundTint="@color/white"
+                            app:cornerRadius="8dp" />
+                    </com.google.android.material.button.MaterialButtonToggleGroup>
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout_cafeteria_korean"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mv_category_toggle_group">
+
+                    <LinearLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/bg_gray100_rounded_corner"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="15dp"
+                            android:src="@drawable/img_cafeteria_korean" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="25dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/PretendardSemiBold20"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cafeteria_korean_title"
+                            android:textColor="@color/gray600" />
+
+                        <TextView
+                            style="@style/PretendardRegular16"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cafeteria_korean_subtitle"
+                            android:textColor="@color/gray400" />
+
+                        <TextView
+                            style="@style/PretendardSemiBold16"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/cafeteria_korean_price"
+                            android:textColor="@color/gray600" />
+
+                        <TextView
+                            style="@style/PretendardSemiBold16"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="16dp"
+                            android:text="@string/cafeteria_korean_emoji"
+                            android:textColor="@color/gray600" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_cafeteria_korean_menu_list"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:overScrollMode="never"
+                            tools:listitem="@layout/item_cafeteria_korean" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout_cafeteria_another"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mv_category_toggle_group">
+
+                    <TextView
+                        android:id="@+id/tv_cafeteria_another_notice"
+                        style="@style/PretendardMedium12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/cafeteria_another_description"
+                        android:textColor="@color/gray400" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_cafeteria_another_menu_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:overScrollMode="never"
+                        tools:listitem="@layout/item_cafeteria_another" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_cafeteria_weekend"
+                    style="@style/PretendardMedium18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/btn_gray100_radius_10dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:text="@string/cafeteria_menu_weekend"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray500"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mv_category_toggle_group" />
+
                 <LinearLayout
                     bind_is_error="@{!vm.isError()}"
                     bind_is_loading="@{vm.isLoading()}"
@@ -112,89 +277,6 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center" />
                 </LinearLayout>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/mv_cafeteria_menu"
-                    bind_is_error="@{vm.cafeteriaList == null}"
-                    bind_is_loading="@{vm.isLoading()}"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="12dp"
-                    app:cardCornerRadius="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cafeteria_info_container"
-                    app:strokeColor="@color/blue300"
-                    app:strokeWidth="2dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="8dp">
-
-                        <TextView
-                            style="@style/PretendardBold20"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="12dp"
-                            android:text="@string/cafeteria_korean"
-                            android:textColor="@color/black" />
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rv_cafeteria_menu_list"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="8dp"
-                            android:layout_marginStart="8dp"
-                            android:overScrollMode="never"
-                            tools:listitem="@layout/item_cafeteria_menu" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/mv_cafeteria_another"
-                    bind_is_error="@{vm.cafeteriaList == null}"
-                    bind_is_loading="@{vm.isLoading()}"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="20dp"
-                    app:cardCornerRadius="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/mv_cafeteria_menu"
-                    app:strokeColor="@color/blue300"
-                    app:strokeWidth="2dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="8dp">
-
-                        <TextView
-                            style="@style/PretendardBold20"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="12dp"
-                            android:text="@string/cafeteria_another"
-                            android:textColor="@color/black" />
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rv_cafeteria_another_menu_list"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="8dp"
-                            android:layout_marginStart="8dp"
-                            android:overScrollMode="never"
-                            tools:listitem="@layout/item_cafeteria_menu" />
-
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,21 +3,19 @@ package com.dongyang.android.youdongknowme.ui.view.cafeteria
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.dongyang.android.youdongknowme.R
+import com.dongyang.android.youdongknowme.data.model.AnotherMenu
 import com.dongyang.android.youdongknowme.data.remote.entity.Cafeteria
 import com.dongyang.android.youdongknowme.data.repository.CafeteriaRepository
 import com.dongyang.android.youdongknowme.standard.base.BaseViewModel
 import com.dongyang.android.youdongknowme.standard.network.NetworkResult
 import com.dongyang.android.youdongknowme.standard.util.Weekdays
 import com.dongyang.android.youdongknowme.ui.view.util.Event
-import com.dongyang.android.youdongknowme.ui.view.util.ResourceProvider
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 import java.time.LocalDate
 
 class CafeteriaViewModel(
     private val cafeteriaRepository: CafeteriaRepository,
-    private val resourceProvider: ResourceProvider,
 ) : BaseViewModel() {
 
     private val _errorState: MutableLiveData<Event<Int>> = MutableLiveData()
@@ -35,19 +33,20 @@ class CafeteriaViewModel(
     private val _cafeteriaList: MutableLiveData<List<Cafeteria>> = MutableLiveData()
     val cafeteriaList: LiveData<List<Cafeteria>> = _cafeteriaList
 
-    private val _koreaMenus: MutableLiveData<List<String>> = MutableLiveData()
-    val koreaMenus: LiveData<List<String>> = _koreaMenus
+    private val _koreanMenus: MutableLiveData<List<String>> = MutableLiveData()
+    val koreanMenus: LiveData<List<String>> = _koreanMenus
 
-    private val _daysMenus: MutableLiveData<List<String>> = MutableLiveData()
-    val daysMenus: LiveData<List<String>> = _daysMenus
+    private val _anotherMenus: MutableLiveData<List<AnotherMenu>> = MutableLiveData()
+    val anotherMenus: LiveData<List<AnotherMenu>> = _anotherMenus
 
-    private val emptyMenu = listOf(resourceProvider.getString(R.string.cafeteria_no_menu))
+    private val _selectedCategory = MutableLiveData<String>()
+    val selectedCategory: LiveData<String> get() = _selectedCategory
 
     init {
         fetchCafeteria()
     }
 
-    fun fetchCafeteria() {
+    private fun fetchCafeteria() {
         viewModelScope.launch {
             _isLoading.postValue(true)
             when (val result = cafeteriaRepository.fetchMenuList()) {
@@ -55,7 +54,9 @@ class CafeteriaViewModel(
                     val menuList = result.data
                     _cafeteriaList.value = menuList
                     _selectedDate.value = LocalDate.now()
-                    selectedDate.value?.let { updateMenuList(it) }
+                    _koreanMenus.value =
+                        menuList.find { it.date == _selectedDate.value?.toString() }?.menus
+                            ?: emptyList()
                     _isError.postValue(false)
                     _isLoading.postValue(false)
                 }
@@ -72,14 +73,7 @@ class CafeteriaViewModel(
     fun updateMenuList(selectedDate: LocalDate) {
         val cafeteriaList = _cafeteriaList.value ?: emptyList()
         _selectedDate.value = selectedDate
-        val selectedMenu = cafeteriaList.find { it.date == selectedDate.toString() }?.menus
-        _koreaMenus.postValue(
-            if (selectedMenu.isNullOrEmpty()) {
-                emptyMenu
-            } else {
-                selectedMenu
-            }
-        )
+        _koreanMenus.value = cafeteriaList.find { it.date == selectedDate.toString() }?.menus ?: emptyList()
     }
 
     fun updateDaysMenu(selectedDate: LocalDate) {
@@ -87,13 +81,25 @@ class CafeteriaViewModel(
             val dateToWeekday: Weekdays = Weekdays.from(selectedDate.dayOfWeek)
             runCatching {
                 cafeteriaRepository.fetchDaysMenus(dateToWeekday)
-            }.onSuccess { daysMenus ->
-                val formatter = DecimalFormat("#,###")
-                val formattedMenuWithPrice = daysMenus.map { "${it.menuNameKr} ${formatter.format(it.price)}원" }
-                _daysMenus.value = formattedMenuWithPrice
+            }.onSuccess { anotherMenus ->
+                _anotherMenus.value = anotherMenus.map { menu ->
+                    AnotherMenu(
+                        menu.menuNameKr,
+                        menu.name,
+                        "${formattedPrice.format(menu.price)}원"
+                    )
+                }
             }.onFailure {
                 _isError.value = true
             }
         }
+    }
+
+    fun setCategory(category: String) {
+        _selectedCategory.value = category
+    }
+
+    companion object {
+        private val formattedPrice = DecimalFormat("#,###")
     }
 }

@@ -4,14 +4,16 @@ import android.annotation.SuppressLint
 import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
+import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.window.layout.WindowMetricsCalculator
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentCafeteriaBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
-import com.dongyang.android.youdongknowme.ui.adapter.CafeteriaAdapter
+import com.dongyang.android.youdongknowme.ui.adapter.CafeteriaAnotherAdapter
+import com.dongyang.android.youdongknowme.ui.adapter.CafeteriaKoreanAdapter
 import com.dongyang.android.youdongknowme.ui.view.util.EventObserver
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexboxLayoutManager
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.utils.Size
@@ -27,53 +29,15 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     override val layoutResourceId: Int = R.layout.fragment_cafeteria
     override val viewModel: CafeteriaViewModel by viewModel()
 
-    private lateinit var koreanMenuAdapter: CafeteriaAdapter
-    private lateinit var anotherMenuAdapter: CafeteriaAdapter
+    private val koreanMenuAdapter by lazy { CafeteriaKoreanAdapter() }
+    private val anotherMenuAdapter by lazy { CafeteriaAnotherAdapter() }
 
     override fun initStartView() {
         binding.vm = viewModel
 
-        koreanMenuAdapter = CafeteriaAdapter()
-        anotherMenuAdapter = CafeteriaAdapter()
-
-        binding.rvCafeteriaMenuList.apply {
-            val layoutManager = FlexboxLayoutManager(context)
-            layoutManager.flexDirection = FlexDirection.ROW
-            this.adapter = this@CafeteriaFragment.koreanMenuAdapter
-            this.layoutManager = layoutManager
-            this.setHasFixedSize(true)
-        }
-
-        binding.rvCafeteriaAnotherMenuList.apply {
-            val layoutManager = FlexboxLayoutManager(context)
-            layoutManager.flexDirection = FlexDirection.ROW
-            this.adapter = this@CafeteriaFragment.anotherMenuAdapter
-            this.layoutManager = layoutManager
-            this.setHasFixedSize(true)
-        }
-
-        val wmc =
-            WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(requireActivity())
-
-        binding.cvCafeteriaCalendar.apply {
-            val dayWidth = wmc.bounds.width() / 5
-            val dayHeight: Int = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                124f,
-                resources.displayMetrics
-            ).toInt()
-
-            daySize = Size(dayWidth, dayHeight)
-        }
-
-        binding.cvCafeteriaCalendar.dayBinder = object : DayBinder<CafeteriaContainer> {
-            override fun create(view: View): CafeteriaContainer =
-                CafeteriaContainer(view, binding.cvCafeteriaCalendar, viewModel)
-
-            override fun bind(container: CafeteriaContainer, day: CalendarDay) = container.bind(day)
-        }
-
-        viewModel.updateDaysMenu(findNearestMonday(LocalDate.now()))
+        setupMenuRecyclerViews()
+        setupCategoryToggleGroup()
+        setupCalendar()
     }
 
     override fun initDataBinding() {
@@ -86,12 +50,21 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
             showToast(getString(resId))
         })
 
-        viewModel.koreaMenus.observe(viewLifecycleOwner) {
+        viewModel.koreanMenus.observe(viewLifecycleOwner) {
             koreanMenuAdapter.submitList(it)
         }
 
-        viewModel.daysMenus.observe(viewLifecycleOwner) {
+        viewModel.anotherMenus.observe(viewLifecycleOwner) {
             anotherMenuAdapter.submitList(it)
+        }
+
+        viewModel.selectedCategory.observe(viewLifecycleOwner) { selectedCategory ->
+            updateCafeteriaState(selectedCategory)
+        }
+
+        viewModel.selectedDate.observe(viewLifecycleOwner) {
+            viewModel.updateDaysMenu(it)
+            viewModel.selectedCategory.value?.let { selectedCategory -> updateCafeteriaState(selectedCategory) }
         }
     }
 
@@ -108,8 +81,7 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         binding.cvCafeteriaCalendar.scrollToDate(nearestMonday)
 
         binding.cafeteriaErrorContainer.refresh.setOnClickListener {
-            viewModel.fetchCafeteria()
-            viewModel.updateDaysMenu(findNearestMonday(LocalDate.now()))
+            viewModel.updateDaysMenu(viewModel.selectedDate.value ?: nearestMonday)
         }
 
         binding.cvCafeteriaCalendar.setOnTouchListener { _, event ->
@@ -123,9 +95,77 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         }
     }
 
+    private fun setupMenuRecyclerViews() {
+        binding.rvCafeteriaKoreanMenuList.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = this@CafeteriaFragment.koreanMenuAdapter
+            setHasFixedSize(true)
+        }
+
+        binding.rvCafeteriaAnotherMenuList.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = this@CafeteriaFragment.anotherMenuAdapter
+            setHasFixedSize(true)
+        }
+    }
+
+    private fun setupCategoryToggleGroup() {
+        binding.tgCategory.check(binding.btnKorean.id)
+        viewModel.setCategory(getString(R.string.cafeteria_korean))
+
+        binding.tgCategory.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                val category = when (checkedId) {
+                    binding.btnKorean.id -> getString(R.string.cafeteria_korean)
+                    binding.btnAnother.id -> getString(R.string.cafeteria_another)
+                    else -> getString(R.string.cafeteria_korean)
+                }
+                viewModel.setCategory(category)
+            }
+        }
+    }
+
+    private fun setupCalendar() {
+        val wmc = WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(requireActivity())
+        val dayWidth = wmc.bounds.width() / DATE_CELL_COUNT
+        val dayHeight: Int = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            DATE_CELL_HEIGHT_DP,
+            resources.displayMetrics
+        ).toInt()
+
+        binding.cvCafeteriaCalendar.apply {
+            daySize = Size(dayWidth, dayHeight)
+            dayBinder = object : DayBinder<CafeteriaContainer> {
+                override fun create(view: View): CafeteriaContainer =
+                    CafeteriaContainer(view, this@apply, viewModel)
+
+                override fun bind(container: CafeteriaContainer, day: CalendarDay) {
+                    container.bind(day)
+                }
+            }
+        }
+    }
+
+    private fun updateCafeteriaState(selectedCategory: String) {
+        val activeColor = ContextCompat.getColor(requireContext(), R.color.white)
+        val inactiveColor = ContextCompat.getColor(requireContext(), R.color.gray200)
+        val isWeekend =
+            viewModel.selectedDate.value?.dayOfWeek == SATURDAY || viewModel.selectedDate.value?.dayOfWeek == SUNDAY
+
+        binding.tvCafeteriaWeekend.isVisible = isWeekend
+
+        binding.linearLayoutCafeteriaKorean.isVisible = selectedCategory == getString(R.string.cafeteria_korean) && !isWeekend
+        binding.linearLayoutCafeteriaAnother.isVisible = selectedCategory == getString(R.string.cafeteria_another) && !isWeekend
+
+        binding.btnKorean.setBackgroundColor(if (selectedCategory == getString(R.string.cafeteria_korean)) activeColor else inactiveColor)
+        binding.btnAnother.setBackgroundColor(if (selectedCategory == getString(R.string.cafeteria_another)) activeColor else inactiveColor)
+    }
+
+
     private fun findNearestMonday(currentDate: LocalDate): LocalDate {
         return when (currentDate.dayOfWeek) {
-            SATURDAY, SUNDAY -> {
+            SUNDAY -> {
                 currentDate.with(TemporalAdjusters.next(MONDAY))
             }
 
@@ -139,13 +179,8 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        notifyDateChanged(
-            viewModel = viewModel,
-            calendarView = binding.cvCafeteriaCalendar,
-            oldDate = viewModel.selectedDate.value,
-            selectedDate = findNearestMonday(LocalDate.now())
-        )
+    companion object {
+        private const val DATE_CELL_COUNT = 5
+        private const val DATE_CELL_HEIGHT_DP = 124f
     }
 }
