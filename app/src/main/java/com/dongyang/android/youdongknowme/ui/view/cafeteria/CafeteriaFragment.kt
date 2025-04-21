@@ -127,10 +127,10 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
     private fun setupCalendar() {
         val wmc = WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(requireActivity())
-        val dayWidth = wmc.bounds.width() / 5
+        val dayWidth = wmc.bounds.width() / DATE_CELL_COUNT
         val dayHeight: Int = TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
-            124f,
+            DATE_CELL_HEIGHT_DP,
             resources.displayMetrics
         ).toInt()
 
@@ -177,5 +177,10 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
                 currentDate.with(TemporalAdjusters.previous(MONDAY))
             }
         }
+    }
+
+    companion object {
+        private const val DATE_CELL_COUNT = 5
+        private const val DATE_CELL_HEIGHT_DP = 124f
     }
 }
