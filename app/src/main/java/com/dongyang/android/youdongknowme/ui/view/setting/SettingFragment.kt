@@ -123,7 +123,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
         }
     }
 
-    private fun getAppVersion(): String {
+    private fun getAppVersion(): String? {
         val packageManager =
             requireContext().packageManager.getPackageInfo(requireContext().packageName, 0)
         return packageManager.versionName
