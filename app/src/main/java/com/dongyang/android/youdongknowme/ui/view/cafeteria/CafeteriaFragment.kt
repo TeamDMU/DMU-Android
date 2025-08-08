@@ -8,15 +8,17 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.window.layout.WindowMetricsCalculator
+import com.kizitonwose.calendar.core.CalendarDay
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentCafeteriaBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
 import com.dongyang.android.youdongknowme.ui.adapter.CafeteriaAnotherAdapter
 import com.dongyang.android.youdongknowme.ui.adapter.CafeteriaKoreanAdapter
 import com.dongyang.android.youdongknowme.ui.view.util.EventObserver
-import com.kizitonwose.calendarview.model.CalendarDay
-import com.kizitonwose.calendarview.ui.DayBinder
-import com.kizitonwose.calendarview.utils.Size
+import com.kizitonwose.calendar.core.WeekDay
+import com.kizitonwose.calendar.view.DaySize
+import com.kizitonwose.calendar.view.MonthDayBinder
+import com.kizitonwose.calendar.view.WeekDayBinder
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.DayOfWeek.*
 import java.time.LocalDate
@@ -126,22 +128,22 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     }
 
     private fun setupCalendar() {
-        val wmc = WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(requireActivity())
-        val dayWidth = wmc.bounds.width() / DATE_CELL_COUNT
-        val dayHeight: Int = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            DATE_CELL_HEIGHT_DP,
-            resources.displayMetrics
-        ).toInt()
-
         binding.cvCafeteriaCalendar.apply {
-            daySize = Size(dayWidth, dayHeight)
-            dayBinder = object : DayBinder<CafeteriaContainer> {
-                override fun create(view: View): CafeteriaContainer =
-                    CafeteriaContainer(view, this@apply, viewModel)
+            daySize = DaySize.Rectangle
+
+            this.dayBinder = object : MonthDayBinder<CafeteriaContainer> {
+                override fun create(view: View): CafeteriaContainer {
+                    return CafeteriaContainer(view, this@apply, viewModel)
+                }
 
                 override fun bind(container: CafeteriaContainer, day: CalendarDay) {
-                    container.bind(day)
+                    val dayOfWeek = day.date.dayOfWeek
+                    if (dayOfWeek == SATURDAY || dayOfWeek == SUNDAY) {
+                        container.view.visibility = View.GONE
+                    } else {
+                        container.view.visibility = View.VISIBLE
+                        container.bind(day)
+                    }
                 }
             }
         }

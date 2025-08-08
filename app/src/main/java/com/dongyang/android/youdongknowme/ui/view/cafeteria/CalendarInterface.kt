@@ -1,6 +1,6 @@
 package com.dongyang.android.youdongknowme.ui.view.cafeteria
 
-import com.kizitonwose.calendarview.CalendarView
+import com.kizitonwose.calendar.view.CalendarView
 import java.time.LocalDate
 
 interface CalendarInterface {
