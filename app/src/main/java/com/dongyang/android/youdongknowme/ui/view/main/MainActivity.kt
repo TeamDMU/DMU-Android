@@ -2,45 +2,44 @@ package com.dongyang.android.youdongknowme.ui.view.main
 
 import android.content.Context
 import android.content.Intent
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.plusAssign
-import androidx.navigation.ui.setupWithNavController
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ActivityMainBinding
-import com.dongyang.android.youdongknowme.standard.base.BaseActivity
-import com.dongyang.android.youdongknowme.ui.view.util.KeepStateNavigator
+import com.dongyang.android.youdongknowme.ui.view.cafeteria.CafeteriaFragment
+import com.dongyang.android.youdongknowme.ui.view.notice.NoticeFragment
+import com.dongyang.android.youdongknowme.ui.view.schedule.ScheduleFragment
+import com.dongyang.android.youdongknowme.ui.view.setting.SettingFragment
 import com.google.firebase.messaging.FirebaseMessaging
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /* 메인 액티비티 */
-class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
+class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+    val viewModel: MainViewModel by viewModel()
 
-    override val layoutResourceId: Int = R.layout.activity_main
-    override val viewModel: MainViewModel by viewModel()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.lifecycleOwner = this
+        setContentView(binding.root)
 
-    override fun initStartView() {
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.main_nav_container) as NavHostFragment
-        val navController = navHostFragment.navController
-
-        val navigator =
-            KeepStateNavigator(
-                this,
-                navHostFragment.childFragmentManager,
-                binding.mainNavContainer.id
-            )
-        navController.navigatorProvider += navigator
-        navController.setGraph(R.navigation.dmu_navigation)
-        binding.mainNvBottom.setupWithNavController(navController)
+        initDataBinding()
+        initBottomNavigation()
+        if (savedInstanceState == null) {
+            binding.mainNvBottom.selectedItemId =
+                R.id.noticeFragment
+        }
     }
 
-    override fun initDataBinding() {
+    private fun initDataBinding() {
         viewModel.isFirstLaunch.observe(this) { boolean ->
             if (boolean) getFcmToken()
         }
     }
-
-    override fun initAfterBinding() = Unit
 
     private fun getFcmToken() {
         viewModel.setIsFirstLaunch(false)
@@ -49,6 +48,49 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
             if (task.isSuccessful) {
                 viewModel.setFCMToken(token).run { viewModel.setInitToken() }
+            }
+        }
+    }
+
+    private fun initBottomNavigation() {
+        binding.mainNvBottom.setOnItemSelectedListener { item ->
+            return@setOnItemSelectedListener when (item.itemId) {
+                R.id.noticeFragment -> {
+                    replaceFragment<NoticeFragment>()
+                    true
+                }
+
+                R.id.scheduleFragment -> {
+                    replaceFragment<ScheduleFragment>()
+                    true
+                }
+
+                R.id.cafeteriaFragment -> {
+                    replaceFragment<CafeteriaFragment>()
+                    true
+                }
+
+                R.id.settingFragment -> {
+                    replaceFragment<SettingFragment>()
+                    true
+                }
+
+                else -> false
+            }
+        }
+    }
+
+    private inline fun <reified T : Fragment> replaceFragment() {
+        val tag: String = T::class.java.name
+        val fragment =
+            supportFragmentManager.findFragmentByTag(tag) as? T ?: T::class.java.newInstance()
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            supportFragmentManager.fragments.forEach { hide(it) }
+            if (fragment.isAdded) {
+                show(fragment)
+            } else {
+                add(binding.mainNavContainer.id, fragment, tag)
             }
         }
     }

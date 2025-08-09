@@ -1,7 +1,6 @@
 package com.dongyang.android.youdongknowme.ui.view.notice
 
 import android.content.Intent
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dongyang.android.youdongknowme.R
