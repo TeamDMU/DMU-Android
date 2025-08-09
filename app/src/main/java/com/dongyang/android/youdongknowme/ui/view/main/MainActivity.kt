@@ -15,6 +15,7 @@ import com.dongyang.android.youdongknowme.ui.view.schedule.ScheduleFragment
 import com.dongyang.android.youdongknowme.ui.view.setting.SettingFragment
 import com.google.firebase.messaging.FirebaseMessaging
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 /* 메인 액티비티 */
 class MainActivity : AppCompatActivity() {
@@ -44,10 +45,11 @@ class MainActivity : AppCompatActivity() {
     private fun getFcmToken() {
         viewModel.setIsFirstLaunch(false)
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
-            val token = task.result
-
             if (task.isSuccessful) {
+                val token = task.result
                 viewModel.setFCMToken(token).run { viewModel.setInitToken() }
+            } else {
+                Timber.e("토큰 재발급 실패 : ${task.exception}")
             }
         }
     }
