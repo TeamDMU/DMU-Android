@@ -4,9 +4,9 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.ItemCalendarDayBinding
-import com.kizitonwose.calendar.core.CalendarDay
-import com.kizitonwose.calendar.view.CalendarView
-import com.kizitonwose.calendar.view.ViewContainer
+import com.kizitonwose.calendarview.CalendarView
+import com.kizitonwose.calendarview.model.CalendarDay
+import com.kizitonwose.calendarview.ui.ViewContainer
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 

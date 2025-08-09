@@ -8,19 +8,19 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.window.layout.WindowMetricsCalculator
-import com.kizitonwose.calendar.core.CalendarDay
 import com.dongyang.android.youdongknowme.R
 import com.dongyang.android.youdongknowme.databinding.FragmentCafeteriaBinding
 import com.dongyang.android.youdongknowme.standard.base.BaseFragment
 import com.dongyang.android.youdongknowme.ui.adapter.CafeteriaAnotherAdapter
 import com.dongyang.android.youdongknowme.ui.adapter.CafeteriaKoreanAdapter
 import com.dongyang.android.youdongknowme.ui.view.util.EventObserver
-import com.kizitonwose.calendar.core.WeekDay
-import com.kizitonwose.calendar.view.DaySize
-import com.kizitonwose.calendar.view.MonthDayBinder
-import com.kizitonwose.calendar.view.WeekDayBinder
+import com.kizitonwose.calendarview.model.CalendarDay
+import com.kizitonwose.calendarview.ui.DayBinder
+import com.kizitonwose.calendarview.utils.Size
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.time.DayOfWeek.*
+import java.time.DayOfWeek.MONDAY
+import java.time.DayOfWeek.SATURDAY
+import java.time.DayOfWeek.SUNDAY
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.temporal.TemporalAdjusters
@@ -66,7 +66,11 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
         viewModel.selectedDate.observe(viewLifecycleOwner) {
             viewModel.updateDaysMenu(it)
-            viewModel.selectedCategory.value?.let { selectedCategory -> updateCafeteriaState(selectedCategory) }
+            viewModel.selectedCategory.value?.let { selectedCategory ->
+                updateCafeteriaState(
+                    selectedCategory
+                )
+            }
         }
     }
 
@@ -128,22 +132,23 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
     }
 
     private fun setupCalendar() {
-        binding.cvCafeteriaCalendar.apply {
-            daySize = DaySize.Rectangle
+        val wmc =
+            WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(requireActivity())
+        val dayWidth = wmc.bounds.width() / DATE_CELL_COUNT
+        val dayHeight: Int = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            DATE_CELL_HEIGHT_DP,
+            resources.displayMetrics
+        ).toInt()
 
-            this.dayBinder = object : MonthDayBinder<CafeteriaContainer> {
-                override fun create(view: View): CafeteriaContainer {
-                    return CafeteriaContainer(view, this@apply, viewModel)
-                }
+        binding.cvCafeteriaCalendar.apply {
+            daySize = Size(dayWidth, dayHeight)
+            dayBinder = object : DayBinder<CafeteriaContainer> {
+                override fun create(view: View): CafeteriaContainer =
+                    CafeteriaContainer(view, this@apply, viewModel)
 
                 override fun bind(container: CafeteriaContainer, day: CalendarDay) {
-                    val dayOfWeek = day.date.dayOfWeek
-                    if (dayOfWeek == SATURDAY || dayOfWeek == SUNDAY) {
-                        container.view.visibility = View.GONE
-                    } else {
-                        container.view.visibility = View.VISIBLE
-                        container.bind(day)
-                    }
+                    container.bind(day)
                 }
             }
         }
@@ -157,8 +162,10 @@ class CafeteriaFragment : BaseFragment<FragmentCafeteriaBinding, CafeteriaViewMo
 
         binding.tvCafeteriaWeekend.isVisible = isWeekend
 
-        binding.linearLayoutCafeteriaKorean.isVisible = selectedCategory == getString(R.string.cafeteria_korean) && !isWeekend
-        binding.linearLayoutCafeteriaAnother.isVisible = selectedCategory == getString(R.string.cafeteria_another) && !isWeekend
+        binding.linearLayoutCafeteriaKorean.isVisible =
+            selectedCategory == getString(R.string.cafeteria_korean) && !isWeekend
+        binding.linearLayoutCafeteriaAnother.isVisible =
+            selectedCategory == getString(R.string.cafeteria_another) && !isWeekend
 
         binding.btnKorean.setBackgroundColor(if (selectedCategory == getString(R.string.cafeteria_korean)) activeColor else inactiveColor)
         binding.btnAnother.setBackgroundColor(if (selectedCategory == getString(R.string.cafeteria_another)) activeColor else inactiveColor)
