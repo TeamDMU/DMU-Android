@@ -19,19 +19,16 @@
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/main_nv_bottom"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_gravity="bottom|center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:elevation="30dp"
+            android:outlineProvider="none"
+            app:itemActiveIndicatorStyle="@null"
+            app:itemIconSize="24dp"
             app:itemTextAppearanceActive="@style/BottomNavigationStyle"
             app:itemTextAppearanceInactive="@style/BottomNavigationStyle"
             app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/menu_main">
-
-        </com.google.android.material.bottomnavigation.BottomNavigationView>
+            app:menu="@menu/menu_main" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>
