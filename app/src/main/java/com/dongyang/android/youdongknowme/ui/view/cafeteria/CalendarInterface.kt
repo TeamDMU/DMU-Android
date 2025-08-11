@@ -8,7 +8,7 @@ interface CalendarInterface {
         viewModel: CafeteriaViewModel,
         calendarView: CalendarView,
         oldDate: LocalDate?,
-        selectedDate: LocalDate
+        selectedDate: LocalDate,
     ) {
         viewModel.updateMenuList(selectedDate)
         viewModel.updateDaysMenu(selectedDate)

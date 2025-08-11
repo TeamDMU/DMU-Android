@@ -28,9 +28,8 @@ class OnboardingKeywordActivity :
     override fun initDataBinding() {
         // 효율을 위해 단 한번만 옵저빙하여 이미 구독중인 항목을 선택 처리
         viewModel.localKeywordList.observe(this, object : Observer<List<KeywordEntity>> {
-            override fun onChanged(t: List<KeywordEntity>?) {
-                viewModel.setAllKeywords(t?.filter { it.isSubscribe }?.map { it.name }
-                    ?: listOf(""))
+            override fun onChanged(value: List<KeywordEntity>) {
+                viewModel.setAllKeywords(value.filter { it.isSubscribe }. map{it.name})
                 setCheckChipChange(
                     binding.chipGroupOnboardingKeywordClass,
                     binding.chipGroupOnboardingKeywordMoney,

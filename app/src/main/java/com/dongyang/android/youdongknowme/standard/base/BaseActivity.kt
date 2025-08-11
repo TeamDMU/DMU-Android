@@ -1,12 +1,15 @@
 package com.dongyang.android.youdongknowme.standard.base
 
-import android.content.Context
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.widget.TextView
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.dongyang.android.youdongknowme.ui.view.LoadingDialog
@@ -24,10 +27,21 @@ abstract class BaseActivity<T : ViewDataBinding, R : BaseViewModel> : AppCompatA
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         binding = DataBindingUtil.setContentView(this, layoutResourceId)
         binding.lifecycleOwner = this
         setContentView(binding.root)
 
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
+            val inset = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(
+                top = inset.top,
+                bottom = inset.bottom,
+                left = inset.left,
+                right = inset.right,
+            )
+            insets
+        }
         initStartView()
         initDataBinding()
         initAfterBinding()
@@ -36,7 +50,7 @@ abstract class BaseActivity<T : ViewDataBinding, R : BaseViewModel> : AppCompatA
     protected fun setSpanText(
         spanTextView: TextView,
         startIdx: Int,
-        endIdx: Int
+        endIdx: Int,
     ) {
         SpannableStringBuilder(spanTextView.text).apply {
             setSpan(
